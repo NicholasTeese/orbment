@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -78,11 +78,11 @@ public class PerkTreeOrb : MonoBehaviour {
 			if (GameObject.Find ("PerkTreeSystem").GetComponent<PerkTreeManager> ().perkPoints >= 1) {
 				if (branchLength [1].GetComponent <PerkTreeOrb> ().boughtPerk == true) {
 					perkTreeSystem.GetComponent <PerkTreeManager> ().perkToActivate = this.gameObject;
-					GameObject.Find ("CanvasPerk").transform.GetChild (0).gameObject.SetActive (true);
+					GameObject.Find ("CanvasUIOver").transform.GetChild (0).gameObject.SetActive (true);
 				} else {
 					if (branchLength [1].gameObject == this.gameObject) {
 						perkTreeSystem.GetComponent <PerkTreeManager> ().perkToActivate = this.gameObject;
-						GameObject.Find ("CanvasPerk").transform.GetChild (0).gameObject.SetActive (true);
+						GameObject.Find ("CanvasUIOver").transform.GetChild (0).gameObject.SetActive (true);
 					}
 				}
 			}
@@ -97,7 +97,7 @@ public class PerkTreeOrb : MonoBehaviour {
 	}
 	//Shows Discription for this perk
 	void OnMouseOver(){
-		GameObject.Find ("CanvasPerk").transform.GetChild (1).GetComponentInChildren<Text>().GetComponent<Text>().text = transform.GetChild (0).GetComponent<Text>().text;
+		GameObject.Find ("CanvasUIOver").transform.GetChild (1).GetComponentInChildren<Text>().GetComponent<Text>().text = transform.GetChild (0).GetComponent<Text>().text;
 	}
 
 	//Disables All Perk Tree's 
