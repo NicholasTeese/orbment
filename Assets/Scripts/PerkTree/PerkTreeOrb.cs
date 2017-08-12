@@ -54,8 +54,8 @@ public class PerkTreeOrb : MonoBehaviour {
 				perkchildren.transform.GetChild(1).gameObject.SetActive(true);
 			}
 			lineRend.enabled = true;
-			lineRend.numPositions = branchLength.Length;
-			positionAmount = lineRend.numPositions;
+			lineRend.positionCount = branchLength.Length;
+			positionAmount = lineRend.positionCount;
 
 			//Sets the line rend for all branch positions
 			for (int i = 0; i < positionAmount; i++) 

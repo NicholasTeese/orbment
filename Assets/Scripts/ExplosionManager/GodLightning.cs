@@ -44,7 +44,7 @@ public class GodLightning : MonoBehaviour
             }
 
         }
-        m_line.numPositions = m_positions.Count;
+        m_line.positionCount = m_positions.Count;
         m_line.SetPositions(m_positions.ToArray());
     }
 
