@@ -52,7 +52,7 @@ public class ExpManager : MonoBehaviour
 
     void LevelUp()
     {
-		perkUpgradeUI.SetActive (true);
+		//perkUpgradeUI.SetActive (true);
         
         m_playerExperience = m_playerExperience - m_playerMaxXP;
         m_playerMaxXP += m_percentageAddedXPPerLvl*m_playerMaxXP;

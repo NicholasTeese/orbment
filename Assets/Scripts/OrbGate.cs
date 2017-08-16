@@ -55,8 +55,8 @@ public class OrbGate : MonoBehaviour
         {
             m_playerIsNear = true;
             //hold e to spend orbs
-
-            checkIfShouldOpen();
+            if (Input.GetKeyDown(KeyCode.E))
+                checkIfShouldOpen();
         }
     }
 
@@ -92,7 +92,7 @@ public class OrbGate : MonoBehaviour
         //}
         if (m_Player.m_orbsCollected >= m_numOfOrbsForOpen)
         {
-
+            
             SpendOrb(m_numOfOrbsForOpen);
 
             m_Animator.SetTrigger("OpenGate");

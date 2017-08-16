@@ -7,7 +7,7 @@ using UnityEngine.UI;
 // Creators: Vince & John
 // Additions: Taliesin Millhouse & Nicholas Teese
 // Description: Updates mana bar
-// *********************unused********************* Updated mana management in player script
+
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 public class Mana : MonoBehaviour
 {
@@ -26,7 +26,7 @@ public class Mana : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		manaBar.GetComponent<Slider> ().value = m_currentMana;
+        manaBar.GetComponent<Slider> ().value = m_currentMana;
 		manaBar.GetComponent<Slider> ().maxValue = m_maxMana;
     }
 

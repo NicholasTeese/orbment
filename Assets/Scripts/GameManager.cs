@@ -8,10 +8,12 @@ public class GameManager : MonoBehaviour {
 	bool perkOpen = false;
 	public bool gameStart = false;
 	public bool paused = false;
+    public bool dead = false;
 
 	public GameObject healthBar;
-	public GameObject pauseMenu;
-	public GameObject hud;
+    public GameObject pauseMenu;
+    public GameObject deathMenu;
+    public GameObject hud;
 
 	// Use this for initialization
 	void Start () {
@@ -33,27 +35,40 @@ public class GameManager : MonoBehaviour {
 			}
 		}
 
-
-		if (gameStart == true) {
-			if (Input.GetKeyUp (KeyCode.Escape)) {
-				if (paused == false) {
+        if (gameStart == true)
+        {
+			if (Input.GetKeyUp (KeyCode.Escape))
+            {
+				if (paused == false)
+                {
 					paused = true;
-				} else {
+				}
+                else
+                {
 					paused = false;
 				}
 			}
-			if (paused == true) {
+			if (paused == true)
+            {
 				Time.timeScale = 0;
 				pauseMenu.SetActive (true);
 				hud.SetActive (false);
-
-			} else {
-				if (!perkOpen) {
+			}
+            else
+            {
+				if (!perkOpen)
+                {
 					Time.timeScale = 1;
 				}
 				pauseMenu.SetActive (false);
 				hud.SetActive (true);
 			}
+            if (dead == true)
+            {
+                Time.timeScale = 0;
+                deathMenu.SetActive(true);
+                hud.SetActive(false);
+            }
 		}
 	}
 	public void ContinueGame(){

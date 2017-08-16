@@ -53,7 +53,7 @@ public class Player : Entity
     [Header("Dash")]
     public float m_dashSpeed = 10.0f;
     public float m_dashTime = 0.2f;
-    public float m_dashManaCost = 50.0f;
+    public float m_dashManaCost = 25.0f;
 
     [Header("Current Weapon")]
     public BaseWeapon m_currWeapon;
@@ -136,7 +136,7 @@ public class Player : Entity
     {
 		if (m_currHealth <= 1) {
 			
-			GameObject.Find ("GameManager").GetComponent<GameManager> ().paused = true;
+			GameObject.Find ("GameManager").GetComponent<GameManager> ().dead = true;
 		}
 		GameObject.Find ("GameManager").GetComponent<GameManager> ().healthBar.GetComponent<Slider> ().maxValue = m_maxHealth;
 		GameObject.Find ("GameManager").GetComponent<GameManager> ().healthBar.GetComponent<Slider> ().value = m_currHealth;
