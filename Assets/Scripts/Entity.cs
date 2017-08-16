@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// Creators: Vince & John
+// Additions: Taliesin Millhouse & Nicholas Teese
+// Description: Agents in game inherit from this script - assigns variables and functions for agent management
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
 [RequireComponent(typeof(NavMeshAgent))]
 public class Entity : MonoBehaviour
 {

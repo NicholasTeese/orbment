@@ -60,9 +60,11 @@ public class TillyPerkTreeOrb : MonoBehaviour
             }
 
             m_lineRenderer.enabled = true;
-            m_lineRenderer.positionCount = m_branchLengths.Count;
+            //m_lineRenderer.positionCount = m_branchLengths.Count;
+            m_lineRenderer.numPositions = m_branchLengths.Count;
 
-            m_iPositionAmount = m_lineRenderer.positionCount;
+            //m_iPositionAmount = m_lineRenderer.positionCount;
+            m_iPositionAmount = m_lineRenderer.numPositions;
 
             // Set LineRenderer's position for each orb in the branch.
             for (int iCount = 0; iCount < m_iPositionAmount; ++iCount)

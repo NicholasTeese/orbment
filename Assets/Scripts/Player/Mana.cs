@@ -2,6 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// Creators: Vince & John
+// Additions: Taliesin Millhouse & Nicholas Teese
+// Description: Updates mana bar
+// *********************unused********************* Updated mana management in player script
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
 public class Mana : MonoBehaviour
 {
 	public GameObject manaBar;

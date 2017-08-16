@@ -1,6 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// Creator: Vince & John
+// Additions: Taliesin Millhouse & Nicholas Teese
+// Description: Isometric camera for following the player and handling screen shaking as well as red screen flash for indicating damage
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 public class IsoCam : MonoBehaviour
 {
@@ -62,15 +70,13 @@ public class IsoCam : MonoBehaviour
             {
                 m_intensity = 1.0f - (m_flashTimer / m_flashDuration);
             }
-            
-            
+                        
             if(m_flashTimer >= m_flashDuration)
             {
                 m_intensity = 0.0f;
                 m_flashTimer = 0.0f;
                 m_flashingRed = false;
-            }
-            
+            }           
         }
         else
         {
@@ -90,7 +96,6 @@ public class IsoCam : MonoBehaviour
         this.transform.position += Random.onUnitSphere * a_shakeAmount * Time.deltaTime;
     }
 
-
     public void FlashRed(float m_duration)
     {
         m_flashDuration = m_duration;
@@ -102,5 +107,4 @@ public class IsoCam : MonoBehaviour
             m_flashRed.SetFloat("_Intensity", m_intensity);
         }
     }
-
 }

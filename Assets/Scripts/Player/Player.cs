@@ -7,6 +7,14 @@ using UnityEngine.UI;
 
 //[RequireComponent(typeof(Health))]
 [RequireComponent(typeof(Mana))]
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// Creators: Vince & John
+// Additions: Taliesin Millhouse & Nicholas Teese
+// Description: Handles player aspects i.e. Health/Mana/Shooting/Aiming/Damage Dealt/Damage Taken/Dash/Orbs/Movement
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
 public class Player : Entity
 {
 	//Johns Variables
