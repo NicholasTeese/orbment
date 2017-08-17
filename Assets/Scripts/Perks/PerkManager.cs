@@ -58,15 +58,16 @@ public class PerkManager : MonoBehaviour
             m_playerMana = m_player.gameObject.GetComponent<Mana>();
         }
 
+//        Time.timeScale = 0;
+//        m_levelUpUI.setClassSelectUI(true);
 
-        m_levelUpUI.setClassSelectUI(true);
         //showPerk(m_StartingPerks[0], 0);
         //showPerk(m_StartingPerks[1], 1);
         //showPerk(m_StartingPerks[2], 2);
         //m_levelUpUI.showUI();
         //m_ShowingUI = true;
 
-        m_UpgradeAvailableText.SetActive(false);
+        //m_UpgradeAvailableText.SetActive(false);
     }
 
     // Update is called once per frame
@@ -83,19 +84,17 @@ public class PerkManager : MonoBehaviour
             {
                 m_levelUpUI.showUI();
                 m_UpgradeAvailableText.SetActive(false);
-                //Time.timeScale = 0.2f;
+                Time.timeScale = 0;
               //  Time.fixedDeltaTime = 0.02f * Time.timeScale;
             }
             else
             {
                 m_levelUpUI.hideUI();
                 m_UpgradeAvailableText.SetActive(true);
-              //  Time.timeScale = 1.0f;
+                Time.timeScale = 1.0f;
               //  Time.fixedDeltaTime = 0.02f;
             }
-
         }
-
     }
 
     private void genPerkList()
@@ -214,6 +213,7 @@ public class PerkManager : MonoBehaviour
 
     public void leveledUp()
     {
+        m_UpgradeAvailableText.SetActive(true);
         if (!m_ShowingUI)
         {
             genPerkList();

@@ -12,7 +12,7 @@ public class LevelUpUI : MonoBehaviour
 {
 
     private const int NUM_OF_PERKS = 3;
-    [Tooltip("Invoked when on of the ui elements were pressed")]
+    [Tooltip("Invoked when one of the ui elements were pressed")]
     public UnityEvent[] m_PerkClicked = new UnityEvent[NUM_OF_PERKS];
 
     public GameObject[] m_classSelectObjects;

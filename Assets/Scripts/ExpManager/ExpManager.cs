@@ -31,14 +31,14 @@ public class ExpManager : MonoBehaviour
 		XPSlider.GetComponent<Slider> ().maxValue = m_playerMaxXP;
 		Xpfiller.GetComponent<Slider> ().value = m_playerExperience;
 		Xpfiller.GetComponent<Slider> ().maxValue = m_playerMaxXP;
-		if (XPSlider.GetComponent<Slider> ().value < m_playerExperience) {
+		if (XPSlider.GetComponent<Slider> ().value < m_playerExperience)
+        {
 			XPSlider.GetComponent<Slider> ().value += 2.5f * Time.deltaTime;
 		}
 
         if(m_playerExperience >= m_playerMaxXP)
         {
             LevelUp();
-
         }
     }
 
@@ -52,8 +52,8 @@ public class ExpManager : MonoBehaviour
 
     void LevelUp()
     {
-		//perkUpgradeUI.SetActive (true);
-        
+        //perkUpgradeUI.SetActive (true);
+
         m_playerExperience = m_playerExperience - m_playerMaxXP;
         m_playerMaxXP += m_percentageAddedXPPerLvl*m_playerMaxXP;
         m_playerLevel++;
