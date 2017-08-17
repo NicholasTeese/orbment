@@ -156,6 +156,7 @@ public class Player : Entity
         m_damage = m_currDamage + Random.Range(-m_damageDeviation, m_damageDeviation);
 
         //mouse hold fire
+//        if (Input.GetKey(KeyCode.UpArrow) && Time.timeScale != 0)
         if (Input.GetMouseButton(0) && Time.timeScale != 0.0f)
         {
             
@@ -284,9 +285,6 @@ public class Player : Entity
     }
 
 
-
-
-
     void Dash(Vector3 dir)
     {
         m_currRegenRate = 0.0f;
@@ -331,8 +329,7 @@ public class Player : Entity
 
     }
 
-
-
+   
     void PoolSpentOrbs()
     {
         for (int i = 0; i < m_poolAmountSpentOrbs; ++i)
@@ -340,7 +337,6 @@ public class Player : Entity
             GameObject obj = GameObject.Instantiate(m_spentOrbPrefab);
             obj.SetActive(false);
             m_spentOrbs.Add(obj);
-
         }
     }
 
@@ -364,7 +360,4 @@ public class Player : Entity
             }
         }
     }
-
-
-
 }
