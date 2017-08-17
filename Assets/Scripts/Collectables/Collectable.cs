@@ -7,6 +7,10 @@ public class Collectable : MonoBehaviour
 	AudioManager audioManager;
     Player m_playerRef;
     Mana m_playerMana;
+    private Rigidbody m_rigidBody;
+    public bool m_healthCap;
+    public bool m_manaCap;
+
     public enum CollectableType
     {
         YellowOrb,
@@ -23,19 +27,36 @@ public class Collectable : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        m_healthCap = true;
+        m_manaCap = true;
 		audioManager = GameObject.Find ("AudioManager").GetComponent<AudioManager>();
         m_playerRef = GameObject.FindObjectOfType<Player>();
         if(m_playerRef != null)
         {
-      
             m_playerMana = m_playerRef.GetComponent<Mana>();
         }
+        m_rigidBody = this.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if ((m_playerRef.m_currHealth + m_healAmount) > m_playerRef.m_maxHealth)
+        {
+            m_healthCap = true;
+        }
+        else
+        {
+            m_healthCap = false;
+        }
+        if ((m_playerMana.m_currentMana + m_manaAmount) > m_playerMana.m_maxMana)
+        {
+            m_manaCap = true;
+        }
+        else
+        {
+            m_manaCap = false;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -51,10 +72,7 @@ public class Collectable : MonoBehaviour
 							//GameObject.Find ("OrbCollected").GetComponent<Animator> ().SetTrigger ("orbCollected");
                             m_playerRef.m_orbsCollected++;
 							audioManager.OrbPickUp ();
-
                         }
-                        
-
                         break;
                     }
 
@@ -62,19 +80,31 @@ public class Collectable : MonoBehaviour
                     {
                         if (m_playerRef)
                         {
-                            m_playerRef.m_currHealth += m_healAmount;
-							audioManager.OrbPickUp ();
-
+                            if (m_healthCap)
+                            {
+                                // Do not pick up orb, do not collect $200
+                            }
+                            else
+                            {
+                                m_playerRef.m_currHealth += m_healAmount;
+                                audioManager.OrbPickUp();
+                            }
                         }
                         break;
                     }
 
                 case CollectableType.BlueOrb:
                     {
-                        m_playerMana.m_currentMana += m_manaAmount;
-					audioManager.OrbPickUp ();
+                        if(m_manaCap)
+                        {
+                            // Do not pick up orb, do not collect $200
+                        }
+                        else
+                        {
+                            m_playerMana.m_currentMana += m_manaAmount;
+                            audioManager.OrbPickUp();
+                        }
                         break;
-
                     }
 
                 default:
@@ -87,5 +117,11 @@ public class Collectable : MonoBehaviour
         }
     }
 
-
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "OrbBoundary")
+        {
+            m_rigidBody.velocity = -m_rigidBody.velocity;   
+        }
+    }
 }

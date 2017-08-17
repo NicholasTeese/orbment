@@ -44,14 +44,9 @@ public class EnemyLootManager : MonoBehaviour
 
                     m_newType.Add(newItem);
                 }
-
-
-
             }
-
             m_pool.Add(m_newType);
         }
-
     }
 
     public void RequestLootsplosion(Vector3 a_position, int minAmount, int maxAmount, Collectable.CollectableType a_type)
@@ -83,10 +78,8 @@ public class EnemyLootManager : MonoBehaviour
                             rb.AddForce(forceVector.normalized * m_lootsplosionForce, ForceMode.Impulse);
                         }
                     }
-
                 }
                 break;
-               
             }
         }
     }
@@ -98,14 +91,8 @@ public class EnemyLootManager : MonoBehaviour
             if (!a_pool[i].m_object.activeInHierarchy)
             {
                 return a_pool[i].m_object;
-
             }
         }
-
         return null;
-
     }
-
-
-
 }
