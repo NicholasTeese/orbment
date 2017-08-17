@@ -5,30 +5,60 @@ using UnityEngine.UI;
 
 public class TillyPerkTreeOrb : MonoBehaviour
 {
+    /// <summary>
+    /// How far down the Perk tree this Perk is.
+    /// </summary>
     private int m_iPositionAmount;
 
+    /// <summary>
+    /// A check for if this Perk is activated or not.
+    /// </summary>
     public bool m_bPerkActivated = false;
+    /// <summary>
+    /// A check for if this Perk is purchased or not.
+    /// </summary>
     public bool m_bPerkPurchased = false;
+    /// <summary>
+    /// A check for if this Perk is available or not.
+    /// </summary>
     private bool m_bPerkAvailable = false;
     public bool PerkAvailable { get { return m_bPerkAvailable; } set { m_bPerkAvailable = value; } }
 
+    /// <summary>
+    /// The description of this Perk.
+    /// </summary>
+    public string m_perkDescription;
+
+    /// <summary>
+    /// The spend perk confirmation buttons.
+    /// </summary>
     public GameObject m_spendPerkConfirmation;
 
-    public GameObject m_perkChild;
-    public GameObject m_perkTreeOrbs;
-
+    /// <summary>
+    /// This Perk's parent Perk if it has one.
+    /// </summary>
     private GameObject m_parentPerk;
     public GameObject ParentPerk { get { return m_parentPerk; } }
 
+    /// <summary>
+    /// A list of this Perk's child Perks if there are any.
+    /// </summary>
     private List<GameObject> m_childPerks;
     public List<GameObject> ChildPerks { get { return m_childPerks; } }
 
-    private GameObject[] m_perkOrbs;
-
+    /// <summary>
+    /// A List of the parent Perks for this Perk.
+    /// </summary>
     public List<GameObject> m_branchLengths;
 
-    public Text m_perkDescriptionText;
+    /// <summary>
+    /// The Text that displays the moused over Perk's description.
+    /// </summary>
+    public Text m_mouseOverPerkDescriptionText;
 
+    /// <summary>
+    /// This Perk's LineRenderer.
+    /// </summary>
     private LineRenderer m_lineRenderer;
 
     /// <summary>
@@ -74,25 +104,30 @@ public class TillyPerkTreeOrb : MonoBehaviour
     }
 
     /// <summary>
-    /// Shows the description of the perk.
+    /// On mouse over of a perk this shows the description of the perk.
     /// </summary>
     private void OnMouseOver()
     {
-        m_perkDescriptionText.text = transform.GetComponentInChildren<Text>().text;
+        m_mouseOverPerkDescriptionText.text = m_perkDescription;
     }
 
+    /// <summary>
+    /// Intitialise remaining variables and instances.
+    /// </summary>
     private void Awake()
     {
-        m_perkTreeOrbs = GameObject.Find("PerkTreeOrbs");
-
         m_parentPerk = InitialiseParentPerk();
         m_childPerks = InitialiseChildPerks();
 
         m_lineRenderer = GetComponent<LineRenderer>();
     }
 
+    /// <summary>
+    /// Update PerkTreeOrb logic.
+    /// </summary>
     private void Update()
     {
+        // If the current perk has a parent perk & it is activated, set the current perk available to be activated.
         if (m_parentPerk != null)
         {
             if (m_parentPerk.GetComponent<TillyPerkTreeOrb>().m_bPerkActivated)
@@ -101,8 +136,6 @@ public class TillyPerkTreeOrb : MonoBehaviour
             }
 
         }
-
-        m_perkOrbs = GameObject.FindGameObjectsWithTag("perkOrb");
 
         // If an orb is activated, create a link down the branch.
         if (m_bPerkActivated)
@@ -115,10 +148,8 @@ public class TillyPerkTreeOrb : MonoBehaviour
             }
 
             m_lineRenderer.enabled = true;
-
-            m_lineRenderer.numPositions = m_branchLengths.Count;
-            
-            m_iPositionAmount = m_lineRenderer.numPositions;
+            m_lineRenderer.positionCount = m_branchLengths.Count;
+            m_iPositionAmount = m_lineRenderer.positionCount;
 
             // Set LineRenderer's position for each orb in the branch.
             for (int iCount = 0; iCount < m_iPositionAmount; ++iCount)
@@ -132,6 +163,10 @@ public class TillyPerkTreeOrb : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Gets the parent perk for the current perk if there is one.
+    /// </summary>
+    /// <returns></returns>
     private GameObject InitialiseParentPerk()
     {
         GameObject parentOrb = transform.parent.gameObject;
@@ -145,6 +180,10 @@ public class TillyPerkTreeOrb : MonoBehaviour
         return parentOrb;
     }
 
+    /// <summary>
+    /// Gets the child perks for the current perk if there are any.
+    /// </summary>
+    /// <returns></returns>
     private List<GameObject> InitialiseChildPerks()
     {
         List<GameObject> childPerks = new List<GameObject>();
@@ -163,14 +202,5 @@ public class TillyPerkTreeOrb : MonoBehaviour
         }
 
         return childPerks;
-    }
-
-    public void UnclickOrbs()
-    {
-        foreach (GameObject orb in m_perkOrbs)
-        {
-            orb.transform.GetChild(0).gameObject.SetActive(false);
-            orb.GetComponent<TillyPerkTreeOrb>().m_bPerkActivated = false;
-        }
     }
 }
