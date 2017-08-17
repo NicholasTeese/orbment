@@ -12,7 +12,7 @@ public class TillyPerkTreeOrb : MonoBehaviour
     private bool m_bPerkAvailable = false;
     public bool PerkAvailable { get { return m_bPerkAvailable; } set { m_bPerkAvailable = value; } }
 
-    private List<Vector3> m_linePositions;
+    public GameObject m_spendPerkConfirmation;
 
     public GameObject m_perkChild;
     public GameObject m_perkTreeOrbs;
@@ -27,25 +27,9 @@ public class TillyPerkTreeOrb : MonoBehaviour
 
     public List<GameObject> m_branchLengths;
 
-    private LineRenderer m_lineRenderer;
+    public Text m_perkDescriptionText;
 
-    /// <summary>
-    /// Drawing lines between perks to make editing them easier.
-    /// </summary>
-    //private void OnDrawGizmos()
-    //{
-    //    if (m_branchLengths[1].gameObject != this.gameObject)
-    //    {
-    //        Gizmos.color = Color.red;
-    //        Gizmos.DrawLine(transform.position, m_branchLengths[1].transform.position);
-    //        m_perkOrbs = GameObject.FindGameObjectsWithTag("perkOrb");
-    //    }
-    //    else
-    //    {
-    //        Gizmos.color = Color.red;
-    //        Gizmos.DrawLine(transform.position, m_branchLengths[2].transform.position);
-    //    }
-    //}
+    private LineRenderer m_lineRenderer;
 
     /// <summary>
     /// When the mouse is clicked this enables new perk tree branch.
@@ -86,7 +70,7 @@ public class TillyPerkTreeOrb : MonoBehaviour
 
         // Send this perk the PerkTreeManager to be activated set the confirmation buttons to be active.
         TillyPerkTreeManager.m_tillyPerkManager.perkToActivate = gameObject;
-        GameObject.Find("PerkTreeCanvas").transform.GetChild(0).gameObject.SetActive(true);
+        m_spendPerkConfirmation.SetActive(true);
     }
 
     /// <summary>
@@ -94,7 +78,7 @@ public class TillyPerkTreeOrb : MonoBehaviour
     /// </summary>
     private void OnMouseOver()
     {
-        GameObject.Find("PerkTreeCanvas").transform.GetChild(1).GetComponentInChildren<Text>().GetComponent<Text>().text = transform.GetChild(0).GetComponent<Text>().text;
+        m_perkDescriptionText.text = transform.GetComponentInChildren<Text>().text;
     }
 
     private void Awake()
