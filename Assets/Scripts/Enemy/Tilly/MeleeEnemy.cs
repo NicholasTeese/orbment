@@ -13,12 +13,11 @@ public class MeleeEnemy : MonoBehaviour
         RECOVERING
     }
 
-    private float m_fWanderSpeed = 2.0f;
-    private float m_fChargeSpeed = 300.0f;
-    private float m_fRecoverSpeed = 0.5f;
+    private float m_fMoveSpeed = 2.0f;
+    private float m_fChargeSpeed = 20.0f;
 
     private float m_fPrepareChargeTime = 2.0f;
-    private float m_fRecoverTime = 3.0f;
+    private float m_fRecoverTime = 0.5f;
 
     private Behaviour m_eBehaviour = Behaviour.WANDERING;
 
@@ -32,7 +31,7 @@ public class MeleeEnemy : MonoBehaviour
     {
         m_navMeshAgent = GetComponent<NavMeshAgent>();
         m_navMeshAgent.destination = GetWanderPosition(transform.position);
-        m_navMeshAgent.speed = m_fWanderSpeed;
+        m_navMeshAgent.speed = m_fMoveSpeed;
     }
 
     private void Update()
@@ -47,8 +46,6 @@ public class MeleeEnemy : MonoBehaviour
                         break;
                     }
 
-                    m_navMeshAgent.speed = m_fWanderSpeed;
-
                     if (Vector3.Distance(transform.position, m_navMeshAgent.destination) <= 1.0f)
                     {
                         m_navMeshAgent.destination = GetWanderPosition(transform.position);
@@ -58,11 +55,18 @@ public class MeleeEnemy : MonoBehaviour
 
             case Behaviour.PREPARING:
                 {
+                    if (Vector3.Distance(transform.position, m_target.transform.position) > 15.0f)
+                    {
+                        m_fPrepareChargeTime = 2.0f;
+                        m_eBehaviour = Behaviour.WANDERING;
+                    }
+                    
                     m_fPrepareChargeTime -= Time.deltaTime;
 
                     if (m_fPrepareChargeTime <= 0.0f)
                     {
-                        m_v3ChargeTarget = m_target.transform.position;
+                        m_v3ChargeTarget = new Vector3(m_target.transform.position.x, transform.position.y, m_target.transform.position.z);
+                        m_navMeshAgent.enabled = false;
                         m_fPrepareChargeTime = 2.0f;
                         m_eBehaviour = Behaviour.CHARGING;
                         break;
@@ -72,42 +76,45 @@ public class MeleeEnemy : MonoBehaviour
 
             case Behaviour.CHARGING:
                 {
-                    if (Vector3.Distance(transform.position, m_v3ChargeTarget) <= 3.0f)
+                    if (Vector3.Distance(transform.position, m_v3ChargeTarget) <= 1.0f)
                     {
                         m_eBehaviour = Behaviour.RECOVERING;
                         break;
                     }
 
-                    m_navMeshAgent.speed = m_fChargeSpeed;
-
-                    if (m_navMeshAgent.destination != m_v3ChargeTarget)
-                    {
-                        m_navMeshAgent.destination = m_v3ChargeTarget;
-                    }
+                    transform.position = Vector3.MoveTowards(transform.position, m_v3ChargeTarget, (m_fChargeSpeed * Time.deltaTime));
                     break;
                 }
 
             case Behaviour.RECOVERING:
                 {
-                    m_fRecoverTime -= Time.deltaTime;
-
-                    if (m_navMeshAgent.destination != m_target.transform.position)
-                    {
-                        m_navMeshAgent.destination = GetWanderPosition(transform.position);
-                        m_navMeshAgent.speed = m_fRecoverSpeed;
-                        break;
-                    }
-
                     if (m_fRecoverTime <= 0.0f)
                     {
-                        if (Vector3.Distance(transform.position, m_target.transform.position) <= 15.0f)
+                        if (Vector3.Distance(transform.position, m_target.transform.position) >= 10.0f)
                         {
-                            m_eBehaviour = Behaviour.PREPARING;
+                            if (Vector3.Distance(transform.position, m_target.transform.position) <= 15.0f)
+                            {
+                                m_navMeshAgent.enabled = true;
+                                m_navMeshAgent.speed = m_fMoveSpeed;
+                                m_fRecoverTime = 3.0f;
+                                m_eBehaviour = Behaviour.PREPARING;
+                                break;
+                            }
+
+                            m_navMeshAgent.enabled = true;
+                            m_navMeshAgent.speed = m_fMoveSpeed;
+                            m_fRecoverTime = 3.0f;
+                            m_eBehaviour = Behaviour.WANDERING;
                             break;
                         }
 
-                        m_eBehaviour = Behaviour.WANDERING;
+                        Vector3 v3RetreatDirection = transform.position - m_target.transform.position;
+                        v3RetreatDirection = new Vector3(v3RetreatDirection.x, 0.0f, v3RetreatDirection.z).normalized;
+                        transform.position += v3RetreatDirection * m_fMoveSpeed * Time.deltaTime;
+                        break;
                     }
+
+                    m_fRecoverTime -= Time.deltaTime;
                     break;
                 }
 
