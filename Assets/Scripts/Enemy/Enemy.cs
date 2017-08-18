@@ -19,14 +19,11 @@ public class Enemy : Entity
     {
         if (m_currHealth <= 0)
         {
-
             m_expManager.m_playerExperience += m_experienceValue;
             if (m_killStreakManager != null)
             {
                 m_killStreakManager.AddKill();
-
             }
-
         }
 
         base.Update();

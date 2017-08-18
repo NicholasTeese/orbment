@@ -266,9 +266,6 @@ public class Entity : MonoBehaviour
             Vector2 screenPoint = Camera.main.WorldToScreenPoint(this.transform.position);
             GUI.DrawTexture(new Rect(screenPoint.x - 0.5f * m_healthBarWidth, Screen.height - screenPoint.y - 40, m_healthBarWidth, 10), m_emptyBarTexture);
             GUI.DrawTexture(new Rect(screenPoint.x - 0.5f * m_healthBarWidth, Screen.height - screenPoint.y - 40, m_healthBarWidth * ((float)m_currHealth / (float)m_maxHealth), 10), m_healthBarTexture);
-
         }
-
-
     }
 }

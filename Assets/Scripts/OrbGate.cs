@@ -21,19 +21,18 @@ public class OrbGate : MonoBehaviour
     public int m_currNumOrbsInvested = 0;
 
 
-    private float m_holdTimer = 0.0f;
-    private float m_holdDuration = 0.1f;
-    private float m_orbSpendRate = 0.02f;
-    private float m_orbSpendTimer = 0.0f;
+    //private float m_holdTimer = 0.0f;
+    //private float m_holdDuration = 0.1f;
+    //private float m_orbSpendRate = 0.02f;
+    //private float m_orbSpendTimer = 0.0f;
 
     private bool m_isOpen = false;
 
-    private bool m_playerIsNear = false;
-
-
+    private bool m_playerIsNear;
 
     public void Awake()
     {
+        m_playerIsNear = false;
         if (m_visualLock != null)
         {
             m_origScale = m_visualLock.transform.localScale.x;
