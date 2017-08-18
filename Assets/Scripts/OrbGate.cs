@@ -109,7 +109,6 @@ public class OrbGate : MonoBehaviour
         
         if (m_Player.m_orbsCollected > 0)
         {
-     
             m_Player.m_orbsCollected -= a_num;
             m_Player.EmitSpentOrb(a_num);
             m_lockScale = 1.0f - ((float)m_currNumOrbsInvested / (float)m_numOfOrbsForOpen);

@@ -9,14 +9,10 @@ public class Magnet : MonoBehaviour
     public bool m_magnetOff = false;
     private Rigidbody m_rigidBody;
     Collectable m_collectableRef;
-    Player m_playerRef;
-
     // Use this for initialization
     void Start()
     {
-        m_playerRef = GameObject.FindObjectOfType<Player>();
-        m_collectableRef = GameObject.FindObjectOfType<Collectable>();
-
+        m_collectableRef = GetComponent<Collectable>();
         m_rigidBody = this.GetComponent<Rigidbody>();
     }
 
@@ -32,13 +28,32 @@ public class Magnet : MonoBehaviour
         if (other.CompareTag(m_tag))
         {
             GameObject player = other.gameObject;
-
-            if (m_collectableRef.m_healthCap && m_collectableRef.m_type == Collectable.CollectableType.GreenOrb)
+            if (this.tag == "Orb")
             {
-                return;
+                if (m_collectableRef != null)
+                {
+                    if (m_collectableRef.m_healthCap && m_collectableRef.m_type == Collectable.CollectableType.GreenOrb)
+                    {
+                        return;
+                    }
+                    if (!m_collectableRef.m_healthCap && m_collectableRef.m_type == Collectable.CollectableType.GreenOrb)
+                        AttractTowards(player.transform.position);
+
+                    if (m_collectableRef.m_manaCap && m_collectableRef.m_type == Collectable.CollectableType.BlueOrb)
+                    {
+                        return;
+                    }
+                    if (!m_collectableRef.m_manaCap && m_collectableRef.m_type == Collectable.CollectableType.BlueOrb)
+                        AttractTowards(player.transform.position);
+
+                    if (m_collectableRef.m_type == Collectable.CollectableType.YellowOrb)
+                        AttractTowards(player.transform.position);
+                }
             }
-            if(!m_collectableRef.m_healthCap && m_collectableRef.m_type == Collectable.CollectableType.GreenOrb)
+            else
+            {
                 AttractTowards(player.transform.position);
+            }
         }
     }
 

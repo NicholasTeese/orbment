@@ -335,6 +335,7 @@ public class Player : Entity
         for (int i = 0; i < m_poolAmountSpentOrbs; ++i)
         {
             GameObject obj = GameObject.Instantiate(m_spentOrbPrefab);
+            obj.tag = "spentOrb";
             obj.SetActive(false);
             m_spentOrbs.Add(obj);
         }
@@ -355,8 +356,7 @@ public class Player : Entity
                 m_spentOrbs[i].transform.position = this.transform.position + Random.onUnitSphere;
 
                 m_spentOrbs[i].SetActive(true);
-                count++;
-                
+                count++;                
             }
         }
     }

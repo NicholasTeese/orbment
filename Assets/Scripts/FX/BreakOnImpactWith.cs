@@ -43,7 +43,7 @@ public class BreakOnImpactWith : MonoBehaviour
 		if (other.tag == "Bullet") {	
 
 			wallHealth -= 45;
-			Debug.Log (wallHealth);
+			//Debug.Log (wallHealth);
 
 		}
 	}
