@@ -42,9 +42,6 @@ public enum PerkID
 [System.Serializable]
 public class Perk : MonoBehaviour
 {
-
-
-
     protected enum PerkRarity
     {
         Common,

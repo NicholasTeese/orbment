@@ -35,23 +35,6 @@ public class TillyPerkTreeManager : MonoBehaviour
 
     public void ActivatePerk()
     {
-        //GameObject parentPerk = perkToActivate.GetComponent<TillyPerkTreeOrb>().ParentPerk;
-        //List<GameObject> parentPerksChildren = null;
-
-        //if (parentPerk != null)
-        //{
-        //    parentPerksChildren = parentPerk.GetComponent<TillyPerkTreeOrb>().ChildPerks;
-
-        //    for (int iCount = 0; iCount < parentPerksChildren.Count; ++iCount)
-        //    {
-        //        if (parentPerksChildren[iCount].GetComponent<TillyPerkTreeOrb>().m_bPerkPurchased)
-        //        {
-        //            return;
-        //        }
-        //    }
-        //}
-
-        //perkToActivate.GetComponent<TillyPerkTreeOrb>().UnclickOrbs();
         perkToActivate.GetComponent<TillyPerkTreeOrb>().m_bPerkActivated = true;
         perkToActivate.GetComponent<TillyPerkTreeOrb>().m_bPerkPurchased = true;
         perkToActivate.GetComponent<TillyPerkTreeOrb>().PerkAvailable = false;
