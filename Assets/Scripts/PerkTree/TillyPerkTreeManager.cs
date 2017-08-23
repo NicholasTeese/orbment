@@ -39,6 +39,5 @@ public class TillyPerkTreeManager : MonoBehaviour
         perkToActivate.GetComponent<TillyPerkTreeOrb>().m_bPerkPurchased = true;
         perkToActivate.GetComponent<TillyPerkTreeOrb>().PerkAvailable = false;
         m_iPerkPoints -= 1;
-
     }
 }

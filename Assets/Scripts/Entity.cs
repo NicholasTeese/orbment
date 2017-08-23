@@ -258,9 +258,7 @@ public class Entity : MonoBehaviour
 
 
     protected void OnGUI()
-    {
-
-        
+    {        
         if (m_currHealth != m_maxHealth)
         {
             Vector2 screenPoint = Camera.main.WorldToScreenPoint(this.transform.position);
