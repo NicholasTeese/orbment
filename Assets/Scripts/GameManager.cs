@@ -4,8 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour {
-	public GameObject PerkCam;
-	bool perkOpen = false;
+    public GameObject PerkCam;
+    public GameObject PerkScreen;
+    public GameObject PerkOrbs;
+
+    public bool perkOpen = false;
 	public bool gameStart = false;
 	public bool paused = false;
     public bool dead = false;
@@ -23,72 +26,94 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//pause game
-		if (Input.GetKeyUp (KeyCode.Tab)) {
-			if (perkOpen == false) {
+        //pause game
+		if (Input.GetKeyUp (KeyCode.Tab))
+        {
+			if (perkOpen == false)
+            {
 				PerkCam.SetActive (true);
-				perkOpen = true;
+                PerkScreen.SetActive(true);
+                PerkOrbs.SetActive(true);
+                hud.SetActive(false);
+
+                perkOpen = true;
 				Time.timeScale = 0;
-			} else {
+			}
+            else
+            {
 				PerkCam.SetActive (false);
-				perkOpen = false;
+                PerkScreen.SetActive(false);
+                PerkOrbs.SetActive(false);
+                hud.SetActive(true);
+
+                perkOpen = false;
 				Time.timeScale = 1;
 			}
-		}
+
+        }
 
         if (gameStart == true)
         {
-			if (Input.GetKeyUp (KeyCode.Escape))
+            if (Input.GetKeyUp(KeyCode.Escape))
             {
-				if (paused == false)
+                if (!paused)
                 {
-					paused = true;
-				}
+                    paused = true;
+                }
                 else
                 {
-					paused = false;
-				}
-			}
-			if (paused == true)
+                    paused = false;
+                }
+            }
+			if (paused)
             {
 				Time.timeScale = 0;
 				pauseMenu.SetActive (true);
 				hud.SetActive (false);
 			}
-            else
+            else if(perkOpen)
             {
-				if (!perkOpen)
-                {
-					Time.timeScale = 1;
-				}
-				pauseMenu.SetActive (false);
-				hud.SetActive (true);
-			}
-            if (dead == true)
+                Time.timeScale = 0;
+                hud.SetActive(false);
+                pauseMenu.SetActive(false);
+            }
+            else if (dead == true)
             {
                 Time.timeScale = 0;
                 deathMenu.SetActive(true);
                 hud.SetActive(false);
             }
+            else
+            {
+                pauseMenu.SetActive(false);
+                hud.SetActive(true);
+                Time.timeScale = 1;
+            }
 		}
 	}
-	public void ContinueGame(){
+	public void ContinueGame()
+    {
 		paused = false;
 	}
-	public void Options(){
+	public void Options()
+    {
 
 	}
-	public void QuitToMain(){
+	public void QuitToMain()
+    {
 
 	}
-	public void QuitToDesktop(){
+	public void QuitToDesktop()
+    {
 
 	}
-	public void RestartGame(){
+	public void RestartGame()
+    {
 		Scene loadedLevel = SceneManager.GetActiveScene ();
 		SceneManager.LoadScene (loadedLevel.buildIndex);
 	}
-	public void StartGame(){
+	public void StartGame()
+    {
 		gameStart = true;
 	}
 }

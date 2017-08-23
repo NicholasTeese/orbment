@@ -68,9 +68,6 @@ public class Player : Entity
     public int m_orbsCollected = 0;
 
 
-
-
-
     private CharacterController m_charCont;
     private Vector3 m_movement;
     private float mouseX;
@@ -99,12 +96,6 @@ public class Player : Entity
 
 
 
-
-
-
-
-
-
     new void Start()
     {
 
@@ -128,8 +119,6 @@ public class Player : Entity
         }
 
     }
-
-
 
 
     protected new void Update()
@@ -250,8 +239,6 @@ public class Player : Entity
     void FixedUpdate()
     {
 
-
-
         //mouse aiming
         RaycastHit hit;
         float rayLength = 1000;
@@ -310,7 +297,6 @@ public class Player : Entity
                 m_dashTrail.enabled = false;
             }
         }
-
     }
 
     void RegenMana()

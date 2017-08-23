@@ -13,7 +13,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class Entity : MonoBehaviour
 {
-	GameManager gameManager;
+	public GameManager gameManager;
     public bool m_godMode = false;
 
     [Header("Level")]
@@ -259,13 +259,15 @@ public class Entity : MonoBehaviour
 
     protected void OnGUI()
     {
-
-        
-        if (m_currHealth != m_maxHealth)
-        {
-            Vector2 screenPoint = Camera.main.WorldToScreenPoint(this.transform.position);
-            GUI.DrawTexture(new Rect(screenPoint.x - 0.5f * m_healthBarWidth, Screen.height - screenPoint.y - 40, m_healthBarWidth, 10), m_emptyBarTexture);
-            GUI.DrawTexture(new Rect(screenPoint.x - 0.5f * m_healthBarWidth, Screen.height - screenPoint.y - 40, m_healthBarWidth * ((float)m_currHealth / (float)m_maxHealth), 10), m_healthBarTexture);
-        }
+        //if (gameManager.perkOpen || gameManager.paused)
+        //{
+        //    return;
+        //}
+        //else if (m_currHealth != m_maxHealth)
+        //{
+        //    Vector2 screenPoint = Camera.main.WorldToScreenPoint(this.transform.position);
+        //    GUI.DrawTexture(new Rect(screenPoint.x - 0.5f * m_healthBarWidth, Screen.height - screenPoint.y - 40, m_healthBarWidth, 10), m_emptyBarTexture);
+        //    GUI.DrawTexture(new Rect(screenPoint.x - 0.5f * m_healthBarWidth, Screen.height - screenPoint.y - 40, m_healthBarWidth * ((float)m_currHealth / (float)m_maxHealth), 10), m_healthBarTexture);
+        //}
     }
 }

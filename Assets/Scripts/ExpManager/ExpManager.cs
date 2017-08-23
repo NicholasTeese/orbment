@@ -17,8 +17,6 @@ public class ExpManager : MonoBehaviour
 
 	private PerkManager m_PerkManager;
 
-
-
     // Use this for initialization
     void Start()
     {
