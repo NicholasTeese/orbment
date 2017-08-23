@@ -114,8 +114,5 @@ public class OrbGate : MonoBehaviour
             Vector3 m_targetScale = new Vector3(m_lockScale * m_origScale, m_lockScale * m_origScale, m_visualLock.transform.localScale.z);
             m_visualLock.transform.localScale = m_targetScale;
         }
-
     }
-
-
 }

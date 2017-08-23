@@ -48,7 +48,6 @@ public class Perk : MonoBehaviour
         Uncommon,
         Rare,
         Legendary,
-
     }
 
     //text name

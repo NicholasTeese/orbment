@@ -26,7 +26,7 @@ public class BomberEnemy : MonoBehaviour
 
     private void Update()
     {
-        
+
     }
 
     private Vector3 GetWanderPosition(Vector3 a_v3CurrentPosition)
@@ -36,3 +36,4 @@ public class BomberEnemy : MonoBehaviour
 
         return new Vector3(a_v3CurrentPosition.x + fXOffset, a_v3CurrentPosition.y, a_v3CurrentPosition.z + fZOffset);
     }
+}
