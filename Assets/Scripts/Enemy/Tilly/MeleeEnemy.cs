@@ -36,6 +36,8 @@ public class MeleeEnemy : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(m_eBehaviour);
+
         switch (m_eBehaviour)
         {
             case Behaviour.WANDERING:
@@ -120,7 +122,7 @@ public class MeleeEnemy : MonoBehaviour
 
             default:
                 {
-                    Debug.Log("Enemy behaviour not recognised. Name: " + gameObject.name);
+                    Debug.Log("MeleeEnemy behaviour not recognised. Name: " + gameObject.name);
                     break;
                 }
         }

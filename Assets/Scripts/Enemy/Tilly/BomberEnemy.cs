@@ -21,12 +21,43 @@ public class BomberEnemy : MonoBehaviour
     private void Awake()
     {
         m_navMeshAgent = GetComponent<NavMeshAgent>();
+        m_navMeshAgent.destination = GetWanderPosition(transform.position);
         m_navMeshAgent.speed = m_fMoveSpeed;
     }
 
     private void Update()
     {
+        Debug.Log(m_eBehaviour);
 
+        switch (m_eBehaviour)
+        {
+            case Behaviour.WANDERING:
+                {
+                    if (Vector3.Distance(transform.position, m_navMeshAgent.destination) <= 1.0f)
+                    {
+                        m_navMeshAgent.destination = GetWanderPosition(transform.position);
+                    }
+                    break;
+                }
+
+            case Behaviour.RETREATING:
+                {
+
+                    break;
+                }
+
+            case Behaviour.HIDING:
+                {
+
+                    break;
+                }
+
+            default:
+                {
+                    Debug.Log("BomberEnemy behaviour not recognised. Name: " + gameObject.name);
+                    break;
+                }
+        }
     }
 
     private Vector3 GetWanderPosition(Vector3 a_v3CurrentPosition)
