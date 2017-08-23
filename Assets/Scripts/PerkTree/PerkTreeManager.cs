@@ -1,29 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-public class PerkTreeManager : MonoBehaviour {
-    public int perkPoints;
-    public Text perkPointText;
 
-    public GameObject perkToActivate;
-    // Use this for initialization
-    void Start()
+public class PerkTreeManager : MonoBehaviour
+{
+    private uint m_uiAvailiablePerks = 0;
+    public uint AvailiablePerks { get { return m_uiAvailiablePerks; } }
+
+    public static PerkTreeManager m_perkTreeManager;
+
+    private void Awake()
     {
-
+        if (m_perkTreeManager == null)
+        {
+            m_perkTreeManager = this;
+        }
+        else if (m_perkTreeManager != this)
+        {
+            Destroy(gameObject);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void IncrementAvailiablePerks()
     {
-        perkPointText.text = "Perk Points: " + perkPoints.ToString();
+        ++m_uiAvailiablePerks;
     }
-    public void ActivatePerk()
-    {
-        perkToActivate.GetComponent<PerkTreeOrb>().unClickOrbs();
-        perkToActivate.GetComponent<PerkTreeOrb>().perkActivated = true;
-        perkToActivate.GetComponent<PerkTreeOrb>().boughtPerk = true;
-        perkPoints -= 1;
 
+    public void DecrementAvailiablePerks()
+    {
+        --m_uiAvailiablePerks;
     }
 }
