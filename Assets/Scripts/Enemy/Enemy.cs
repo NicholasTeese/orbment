@@ -13,7 +13,6 @@ public class Enemy : Entity
 
     public EnemyType m_type;
 
-
     // Update is called once per frame
     new void Update()
     {
@@ -45,10 +44,21 @@ public class Enemy : Entity
 
     new private void OnGUI()
     {
-        base.OnGUI();
-
-        Vector2 screenPoint = Camera.main.WorldToScreenPoint(this.transform.position);
-
-        GUI.Label(new Rect(screenPoint.x - 0.5f * m_healthBarWidth, Screen.height - screenPoint.y - 60, m_healthBarWidth, 50), "Lvl " + m_currLevel);
+        if (gameManager.perkOpen || gameManager.paused)
+        {
+            return;
+        }
+        else if (m_currHealth != m_maxHealth)
+        {
+            Vector2 screenPoint = Camera.main.WorldToScreenPoint(this.transform.position);
+            GUI.DrawTexture(new Rect(screenPoint.x - 0.5f * m_healthBarWidth, Screen.height - screenPoint.y - 40, m_healthBarWidth, 10), m_emptyBarTexture);
+            GUI.DrawTexture(new Rect(screenPoint.x - 0.5f * m_healthBarWidth, Screen.height - screenPoint.y - 40, m_healthBarWidth * ((float)m_currHealth / (float)m_maxHealth), 10), m_healthBarTexture);
+        }
+        else
+        {
+            base.OnGUI();
+            Vector2 screenPoint = Camera.main.WorldToScreenPoint(this.transform.position);
+            GUI.Label(new Rect(screenPoint.x - 0.5f * m_healthBarWidth, Screen.height - screenPoint.y - 60, m_healthBarWidth, 50), "Lvl " + m_currLevel);
+        }
     }
 }

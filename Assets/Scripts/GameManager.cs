@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour {
     public GameObject PerkScreen;
     public GameObject PerkOrbs;
 
-    bool perkOpen = false;
+    public bool perkOpen = false;
 	public bool gameStart = false;
 	public bool paused = false;
     public bool dead = false;
