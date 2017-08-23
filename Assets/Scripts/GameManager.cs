@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour {
     public GameObject PerkCam;
     public GameObject PerkScreen;
-    public GameObject PerkOrbs;
 
     public bool perkOpen = false;
 	public bool gameStart = false;
@@ -33,7 +32,6 @@ public class GameManager : MonoBehaviour {
             {
 				PerkCam.SetActive (true);
                 PerkScreen.SetActive(true);
-                PerkOrbs.SetActive(true);
                 hud.SetActive(false);
 
                 perkOpen = true;
@@ -43,7 +41,6 @@ public class GameManager : MonoBehaviour {
             {
 				PerkCam.SetActive (false);
                 PerkScreen.SetActive(false);
-                PerkOrbs.SetActive(false);
                 hud.SetActive(true);
 
                 perkOpen = false;
