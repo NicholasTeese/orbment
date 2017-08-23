@@ -160,7 +160,6 @@ public class Player : Entity
                 {
                     if (m_currWeapon != null)
                     {
-
                         m_currWeapon.m_playerRef = this;
                         m_hasCrit = false;
                         if (Random.Range(0, 100) <= m_critPercentChance)
@@ -196,13 +195,11 @@ public class Player : Entity
                     }
                     m_manaPool.m_currentMana -= m_shootManaCost;
                 }
-
             }
-
             m_playerFireTimer += Time.deltaTime;
         }
 
-        //regen mana when mouse up   
+        //regen mana when mouse up
         if ((!Input.GetMouseButton(0) || m_manaPool.m_currentMana <= m_shootManaCost) && Time.timeScale != 0.0f)
         {
             RegenMana();

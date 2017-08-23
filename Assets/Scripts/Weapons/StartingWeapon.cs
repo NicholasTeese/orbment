@@ -20,9 +20,6 @@ public class StartingWeapon : BaseWeapon
             {
                 m_activePool[i].m_damage = (int) (m_activePool[i].m_damage * a_critMult);
             }
-
         }
-
-
     }
 }

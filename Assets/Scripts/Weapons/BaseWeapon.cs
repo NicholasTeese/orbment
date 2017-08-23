@@ -87,7 +87,6 @@ public class BaseWeapon : MonoBehaviour
                     projectileCount++;
                 }
             }
-
         }
     }
 
@@ -101,8 +100,5 @@ public class BaseWeapon : MonoBehaviour
         m_projectile = a_projectile;
 
         Start();
-
     }
-
-
 }
