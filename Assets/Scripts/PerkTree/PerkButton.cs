@@ -38,6 +38,12 @@ public class PerkButton : MonoBehaviour
 
     public void OnClick()
     {
+        if (PerkTreeManager.m_perkTreeManager.AvailiablePerks == 0)
+        {
+            Debug.Log("No availiable perks to spend.");
+            return;
+        }
+
         if (m_parentPerk != null)
         {
             if (!m_parentPerk.GetComponent<PerkButton>().m_bIsPurchased || m_parentPerk.GetComponent<PerkButton>().m_bChildPathChosen)
@@ -51,5 +57,6 @@ public class PerkButton : MonoBehaviour
 
         m_bIsPurchased = true;
         gameObject.GetComponent<Image>().color = Color.red;
+        PerkTreeManager.m_perkTreeManager.DecrementAvailiablePerks();
     }
 }
