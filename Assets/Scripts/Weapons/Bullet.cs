@@ -49,17 +49,11 @@ public class Bullet : MonoBehaviour
     public ProjectileType m_type;
 
 
-
-
-
-
     // Use this for initialization
     protected virtual void Start()
     {
         m_explosionManager = GameObject.FindObjectOfType<ExplosionManager>();
         m_trail = this.GetComponent<TrailRenderer>();
- 
-
     }
 
     protected void OnEnable()
@@ -79,7 +73,6 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     protected void FixedUpdate()
     {
-
         this.transform.position += m_direction * m_projectileSpeed * Time.deltaTime;
         CameraCheck();
         m_timer += Time.deltaTime;
@@ -91,7 +84,7 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    //is is camera view?
+    //is in camera view?
     protected void Disable()
     {
 
@@ -121,8 +114,6 @@ public class Bullet : MonoBehaviour
         }
 
     }
-
-
 
 
     protected virtual void OnCollisionEnter(Collision collision)
