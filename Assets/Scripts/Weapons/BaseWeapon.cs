@@ -32,9 +32,9 @@ public class BaseWeapon : MonoBehaviour
         {
             for (uint i = 0; i < m_maxBulletsOnScreen; ++i)
             {
-                GameObject projectile = (GameObject)Instantiate(m_projectile,this.transform);
+                GameObject projectile = Instantiate(m_projectile, transform);
                 projectile.SetActive(false);
-                projectile.transform.parent = this.transform;
+                projectile.transform.parent = transform;
                 m_projectilePool.Add(projectile);
                 Bullet projectileScript = projectile.GetComponent<Bullet>();
                 if (projectileScript != null)
