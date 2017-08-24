@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class ExpManager : MonoBehaviour
 {
+    public GameObject perkText;
 	public GameObject Xpfiller;
 	public GameObject perkUpgradeUI;
 	public GameObject XPSlider;
@@ -38,6 +39,14 @@ public class ExpManager : MonoBehaviour
         {
             LevelUp();
         }
+        if (PerkTreeManager.m_perkTreeManager.AvailiablePerks == 0)
+        {
+            perkText.SetActive(false);
+        }
+        else
+        {
+            perkText.SetActive(true);
+        }
     }
 
 
@@ -55,11 +64,9 @@ public class ExpManager : MonoBehaviour
         m_playerExperience = m_playerExperience - m_playerMaxXP;
         m_playerMaxXP += m_percentageAddedXPPerLvl*m_playerMaxXP;
         m_playerLevel++;
+        PerkTreeManager.m_perkTreeManager.IncrementAvailiablePerks();
 		//m_PerkManager.genPerkList();
 		m_PerkManager.leveledUp();
 		//LevelUpUI.m_Singleton.showUI();
-	}
-
-
-  
+	}  
 }

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
+    public static GameManager m_GameManager;
     public GameObject PerkCam;
     public GameObject PerkScreen;
 
@@ -18,17 +20,20 @@ public class GameManager : MonoBehaviour {
     public GameObject hud;
 
 	// Use this for initialization
-	void Start () {
-		PerkCam.SetActive (false);
+	void Start ()
+    {
+        PerkCam.SetActive(false);
+        PerkScreen.SetActive(false);
         gameStart = true;
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
         //pause game
 		if (Input.GetKeyUp (KeyCode.Tab))
         {
-			if (perkOpen == false)
+			if (!perkOpen)
             {
 				PerkCam.SetActive (true);
                 PerkScreen.SetActive(true);
