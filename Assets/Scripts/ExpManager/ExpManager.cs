@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 public class ExpManager : MonoBehaviour
 {
+    public static ExpManager m_ExpManager;
+
     public GameObject perkText;
 	public GameObject Xpfiller;
 	public GameObject perkUpgradeUI;
@@ -40,6 +42,8 @@ public class ExpManager : MonoBehaviour
             LevelUp();
         }
         if (PerkTreeManager.m_perkTreeManager.AvailiablePerks == 0)
+//            && !GameManager.m_GameManager.perkOpen 
+  //          && !GameManager.m_GameManager.paused)
         {
             perkText.SetActive(false);
         }

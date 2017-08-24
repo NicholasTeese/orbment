@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
 				PerkCam.SetActive (true);
                 PerkScreen.SetActive(true);
                 hud.SetActive(false);
-
+                
                 perkOpen = true;
 				Time.timeScale = 0;
 			}
