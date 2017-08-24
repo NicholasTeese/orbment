@@ -102,10 +102,7 @@ public class Entity : MonoBehaviour
         LevelUpdate();
         m_oldHealth = m_currHealth;
     }
-    protected void Awake()
-    {
-        LevelUpdate();
-    }
+
     protected void OnEnable()
     {
         LevelUpdate();

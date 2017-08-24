@@ -17,7 +17,9 @@ using UnityEngine.UI;
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 public class Player : Entity
 {
-	//Johns Variables
+    //Johns Variables
+
+    public static Player m_Player;
 
 	public AudioClip fire_shot;
 	public AudioClip ice_shot;
@@ -95,7 +97,17 @@ public class Player : Entity
     private List<GameObject> m_spentOrbs = new List<GameObject>();
 
 
-
+    void Awake()
+    {
+        if (m_Player == null)
+        {
+            m_Player = this;
+        }
+        else if ( m_Player != this)
+        {
+            Destroy(gameObject);
+        }
+    }
     new void Start()
     {
 

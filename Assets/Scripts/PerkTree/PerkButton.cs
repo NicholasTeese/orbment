@@ -58,7 +58,7 @@ public class PerkButton : MonoBehaviour
             // Increase player movement speed by 5% (2A).
             case "2A":
                 {
-                    float iHealthIncrease = PerkTreeManager.m_perkTreeManager.m_player.m_maxHealth /= 0.05f;
+//                    float iHealthIncrease = PerkTreeManager.m_perkTreeManager.m_player.m_maxHealth /= 0.05f;
                     break;
                 }
 
