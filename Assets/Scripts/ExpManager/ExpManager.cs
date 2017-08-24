@@ -8,7 +8,6 @@ public class ExpManager : MonoBehaviour
 
     public GameObject perkText;
 	public GameObject Xpfiller;
-	public GameObject perkUpgradeUI;
 	public GameObject XPSlider;
     public Texture2D m_expBarTexture;
     public Texture2D m_emptyBarTexture;
@@ -55,21 +54,21 @@ public class ExpManager : MonoBehaviour
 
     private void OnGUI()
     {
-        //GUI.DrawTexture(new Rect((Screen.width - m_expBarWidth)/2, 200, m_expBarWidth, 25), m_emptyBarTexture);
-        //GUI.DrawTexture(new Rect((Screen.width - m_expBarWidth)/2 + 200, 0, m_expBarWidth * (m_playerExperience/m_playerMaxXP), 25), m_expBarTexture);
+        //x GUI.DrawTexture(new Rect((Screen.width - m_expBarWidth)/2, 200, m_expBarWidth, 25), m_emptyBarTexture);
+        //x GUI.DrawTexture(new Rect((Screen.width - m_expBarWidth)/2 + 200, 0, m_expBarWidth * (m_playerExperience/m_playerMaxXP), 25), m_expBarTexture);
     }
 
 
     void LevelUp()
     {
-        //perkUpgradeUI.SetActive (true);
+        //x perkUpgradeUI.SetActive (true);
 
         m_playerExperience = m_playerExperience - m_playerMaxXP;
         m_playerMaxXP += m_percentageAddedXPPerLvl*m_playerMaxXP;
         m_playerLevel++;
         PerkTreeManager.m_perkTreeManager.IncrementAvailiablePerks();
-		//m_PerkManager.genPerkList();
-		m_PerkManager.leveledUp();
-		//LevelUpUI.m_Singleton.showUI();
+		//x m_PerkManager.genPerkList();
+		//x m_PerkManager.leveledUp();
+		//x LevelUpUI.m_Singleton.showUI();
 	}  
 }
