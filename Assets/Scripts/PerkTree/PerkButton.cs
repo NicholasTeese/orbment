@@ -40,34 +40,133 @@ public class PerkButton : MonoBehaviour
         m_startingWeapon = GameObject.FindGameObjectWithTag("StartingWeapon").GetComponent<StartingWeapon>();
     }
 
-    private void PurchasePerk(string a_strPerk)
+    /// <summary>
+    /// Checks the fire tree's perks to apply perk to.
+    /// </summary>
+    /// <param name="a_strPerkName"></param>
+    private void CheckFireTree(string a_strPerkName)
     {
-        switch (a_strPerk)
+        switch (a_strPerkName)
         {
-            case "FireBullet":
+            // Fire bullet (1).
+            case "1":
                 {
                     m_startingWeapon.SetProjectile(Resources.Load("Prefabs/Projectiles/FireBall") as GameObject);
                     break;
                 }
 
+            // Increase player movement speed by 5% (2A).
+            case "2A":
+                {
+                    float iHealthIncrease = PerkTreeManager.m_perkTreeManager.m_player.m_maxHealth /= 0.05f;
+                    break;
+                }
+
+            // Increase player max health by 5% (2B).
+            case "2B":
+                {
+
+                    break;
+                }
+
+            // Give player speed boost based on how many enemies are burning (3A).
+            case "3A":
+                {
+
+                    break; 
+                }
+
+            // Increase player bullet velocity by 10% (3B).
+            case "3B":
+                {
+
+                    break;
+                }
+
+            // Spawn ring of fire when player health is below 25% (3C).
+            case "3C":
+                {
+
+                    break;
+                }
+
+            // Getting a kill combo returns HP to the player (3D).
+            case "3D":
+                {
+
+                    break;
+                }
+
+            // Increase player speed boost based on how many enemies are burning (4A).
+            case "4A":
+                {
+
+                    break;
+                }
+
+            // Increase player bullet velocity by 50% (4B).
+            case "4B":
+                {
+
+                    break;
+                }
+
+            // Ring of fire damage increased (4C).
+            case "4C":
+                {
+
+                    break;
+                }
+
+            // God mode enabled for 5 seconds when player reaches highest combo (4D).
+            case "4D":
+                {
+
+                    break;
+                }
+
+        }
+    }
+
+    /// <summary>
+    /// Checks ice tree perks to apply perk to.
+    /// </summary>
+    /// <param name="a_strPerkName"></param>
+    private void CheckIceTree(string a_strPerkName)
+    {
+        switch (a_strPerkName)
+        {
+            // Ice bullet (1).
             case "IceBullet":
                 {
                     m_startingWeapon.SetProjectile(Resources.Load("Prefabs/Projectiles/IceShard") as GameObject);
                     break;
                 }
+        }
+    }
 
+    /// <summary>
+    /// Checks lightning tree perk to apply perk to.
+    /// </summary>
+    /// <param name="a_strPerkName"></param>
+    private void CheckLightningTree(string a_strPerkName)
+    {
+        switch (a_strPerkName)
+        {
+            // Lightning bullet (1).
             case "LightningBullet":
                 {
                     m_startingWeapon.SetProjectile(Resources.Load("Prefabs/Projectiles/LightningBall") as GameObject);
                     break;
                 }
-
-            default:
-                {
-                    Debug.Log("Perk name to be purchased not recognised.");
-                    break;
-                }
         }
+    }
+
+    private void PurchasePerk(string a_strPerkName)
+    {
+        CheckFireTree(a_strPerkName);
+        CheckIceTree(a_strPerkName);
+        CheckLightningTree(a_strPerkName);
     }
 
     public void OnClick(string a_strPerk)
