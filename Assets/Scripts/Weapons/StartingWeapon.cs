@@ -4,19 +4,6 @@ using UnityEngine;
 
 public class StartingWeapon : BaseWeapon
 {
-    public static StartingWeapon m_startingWeapon;
-
-    private void Awake()
-    {
-        if (m_startingWeapon == null)
-        {
-            m_startingWeapon = this;
-        }
-        else if (m_startingWeapon != this)
-        {
-            Destroy(gameObject);
-        }
-    }
 
     public override void Fire(Vector3 a_direction, int damagePerProjectile, bool a_hasCrit, float a_critMult)
     {
