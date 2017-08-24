@@ -138,6 +138,7 @@ public class Bullet : MonoBehaviour
 
                 m_explosionManager.RequestExplosion(this.transform.position, -m_direction, Explosion.ExplosionType.SmallBlood, 0.0f);
             }
+            Disable();
         }           
     }
 }
