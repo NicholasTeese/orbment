@@ -56,9 +56,9 @@ public class PerkButton : MonoBehaviour
                 }
 
             // Increase player movement speed by 5% (2A).
-            case "2A":
+            case "Fire2A":
                 {
-
+                    Player.m_Player.m_currSpeed += (int)(Player.m_Player.m_currSpeed * 0.05f);
                     break;
                 }
 
@@ -70,56 +70,56 @@ public class PerkButton : MonoBehaviour
                 }
 
             // Give player speed boost based on how many enemies are burning (3A).
-            case "3A":
+            case "Fire3A":
                 {
 
                     break; 
                 }
 
             // Increase player bullet velocity by 10% (3B).
-            case "3B":
+            case "Fire3B":
                 {
 
                     break;
                 }
 
             // Spawn ring of fire when player health is below 25% (3C).
-            case "3C":
+            case "Fire3C":
                 {
 
                     break;
                 }
 
             // Getting a kill combo returns HP to the player (3D).
-            case "3D":
+            case "Fire3D":
                 {
 
                     break;
                 }
 
             // Increase player speed boost based on how many enemies are burning (4A).
-            case "4A":
+            case "Fire4A":
                 {
 
                     break;
                 }
 
             // Increase player bullet velocity by 50% (4B).
-            case "4B":
+            case "Fire4B":
                 {
 
                     break;
                 }
 
             // Ring of fire damage increased (4C).
-            case "4C":
+            case "Fire4C":
                 {
 
                     break;
                 }
 
             // God mode enabled for 5 seconds when player reaches highest combo (4D).
-            case "4D":
+            case "Fire4D":
                 {
 
                     break;
