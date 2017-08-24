@@ -48,8 +48,8 @@ public class PerkButton : MonoBehaviour
     {
         switch (a_strPerkName)
         {
-            // Fire bullet (1).
-            case "1":
+            // Fire bullet (1A).
+            case "Fire1A":
                 {
                     m_startingWeapon.SetProjectile(Resources.Load("Prefabs/Projectiles/FireBall") as GameObject);
                     break;
@@ -58,14 +58,14 @@ public class PerkButton : MonoBehaviour
             // Increase player movement speed by 5% (2A).
             case "2A":
                 {
-//                    float iHealthIncrease = PerkTreeManager.m_perkTreeManager.m_player.m_maxHealth /= 0.05f;
+
                     break;
                 }
 
             // Increase player max health by 5% (2B).
-            case "2B":
+            case "Fire2B":
                 {
-
+                    Player.m_Player.m_maxHealth += (int)(Player.m_Player.m_maxHealth * 0.05f);
                     break;
                 }
 
