@@ -24,6 +24,7 @@ public class ExpManager : MonoBehaviour
     void Start()
     {
 		m_PerkManager = FindObjectOfType<PerkManager>();
+        //m_gameManager = GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -34,7 +35,7 @@ public class ExpManager : MonoBehaviour
 		Xpfiller.GetComponent<Slider> ().maxValue = m_playerMaxXP;
 		if (XPSlider.GetComponent<Slider> ().value < m_playerExperience)
         {
-			XPSlider.GetComponent<Slider> ().value += 2.5f * Time.deltaTime;
+			XPSlider.GetComponent<Slider> ().value += 5.0f * Time.deltaTime;
 		}
 
         if(m_playerExperience >= m_playerMaxXP)
@@ -42,8 +43,6 @@ public class ExpManager : MonoBehaviour
             LevelUp();
         }
         if (PerkTreeManager.m_perkTreeManager.AvailiablePerks == 0)
-//            && !GameManager.m_GameManager.perkOpen 
-  //          && !GameManager.m_GameManager.paused)
         {
             perkText.SetActive(false);
         }

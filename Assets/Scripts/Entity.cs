@@ -20,7 +20,7 @@ public class Entity : MonoBehaviour
     public int m_currLevel = 1;
     public int m_healthPerLevel = 50;
     public int m_damagePerLevel = 5;
-    public int m_xpPerLevel = 5;
+    public int m_xpPerLevel = 20;
 
     [Header("Health")]
     public int m_healthBarWidth = 100;

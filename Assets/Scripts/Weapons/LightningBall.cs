@@ -29,9 +29,7 @@ public class LightningBall : Bullet
                     m_explosionManager.RequestExplosion(this.transform.position, this.transform.forward, Explosion.ExplosionType.GodLightning, m_damage);
                     m_explosionManager.RequestExplosion(this.transform.position, this.transform.forward, Explosion.ExplosionType.Shockwave, 0.0f);
                 }
-
             }
-            
         }
 
 

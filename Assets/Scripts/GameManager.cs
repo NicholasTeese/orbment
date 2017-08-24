@@ -19,7 +19,19 @@ public class GameManager : MonoBehaviour
     public GameObject deathMenu;
     public GameObject hud;
 
-	// Use this for initialization
+	void Awake()
+    {
+        if (m_GameManager == null)
+        {
+            m_GameManager = this;
+        }
+        else if (m_GameManager != this)
+        {
+            Destroy(gameObject);
+        }
+    }
+    
+    // Use this for initialization
 	void Start ()
     {
         PerkCam.SetActive(false);
@@ -38,7 +50,6 @@ public class GameManager : MonoBehaviour
 				PerkCam.SetActive (true);
                 PerkScreen.SetActive(true);
                 hud.SetActive(false);
-                
                 perkOpen = true;
 				Time.timeScale = 0;
 			}
