@@ -44,22 +44,18 @@ public class BreakOnImpactWith : MonoBehaviour
 			}
 		}
 	}
-	void OnTriggerEnter(Collider other){
-		if (other.tag == "Bullet") {	
-
+	void OnTriggerEnter(Collider other)
+    {
+		if (other.tag == "Bullet")
+        {	
 			wallHealth -= 45;
-			//Debug.Log (wallHealth);
-
+			//x Debug.Log (wallHealth);
 		}
 	}
     void OnTriggerStay(Collider other)
     {
-
         if(other.CompareTag(m_tag) && !m_isBroken)
         {
-
-
-
             ///if player
             Player playerScript = other.GetComponent<Player>();
 
@@ -73,10 +69,6 @@ public class BreakOnImpactWith : MonoBehaviour
                 m_isBroken = true;
 				audiosrc.pitch = 1 + Random.Range (-0.4f, 0.3f);
             }
-        }
-
-       
+        }       
     }
-
-
 }
