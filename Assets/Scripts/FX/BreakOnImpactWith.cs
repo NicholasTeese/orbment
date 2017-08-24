@@ -23,8 +23,10 @@ public class BreakOnImpactWith : MonoBehaviour
         }
        
     }
-	void Update(){
-		if (wallHealth <= 0) {
+	void Update()
+    {
+		if (wallHealth <= 0)
+        {
 			m_faceModel.SetActive (false);
 
 			m_chunkModel.SetActive (true);
@@ -32,8 +34,11 @@ public class BreakOnImpactWith : MonoBehaviour
 			m_entranceVector = GameObject.Find ("Player").GetComponent<Player> ().m_dashDirection;
 			m_isBroken = true;
 			audiosrc.pitch = 1 + Random.Range (-0.4f, 0.3f);
-		} else {
-			if (wallHealth <= 50) {
+		}
+        else
+        {
+			if (wallHealth <= 50)
+            {
 				Material[] breakWallMaterials = m_faceModel.GetComponent<Renderer> ().materials;
 				breakWallMaterials [0].mainTexture = null;
 			}

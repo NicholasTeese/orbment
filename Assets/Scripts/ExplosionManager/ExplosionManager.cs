@@ -58,12 +58,8 @@ public class ExplosionManager : MonoBehaviour
 
                 }
             }
-
-
             m_explosionPool.Add(explosionType);
         }
-
-
     }
 
     public GameObject RequestExplosion(Vector3 a_position, Vector3 a_forward, Explosion.ExplosionType a_type, float a_damage)
