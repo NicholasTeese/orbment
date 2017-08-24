@@ -15,6 +15,8 @@ public class PerkButton : MonoBehaviour
 
     public Text m_perkDescriptionText;
 
+    private StartingWeapon m_startingWeapon;
+
     public void OnCursorOver()
     {
         m_perkDescriptionText.text = m_strPerkDescription;
@@ -34,10 +36,48 @@ public class PerkButton : MonoBehaviour
                 m_childPerks.Add(child.gameObject);
             }
         }
+
+        m_startingWeapon = GameObject.FindGameObjectWithTag("StartingWeapon").GetComponent<StartingWeapon>();
     }
 
-    public void OnClick()
+    private void PurchasePerk(string a_strPerk)
     {
+        switch (a_strPerk)
+        {
+            case "FireBullet":
+                {
+                    m_startingWeapon.SetProjectile(Resources.Load("Prefabs/Projectiles/FireBall") as GameObject);
+                    break;
+                }
+
+            case "IceBullet":
+                {
+                    m_startingWeapon.SetProjectile(Resources.Load("Prefabs/Projectiles/IceShard") as GameObject);
+                    break;
+                }
+
+            case "LightningBullet":
+                {
+                    m_startingWeapon.SetProjectile(Resources.Load("Prefabs/Projectiles/LightningBall") as GameObject);
+                    break;
+                }
+
+            default:
+                {
+                    Debug.Log("Perk name to be purchased not recognised.");
+                    break;
+                }
+        }
+    }
+
+    public void OnClick(string a_strPerk)
+    {
+        if (PerkTreeManager.m_perkTreeManager.AvailiablePerks == 0)
+        {
+            Debug.Log("No availiable perks to spend.");
+            return;
+        }
+
         if (m_parentPerk != null)
         {
             if (!m_parentPerk.GetComponent<PerkButton>().m_bIsPurchased || m_parentPerk.GetComponent<PerkButton>().m_bChildPathChosen)
@@ -51,5 +91,7 @@ public class PerkButton : MonoBehaviour
 
         m_bIsPurchased = true;
         gameObject.GetComponent<Image>().color = Color.red;
+        PerkTreeManager.m_perkTreeManager.DecrementAvailiablePerks();
+        PurchasePerk(a_strPerk);
     }
 }

@@ -83,14 +83,14 @@ public class PerkManager : MonoBehaviour
             if (Input.GetKey(code))
             {
                 m_levelUpUI.showUI();
-                m_UpgradeAvailableText.SetActive(false);
+               // m_UpgradeAvailableText.SetActive(false);
                 Time.timeScale = 0;
               //  Time.fixedDeltaTime = 0.02f * Time.timeScale;
             }
             else
             {
                 m_levelUpUI.hideUI();
-                m_UpgradeAvailableText.SetActive(true);
+                //m_UpgradeAvailableText.SetActive(true);
                 Time.timeScale = 1.0f;
               //  Time.fixedDeltaTime = 0.02f;
             }
@@ -207,13 +207,13 @@ public class PerkManager : MonoBehaviour
         }
         m_levelUpUI.hideUI();
         m_ShowingUI = false;
-        m_UpgradeAvailableText.SetActive(false);
+  //      m_UpgradeAvailableText.SetActive(false);
         Time.timeScale = 1.0f;
     }
 
     public void leveledUp()
     {
-        m_UpgradeAvailableText.SetActive(true);
+//        m_UpgradeAvailableText.SetActive(true);
         if (!m_ShowingUI)
         {
             genPerkList();
