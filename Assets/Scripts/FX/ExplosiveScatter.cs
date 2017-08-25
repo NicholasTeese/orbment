@@ -42,5 +42,7 @@ public class ExplosiveScatter : MonoBehaviour
     {
         yield return new WaitForSeconds(2.0f);
         canFade = true;
+        yield return new WaitForSeconds(0.5f);
+        this.gameObject.SetActive(false);
     }
 }

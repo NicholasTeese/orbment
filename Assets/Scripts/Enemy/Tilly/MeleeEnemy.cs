@@ -27,8 +27,12 @@ public class MeleeEnemy : MonoBehaviour
 
     private NavMeshAgent m_navMeshAgent;
 
+    private FindObjectsInRadius m_foir;
+
     private void Awake()
     {
+        m_foir = this.GetComponent<FindObjectsInRadius>();
+        //m_foir.m_sightAngle = 360;
         m_navMeshAgent = GetComponent<NavMeshAgent>();
         m_navMeshAgent.destination = GetWanderPosition(transform.position);
         m_navMeshAgent.speed = m_fMoveSpeed;
@@ -42,11 +46,15 @@ public class MeleeEnemy : MonoBehaviour
         {
             case Behaviour.WANDERING:
                 {
-                    if (Vector3.Distance(transform.position, m_target.transform.position) <= 15.0f)
+                    if (m_foir.m_target != null)
                     {
-                        m_eBehaviour = Behaviour.PREPARING;
-                        break;
+                        if (Vector3.Distance(transform.position, m_target.transform.position) <= 15.0f)
+                        {
+                            m_eBehaviour = Behaviour.PREPARING;
+                            break;
+                        }
                     }
+
 
                     if (Vector3.Distance(transform.position, m_navMeshAgent.destination) <= 1.0f)
                     {
@@ -62,7 +70,9 @@ public class MeleeEnemy : MonoBehaviour
                         m_fPrepareChargeTime = 2.0f;
                         m_eBehaviour = Behaviour.WANDERING;
                     }
-                    
+
+                    this.transform.LookAt(m_foir.m_target);
+
                     m_fPrepareChargeTime -= Time.deltaTime;
 
                     if (m_fPrepareChargeTime <= 0.0f)
@@ -85,6 +95,7 @@ public class MeleeEnemy : MonoBehaviour
                     }
 
                     transform.position = Vector3.MoveTowards(transform.position, m_v3ChargeTarget, (m_fChargeSpeed * Time.deltaTime));
+                    
                     break;
                 }
 
@@ -92,7 +103,7 @@ public class MeleeEnemy : MonoBehaviour
                 {
                     if (m_fRecoverTime <= 0.0f)
                     {
-                        if (Vector3.Distance(transform.position, m_target.transform.position) >= 10.0f)
+                        if (Vector3.Distance(transform.position, m_target.transform.position) >= 4.0f)
                         {
                             if (Vector3.Distance(transform.position, m_target.transform.position) <= 15.0f)
                             {

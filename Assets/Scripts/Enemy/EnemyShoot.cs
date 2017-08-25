@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemyShoot : MonoBehaviour
 {
-    private int m_damagePerProjectile;
+//    private int m_damagePerProjectile;
     public float m_attackInterval = 1.0f;
     public bool m_canAttack = true;
 
