@@ -40,7 +40,7 @@ public class MeleeEnemy : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(m_eBehaviour);
+        //Debug.Log(m_eBehaviour);
 
         switch (m_eBehaviour)
         {
@@ -55,10 +55,10 @@ public class MeleeEnemy : MonoBehaviour
                         }
                     }
 
-
                     if (Vector3.Distance(transform.position, m_navMeshAgent.destination) <= 1.0f)
                     {
                         m_navMeshAgent.destination = GetWanderPosition(transform.position);
+                        //Debug.Log(m_navMeshAgent.destination);
                     }
                     break;
                 }
