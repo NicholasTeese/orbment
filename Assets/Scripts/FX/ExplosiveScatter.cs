@@ -13,7 +13,7 @@ public class ExplosiveScatter : MonoBehaviour
 
     private bool canFade;
     [SerializeField]
-    private float fadePerSecond = 0.5f;
+    private float fadePerSecond = 1.5f;
 
     void Update()
     {
@@ -34,7 +34,13 @@ public class ExplosiveScatter : MonoBehaviour
         if (m_script != null && m_rb != null && m_explsionPosition != null)
         {
             m_rb.AddExplosionForce(m_explosiveForce, m_explsionPosition.position, m_explosiveRadius, m_explosiveUpMod);
-            canFade = true;
+            StartCoroutine(FadeDelay());
         }
+    }
+
+    IEnumerator FadeDelay()
+    {
+        yield return new WaitForSeconds(2.0f);
+        canFade = true;
     }
 }
