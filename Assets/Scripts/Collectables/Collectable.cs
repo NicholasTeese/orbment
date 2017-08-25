@@ -82,7 +82,7 @@ public class Collectable : MonoBehaviour
                         {
                             if (m_healthCap)
                             {
-                                // Do not pick up orb, do not collect $200
+                                // Do not pick up orb, do not pass go, do not collect $200
                             }
                             else
                             {
@@ -97,7 +97,7 @@ public class Collectable : MonoBehaviour
                     {
                         if(m_manaCap)
                         {
-                            // Do not pick up orb, do not collect $200
+                            // Do not pick up orb, do not pass go, do not collect $200
                         }
                         else
                         {
@@ -121,7 +121,8 @@ public class Collectable : MonoBehaviour
     {
         if (other.tag == "OrbBoundary")
         {
-            m_rigidBody.velocity = -m_rigidBody.velocity;   
+            m_rigidBody.velocity = -m_rigidBody.velocity;
+            Debug.Log("Left Bounds");
         }
     }
 }
