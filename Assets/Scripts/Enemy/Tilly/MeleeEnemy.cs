@@ -105,14 +105,18 @@ public class MeleeEnemy : MonoBehaviour
                     {
                         if (Vector3.Distance(transform.position, m_target.transform.position) >= 4.0f)
                         {
-                            if (Vector3.Distance(transform.position, m_target.transform.position) <= 15.0f)
+                            if (m_foir.m_target != null)
                             {
-                                m_navMeshAgent.enabled = true;
-                                m_navMeshAgent.speed = m_fMoveSpeed;
-                                m_fRecoverTime = 3.0f;
-                                m_eBehaviour = Behaviour.PREPARING;
-                                break;
+                                if (Vector3.Distance(transform.position, m_target.transform.position) <= 15.0f)
+                                {
+                                    m_navMeshAgent.enabled = true;
+                                    m_navMeshAgent.speed = m_fMoveSpeed;
+                                    m_fRecoverTime = 3.0f;
+                                    m_eBehaviour = Behaviour.PREPARING;
+                                    break;
+                                }
                             }
+
 
                             m_navMeshAgent.enabled = true;
                             m_navMeshAgent.speed = m_fMoveSpeed;
@@ -136,6 +140,21 @@ public class MeleeEnemy : MonoBehaviour
                     Debug.Log("MeleeEnemy behaviour not recognised. Name: " + gameObject.name);
                     break;
                 }
+        }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("Bullet"))
+        {
+            Bullet m_bulletScript = collision.collider.GetComponent<Bullet>();
+
+            if (m_bulletScript != null && m_bulletScript.m_id == "Player")
+            {
+                //m_navMeshAgent.SetDestination(collision.collider.transform.position - m_bulletScript.m_direction);
+                m_navMeshAgent.transform.LookAt(collision.collider.transform.position - m_bulletScript.m_direction);
+                // Conflicts with Enemy class' OnCollisionEnter
+            }
         }
     }
 

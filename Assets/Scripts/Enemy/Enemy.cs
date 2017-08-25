@@ -37,7 +37,8 @@ public class Enemy : Entity
 
             if (m_bulletScript != null && m_bulletScript.m_id == "Player")
             {
-                m_agent.SetDestination(collision.collider.transform.position - m_bulletScript.m_direction);
+                m_agent.SetDestination(collision.collider.transform.position - m_bulletScript.m_direction); // Travel to bullet origin
+                //m_agent.transform.LookAt(collision.collider.transform.position - m_bulletScript.m_direction); // Look at bullet origin
             }
         }
     }
