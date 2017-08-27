@@ -27,6 +27,8 @@ public class FireBall : Bullet
             }
 
             m_enemy.m_setOnFire = true;
+
+            Player.m_Player.m_currSpeedMult += 1;
         }
 
 

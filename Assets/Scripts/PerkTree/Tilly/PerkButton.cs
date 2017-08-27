@@ -79,7 +79,10 @@ public class PerkButton : MonoBehaviour
             // Increase player bullet velocity by 10% (3B).
             case "Fire3B":
                 {
-
+                    foreach (Transform bullet in m_startingWeapon.transform)
+                    {
+                        bullet.GetComponent<Bullet>().m_projectileSpeed += (int)(bullet.GetComponent<Bullet>().m_projectileSpeed * 0.10f);
+                    }
                     break;
                 }
 
@@ -107,7 +110,10 @@ public class PerkButton : MonoBehaviour
             // Increase player bullet velocity by 50% (4B).
             case "Fire4B":
                 {
-
+                    foreach (Transform bullet in m_startingWeapon.transform)
+                    {
+                        bullet.GetComponent<Bullet>().m_projectileSpeed += (int)(bullet.GetComponent<Bullet>().m_projectileSpeed * 0.50f);
+                    }
                     break;
                 }
 
