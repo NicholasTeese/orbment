@@ -152,6 +152,8 @@ public class Player : Entity
             }
         }
 
+        //Debug.Log(m_currSpeed);
+
 		if (m_currHealth <= 1) {
 			
 			GameObject.Find ("GameManager").GetComponent<GameManager> ().dead = true;

@@ -33,8 +33,8 @@ public class Entity : MonoBehaviour
 
     [Header("Health")]
     public int m_healthBarWidth = 100;
-    public int m_maxHealth = 100;
-    public int m_currHealth = 100;
+    public float m_maxHealth = 100;
+    public float m_currHealth = 100;
     public float m_experienceValue = 10;
     public Texture m_healthBarTexture;
     public Texture m_emptyBarTexture;
@@ -42,7 +42,7 @@ public class Entity : MonoBehaviour
 
     [Header("Current Damage and Speed")]
     public int m_currDamage = 10;
-    public int m_currSpeed = 10;
+    public float m_currSpeed = 10;
     protected int m_damage = 10;
 
 
