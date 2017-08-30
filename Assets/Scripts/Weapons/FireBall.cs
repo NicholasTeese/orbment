@@ -10,6 +10,8 @@ public class FireBall : Bullet
 
     protected override void OnCollisionEnter(Collision collision)
     {
+        Debug.Log(collision.collider.tag);
+
         if (base.m_bColliding)
         {
             if (collision.collider.CompareTag("Player"))
@@ -28,7 +30,6 @@ public class FireBall : Bullet
             base.m_bColliding = false;
             return;
         }
-        //Debug.Log(collision.collider.tag);
 
         //base.OnCollisionEnter(collision);
         if (!collision.collider.CompareTag(m_id))
