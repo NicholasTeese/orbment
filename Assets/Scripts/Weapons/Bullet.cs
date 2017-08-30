@@ -27,7 +27,7 @@ public class Bullet : MonoBehaviour
     private Light m_light;
     private TrailRenderer m_trail;
 
-    private bool m_bColliding;
+    public bool m_bColliding;
 
     protected ExplosionManager m_explosionManager;
     protected Entity m_enemy = null;
