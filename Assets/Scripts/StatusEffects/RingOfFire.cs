@@ -26,8 +26,6 @@ public class RingOfFire : StatusEffect
         {
             m_entity.m_ringOfFireActive = true;
         }
-
-
     }
 
     void OnDisable()
@@ -65,7 +63,6 @@ public class RingOfFire : StatusEffect
             {
                 entity.m_setOnFire = true;
             }
-
         }
     }
 }
