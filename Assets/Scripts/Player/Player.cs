@@ -90,12 +90,18 @@ public class Player : Entity
     [HideInInspector]
     public Vector3 m_dashDirection;
 
- 
-
     public GameObject m_spentOrbPrefab;
     public int m_poolAmountSpentOrbs = 15;
     private List<GameObject> m_spentOrbs = new List<GameObject>();
 
+    private int m_iAdditionalBurnDPS = 0;
+    public int AdditionalBurnDPS { get; set; }
+
+    private bool m_bBurningSpeedBoost = false;
+    public bool BurningSpeedBoost { get; set; }
+
+    private int m_iEnemiesOnFire = 0;
+    public int EnemiesOnFire { get; set; }
 
     void Awake()
     {
@@ -135,6 +141,17 @@ public class Player : Entity
 
     protected new void Update()
     {
+        if (m_bGodModeIsActive)
+        {
+            m_fGodModeTimer -= Time.deltaTime;
+
+            if (m_fGodModeTimer <= 0.0f)
+            {
+                m_bGodModeIsActive = false;
+                m_fGodModeTimer = 5.0f;
+            }
+        }
+
 		if (m_currHealth <= 1) {
 			
 			GameObject.Find ("GameManager").GetComponent<GameManager> ().dead = true;
