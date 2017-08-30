@@ -49,24 +49,7 @@ public class GameManager : MonoBehaviour
         {
 		    if (Input.GetKeyUp (KeyCode.Tab))
             {
-		    	if (!perkOpen)
-                {
-		    		PerkCam.SetActive (true);
-                    PerkScreen.SetActive(true);
-                    hud.SetActive(false);
-                    perkOpen = true;
-		    		Time.timeScale = 0;
-		    	}
-                else
-                {
-		    		PerkCam.SetActive (false);
-                    PerkScreen.SetActive(false);
-                    hud.SetActive(true);
-
-                    perkOpen = false;
-		    		Time.timeScale = 1;
-		    	}
-
+                EnablePerkTree();
             }
         }
 
@@ -134,4 +117,25 @@ public class GameManager : MonoBehaviour
     {
 		gameStart = true;
 	}
+
+    public void EnablePerkTree()
+    {
+        if (!perkOpen)
+        {
+            PerkCam.SetActive(true);
+            PerkScreen.SetActive(true);
+            hud.SetActive(false);
+            perkOpen = true;
+            Time.timeScale = 0;
+        }
+        else
+        {
+            PerkCam.SetActive(false);
+            PerkScreen.SetActive(false);
+            hud.SetActive(true);
+
+            perkOpen = false;
+            Time.timeScale = 1;
+        }
+    }
 }
