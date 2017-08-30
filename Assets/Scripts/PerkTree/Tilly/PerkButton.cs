@@ -55,17 +55,17 @@ public class PerkButton : MonoBehaviour
                     break;
                 }
 
-            // Increase player movement speed by 5% (2A).
+            // Increase player movement speed by 50% (2A).
             case "Fire2A":
                 {
-                    Player.m_Player.m_currSpeed += (int)(Player.m_Player.m_currSpeed * 0.05f);
+                    Player.m_Player.m_currSpeed += (Player.m_Player.m_currSpeed * 0.5f);
                     break;
                 }
 
-            // Increase player max health by 5% (2B).
+            // Increase player max health by 50% (2B).
             case "Fire2B":
                 {
-                    Player.m_Player.m_maxHealth += (int)(Player.m_Player.m_maxHealth * 0.05f);
+                    Player.m_Player.m_maxHealth += (Player.m_Player.m_maxHealth * 0.5f);
                     break;
                 }
 
@@ -76,12 +76,12 @@ public class PerkButton : MonoBehaviour
                     break; 
                 }
 
-            // Increase player bullet velocity by 10% (3B).
+            // Increase player bullet velocity by 30% (3B).
             case "Fire3B":
                 {
                     foreach (Transform bullet in m_startingWeapon.transform)
                     {
-                        bullet.GetComponent<Bullet>().m_projectileSpeed += (int)(bullet.GetComponent<Bullet>().m_projectileSpeed * 0.10f);
+                        bullet.GetComponent<Bullet>().m_projectileSpeed += (bullet.GetComponent<Bullet>().m_projectileSpeed * 0.30f);
                     }
                     break;
                 }
