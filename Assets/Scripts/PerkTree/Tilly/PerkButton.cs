@@ -72,7 +72,7 @@ public class PerkButton : MonoBehaviour
             // Give player speed boost based on how many enemies are burning (3A).
             case "Fire3A":
                 {
-
+                    //TODO: Implement.
                     break; 
                 }
 
@@ -89,21 +89,21 @@ public class PerkButton : MonoBehaviour
             // Spawn ring of fire when player health is below 25% (3C).
             case "Fire3C":
                 {
-
+                    Player.m_Player.m_hasRingOfFire = true;
                     break;
                 }
 
-            // Getting a kill combo returns HP to the player (3D).
+            // Getting a kill streak returns HP to the player (3D).
             case "Fire3D":
                 {
-
+                    KillStreakManager.m_killStreakManager.Lifesteal = true;
                     break;
                 }
 
             // Increase player speed boost based on how many enemies are burning (4A).
             case "Fire4A":
                 {
-
+                    //TODO: Implement.
                     break;
                 }
 
@@ -120,14 +120,14 @@ public class PerkButton : MonoBehaviour
             // Ring of fire damage increased (4C).
             case "Fire4C":
                 {
-
+                    Player.m_Player.AdditionalBurnDPS += 5;
                     break;
                 }
 
-            // God mode enabled for 5 seconds when player reaches highest combo (4D).
+            // God mode enabled for 5 seconds when player reaches highest killstreak (4D).
             case "Fire4D":
                 {
-
+                    Player.m_Player.GodModeIsAvailable = true;
                     break;
                 }
 

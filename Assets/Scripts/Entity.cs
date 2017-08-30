@@ -14,7 +14,16 @@ using UnityEngine.UI;
 public class Entity : MonoBehaviour
 {
 	public GameManager gameManager;
-    public bool m_godMode = false;
+
+    //TODO: Move perk related variables to the player class as other entities wont have perks.
+    protected float m_fGodModeTimer = 5.0f;
+    public float GodModeTimer { get; set; }
+
+    protected bool m_bGodModeIsAvailable = false;
+    public bool GodModeIsAvailable { get; set; }
+
+    public bool m_bGodModeIsActive = false;
+    public bool GodModeIsActive { get; set; }
 
     [Header("Level")]
     public int m_currLevel = 1;
@@ -185,7 +194,7 @@ public class Entity : MonoBehaviour
         if (m_currHealth <= 0)
         {
 
-            if (!m_godMode)
+            if (!m_bGodModeIsActive)
             {
                 m_explosionManager.RequestExplosion(this.transform.position, this.transform.forward, Explosion.ExplosionType.BigBlood, 0.0f);
                 m_explosionManager.RequestExplosion(this.transform.position, this.transform.forward, Explosion.ExplosionType.Gibs, 0.0f);
@@ -206,7 +215,11 @@ public class Entity : MonoBehaviour
         {
             m_statusEffectManager.RequestEffect(this.transform, StatusEffect.Status.OnFire);
             m_setOnFire = false;
-
+            
+            if (!gameObject.CompareTag("Player") && Player.m_Player.BurningSpeedBoost)
+            {
+                ++Player.m_Player.EnemiesOnFire;
+            }
         }
 
         if (m_causeSlow && !m_isSlowed)

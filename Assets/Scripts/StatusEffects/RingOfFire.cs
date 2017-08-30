@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class RingOfFire : StatusEffect
 {
-    public int m_ringOfFireDPS = 5;
+    private int m_iDamagePerSecond = 5;
+    public int DamagePerSecond { get; set; }
     public float m_tickInterval = 0.5f;
     private float m_elapsed = 0.0f;
     public float m_healthPercentThreshold = 25.0f;
@@ -26,6 +27,11 @@ public class RingOfFire : StatusEffect
         {
             m_entity.m_ringOfFireActive = true;
         }
+<<<<<<< HEAD
+
+        m_iDamagePerSecond += Player.m_Player.AdditionalBurnDPS;
+=======
+>>>>>>> a52b581bf0adee1726b777266a1f8c6ed604c79c
     }
 
     void OnDisable()

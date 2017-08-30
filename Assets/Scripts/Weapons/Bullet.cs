@@ -147,9 +147,12 @@ public class Bullet : MonoBehaviour
             //do base damage
             if (m_enemy != null)
             {
-                m_enemy.m_beenCrit = this.m_isCrit;
-                m_enemy.m_currHealth -= m_damage;
-                m_enemy.m_recentDamageTaken = m_damage;
+                if (!collision.collider.CompareTag("Player") && !Player.m_Player.GodModeIsActive)
+                {
+                    m_enemy.m_beenCrit = this.m_isCrit;
+                    m_enemy.m_currHealth -= m_damage;
+                    m_enemy.m_recentDamageTaken = m_damage;
+                }
 
                 m_explosionManager.RequestExplosion(this.transform.position, -m_direction, Explosion.ExplosionType.SmallBlood, 0.0f);
             }

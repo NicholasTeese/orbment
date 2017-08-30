@@ -15,6 +15,23 @@ public class KillStreakManager : MonoBehaviour
     public float m_timeAllowedBetweenKills = 1.0f;
     private float m_timeOfLastKill = 0.0f;
 
+    private bool m_bLifesteal = false;
+    public bool Lifesteal { get; set; }
+
+    public static KillStreakManager m_killStreakManager;
+
+    private void Awake()
+    {
+        if (m_killStreakManager == null)
+        {
+            m_killStreakManager = this;
+        }
+        else if (m_killStreakManager != this)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     public void ResetKillStreak()
     {
         m_killStreak = 0;
@@ -27,6 +44,17 @@ public class KillStreakManager : MonoBehaviour
         {
             m_killStreak++;
             m_timeOfLastKill = Time.time;
+
+            if (m_killStreak >= 5)
+            {
+                Player.m_Player.m_currHealth += (int)(Player.m_Player.m_maxHealth * 0.05f);
+            }
+
+            if (m_killStreak >= 10)
+            {
+                Player.m_Player.m_bGodModeIsActive = true;
+                Player.m_Player.GodModeTimer = 5.0f;
+            }
         }
 
 
