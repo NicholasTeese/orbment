@@ -8,11 +8,13 @@ public class GameManager : MonoBehaviour
     public static GameManager m_GameManager;
     public GameObject PerkCam;
     public GameObject PerkScreen;
+    public GameObject Tree;
 
     public bool perkOpen = false;
 	public bool gameStart = false;
 	public bool paused = false;
     public bool dead = false;
+    public bool inRange = false;
 
 	public GameObject healthBar;
     public GameObject pauseMenu;
@@ -43,26 +45,29 @@ public class GameManager : MonoBehaviour
 	void Update ()
     {
         //pause game
-		if (Input.GetKeyUp (KeyCode.Tab))
+        if(inRange)
         {
-			if (!perkOpen)
+		    if (Input.GetKeyUp (KeyCode.Tab))
             {
-				PerkCam.SetActive (true);
-                PerkScreen.SetActive(true);
-                hud.SetActive(false);
-                perkOpen = true;
-				Time.timeScale = 0;
-			}
-            else
-            {
-				PerkCam.SetActive (false);
-                PerkScreen.SetActive(false);
-                hud.SetActive(true);
+		    	if (!perkOpen)
+                {
+		    		PerkCam.SetActive (true);
+                    PerkScreen.SetActive(true);
+                    hud.SetActive(false);
+                    perkOpen = true;
+		    		Time.timeScale = 0;
+		    	}
+                else
+                {
+		    		PerkCam.SetActive (false);
+                    PerkScreen.SetActive(false);
+                    hud.SetActive(true);
 
-                perkOpen = false;
-				Time.timeScale = 1;
-			}
+                    perkOpen = false;
+		    		Time.timeScale = 1;
+		    	}
 
+            }
         }
 
         if (gameStart == true)

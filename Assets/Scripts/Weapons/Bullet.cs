@@ -27,7 +27,7 @@ public class Bullet : MonoBehaviour
     private Light m_light;
     private TrailRenderer m_trail;
 
-    
+    public bool m_bColliding;
 
     protected ExplosionManager m_explosionManager;
     protected Entity m_enemy = null;
@@ -52,6 +52,7 @@ public class Bullet : MonoBehaviour
     // Use this for initialization
     protected virtual void Start()
     {
+        m_bColliding = false;
         m_explosionManager = GameObject.FindObjectOfType<ExplosionManager>();
         m_trail = this.GetComponent<TrailRenderer>();
     }
@@ -67,6 +68,7 @@ public class Bullet : MonoBehaviour
         {
             m_light.enabled = true;
         }
+        m_bColliding = false;
     }
 
 
@@ -118,6 +120,19 @@ public class Bullet : MonoBehaviour
 
     protected virtual void OnCollisionEnter(Collision collision)
     {
+        
+        if (m_bColliding)
+        {
+            if (collision.collider.CompareTag("Player"))
+            {
+                // do nothing - fixes the "fart" vs invincible bug
+            }
+            else
+            {
+                return;
+            }
+        }
+        m_bColliding = true;
 
         if (m_id == "")
         {

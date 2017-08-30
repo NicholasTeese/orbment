@@ -10,7 +10,44 @@ public class FireBall : Bullet
 
     protected override void OnCollisionEnter(Collision collision)
     {
-        base.OnCollisionEnter(collision);
+        if (base.m_bColliding)
+        {
+            if (collision.collider.CompareTag("Player"))
+            {
+                // do nothing - fixes the "fart" vs invincible bug
+            }
+            else
+            {
+                return;
+            }
+        }
+        base.m_bColliding = true;
+
+        if (collision.collider.CompareTag(m_id))
+        {
+            base.m_bColliding = false;
+            return;
+        }
+        //Debug.Log(collision.collider.tag);
+
+        //base.OnCollisionEnter(collision);
+        if (!collision.collider.CompareTag(m_id))
+        {
+            m_explosionManager.RequestExplosion(this.transform.position, -m_direction, Explosion.ExplosionType.BulletImpact, 0.0f);
+
+            m_enemy = collision.collider.GetComponent<Entity>();
+            //do base damage
+            if (m_enemy != null)
+            {
+                m_enemy.m_beenCrit = this.m_isCrit;
+                m_enemy.m_currHealth -= m_damage;
+                m_enemy.m_recentDamageTaken = m_damage;
+
+                m_explosionManager.RequestExplosion(this.transform.position, -m_direction, Explosion.ExplosionType.SmallBlood, 0.0f);
+            }
+            Disable();
+        }
+
         //set on fire
         if (m_enemy != null)
         {

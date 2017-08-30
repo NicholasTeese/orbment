@@ -27,8 +27,11 @@ public class RingOfFire : StatusEffect
         {
             m_entity.m_ringOfFireActive = true;
         }
+<<<<<<< HEAD
 
         m_iDamagePerSecond += Player.m_Player.AdditionalBurnDPS;
+=======
+>>>>>>> a52b581bf0adee1726b777266a1f8c6ed604c79c
     }
 
     void OnDisable()
@@ -66,7 +69,6 @@ public class RingOfFire : StatusEffect
             {
                 entity.m_setOnFire = true;
             }
-
         }
     }
 }

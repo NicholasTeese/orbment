@@ -47,7 +47,12 @@ public class ExpManager : MonoBehaviour
         }
         else
         {
-            perkText.SetActive(true);
+            if(GameManager.m_GameManager.inRange)
+                perkText.SetActive(true);
+            else
+            {
+                perkText.SetActive(false);
+            }
         }
     }
 

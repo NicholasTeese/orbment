@@ -372,4 +372,20 @@ public class Player : Entity
             }
         }
     }
+
+    private void OnTriggerStay(Collider collider)
+    {
+        if(collider.CompareTag("Tree"))
+        {
+            gameManager.inRange = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider collider)
+    {
+        if (collider.CompareTag("Tree"))
+        {
+            gameManager.inRange = false;
+        }
+    }
 }
