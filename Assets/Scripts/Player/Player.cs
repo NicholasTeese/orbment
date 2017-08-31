@@ -243,30 +243,25 @@ public class Player : Entity
 
 
         //dash
-        if (Input.GetKeyDown(KeyCode.Space) && m_manaPool.m_currentMana >= m_dashManaCost && m_movement != Vector3.zero)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && m_manaPool.m_currentMana >= m_dashManaCost && m_movement != Vector3.zero)
         {
             if (m_dashTrail != null)
             {
 				GameObject.Find ("AudioManager").GetComponent<AudioManager> ().DashSound ();
                 m_dashTrail.enabled = true;
-
             }
-
             m_dashDirection = m_movement.normalized;
             m_manaPool.m_currentMana -= m_dashManaCost;
             m_dashing = true;
-
         }
 
         //get movement input
         m_movement = Vector3.forward * Input.GetAxis("Vertical") + Vector3.right * Input.GetAxis("Horizontal");
-
     }
 
 
     void FixedUpdate()
     {
-
         //mouse aiming
         RaycastHit hit;
         float rayLength = 1000;
@@ -289,14 +284,12 @@ public class Player : Entity
         if (m_dashing)
         {
             Dash(m_dashDirection);
-
         }
         else
         {
             //movement
             m_charCont.Move(m_movement * m_currSpeed * m_currSpeedMult * Time.deltaTime);
         }
-
     }
 
 
