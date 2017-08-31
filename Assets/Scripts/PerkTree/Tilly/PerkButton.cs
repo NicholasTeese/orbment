@@ -9,8 +9,6 @@ public class PerkButton : MonoBehaviour
     private bool m_bChildPathChosen = false;
     private bool m_bCursorIsOver = false;
 
-    public string m_strPerkDescription = "Default Description";
-
     private GameObject m_parentPerk = null;
     private List<GameObject> m_childPerks = new List<GameObject>();
 
@@ -18,7 +16,7 @@ public class PerkButton : MonoBehaviour
 
     private StartingWeapon m_startingWeapon;
 
-    public void OnCursorOver()
+    public void OnCursorEnter(string a_strPerkDescription)
     {
         m_bCursorIsOver = true;
 
@@ -33,7 +31,7 @@ public class PerkButton : MonoBehaviour
             }
         }
         
-        m_perkDescriptionText.text = m_strPerkDescription;
+        m_perkDescriptionText.text = a_strPerkDescription;
     }
 
     public void OnCursorExit()

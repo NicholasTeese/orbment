@@ -38,9 +38,9 @@ public class GameManager : MonoBehaviour
 	void Start ()
     {
         PerkCam.SetActive(false);
-        PerkScreen.SetActive(true); //AA changed this
+        PerkScreen.SetActive(false); //AA changed this
         gameStart = true;
-		Buffer.SetActive(true); //AA added this
+		//Buffer.SetActive(true); //AA added this
 	}
 	
 	// Update is called once per frame
@@ -49,31 +49,30 @@ public class GameManager : MonoBehaviour
         //pause game
         if(inRange)
         {
-		    if (Input.GetKeyUp (KeyCode.Tab))
+		    if (Input.GetKeyDown(KeyCode.Tab))
             {
-<<<<<<< HEAD
-		    	if (!perkOpen)
-                {
-		    		PerkCam.SetActive (true);
-                    PerkScreen.SetActive(true);
-                    hud.SetActive(false);
-                    perkOpen = true;
-					Buffer.SetActive(false); //AA added this
-		    		Time.timeScale = 0;
-		    	}
-                else
-                {
-		    		PerkCam.SetActive (false);
-                    PerkScreen.SetActive(true); //AA changed this
-                    hud.SetActive(true);
-					Buffer.SetActive(true); //AA added this
-                    perkOpen = false;
-		    		Time.timeScale = 1;
-		    	}
-
-=======
+                Debug.Log("tab");
+		    	//x if (!perkOpen)
+                //x {
+                //x     Debug.Log("open");
+		    	//x 	PerkCam.SetActive (true);
+                //x     PerkScreen.SetActive(true);
+                //x     hud.SetActive(false);
+                //x     perkOpen = true;
+				//x 	//Buffer.SetActive(false); //AA added this
+		    	//x 	Time.timeScale = 0;
+		    	//x }
+                //x else
+                //x {
+                //x     Debug.Log("close");
+		    	//x 	PerkCam.SetActive (false);
+                //x     PerkScreen.SetActive(false); //AA changed this
+                //x     hud.SetActive(true);
+				//x 	//Buffer.SetActive(true); //AA added this
+                //x     perkOpen = false;
+		    	//x 	Time.timeScale = 1;
+		    	//x }
                 EnablePerkTree();
->>>>>>> d5fa6fcc629e072d7633467f2e48e9b8312e28c4
             }
         }
 
