@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager m_GameManager;
     public GameObject PerkCam;
     public GameObject PerkScreen;
+	public GameObject Buffer; //AA added this
     public GameObject Tree;
 
     public bool perkOpen = false;
@@ -37,8 +38,9 @@ public class GameManager : MonoBehaviour
 	void Start ()
     {
         PerkCam.SetActive(false);
-        PerkScreen.SetActive(false);
+        PerkScreen.SetActive(true); //AA changed this
         gameStart = true;
+		Buffer.SetActive(true); //AA added this
 	}
 	
 	// Update is called once per frame
@@ -55,14 +57,15 @@ public class GameManager : MonoBehaviour
                     PerkScreen.SetActive(true);
                     hud.SetActive(false);
                     perkOpen = true;
+					Buffer.SetActive(false); //AA added this
 		    		Time.timeScale = 0;
 		    	}
                 else
                 {
 		    		PerkCam.SetActive (false);
-                    PerkScreen.SetActive(false);
+                    PerkScreen.SetActive(true); //AA changed this
                     hud.SetActive(true);
-
+					Buffer.SetActive(true); //AA added this
                     perkOpen = false;
 		    		Time.timeScale = 1;
 		    	}
