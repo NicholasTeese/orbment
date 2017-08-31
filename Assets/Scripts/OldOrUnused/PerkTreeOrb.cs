@@ -60,8 +60,8 @@ public class PerkTreeOrb : MonoBehaviour {
             lineRend.enabled = true;
             //lineRend.positionCount = branchLength.Length;
             //positionAmount = lineRend.positionCount;
-            lineRend.numPositions = branchLength.Length;
-            positionAmount = lineRend.numPositions;
+            lineRend.positionCount = branchLength.Length;
+            positionAmount = lineRend.positionCount;
             //Sets the line rend for all branch positions
             for (int i = 0; i < positionAmount; i++)
             {

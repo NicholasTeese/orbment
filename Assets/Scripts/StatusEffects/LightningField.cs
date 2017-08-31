@@ -41,7 +41,7 @@ public class LightningField : StatusEffect
     private void FixedUpdate()
     {
         //m_line.positionCount = 0;
-        m_line.numPositions = 0;
+        m_line.positionCount = 0;
         int numEnemies = 1;
         m_positions.Clear();
        
@@ -61,7 +61,7 @@ public class LightningField : StatusEffect
 
 
         //m_line.positionCount = numEnemies;
-        m_line.numPositions = numEnemies;
+        m_line.positionCount = numEnemies;
         m_line.SetPositions(m_positions.ToArray());
 
 
