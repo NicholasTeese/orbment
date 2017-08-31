@@ -71,7 +71,8 @@ public class Collectable : MonoBehaviour
                         {
 							//GameObject.Find ("OrbCollected").GetComponent<Animator> ().SetTrigger ("orbCollected");
                             m_playerRef.m_orbsCollected++;
-							audioManager.OrbPickUp ();
+							audioManager.OrbPickUp();
+                            this.gameObject.SetActive(false);
                         }
                         break;
                     }
@@ -88,6 +89,7 @@ public class Collectable : MonoBehaviour
                             {
                                 m_playerRef.m_currHealth += m_healAmount;
                                 audioManager.OrbPickUp();
+                                this.gameObject.SetActive(false);
                             }
                         }
                         break;
@@ -103,6 +105,7 @@ public class Collectable : MonoBehaviour
                         {
                             m_playerMana.m_currentMana += m_manaAmount;
                             audioManager.OrbPickUp();
+                            this.gameObject.SetActive(false);
                         }
                         break;
                     }
@@ -113,7 +116,6 @@ public class Collectable : MonoBehaviour
                     }
             }
 
-            this.gameObject.SetActive(false);
         }
     }
 

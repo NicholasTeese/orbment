@@ -69,7 +69,6 @@ public class Magnet : MonoBehaviour
             m_rigidBody.velocity = Vector3.zero;
             forceVect = (dir * m_attraction) / (distance * distance);
             m_rigidBody.AddForce(forceVect, ForceMode.Acceleration);
-            
         }
     }
 }

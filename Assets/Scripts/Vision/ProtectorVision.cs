@@ -40,13 +40,9 @@ public class ProtectorVision : MonoBehaviour
                 {
                     closest = distance;
                     leaderInSight = true;
-                    m_leader = col.transform;
-                    
+                    m_leader = col.transform;                    
                 }
-                
-               
             }
-
         }
     }
 
