@@ -15,12 +15,11 @@ public class EnemyLootManager : MonoBehaviour
     }
 
     public List<List<Item>> m_pool = new List<List<Item>>();
+
+
     // Use this for initialization
-
-
     void Start()
     {
-
         for (int j = 0; j < collectablePrefabs.Length; ++j)
         {
             List<Item> m_newType = new List<Item>();
