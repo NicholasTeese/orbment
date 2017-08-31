@@ -61,12 +61,12 @@ public class BreakOnImpactWith : MonoBehaviour
 
             if(playerScript != null && playerScript.m_dashing)
             {
-                m_faceModel.SetActive(false);
+                //m_faceModel.SetActive(false);
 
-                m_chunkModel.SetActive(true);
+                //m_chunkModel.SetActive(true);
 
                 m_entranceVector = playerScript.m_dashDirection;
-                m_isBroken = true;
+                wallHealth -= 20;//m_isBroken = true;
 				audiosrc.pitch = 1 + Random.Range (-0.4f, 0.3f);
             }
         }       
