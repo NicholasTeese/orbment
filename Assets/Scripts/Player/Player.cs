@@ -280,9 +280,9 @@ public class Player : Entity
             playerToMouse.y = 0f;
             Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
             this.transform.rotation = newRotation;
-            Debug.DrawRay(this.transform.position, this.transform.forward * 10, Color.cyan);
+            //Debug.DrawRay(this.transform.position, this.transform.forward * 10, Color.cyan);
 
-            Debug.DrawLine(this.transform.position, hit.point, Color.red);
+            //Debug.DrawLine(this.transform.position, hit.point, Color.red);
         }
 
         //dashing
@@ -372,22 +372,6 @@ public class Player : Entity
                 m_spentOrbs[i].SetActive(true);
                 count++;                
             }
-        }
-    }
-
-    private void OnTriggerStay(Collider collider)
-    {
-        if(collider.CompareTag("Tree"))
-        {
-            gameManager.inRange = true;
-        }
-    }
-
-    private void OnTriggerExit(Collider collider)
-    {
-        if (collider.CompareTag("Tree"))
-        {
-            gameManager.inRange = false;
         }
     }
 }

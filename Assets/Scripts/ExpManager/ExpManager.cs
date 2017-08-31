@@ -6,7 +6,8 @@ public class ExpManager : MonoBehaviour
 {
     public static ExpManager m_ExpManager;
 
-    public GameObject perkText;
+    public GameObject m_upgradeAvailableText;
+    public GameObject m_upgradeUnavailableText;
 	public GameObject Xpfiller;
 	public GameObject XPSlider;
     public Texture2D m_expBarTexture;
@@ -36,23 +37,33 @@ public class ExpManager : MonoBehaviour
         {
 			XPSlider.GetComponent<Slider> ().value += 5.0f * Time.deltaTime;
 		}
+        if (m_playerExperience < XPSlider.GetComponent<Slider>().value)
+        {
+            XPSlider.GetComponent<Slider>().value = m_playerExperience;
+        }
 
-        if(m_playerExperience >= m_playerMaxXP)
+        if (m_playerExperience >= m_playerMaxXP)
         {
             LevelUp();
         }
-        if (PerkTreeManager.m_perkTreeManager.AvailiablePerks == 0)
+
+        if (GameManager.m_GameManager.inRange)
         {
-            perkText.SetActive(false);
+            if (PerkTreeManager.m_perkTreeManager.AvailiablePerks == 0)
+            {
+                m_upgradeAvailableText.SetActive(false);
+                m_upgradeUnavailableText.SetActive(true);
+            }
+            else
+            {
+                m_upgradeAvailableText.SetActive(true);
+                m_upgradeUnavailableText.SetActive(false);
+            }
         }
         else
         {
-            if(GameManager.m_GameManager.inRange)
-                perkText.SetActive(true);
-            else
-            {
-                perkText.SetActive(false);
-            }
+            m_upgradeAvailableText.SetActive(false);
+            m_upgradeUnavailableText.SetActive(false);
         }
     }
 

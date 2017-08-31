@@ -7,6 +7,7 @@ public class PerkButton : MonoBehaviour
 {
     private bool m_bIsPurchased = false;
     private bool m_bChildPathChosen = false;
+    private bool m_bCursorIsOver = false;
 
     public string m_strPerkDescription = "Default Description";
 
@@ -19,7 +20,25 @@ public class PerkButton : MonoBehaviour
 
     public void OnCursorOver()
     {
+        m_bCursorIsOver = true;
+
+        if (m_childPerks.Count > 0)
+        {
+            foreach (GameObject child in m_childPerks)
+            {
+                if (child.GetComponent<PerkButton>().m_bCursorIsOver)
+                {
+                    return;
+                }
+            }
+        }
+        
         m_perkDescriptionText.text = m_strPerkDescription;
+    }
+
+    public void OnCursorExit()
+    {
+        m_bCursorIsOver = false;
     }
 
     private void Awake()

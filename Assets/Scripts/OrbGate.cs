@@ -73,27 +73,44 @@ public class OrbGate : MonoBehaviour
 
     private void checkIfShouldOpen()
     {
-        //if(m_isOpen)
-        //{
-        //    m_holdTimer += Time.deltaTime;
-        //    if (m_holdTimer >= m_holdDuration)
-        //    {
-        //        if (m_orbSpendTimer == 0.0f)
-        //        {
-                    
-        //        }
-        //        m_orbSpendTimer += Time.deltaTime;
-        //        if (m_orbSpendTimer >= m_orbSpendRate)
-        //        {
-        //            m_orbSpendTimer = 0.0f;
-        //        }
-        //    }
-        //}
-        if (m_Player.m_orbsCollected >= m_numOfOrbsForOpen)
+        if (m_isOpen)
         {
-            
-            SpendOrb(m_numOfOrbsForOpen);
+            return;
+            //    m_holdTimer += Time.deltaTime;
+            //    if (m_holdTimer >= m_holdDuration)
+            //    {
+            //        if (m_orbSpendTimer == 0.0f)
+            //        {
 
+            //        }
+            //        m_orbSpendTimer += Time.deltaTime;
+            //        if (m_orbSpendTimer >= m_orbSpendRate)
+            //        {
+            //            m_orbSpendTimer = 0.0f;
+            //        }
+            //    }
+        }
+        else if (m_Player.m_orbsCollected > 0) //>= m_numOfOrbsForOpen)
+        {
+            int orbsPassed = m_Player.m_orbsCollected;
+            SpendOrb(m_Player.m_orbsCollected);
+            if (m_currNumOrbsInvested < m_numOfOrbsForOpen)
+            {
+                m_currNumOrbsInvested = m_currNumOrbsInvested + orbsPassed;
+                m_numOfOrbsForOpen = m_numOfOrbsForOpen - m_currNumOrbsInvested;
+            }
+            else
+            {
+                m_Animator.SetTrigger("OpenGate");
+                if (m_visualLock != null)
+                {
+                    m_visualLock.SetActive(false);
+                }
+                m_isOpen = true;
+            }
+        }
+        else if (m_numOfOrbsForOpen <= 0)
+        {
             m_Animator.SetTrigger("OpenGate");
             if (m_visualLock != null)
             {

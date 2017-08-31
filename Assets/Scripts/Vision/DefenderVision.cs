@@ -50,7 +50,7 @@ public class DefenderVision : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(m_originalPos, m_sightRadius);
+        //Gizmos.color = Color.red;
+        //Gizmos.DrawWireSphere(m_originalPos, m_sightRadius);
     }
 }
