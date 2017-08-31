@@ -76,7 +76,7 @@ public class ExpManager : MonoBehaviour
         //x perkUpgradeUI.SetActive (true);
 
         m_playerExperience = m_playerExperience - m_playerMaxXP;
-        m_playerMaxXP += m_percentageAddedXPPerLvl * m_playerMaxXP;
+        m_playerMaxXP += m_percentageAddedXPPerLvl*m_playerMaxXP;
         m_playerLevel++;
         PerkTreeManager.m_perkTreeManager.IncrementAvailiablePerks();
 		//x m_PerkManager.genPerkList();
