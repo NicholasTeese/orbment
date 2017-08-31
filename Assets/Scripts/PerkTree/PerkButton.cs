@@ -10,11 +10,54 @@ public class PerkButton : MonoBehaviour
     private bool m_bCursorIsOver = false;
 
     private GameObject m_parentPerk = null;
+
     private List<GameObject> m_childPerks = new List<GameObject>();
+
+    [Header("Perk Button ParticleSystems", order = 0)]
+    public ParticleSystem m_firstParticleSystem;
+    public ParticleSystem m_secondParticleSystem;
+
+    private Button m_perkButton;
 
     public Text m_perkDescriptionText;
 
+    private Image m_perkWingsImage;
+
+    [Header("Perk Button Sprites", order = 1)]
+    public Sprite m_circleInactive;
+    public Sprite m_circleActive;
+    public Sprite m_wingsInactive;
+    public Sprite m_wingsActive;
+
     private StartingWeapon m_startingWeapon;
+
+    private void Awake()
+    {
+        if (transform.parent.CompareTag("PerkButton"))
+        {
+            m_parentPerk = transform.parent.gameObject;
+        }
+
+        foreach (Transform child in transform)
+        {
+            if (child.CompareTag("PerkButton"))
+            {
+                m_childPerks.Add(child.gameObject);
+            }
+
+            if (child.CompareTag("Wings"))
+            {
+                m_perkWingsImage = child.GetComponent<Image>();
+            }
+        }
+
+        m_firstParticleSystem.Stop();
+        m_secondParticleSystem.Stop();
+
+        m_perkButton = GetComponent<Button>();
+
+        m_startingWeapon = GameObject.FindGameObjectWithTag("StartingWeapon").GetComponent<StartingWeapon>();
+    }
 
     public void OnCursorEnter(string a_strPerkDescription)
     {
@@ -30,31 +73,13 @@ public class PerkButton : MonoBehaviour
                 }
             }
         }
-        
+
         m_perkDescriptionText.text = a_strPerkDescription;
     }
 
     public void OnCursorExit()
     {
         m_bCursorIsOver = false;
-    }
-
-    private void Awake()
-    {
-        if (transform.parent.CompareTag("PerkButton"))
-        {
-            m_parentPerk = transform.parent.gameObject;
-        }
-
-        foreach (Transform child in transform)
-        {
-            if (child.CompareTag("PerkButton"))
-            {
-                m_childPerks.Add(child.gameObject);
-            }
-        }
-
-        m_startingWeapon = GameObject.FindGameObjectWithTag("StartingWeapon").GetComponent<StartingWeapon>();
     }
 
     /// <summary>
@@ -187,19 +212,35 @@ public class PerkButton : MonoBehaviour
 
     private void PurchasePerk(string a_strPerkName)
     {
+        m_bIsPurchased = true;
+
+        PerkTreeManager.m_perkTreeManager.DecrementAvailiablePerks();
+
+        m_firstParticleSystem.Play();
+        m_secondParticleSystem.Play();
+
+        m_perkButton.GetComponent<Image>().sprite = m_circleActive;
+        m_perkWingsImage.sprite = m_wingsActive;
+
         CheckFireTree(a_strPerkName);
         CheckIceTree(a_strPerkName);
         CheckLightningTree(a_strPerkName);
     }
 
+    /// <summary>
+    /// Is called when the button this script is attached to is clicked.
+    /// </summary>
+    /// <param name="a_strPerk"></param>
     public void OnClick(string a_strPerk)
     {
+        // If there are no available perks, exit the function.
         if (PerkTreeManager.m_perkTreeManager.AvailiablePerks == 0)
         {
             Debug.Log("No availiable perks to spend.");
             return;
         }
 
+        // If this perk's parent perk's is not purchased or it's one of it's child perks have already been chosen, exit the function.
         if (m_parentPerk != null)
         {
             if (!m_parentPerk.GetComponent<PerkButton>().m_bIsPurchased || m_parentPerk.GetComponent<PerkButton>().m_bChildPathChosen)
@@ -208,12 +249,12 @@ public class PerkButton : MonoBehaviour
                 return;
             }
 
+            // Set this perk's parent perk's child parth to be chosen.
             m_parentPerk.GetComponent<PerkButton>().m_bChildPathChosen = true;
         }
 
-        m_bIsPurchased = true;
-        gameObject.GetComponent<Image>().color = Color.red;
-        PerkTreeManager.m_perkTreeManager.DecrementAvailiablePerks();
+        // Perchase this perk.
+        //x gameObject.GetComponent<Image>().color = Color.red;
         PurchasePerk(a_strPerk);
     }
 }
