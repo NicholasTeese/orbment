@@ -37,8 +37,12 @@ public class ExpManager : MonoBehaviour
         {
 			XPSlider.GetComponent<Slider> ().value += 5.0f * Time.deltaTime;
 		}
+        if (m_playerExperience < XPSlider.GetComponent<Slider>().value)
+        {
+            XPSlider.GetComponent<Slider>().value = m_playerExperience;
+        }
 
-        if(m_playerExperience >= m_playerMaxXP)
+        if (m_playerExperience >= m_playerMaxXP)
         {
             LevelUp();
         }
