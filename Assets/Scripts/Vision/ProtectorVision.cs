@@ -54,7 +54,7 @@ public class ProtectorVision : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(this.transform.position, m_sightRadius);
+        //Gizmos.color = Color.red;
+        //Gizmos.DrawWireSphere(this.transform.position, m_sightRadius);
     }
 }
