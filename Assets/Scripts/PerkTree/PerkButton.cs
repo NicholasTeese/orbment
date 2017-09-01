@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PerkButton : MonoBehaviour
 {
     private bool m_bIsPurchased = false;
+    public bool IsPurchased { get { return m_bIsPurchased; } }
     private bool m_bChildPathChosen = false;
     private bool m_bCursorIsOver = false;
 
@@ -13,21 +14,23 @@ public class PerkButton : MonoBehaviour
 
     private List<GameObject> m_childPerks = new List<GameObject>();
 
-    [Header("Perk Button ParticleSystems", order = 0)]
-    public ParticleSystem m_firstParticleSystem;
-    public ParticleSystem m_secondParticleSystem;
-
     private Button m_perkButton;
-
-    public Text m_perkDescriptionText;
 
     private Image m_perkWingsImage;
 
-    [Header("Perk Button Sprites", order = 1)]
-    public Sprite m_circleInactive;
-    public Sprite m_circleActive;
-    public Sprite m_wingsInactive;
+    [Header("Perk Button Animators", order = 0)]
+    public Animator m_wingsAnimator;
+
+    [Header("Perk Button ParticleSystems", order = 1)]
+    public ParticleSystem m_firstParticleSystem;
+    public ParticleSystem m_secondParticleSystem;
+
+    [Header("Perk Button Sprites", order = 2)]
     public Sprite m_wingsActive;
+    public Sprite m_circleActive;
+
+    [Header("Perk Description Text", order = 3)]
+    public Text m_perkDescriptionText;
 
     private StartingWeapon m_startingWeapon;
 
@@ -219,8 +222,8 @@ public class PerkButton : MonoBehaviour
         m_firstParticleSystem.Play();
         m_secondParticleSystem.Play();
 
-        m_perkButton.GetComponent<Image>().sprite = m_circleActive;
-        m_perkWingsImage.sprite = m_wingsActive;
+        m_perkButton.GetComponent<Image>().sprite = m_wingsActive;
+        m_perkWingsImage.sprite = m_circleActive;
 
         CheckFireTree(a_strPerkName);
         CheckIceTree(a_strPerkName);
