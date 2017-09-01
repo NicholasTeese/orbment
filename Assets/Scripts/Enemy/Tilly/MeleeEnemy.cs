@@ -54,17 +54,16 @@ public class MeleeEnemy : MonoBehaviour
                             break;
                         }
                     }
-
                     if (Vector3.Distance(transform.position, m_navMeshAgent.destination) <= 1.0f)
                     {
                         m_navMeshAgent.destination = GetWanderPosition(transform.position);
-                        //Debug.Log(m_navMeshAgent.destination);
                     }
                     break;
                 }
 
             case Behaviour.PREPARING:
                 {
+                    m_navMeshAgent.destination = transform.position;
                     if (Vector3.Distance(transform.position, m_target.transform.position) > 15.0f)
                     {
                         m_fPrepareChargeTime = 2.0f;
@@ -117,7 +116,6 @@ public class MeleeEnemy : MonoBehaviour
                                 }
                             }
 
-
                             m_navMeshAgent.enabled = true;
                             m_navMeshAgent.speed = m_fMoveSpeed;
                             m_fRecoverTime = 3.0f;
@@ -151,10 +149,13 @@ public class MeleeEnemy : MonoBehaviour
 
             if (m_bulletScript != null && m_bulletScript.m_id == "Player")
             {
-                //m_navMeshAgent.SetDestination(collision.collider.transform.position - m_bulletScript.m_direction);
+                m_navMeshAgent.SetDestination(collision.collider.transform.position - m_bulletScript.m_direction);
                 m_navMeshAgent.transform.LookAt(collision.collider.transform.position - m_bulletScript.m_direction);
-                // Conflicts with Enemy class' OnCollisionEnter
             }
+        }
+        if (collision.collider.CompareTag("Player"))
+        {
+            Debug.Log("hit");
         }
     }
 

@@ -40,7 +40,7 @@ public class Enemy : Entity
                 m_agent.SetDestination(collision.collider.transform.position - m_bulletScript.m_direction); // Travel to bullet origin
                 //m_agent.transform.LookAt(collision.collider.transform.position - m_bulletScript.m_direction); // Look at bullet origin
             }
-        }
+        }        
     }
 
     new private void OnGUI()

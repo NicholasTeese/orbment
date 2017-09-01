@@ -37,6 +37,7 @@ public class DashNotificationTrigger : MonoBehaviour
 
             if (m_fDestroyTimer <= 0)
             {
+                m_dashNotificationText.SetActive(false);
                 Destroy(gameObject);
             }
         }

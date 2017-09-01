@@ -122,7 +122,6 @@ public class OrbGate : MonoBehaviour
 
     private void SpendOrb( int a_num)
     {
-        
         if (m_Player.m_orbsCollected > 0)
         {
             m_Player.m_orbsCollected -= a_num;
