@@ -1,21 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PerkButtonWings : MonoBehaviour
 {
     private float m_fRotationSpeed = 5.0f;
 
-    private PerkButton m_perkButton;
-
-    private void Awake()
-    {
-        m_perkButton = transform.GetComponentInParent<PerkButton>();
-    }
+    private bool m_bRotate = true;
+    public bool Rotate { get; set; }
 
     private void Update()
     {
-        if (m_perkButton.IsPurchased)
+        if (m_bRotate)
         {
             transform.Rotate(Vector3.forward * Time.deltaTime * m_fRotationSpeed);
         }
