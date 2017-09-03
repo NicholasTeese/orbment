@@ -51,7 +51,6 @@ public class GameManager : MonoBehaviour
         {
 		    if (Input.GetKeyDown(KeyCode.Tab))
             {
-                Debug.Log("tab");
 		    	//x if (!perkOpen)
                 //x {
                 //x     Debug.Log("open");
