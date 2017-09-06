@@ -114,7 +114,6 @@ public class Bullet : MonoBehaviour
         {
             Disable();
         }
-
     }
 
 
@@ -124,16 +123,23 @@ public class Bullet : MonoBehaviour
         {
             if (!a_collision.collider.CompareTag("Player"))
             {
-                return;
+                if (a_collision.collider.CompareTag("Untagged"))
+                {
+                    // Do nothing
+                }
+                else
+                {
+                    return;
+                }
             }
         }
 
         m_bColliding = true;
 
-        //x if (m_id == "")
-        //x {
-        //x     return;
-        //x }
+        //if (m_id == "")
+        //{
+        //    return;
+        //}
 
         if (!a_collision.collider.CompareTag(m_id))
         {
