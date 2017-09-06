@@ -19,7 +19,7 @@ public class OrbCountDisplay : MonoBehaviour
     {
         if(m_playerRef != null && m_textDisplay != null)
         {
-            m_textDisplay.text = m_playerRef.m_orbsCollected.ToString();
+            m_textDisplay.text = "Keys Collected " + m_playerRef.m_orbsCollected.ToString() + "/20";
         }
     }
 }
