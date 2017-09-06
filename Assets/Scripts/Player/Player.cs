@@ -242,7 +242,7 @@ public class Player : Entity
 
 
         //dash
-        if (Input.GetKeyDown(KeyCode.LeftShift) && m_manaPool.m_currentMana >= m_dashManaCost && m_movement != Vector3.zero)
+        if (Input.GetKeyDown(KeyCode.Space) && m_manaPool.m_currentMana >= m_dashManaCost && m_movement != Vector3.zero)
         {
             if (m_dashTrail != null)
             {
