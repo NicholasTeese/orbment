@@ -255,7 +255,7 @@ public class Player : Entity
         }
 
         //get movement input
-        m_movement = Vector3.forward * Input.GetAxis("Vertical") + Vector3.right * Input.GetAxis("Horizontal");
+        m_movement = Vector3.forward * InputManager.PrimaryVertical() + Vector3.right * InputManager.PrimaryHorizontal();
     }
 
 
@@ -267,16 +267,13 @@ public class Player : Entity
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hit, rayLength, m_shootPlane))
         {
-
             Vector3 hitPoint = hit.point;
             hitPoint.y = 0;
-            Vector3 playerToMouse = hitPoint - this.transform.position;
+            Vector3 playerToMouse = hitPoint - transform.position;
             playerToMouse.y = 0f;
+            //playerToMouse = InputManager.SecondaryInput(playerToMouse);
             Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
-            this.transform.rotation = newRotation;
-            //Debug.DrawRay(this.transform.position, this.transform.forward * 10, Color.cyan);
-
-            //Debug.DrawLine(this.transform.position, hit.point, Color.red);
+            transform.rotation = newRotation;
         }
 
         //dashing
