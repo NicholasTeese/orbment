@@ -177,7 +177,7 @@ public class Player : Entity
 
         //mouse hold fire
 //        if (Input.GetKey(KeyCode.UpArrow) && Time.timeScale != 0)
-        if (Input.GetMouseButton(0) && Time.timeScale != 0.0f)
+        if ((Input.GetMouseButton(0) || InputManager.RightTriggerHold()) && Time.timeScale != 0.0f)
         {
             
             if (m_playerFireTimer >= m_playerFiringInterval)
@@ -242,7 +242,7 @@ public class Player : Entity
 
 
         //dash
-        if (Input.GetKeyDown(KeyCode.Space) && m_manaPool.m_currentMana >= m_dashManaCost && m_movement != Vector3.zero)
+        if ((Input.GetKeyDown(KeyCode.Space) || InputManager.LeftTriggerDown()) && m_manaPool.m_currentMana >= m_dashManaCost && m_movement != Vector3.zero)
         {
             if (m_dashTrail != null)
             {
@@ -274,6 +274,9 @@ public class Player : Entity
             //playerToMouse = InputManager.SecondaryInput(playerToMouse);
             Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
             transform.rotation = newRotation;
+            //Quaternion newRoation = Quaternion.LookRotation(new Vector3(Input.GetAxis("Mouse X"), 0.0f, Input.GetAxis("Mouse Y")));
+            //if (newRoation != Quaternion.identity)
+            //transform.LookAt(new Vector3(Input.GetAxis("Mouse X"), 0.0f, Input.GetAxis("Mouse Y")));
         }
 
         //dashing

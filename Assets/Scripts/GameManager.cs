@@ -49,35 +49,15 @@ public class GameManager : MonoBehaviour
         //pause game
         if(inRange)
         {
-		    if (Input.GetKeyDown(KeyCode.Tab))
+		    if (Input.GetKeyDown(KeyCode.Tab) || InputManager.BackButton())
             {
-		    	//x if (!perkOpen)
-                //x {
-                //x     Debug.Log("open");
-		    	//x 	PerkCam.SetActive (true);
-                //x     PerkScreen.SetActive(true);
-                //x     hud.SetActive(false);
-                //x     perkOpen = true;
-				//x 	//Buffer.SetActive(false); //AA added this
-		    	//x 	Time.timeScale = 0;
-		    	//x }
-                //x else
-                //x {
-                //x     Debug.Log("close");
-		    	//x 	PerkCam.SetActive (false);
-                //x     PerkScreen.SetActive(false); //AA changed this
-                //x     hud.SetActive(true);
-				//x 	//Buffer.SetActive(true); //AA added this
-                //x     perkOpen = false;
-		    	//x 	Time.timeScale = 1;
-		    	//x }
                 EnablePerkTree();
             }
         }
 
         if (gameStart == true)
         {
-            if (Input.GetKeyUp(KeyCode.Escape))
+            if (Input.GetKeyUp(KeyCode.Escape) || InputManager.StartButton())
             {
                 if (!paused)
                 {

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public static class InputManager
 {
+    private static bool m_bLeftTriggerIsPressed = false;
+    private static bool m_bRightTriggerIsPressed = false;
+
     public static float PrimaryHorizontal()
     {
         float fHorizontalAxis = 0.0f;
@@ -36,18 +39,54 @@ public static class InputManager
         return Mathf.Clamp(fVertialAxis, -1.0f, 1.0f);
     }
 
-    public static float LeftTrigger()
+    public static bool LeftTriggerDown()
     {
-        float fLeftTriggerAxis = 0.0f;
-        fLeftTriggerAxis += Input.GetAxis("LeftTrigger");
-        return Mathf.Clamp(fLeftTriggerAxis, -1.0f, 1.0f);
+        if (Input.GetAxis("LeftTrigger") != 0.0f)
+        {
+            if (!m_bLeftTriggerIsPressed)
+            {
+                m_bLeftTriggerIsPressed = true;
+                return true;
+            }
+            return false;
+        }
+
+        m_bLeftTriggerIsPressed = false;
+        return false;
     }
 
-    public static float RightTrigger()
+    public static bool LeftTriggerHold()
     {
-        float fRightTriggerAxis = 0.0f;
-        fRightTriggerAxis += Input.GetAxis("RightTrigger");
-        return Mathf.Clamp(fRightTriggerAxis, -1.0f, 1.0f);
+        if (Input.GetAxis("LeftTrigger") != 0.0f)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public static bool RightTriggerDown()
+    {
+        if (Input.GetAxis("RightTrigger") != 0.0f)
+        {
+            if (!m_bRightTriggerIsPressed)
+            {
+                m_bRightTriggerIsPressed = true;
+                return true;
+            }
+            return false;
+        }
+
+        m_bRightTriggerIsPressed = false;
+        return false;
+    }
+
+    public static bool RightTriggerHold()
+    {
+        if (Input.GetAxis("RightTrigger") != 0.0f)
+        {
+            return true;
+        }
+        return false;
     }
 
     public static bool AButton()
@@ -68,6 +107,16 @@ public static class InputManager
     public static bool YButton()
     {
         return Input.GetButtonDown("YButton");
+    }
+
+    public static bool StartButton()
+    {
+        return Input.GetButtonDown("StartButton");
+    }
+
+    public static bool BackButton()
+    {
+        return Input.GetButtonDown("BackButton");
     }
 
     public static Vector3 PrimaryInput()

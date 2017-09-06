@@ -5,14 +5,6 @@ using UnityEngine.UI;
 
 public class PerkButton : MonoBehaviour
 {
-    public enum ActiveBranch
-    {
-        LEFT,
-        MIDDLE,
-        RIGHT,
-        NONE
-    }
-
     private float m_fBranchFillSpeed = 0.01f;
 
     private bool m_bIsPurchased = false;
@@ -22,8 +14,6 @@ public class PerkButton : MonoBehaviour
     private bool m_bLeftBranchActive = false;
     private bool m_bRightBranchActive = false;
 
-    private ActiveBranch m_eActiveBrach;
-
     private Button m_perkIconButton;
 
     [Header("Parent Perks")]
@@ -31,33 +21,23 @@ public class PerkButton : MonoBehaviour
     [Header("Child Perks")]
     public List<GameObject> m_childPerks = new List<GameObject>();
 
-    [Header("Perk Button Animators")]
-    public Animator m_wingsAnimator;
-
-    [Header("Perk Button ParticleSystems")]
-    public ParticleSystem m_firstParticleSystem;
-    public ParticleSystem m_secondParticleSystem;
-
     [Header("Active Perk Button Sprites")]
     public Sprite m_iconActive;
     public Sprite m_wingsActive;
 
     [Header("Perk Images")]
-    public GameObject m_perkWingsImage;
-    public Image m_leftBranchImage;
-    public Image m_rightBranchImage;
-    public Image m_middleBranchImage;
+    public Image m_branchImage;
 
     [Header("Perk Description Text")]
     public Text m_perkDescriptionText;
+
+    [Header("Perk Wings Script")]
+    public PerkButtonWings m_perkButtonWings;
 
     private StartingWeapon m_startingWeapon;
 
     private void Awake()
     {
-        //? m_firstParticleSystem.Stop();
-        //? m_secondParticleSystem.Stop();
-
         m_perkIconButton = GetComponent<Button>();
 
         m_startingWeapon = GameObject.FindGameObjectWithTag("StartingWeapon").GetComponent<StartingWeapon>();
@@ -65,55 +45,21 @@ public class PerkButton : MonoBehaviour
 
     private void Update()
     {
+        if (m_parentPerk != null && m_bIsPurchased)
+        {
+            if (m_branchImage.fillAmount < 1.0f)
+            {
+                m_branchImage.fillAmount += m_fBranchFillSpeed;
+                return;
+            }
+
+            ActivateChildPerk();
+            return;
+        }
+
         if (m_bIsPurchased)
         {
-            switch (m_eActiveBrach)
-            {
-                case ActiveBranch.LEFT:
-                    {
-                        m_leftBranchImage.fillAmount += m_fBranchFillSpeed;
-
-                        if (m_leftBranchImage.fillAmount >= 0.9)
-                        {
-                            ActivateChildPerk();
-                        }
-                        break;
-                    }
-
-                case ActiveBranch.MIDDLE:
-                    {
-                        m_middleBranchImage.fillAmount += m_fBranchFillSpeed;
-
-                        if (m_middleBranchImage.fillAmount >= 0.9)
-                        {
-                            ActivateChildPerk();
-                        }
-                        break;
-                    }
-
-                case ActiveBranch.RIGHT:
-                    {
-                        m_rightBranchImage.fillAmount += m_fBranchFillSpeed;
-
-                        if (m_rightBranchImage.fillAmount >= 0.9)
-                        {
-                            ActivateChildPerk();
-                        }
-                        break;
-                    }
-
-                case ActiveBranch.NONE:
-                    {
-                        ActivateChildPerk();
-                        break;
-                    }
-
-                default:
-                    {
-                        Debug.Log("ACctive branch could not be found.");
-                        break;
-                    }
-            }
+            ActivateChildPerk();
         }
     }
 
@@ -188,9 +134,6 @@ public class PerkButton : MonoBehaviour
         // Decrement the amount of available perks.
         PerkTreeManager.m_perkTreeManager.DecrementAvailiablePerks();
 
-        //? m_firstParticleSystem.Play();
-        //? m_secondParticleSystem.Play();
-
         // If the perk is successfully applied change the perk images to be active.
         CheckFireTree(a_strPerkName);
 
@@ -210,7 +153,6 @@ public class PerkButton : MonoBehaviour
             case "Fire1A":
                 {
                     m_startingWeapon.SetProjectile(Resources.Load("Prefabs/Projectiles/FireBall") as GameObject);
-                    m_eActiveBrach = ActiveBranch.NONE;
                     break;
                 }
 
@@ -218,7 +160,6 @@ public class PerkButton : MonoBehaviour
             case "Fire2A":
                 {
                     Player.m_Player.m_currSpeed += (Player.m_Player.m_currSpeed * 0.5f);
-                    m_eActiveBrach = ActiveBranch.LEFT;
                     break;
                 }
 
@@ -226,7 +167,6 @@ public class PerkButton : MonoBehaviour
             case "Fire2B":
                 {
                     Player.m_Player.m_maxHealth += (Player.m_Player.m_maxHealth * 0.5f);
-                    m_eActiveBrach = ActiveBranch.RIGHT;
                     break;
                 }
 
@@ -234,7 +174,6 @@ public class PerkButton : MonoBehaviour
             case "Fire3A":
                 {
                     //TODO: Implement.
-                    m_eActiveBrach = ActiveBranch.LEFT;
                     break;
                 }
 
@@ -245,7 +184,6 @@ public class PerkButton : MonoBehaviour
                     {
                         bullet.GetComponent<Bullet>().m_projectileSpeed += (bullet.GetComponent<Bullet>().m_projectileSpeed * 0.30f);
                     }
-                    m_eActiveBrach = ActiveBranch.RIGHT;
                     break;
                 }
 
@@ -253,7 +191,6 @@ public class PerkButton : MonoBehaviour
             case "Fire3C":
                 {
                     Player.m_Player.m_hasRingOfFire = true;
-                    m_eActiveBrach = ActiveBranch.LEFT;
                     break;
                 }
 
@@ -261,7 +198,6 @@ public class PerkButton : MonoBehaviour
             case "Fire3D":
                 {
                     KillStreakManager.m_killStreakManager.Lifesteal = true;
-                    m_eActiveBrach = ActiveBranch.RIGHT;
                     break;
                 }
 
@@ -269,7 +205,6 @@ public class PerkButton : MonoBehaviour
             case "Fire4A":
                 {
                     //TODO: Implement.
-                    m_eActiveBrach = ActiveBranch.MIDDLE;
                     break;
                 }
 
@@ -280,7 +215,6 @@ public class PerkButton : MonoBehaviour
                     {
                         bullet.GetComponent<Bullet>().m_projectileSpeed += (int)(bullet.GetComponent<Bullet>().m_projectileSpeed * 0.50f);
                     }
-                    m_eActiveBrach = ActiveBranch.MIDDLE;
                     break;
                 }
 
@@ -288,7 +222,6 @@ public class PerkButton : MonoBehaviour
             case "Fire4C":
                 {
                     Player.m_Player.AdditionalBurnDPS += 5;
-                    m_eActiveBrach = ActiveBranch.MIDDLE;
                     break;
                 }
 
@@ -296,7 +229,6 @@ public class PerkButton : MonoBehaviour
             case "Fire4D":
                 {
                     Player.m_Player.GodModeIsAvailable = true;
-                    m_eActiveBrach = ActiveBranch.MIDDLE;
                     break;
                 }
 
@@ -345,8 +277,8 @@ public class PerkButton : MonoBehaviour
 
     private void ActivateChildPerk()
     {
-        m_perkWingsImage.GetComponent<PerkButtonWings>().Rotate = true;
         m_perkIconButton.GetComponent<Image>().sprite = m_iconActive;
-        m_perkWingsImage.GetComponent<Image>().sprite = m_wingsActive;
+        m_perkButtonWings.GetComponent<Image>().sprite = m_wingsActive;
+        m_perkButtonWings.Rotate = true;
     }
 }
