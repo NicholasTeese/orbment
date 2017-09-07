@@ -41,7 +41,7 @@ public class PerkButton : MonoBehaviour
 
     private void Awake()
     {
-        m_strPerkName = transform.GetComponentInParent<Transform>().name;
+        m_strPerkName = transform.parent.name;
 
         m_perkIconButton = GetComponent<Button>();
 
@@ -164,6 +164,7 @@ public class PerkButton : MonoBehaviour
     /// <param name="a_strPerkName"></param>
     private void CheckFireTree()
     {
+        Debug.Log(m_strPerkName);
         switch (m_strPerkName)
         {
             // Fire bullet (1A).
