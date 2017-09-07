@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class PassLevel : MonoBehaviour
 {
 	public string goToLevel;
+
 	void Start ()
     {
 		
@@ -18,7 +19,7 @@ public class PassLevel : MonoBehaviour
     {
 		if (col.tag == "Player")
         {
-			SceneManager.LoadScene (goToLevel);
+			SceneManager.LoadScene(goToLevel);
 		}
 	}
 }
