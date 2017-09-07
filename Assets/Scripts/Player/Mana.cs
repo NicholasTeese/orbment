@@ -17,13 +17,12 @@ public class Mana : MonoBehaviour
     public int m_manaBarWidth = 500;
     public float m_currentMana = 100.0f;
     public float m_maxMana = 100.0f;
-    // Use this for initialization
+
     void Start()
     {
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         manaBar.GetComponent<Slider> ().value = m_currentMana;
@@ -34,6 +33,4 @@ public class Mana : MonoBehaviour
     {
         
     }
-
-
 }
