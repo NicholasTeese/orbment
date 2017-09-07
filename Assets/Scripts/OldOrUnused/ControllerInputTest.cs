@@ -8,7 +8,7 @@ public class ControllerInputTest : MonoBehaviour
     {
 		if (InputManager.AButton())
         {
-            Debug.Log(InputManager.PrimaryInput());
+            //Debug.Log(InputManager.PrimaryInput());
         }
 
         if (InputManager.BButton())

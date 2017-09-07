@@ -4,6 +4,7 @@ using UnityEngine;
 
 public static class InputManager
 {
+    private static bool m_bPrimaryInputIsPressed = false;
     private static bool m_bLeftTriggerIsPressed = false;
     private static bool m_bRightTriggerIsPressed = false;
 
@@ -119,12 +120,29 @@ public static class InputManager
         return Input.GetButtonDown("BackButton");
     }
 
-    public static Vector3 PrimaryInput()
+    public static Vector3 PrimaryInputDown()
+    {
+        if (PrimaryInputHold().x >= 0.3f || PrimaryInputHold().z >= 0.3f || PrimaryInputHold().x <= -0.3f || PrimaryInputHold().z <= -0.3f)
+        {
+            if (!m_bPrimaryInputIsPressed)
+            {
+                m_bPrimaryInputIsPressed = true;
+                Debug.Log(PrimaryInputHold());
+                return PrimaryInputHold();
+            }
+            return Vector3.zero;
+        }
+
+        m_bPrimaryInputIsPressed = false;
+        return Vector3.zero;
+    }
+
+    public static Vector3 PrimaryInputHold()
     {
         return new Vector3(PrimaryHorizontal(), 0.0f, PrimaryVertical());
     }
 
-    public static Vector3 SecondaryInput(Vector3 a_v3MouseInput)
+    public static Vector3 SecondaryInputHold(Vector3 a_v3MouseInput)
     {
         return new Vector3(SecondaryHorizontal(a_v3MouseInput.x), 0.0f, SecondaryVertical(a_v3MouseInput.z));
     }

@@ -6,13 +6,16 @@ using UnityEngine.UI;
 public class PerkButton : MonoBehaviour
 {
     private float m_fBranchFillSpeed = 0.01f;
+    private float m_fGrowShrinkSpeed = 0.05f;
 
+    private bool m_bIsHighlighted = false;
+    public bool IsHighLighted { get { return m_bIsHighlighted; } set { m_bIsHighlighted = value; } }
     private bool m_bIsPurchased = false;
     public bool IsPurchased { get { return m_bIsPurchased; } }
     private bool m_bChildPathChosen = false;
     private bool m_bCursorIsOver = false;
-    private bool m_bLeftBranchActive = false;
-    private bool m_bRightBranchActive = false;
+
+    private string m_strPerkName;
 
     private Button m_perkIconButton;
 
@@ -32,12 +35,14 @@ public class PerkButton : MonoBehaviour
     public Text m_perkDescriptionText;
 
     [Header("Perk Wings Script")]
-    public PerkButtonWings m_perkButtonWings;
+    public PerkWings m_perkWings;
 
     private StartingWeapon m_startingWeapon;
 
     private void Awake()
     {
+        m_strPerkName = transform.GetComponentInParent<Transform>().name;
+
         m_perkIconButton = GetComponent<Button>();
 
         m_startingWeapon = GameObject.FindGameObjectWithTag("StartingWeapon").GetComponent<StartingWeapon>();
@@ -45,6 +50,15 @@ public class PerkButton : MonoBehaviour
 
     private void Update()
     {
+        if (m_bIsHighlighted)
+        {
+            Grow();
+        }
+        else
+        {
+            Shrink();
+        }
+
         if (m_parentPerk != null && m_bIsPurchased)
         {
             if (m_branchImage.fillAmount < 1.0f)
@@ -70,6 +84,9 @@ public class PerkButton : MonoBehaviour
     public void OnCursorEnter(string a_strPerkDescription)
     {
         m_bCursorIsOver = true;
+        PerkTreeManager.m_perkTreeManager.m_selectedPerk.IsHighLighted = false;
+        PerkTreeManager.m_perkTreeManager.m_selectedPerk = GetComponent<PerkButton>();
+        PerkTreeManager.m_perkTreeManager.m_selectedPerk.IsHighLighted = true;
 
         if (m_childPerks.Count > 0)
         {
@@ -97,7 +114,7 @@ public class PerkButton : MonoBehaviour
     /// Is called when the button this script is attached to is clicked.
     /// </summary>
     /// <param name="a_strPerk"></param>
-    public void OnClick(string a_strPerk)
+    public void OnClick()
     {
         // If there are no available perks, exit the function.
         if (PerkTreeManager.m_perkTreeManager.AvailiablePerks == 0)
@@ -120,14 +137,14 @@ public class PerkButton : MonoBehaviour
         }
 
         // Perchase this perk.
-        PurchasePerk(a_strPerk);
+        PurchasePerk();
     }
 
     /// <summary>
     /// Is called when a perk is purchased.
     /// </summary>
     /// <param name="a_strPerkName"></param>
-    private void PurchasePerk(string a_strPerkName)
+    private void PurchasePerk()
     {
         // Set the perk to be purchased.
         m_bIsPurchased = true;
@@ -135,7 +152,7 @@ public class PerkButton : MonoBehaviour
         PerkTreeManager.m_perkTreeManager.DecrementAvailiablePerks();
 
         // If the perk is successfully applied change the perk images to be active.
-        CheckFireTree(a_strPerkName);
+        CheckFireTree();
 
         //TODO: CheckIceTree(a_strPerkName);
         //TODO: CheckLightningTree(a_strPerkName);
@@ -145,40 +162,40 @@ public class PerkButton : MonoBehaviour
     /// Checks the fire tree's perks to apply perk to.
     /// </summary>
     /// <param name="a_strPerkName"></param>
-    private void CheckFireTree(string a_strPerkName)
+    private void CheckFireTree()
     {
-        switch (a_strPerkName)
+        switch (m_strPerkName)
         {
             // Fire bullet (1A).
-            case "Fire1A":
+            case "FirePerk_1A":
                 {
                     m_startingWeapon.SetProjectile(Resources.Load("Prefabs/Projectiles/FireBall") as GameObject);
                     break;
                 }
 
             // Increase player movement speed by 50% (2A).
-            case "Fire2A":
+            case "FirePerk_2A":
                 {
                     Player.m_Player.m_currSpeed += (Player.m_Player.m_currSpeed * 0.5f);
                     break;
                 }
 
             // Increase player max health by 50% (2B).
-            case "Fire2B":
+            case "FirePerk_2B":
                 {
                     Player.m_Player.m_maxHealth += (Player.m_Player.m_maxHealth * 0.5f);
                     break;
                 }
 
             // Give player speed boost based on how many enemies are burning (3A).
-            case "Fire3A":
+            case "FirePerk_3A":
                 {
                     //TODO: Implement.
                     break;
                 }
 
             // Increase player bullet velocity by 30% (3B).
-            case "Fire3B":
+            case "FirePerk_3B":
                 {
                     foreach (Transform bullet in m_startingWeapon.transform)
                     {
@@ -188,28 +205,28 @@ public class PerkButton : MonoBehaviour
                 }
 
             // Spawn ring of fire when player health is below 25% (3C).
-            case "Fire3C":
+            case "FirePerk_3C":
                 {
                     Player.m_Player.m_hasRingOfFire = true;
                     break;
                 }
 
             // Getting a kill streak returns HP to the player (3D).
-            case "Fire3D":
+            case "FirePerk_3D":
                 {
                     KillStreakManager.m_killStreakManager.Lifesteal = true;
                     break;
                 }
 
             // Increase player speed boost based on how many enemies are burning (4A).
-            case "Fire4A":
+            case "FirePerk_4A":
                 {
                     //TODO: Implement.
                     break;
                 }
 
             // Increase player bullet velocity by 50% (4B).
-            case "Fire4B":
+            case "FirePerk_4B":
                 {
                     foreach (Transform bullet in m_startingWeapon.transform)
                     {
@@ -219,14 +236,14 @@ public class PerkButton : MonoBehaviour
                 }
 
             // Ring of fire damage increased (4C).
-            case "Fire4C":
+            case "FirePerk_4C":
                 {
                     Player.m_Player.AdditionalBurnDPS += 5;
                     break;
                 }
 
             // God mode enabled for 5 seconds when player reaches highest killstreak (4D).
-            case "Fire4D":
+            case "FirePerk_4D":
                 {
                     Player.m_Player.GodModeIsAvailable = true;
                     break;
@@ -278,7 +295,25 @@ public class PerkButton : MonoBehaviour
     private void ActivateChildPerk()
     {
         m_perkIconButton.GetComponent<Image>().sprite = m_iconActive;
-        m_perkButtonWings.GetComponent<Image>().sprite = m_wingsActive;
-        m_perkButtonWings.Rotate = true;
+        m_perkWings.GetComponent<Image>().sprite = m_wingsActive;
+        m_perkWings.Rotate = true;
+    }
+
+    private void Grow()
+    {
+        if (m_perkIconButton.transform.localScale.x < 1.5f)
+        {
+            m_perkIconButton.transform.localScale += new Vector3(m_fGrowShrinkSpeed, m_fGrowShrinkSpeed, 0.0f);
+            m_perkWings.transform.localScale += new Vector3(m_fGrowShrinkSpeed, m_fGrowShrinkSpeed, 0.0f);
+        }
+    }
+
+    private void Shrink()
+    {
+        if (m_perkIconButton.transform.localScale.x > 1.0f)
+        {
+            m_perkIconButton.transform.localScale -= new Vector3(m_fGrowShrinkSpeed, m_fGrowShrinkSpeed, 0.0f);
+            m_perkWings.transform.localScale -= new Vector3(m_fGrowShrinkSpeed, m_fGrowShrinkSpeed, 0.0f);
+        }
     }
 }
