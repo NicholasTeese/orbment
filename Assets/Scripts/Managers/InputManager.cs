@@ -122,18 +122,23 @@ public static class InputManager
 
     public static Vector3 PrimaryInputDown()
     {
-        if (PrimaryInputHold().x >= 0.3f || PrimaryInputHold().z >= 0.3f || PrimaryInputHold().x <= -0.3f || PrimaryInputHold().z <= -0.3f)
+        Debug.Log(PrimaryInputHold());
+        if (PrimaryInputHold() != Vector3.zero)
         {
             if (!m_bPrimaryInputIsPressed)
             {
                 m_bPrimaryInputIsPressed = true;
-                Debug.Log(PrimaryInputHold());
+                //Debug.Log(PrimaryInputHold());
+                //Debug.Log(m_bPrimaryInputIsPressed);
                 return PrimaryInputHold();
             }
+            //m_bPrimaryInputIsPressed = false;
+            //Debug.Log(m_bPrimaryInputIsPressed);
             return Vector3.zero;
         }
 
         m_bPrimaryInputIsPressed = false;
+        Debug.Log(m_bPrimaryInputIsPressed);
         return Vector3.zero;
     }
 

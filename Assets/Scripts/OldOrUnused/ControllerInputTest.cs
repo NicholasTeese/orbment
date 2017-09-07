@@ -4,31 +4,55 @@ using UnityEngine;
 
 public class ControllerInputTest : MonoBehaviour
 {
+    private float m_fInputBuffer = 0.2f;
+
+    private bool m_bIsPressed = false;
+
 	private void Update ()
     {
-		if (InputManager.AButton())
-        {
-            //Debug.Log(InputManager.PrimaryInput());
-        }
+        Vector3 v3PrimaryInputDirection = InputManager.PrimaryInputHold();
 
-        if (InputManager.BButton())
+        if (v3PrimaryInputDirection.z >= m_fInputBuffer)
         {
-            Debug.Log("B");
+            if (v3PrimaryInputDirection.x <= -m_fInputBuffer)
+            {
+                if (!m_bIsPressed)
+                {
+                    m_bIsPressed = true;
+                    v3PrimaryInputDirection = InputManager.PrimaryInputHold();
+                }
+            }
+            else if (v3PrimaryInputDirection.x >= m_fInputBuffer)
+            {
+                if (!m_bIsPressed)
+                {
+                    m_bIsPressed = true;
+                    v3PrimaryInputDirection = InputManager.PrimaryInputHold();
+                }
+            }
         }
-
-        if (InputManager.XButton())
+        else if (v3PrimaryInputDirection.z <= -m_fInputBuffer)
         {
-            Debug.Log("X");
+            if (v3PrimaryInputDirection.x <= -m_fInputBuffer)
+            {
+                if (!m_bIsPressed)
+                {
+                    m_bIsPressed = true;
+                    v3PrimaryInputDirection = InputManager.PrimaryInputHold();
+                }
+            }
+            else if (v3PrimaryInputDirection.x >= m_fInputBuffer)
+            {
+                if (!m_bIsPressed)
+                {
+                    m_bIsPressed = true;
+                    v3PrimaryInputDirection = InputManager.PrimaryInputHold();
+                }
+            }
         }
-
-        if (InputManager.YButton())
+        else
         {
-            Debug.Log("Y");
+            m_bIsPressed = false;
         }
-
-        //if (InputManager.PrimaryInput() != Vector3.zero)
-        //{
-        //    Debug.Log(InputManager.PrimaryInput());
-        //}
     }
 }
