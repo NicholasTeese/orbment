@@ -7,26 +7,24 @@ public class OrbGate : MonoBehaviour
     public GUIStyle m_textStyle;
     public GameObject m_visualLock;
 
-
     private float m_origScale = 1.0f;
     private float m_lockScale = 1.0f;
-
 
     private Player m_Player;
     private Animator m_Animator;
 
-    public int m_numOfOrbsForOpen = 10;
-
-
+    public int m_numOfOrbsForOpen = 20;
     public int m_currNumOrbsInvested = 0;
 
+    public float m_fDivisionRate;
+    public float m_reduction;
 
     //private float m_holdTimer = 0.0f;
     //private float m_holdDuration = 0.1f;
     //private float m_orbSpendRate = 0.02f;
     //private float m_orbSpendTimer = 0.0f;
 
-    private bool m_isOpen = false;
+    public bool m_isOpen = false;
 
     private bool m_playerIsNear;
 
@@ -36,16 +34,13 @@ public class OrbGate : MonoBehaviour
         if (m_visualLock != null)
         {
             m_origScale = m_visualLock.transform.localScale.x;
+            m_fDivisionRate = m_visualLock.transform.localScale.x / m_numOfOrbsForOpen;
+            m_reduction = 0;
         }
 
         m_Player = FindObjectOfType<Player>();
         m_Animator = GetComponentInChildren<Animator>();
     }
-
-
-    //public void Update() {
-    //		checkIfShouldOpen();
-    //}
 
     public void OnTriggerStay(Collider other)
     {
@@ -54,7 +49,7 @@ public class OrbGate : MonoBehaviour
         {
             m_playerIsNear = true;
             //hold e to spend orbs
-            if (m_playerIsNear) //Input.GetKeyDown(KeyCode.E))
+            if (m_playerIsNear)// && Input.GetKeyDown(KeyCode.E))
                 checkIfShouldOpen();
         }
     }
@@ -67,9 +62,6 @@ public class OrbGate : MonoBehaviour
             m_playerIsNear = false;
         }
     }
-
-
-
 
     private void checkIfShouldOpen()
     {
@@ -93,11 +85,11 @@ public class OrbGate : MonoBehaviour
         else if (m_Player.m_orbsCollected > 0) //>= m_numOfOrbsForOpen)
         {
             int orbsPassed = m_Player.m_orbsCollected;
-            SpendOrb(m_Player.m_orbsCollected);
-            if (m_currNumOrbsInvested < m_numOfOrbsForOpen)
+            if (m_numOfOrbsForOpen > 0)
             {
                 m_currNumOrbsInvested = m_currNumOrbsInvested + orbsPassed;
-                m_numOfOrbsForOpen = m_numOfOrbsForOpen - m_currNumOrbsInvested;
+                m_numOfOrbsForOpen = 20 - m_currNumOrbsInvested;
+                SpendOrb(m_Player.m_orbsCollected);
             }
             else
             {
@@ -126,8 +118,10 @@ public class OrbGate : MonoBehaviour
         {
             m_Player.m_orbsCollected -= a_num;
             m_Player.EmitSpentOrb(a_num);
-            m_lockScale = 1.0f - ((float)m_currNumOrbsInvested / (float)m_numOfOrbsForOpen);
-            Vector3 m_targetScale = new Vector3(m_lockScale * m_origScale, m_lockScale * m_origScale, m_visualLock.transform.localScale.z);
+            m_reduction = m_fDivisionRate * m_currNumOrbsInvested; //1.0f - ((float)m_currNumOrbsInvested / (float)m_numOfOrbsForOpen);
+//            m_lockScale = 1.0f - ((float)m_currNumOrbsInvested / (float)m_numOfOrbsForOpen);
+//            Vector3 m_targetScale = new Vector3(m_lockScale * m_origScale, m_lockScale * m_origScale, m_visualLock.transform.localScale.z);
+            Vector3 m_targetScale = new Vector3(m_origScale - m_reduction, m_origScale - m_reduction, m_visualLock.transform.localScale.z);
             m_visualLock.transform.localScale = m_targetScale;
         }
     }

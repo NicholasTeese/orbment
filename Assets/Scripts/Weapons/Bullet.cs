@@ -32,7 +32,6 @@ public class Bullet : MonoBehaviour
     protected ExplosionManager m_explosionManager;
     protected Entity m_enemy = null;
 
-
     public Player m_playerRef = null;
 
     public bool m_isCrit = false;

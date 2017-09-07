@@ -13,7 +13,6 @@ public class Enemy : Entity
 
     public EnemyType m_type;
 
-    // Update is called once per frame
     new void Update()
     {
         if (m_currHealth <= 0)
@@ -24,9 +23,10 @@ public class Enemy : Entity
                 m_killStreakManager.AddKill();
             }
         }
-
         base.Update();
-
+        // kill code for easy debugging
+        if (Input.GetKey(KeyCode.E) && Input.GetKey(KeyCode.Equals) && Input.GetKey(KeyCode.Alpha0))
+            this.m_currHealth = 0;
     }
 
     void OnCollisionEnter(Collision collision)
