@@ -120,28 +120,6 @@ public static class InputManager
         return Input.GetButtonDown("BackButton");
     }
 
-    public static Vector3 PrimaryInputDown()
-    {
-        Debug.Log(PrimaryInputHold());
-        if (PrimaryInputHold() != Vector3.zero)
-        {
-            if (!m_bPrimaryInputIsPressed)
-            {
-                m_bPrimaryInputIsPressed = true;
-                //Debug.Log(PrimaryInputHold());
-                //Debug.Log(m_bPrimaryInputIsPressed);
-                return PrimaryInputHold();
-            }
-            //m_bPrimaryInputIsPressed = false;
-            //Debug.Log(m_bPrimaryInputIsPressed);
-            return Vector3.zero;
-        }
-
-        m_bPrimaryInputIsPressed = false;
-        Debug.Log(m_bPrimaryInputIsPressed);
-        return Vector3.zero;
-    }
-
     public static Vector3 PrimaryInputHold()
     {
         return new Vector3(PrimaryHorizontal(), 0.0f, PrimaryVertical());
