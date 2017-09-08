@@ -4,7 +4,6 @@ using UnityEngine;
 
 public static class InputManager
 {
-    private static bool m_bPrimaryInputIsPressed = false;
     private static bool m_bLeftTriggerIsPressed = false;
     private static bool m_bRightTriggerIsPressed = false;
 
@@ -24,19 +23,17 @@ public static class InputManager
         return Mathf.Clamp(fVerticalAxis, -1.0f, 1.0f);
     }
 
-    public static float SecondaryHorizontal(float a_fMouseXAxis)
+    public static float SecondaryHorizontal()
     {
         float fHorizontalAxis = 0.0f;
         fHorizontalAxis += Input.GetAxis("RightStickXAxis");
-        fHorizontalAxis += a_fMouseXAxis;
         return Mathf.Clamp(fHorizontalAxis, -1.0f, 1.0f);
     }
 
-    public static float SecondaryVertical(float a_fMouseYAxis)
+    public static float SecondaryVertical()
     {
         float fVertialAxis = 0.0f;
         fVertialAxis += Input.GetAxis("RightStickYAxis");
-        fVertialAxis += a_fMouseYAxis;
         return Mathf.Clamp(fVertialAxis, -1.0f, 1.0f);
     }
 
@@ -125,8 +122,8 @@ public static class InputManager
         return new Vector3(PrimaryHorizontal(), 0.0f, PrimaryVertical());
     }
 
-    public static Vector3 SecondaryInputHold(Vector3 a_v3MouseInput)
+    public static Vector3 SecondaryInputHold()
     {
-        return new Vector3(SecondaryHorizontal(a_v3MouseInput.x), 0.0f, SecondaryVertical(a_v3MouseInput.z));
+        return new Vector3(SecondaryHorizontal(), 0.0f, SecondaryVertical());
     }
 }
