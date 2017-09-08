@@ -1,56 +1,15 @@
 fileFormatVersion: 2
-guid: 064d1bc6a7838a94d8562703a5887a90
-timeCreated: 1504072756
+guid: b2b932af925e86946baeb549a96c155e
+timeCreated: 1504839242
 licenseType: Pro
 ModelImporter:
   serializedVersion: 21
   fileIDToRecycleName:
-    100000: backpack
-    100002: belt
-    100004: body
-    100006: face
-    100008: hair
-    100010: //RootNode
-    100012: imagePlane1
-    100014: imagePlane2
-    100016: shirt
-    100018: sleeve
-    100020: ear
-    400000: backpack
-    400002: belt
-    400004: body
-    400006: face
-    400008: hair
-    400010: //RootNode
-    400012: imagePlane1
-    400014: imagePlane2
-    400016: shirt
-    400018: sleeve
-    400020: ear
-    2300000: backpack
-    2300002: belt
-    2300004: body
-    2300006: face
-    2300008: hair
-    2300010: shirt
-    2300012: sleeve
-    2300014: ear
-    3300000: backpack
-    3300002: belt
-    3300004: body
-    3300006: face
-    3300008: hair
-    3300010: shirt
-    3300012: sleeve
-    3300014: ear
-    4300000: body
-    4300002: sleeve
-    4300004: shirt
-    4300006: backpack
-    4300008: belt
-    4300010: face
-    4300012: hair
-    4300014: ear
+    100000: //RootNode
+    400000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: lightning_staff
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -79,7 +38,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1.5
+    globalScale: 0.01443685
     meshCompression: 0
     addColliders: 0
     importVisibility: 1
