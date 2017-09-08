@@ -29,6 +29,9 @@ public class Bullet : MonoBehaviour
 
     public bool m_bColliding;
 
+    private int L_Ground;
+    private int L_Bullet;
+
     protected ExplosionManager m_explosionManager;
     protected Entity m_enemy = null;
 
@@ -47,6 +50,11 @@ public class Bullet : MonoBehaviour
 
     public ProjectileType m_type;
 
+    protected virtual void Awake()
+    {
+        L_Ground = LayerMask.NameToLayer("Ground");
+        L_Bullet = LayerMask.NameToLayer("Bullet");
+    }
 
     // Use this for initialization
     protected virtual void Start()
@@ -54,6 +62,7 @@ public class Bullet : MonoBehaviour
         m_bColliding = false;
         m_explosionManager = GameObject.FindObjectOfType<ExplosionManager>();
         m_trail = this.GetComponent<TrailRenderer>();
+        Physics.IgnoreLayerCollision(L_Bullet, L_Ground);
     }
 
     protected void OnEnable()
