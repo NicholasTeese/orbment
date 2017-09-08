@@ -164,7 +164,7 @@ public class PerkButton : MonoBehaviour
     /// <param name="a_strPerkName"></param>
     private void CheckFireTree()
     {
-        Debug.Log(m_strPerkName);
+        //Debug.Log(m_strPerkName);
         switch (m_strPerkName)
         {
             // Fire bullet (1A).
