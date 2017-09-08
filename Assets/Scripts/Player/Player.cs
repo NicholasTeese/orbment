@@ -240,7 +240,6 @@ public class Player : Entity
             m_currRegenRate = 0.0f;
         }
 
-
         //dash
         if ((Input.GetKeyDown(KeyCode.Space) || InputManager.LeftTriggerDown()) && m_manaPool.m_currentMana >= m_dashManaCost && m_movement != Vector3.zero)
         {
@@ -262,21 +261,30 @@ public class Player : Entity
     void FixedUpdate()
     {
         //mouse aiming
-        RaycastHit hit;
-        float rayLength = 1000;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit, rayLength, m_shootPlane))
+        if (InputManager.SecondaryInputHold() == Vector3.zero)
         {
-            Vector3 hitPoint = hit.point;
-            hitPoint.y = 0;
-            Vector3 playerToMouse = hitPoint - transform.position;
-            playerToMouse.y = 0f;
-            //playerToMouse = InputManager.SecondaryInput(playerToMouse);
-            Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
+            RaycastHit hit;
+            float rayLength = 1000;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit, rayLength, m_shootPlane))
+            {
+                Vector3 hitPoint = hit.point;
+                hitPoint.y = 0;
+                Vector3 playerToMouse = hitPoint - transform.position;
+                playerToMouse = hitPoint - transform.position;
+                playerToMouse.y = 0f;
+                Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
+                transform.rotation = newRotation;
+            }
+        }
+
+        if (InputManager.SecondaryInputHold() != Vector3.zero)
+        {
+            Debug.Log("Joy");
+            Vector3 playerTojoy = Vector3.zero;
+            playerTojoy = InputManager.SecondaryInputHold();
+            Quaternion newRotation = Quaternion.LookRotation(playerTojoy);
             transform.rotation = newRotation;
-            //Quaternion newRoation = Quaternion.LookRotation(new Vector3(Input.GetAxis("Mouse X"), 0.0f, Input.GetAxis("Mouse Y")));
-            //if (newRoation != Quaternion.identity)
-            //transform.LookAt(new Vector3(Input.GetAxis("Mouse X"), 0.0f, Input.GetAxis("Mouse Y")));
         }
 
         //dashing
