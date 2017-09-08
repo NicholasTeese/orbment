@@ -128,6 +128,7 @@ public class GameManager : MonoBehaviour
             PerkScreen.SetActive(true);
             hud.SetActive(false);
             perkOpen = true;
+
             Time.timeScale = 0;
         }
         else

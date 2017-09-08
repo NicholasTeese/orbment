@@ -221,7 +221,7 @@ public class Player : Entity
 						//End of Johns Code
                         if (m_camera != null)
                         {
-                            m_camera.Shake(5.0f, m_playerFiringInterval);
+                            m_camera.Shake(2.5f, m_playerFiringInterval);
                         }
                     }
                     m_manaPool.m_currentMana -= m_shootManaCost;

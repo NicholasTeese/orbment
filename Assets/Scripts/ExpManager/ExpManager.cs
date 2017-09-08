@@ -47,7 +47,7 @@ public class ExpManager : MonoBehaviour
             LevelUp();
         }
 
-        if (GameManager.m_GameManager.inRange)
+        if (GameManager.m_GameManager.inRange && !GameManager.m_GameManager.perkOpen)
         {
             if (PerkTreeManager.m_perkTreeManager.AvailiablePerks == 0)
             {
