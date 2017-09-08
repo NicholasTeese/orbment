@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5b529fdfe34fbde4b9b3292fdaa6241a
+guid: c668c47bd10b51745b67443a6321478f
 timeCreated: 1504837310
 licenseType: Pro
 ModelImporter:
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: ice_staff
+    4300000: basic_staff
     9500000: //RootNode
   materials:
     importMaterials: 1
