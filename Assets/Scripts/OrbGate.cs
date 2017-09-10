@@ -68,19 +68,6 @@ public class OrbGate : MonoBehaviour
         if (m_isOpen)
         {
             return;
-            //    m_holdTimer += Time.deltaTime;
-            //    if (m_holdTimer >= m_holdDuration)
-            //    {
-            //        if (m_orbSpendTimer == 0.0f)
-            //        {
-
-            //        }
-            //        m_orbSpendTimer += Time.deltaTime;
-            //        if (m_orbSpendTimer >= m_orbSpendRate)
-            //        {
-            //            m_orbSpendTimer = 0.0f;
-            //        }
-            //    }
         }
         else if (m_Player.m_orbsCollected > 0) //>= m_numOfOrbsForOpen)
         {
@@ -118,9 +105,7 @@ public class OrbGate : MonoBehaviour
         {
             m_Player.m_orbsCollected -= a_num;
             m_Player.EmitSpentOrb(a_num);
-            m_reduction = m_fDivisionRate * m_currNumOrbsInvested; //1.0f - ((float)m_currNumOrbsInvested / (float)m_numOfOrbsForOpen);
-//            m_lockScale = 1.0f - ((float)m_currNumOrbsInvested / (float)m_numOfOrbsForOpen);
-//            Vector3 m_targetScale = new Vector3(m_lockScale * m_origScale, m_lockScale * m_origScale, m_visualLock.transform.localScale.z);
+            m_reduction = m_fDivisionRate * m_currNumOrbsInvested;
             Vector3 m_targetScale = new Vector3(m_origScale - m_reduction, m_origScale - m_reduction, m_visualLock.transform.localScale.z);
             m_visualLock.transform.localScale = m_targetScale;
         }
