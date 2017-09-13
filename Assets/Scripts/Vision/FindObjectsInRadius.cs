@@ -98,10 +98,10 @@ public class FindObjectsInRadius : MonoBehaviour
         Vector3 leftLine = Quaternion.Euler(this.transform.up * m_sightAngle) * this.transform.forward;
         Vector3 rightLine = Quaternion.Euler(this.transform.up * -m_sightAngle) * this.transform.forward;
 
-        //Gizmos.color = Color.red;
-        //Gizmos.DrawWireSphere(this.transform.position, m_sightRadius);
-        //Gizmos.color = Color.red;
-        //Gizmos.DrawLine(this.transform.position, this.transform.position + leftLine * m_sightRadius);
-        //Gizmos.DrawLine(this.transform.position, this.transform.position + rightLine * m_sightRadius);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(this.transform.position, m_sightRadius);
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(this.transform.position, this.transform.position + leftLine * m_sightRadius);
+        Gizmos.DrawLine(this.transform.position, this.transform.position + rightLine * m_sightRadius);
     }
 }
