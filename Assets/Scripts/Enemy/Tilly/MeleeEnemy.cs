@@ -70,17 +70,21 @@ public class MeleeEnemy : MonoBehaviour
                         m_eBehaviour = Behaviour.WANDERING;
                     }
 
-                    this.transform.LookAt(m_foir.m_target);
-
-                    m_fPrepareChargeTime -= Time.deltaTime;
-
-                    if (m_fPrepareChargeTime <= 0.0f)
+                    if (m_foir.m_target != null)
                     {
-                        m_v3ChargeTarget = new Vector3(m_target.transform.position.x, transform.position.y, m_target.transform.position.z);
-                        m_navMeshAgent.enabled = false;
-                        m_fPrepareChargeTime = 2.0f;
-                        m_eBehaviour = Behaviour.CHARGING;
-                        break;
+    
+                        this.transform.LookAt(m_foir.m_target);
+    
+                        m_fPrepareChargeTime -= Time.deltaTime;
+    
+                        if (m_fPrepareChargeTime <= 0.0f)
+                        {
+                            m_v3ChargeTarget = new Vector3(m_target.transform.position.x, transform.position.y, m_target.transform.position.z);
+                            m_navMeshAgent.enabled = false;
+                            m_fPrepareChargeTime = 2.0f;
+                            m_eBehaviour = Behaviour.CHARGING;
+                            break;
+                        }
                     }
                     break;
                 }
@@ -149,7 +153,7 @@ public class MeleeEnemy : MonoBehaviour
 
             if (m_bulletScript != null && m_bulletScript.m_id == "Player")
             {
-                m_navMeshAgent.SetDestination(collision.collider.transform.position - m_bulletScript.m_direction);
+                //m_navMeshAgent.SetDestination(collision.collider.transform.position - m_bulletScript.m_direction);
                 m_navMeshAgent.transform.LookAt(collision.collider.transform.position - m_bulletScript.m_direction);
             }
         }
