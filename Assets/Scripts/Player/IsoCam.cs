@@ -23,7 +23,7 @@ public class IsoCam : MonoBehaviour
     private bool m_shake = false;
     private float m_shakeTimer = 0.0f;
     private float m_shakeDuration = 0.0f;
-    private float m_shakeAmount = 0.0f;
+    public float m_shakeAmount = 0.0f;
 
 
     private bool m_flashingRed = false;

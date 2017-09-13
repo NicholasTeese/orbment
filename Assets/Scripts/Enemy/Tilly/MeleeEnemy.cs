@@ -41,45 +41,48 @@ public class MeleeEnemy : MonoBehaviour
     private void Update()
     {
         //Debug.Log(m_eBehaviour);
-
+        Vector3 V_targetOffset = new Vector3(m_target.transform.position.x, transform.position.y, m_target.transform.position.z);
         switch (m_eBehaviour)
         {
             case Behaviour.WANDERING:
                 {
+                    // Choose point to wander to
+                    if (Vector3.Distance(transform.position, m_navMeshAgent.destination) <= 1.0f)
+                    {
+                        m_navMeshAgent.destination = GetWanderPosition(transform.position);
+                    }
+                    // If enemy detects player
                     if (m_foir.m_target != null)
                     {
                         if (Vector3.Distance(transform.position, m_target.transform.position) <= 15.0f)
                         {
+                            // set behaviour to prepare charge
                             m_eBehaviour = Behaviour.PREPARING;
                             break;
                         }
-                    }
-                    if (Vector3.Distance(transform.position, m_navMeshAgent.destination) <= 1.0f)
-                    {
-                        m_navMeshAgent.destination = GetWanderPosition(transform.position);
                     }
                     break;
                 }
 
             case Behaviour.PREPARING:
                 {
+                    // cease wander
                     m_navMeshAgent.destination = transform.position;
+                    // If player retreats far enough away before enemy charges, return to wander
                     if (Vector3.Distance(transform.position, m_target.transform.position) > 15.0f)
                     {
                         m_fPrepareChargeTime = 2.0f;
                         m_eBehaviour = Behaviour.WANDERING;
                     }
 
+                    m_fPrepareChargeTime -= Time.deltaTime;
+
                     if (m_foir.m_target != null)
-                    {
-    
-                        this.transform.LookAt(m_foir.m_target);
-    
-                        m_fPrepareChargeTime -= Time.deltaTime;
-    
+                    {    
+                        this.transform.LookAt(V_targetOffset);//(m_foir.m_target);
                         if (m_fPrepareChargeTime <= 0.0f)
                         {
-                            m_v3ChargeTarget = new Vector3(m_target.transform.position.x, transform.position.y, m_target.transform.position.z);
+                            m_v3ChargeTarget = V_targetOffset;//new Vector3(m_target.transform.position.x, transform.position.y, m_target.transform.position.z);
                             m_navMeshAgent.enabled = false;
                             m_fPrepareChargeTime = 2.0f;
                             m_eBehaviour = Behaviour.CHARGING;
