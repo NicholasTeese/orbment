@@ -41,7 +41,11 @@ public class MeleeEnemy : MonoBehaviour
     private void Update()
     {
         //Debug.Log(m_eBehaviour);
+        Debug.Log(m_foir.inSight);
+        //Debug.Log(m_foir.m_target);
+
         Vector3 V_targetOffset = new Vector3(m_target.transform.position.x, transform.position.y, m_target.transform.position.z);
+
         switch (m_eBehaviour)
         {
             case Behaviour.WANDERING:
@@ -89,6 +93,11 @@ public class MeleeEnemy : MonoBehaviour
                             break;
                         }
                     }
+//                    else
+//                    {
+//                        m_fPrepareChargeTime = 2.0f;
+//                        m_eBehaviour = Behaviour.WANDERING;
+//                    }
                     break;
                 }
 

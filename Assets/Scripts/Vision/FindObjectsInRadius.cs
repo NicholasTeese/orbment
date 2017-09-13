@@ -73,7 +73,6 @@ public class FindObjectsInRadius : MonoBehaviour
             }
         }
         
-
         if(m_target != null)
         {
             float distance = Vector3.Distance(this.transform.position, m_target.position);
@@ -100,8 +99,8 @@ public class FindObjectsInRadius : MonoBehaviour
 
         //Gizmos.color = Color.red;
         //Gizmos.DrawWireSphere(this.transform.position, m_sightRadius);
-        //Gizmos.color = Color.red;
-        //Gizmos.DrawLine(this.transform.position, this.transform.position + leftLine * m_sightRadius);
-        //Gizmos.DrawLine(this.transform.position, this.transform.position + rightLine * m_sightRadius);
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(this.transform.position, this.transform.position + leftLine * m_sightRadius);
+        Gizmos.DrawLine(this.transform.position, this.transform.position + rightLine * m_sightRadius);
     }
 }
