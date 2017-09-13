@@ -40,8 +40,8 @@ public class MeleeEnemy : MonoBehaviour
 
     private void Update()
     {
-        //Debug.Log(m_eBehaviour);
-        Debug.Log(m_foir.inSight);
+        Debug.Log(m_eBehaviour);
+        //Debug.Log(m_foir.inSight);
         //Debug.Log(m_foir.m_target);
 
         Vector3 V_targetOffset = new Vector3(m_target.transform.position.x, transform.position.y, m_target.transform.position.z);
@@ -81,9 +81,7 @@ public class MeleeEnemy : MonoBehaviour
 
                     m_fPrepareChargeTime -= Time.deltaTime;
 
-                    if (m_foir.m_target != null)
-                    {    
-                        this.transform.LookAt(V_targetOffset);//(m_foir.m_target);
+                        this.transform.LookAt(V_targetOffset);
                         if (m_fPrepareChargeTime <= 0.0f)
                         {
                             m_v3ChargeTarget = V_targetOffset;//new Vector3(m_target.transform.position.x, transform.position.y, m_target.transform.position.z);
@@ -92,12 +90,7 @@ public class MeleeEnemy : MonoBehaviour
                             m_eBehaviour = Behaviour.CHARGING;
                             break;
                         }
-                    }
-//                    else
-//                    {
-//                        m_fPrepareChargeTime = 2.0f;
-//                        m_eBehaviour = Behaviour.WANDERING;
-//                    }
+
                     break;
                 }
 
@@ -109,7 +102,15 @@ public class MeleeEnemy : MonoBehaviour
                         break;
                     }
 
-                    transform.position = Vector3.MoveTowards(transform.position, m_v3ChargeTarget, (m_fChargeSpeed * Time.deltaTime));
+                    if (m_foir.m_target != null)
+                    {
+                        transform.position = Vector3.MoveTowards(transform.position, m_v3ChargeTarget, (m_fChargeSpeed * Time.deltaTime));
+                    }
+                    else
+                    {
+                        m_eBehaviour = Behaviour.RECOVERING;
+                        break;
+                    }
                     
                     break;
                 }
