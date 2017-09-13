@@ -193,7 +193,6 @@ public class Entity : MonoBehaviour
 
         if (m_currHealth <= 0)
         {
-
             if (!m_bGodModeIsActive)
             {
                 m_explosionManager.RequestExplosion(this.transform.position, this.transform.forward, Explosion.ExplosionType.BigBlood, 0.0f);

@@ -42,9 +42,9 @@ public class BomberEnemy : Enemy
         m_hidingSpots = HidingSpotManager.m_hidingSpotManager.HidingSpots;
     }
 
-    private void Update()
+    private new void Update()
     {
-        Debug.Log(m_eBehaviour);
+        base.Update();
         CheckBehaviour();
         PerformBehavior();
     }
