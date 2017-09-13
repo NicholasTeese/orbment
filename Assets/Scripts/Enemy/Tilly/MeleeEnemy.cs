@@ -43,7 +43,9 @@ public class MeleeEnemy : Enemy
         //Debug.Log(m_eBehaviour);
         //Debug.Log(m_foir.inSight);
         //Debug.Log(m_foir.m_target);
+
         base.Update();
+
         Vector3 V_targetOffset = new Vector3(m_target.transform.position.x, transform.position.y, m_target.transform.position.z);
 
         switch (m_eBehaviour)
@@ -167,7 +169,7 @@ public class MeleeEnemy : Enemy
             if (m_bulletScript != null && m_bulletScript.m_id == "Player")
             {
                 //m_navMeshAgent.SetDestination(collision.collider.transform.position - m_bulletScript.m_direction);
-                m_navMeshAgent.transform.LookAt(collision.collider.transform.position - m_bulletScript.m_direction);
+                //m_navMeshAgent.transform.LookAt(collision.collider.transform.position - m_bulletScript.m_direction);
             }
         }
         if (collision.collider.CompareTag("Player"))
