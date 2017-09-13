@@ -26,7 +26,7 @@ public class Enemy : Entity
             }
         }
         base.Update();
-        // kill code for easy debugging
+        // kill code for debugging
         if (Input.GetKey(KeyCode.E) && Input.GetKey(KeyCode.Equals) && Input.GetKey(KeyCode.Alpha0))
             this.m_currHealth = 0;
     }
