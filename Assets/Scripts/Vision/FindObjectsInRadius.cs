@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class FindObjectsInRadius : MonoBehaviour
 {
-
     public string m_targetTag;
     public float m_sightRadius = 20;
     public float m_sightAngle = 45;
@@ -30,21 +29,15 @@ public class FindObjectsInRadius : MonoBehaviour
     {
         insideSphere = Physics.OverlapSphere(this.transform.position, m_sightRadius);
 
-
         if (m_targetTag == "")
         {
             return;
         }
 
-  
-
-
         foreach (Collider col in insideSphere)
         {
             if (col.CompareTag(m_targetTag))
             {
-
-
                 direction = col.transform.position - this.transform.position;
                 direction.y = 0;
                 direction.Normalize();
@@ -58,44 +51,28 @@ public class FindObjectsInRadius : MonoBehaviour
                         if (hit.collider.CompareTag(m_targetTag))
                         {
                             inSight = true;
-
                             m_target = hit.collider.transform;
-
-                            
                         }
                         else
                         {
                             inSight = false;
-
                             m_target = null;
-                            
                         }
                     }
                     else
                     {
-
                         inSight = false;
                         m_target = null;
-                        
                     }
-
                 }
                 else
                 {
-
                     inSight = false;
                     m_target = null;
-                   
                 }
-
-
-
             }
-
         }
-
-
-
+        
 
         if(m_target != null)
         {
@@ -104,7 +81,6 @@ public class FindObjectsInRadius : MonoBehaviour
             if(distance <= m_attackRange)
             {
                 inRange = true;
-
             }
             else
             {
@@ -115,26 +91,17 @@ public class FindObjectsInRadius : MonoBehaviour
         {
             inRange = false;
         }
-
-
-
-
     }
 
     void OnDrawGizmos()
     {
-
         Vector3 leftLine = Quaternion.Euler(this.transform.up * m_sightAngle) * this.transform.forward;
         Vector3 rightLine = Quaternion.Euler(this.transform.up * -m_sightAngle) * this.transform.forward;
-
 
         //Gizmos.color = Color.red;
         //Gizmos.DrawWireSphere(this.transform.position, m_sightRadius);
         //Gizmos.color = Color.red;
         //Gizmos.DrawLine(this.transform.position, this.transform.position + leftLine * m_sightRadius);
         //Gizmos.DrawLine(this.transform.position, this.transform.position + rightLine * m_sightRadius);
-
-
     }
-
 }

@@ -15,6 +15,7 @@ ModelImporter:
     100014: imagePlane2
     100016: shirt
     100018: sleeve
+    100020: ear
     400000: backpack
     400002: belt
     400004: body
@@ -25,6 +26,7 @@ ModelImporter:
     400014: imagePlane2
     400016: shirt
     400018: sleeve
+    400020: ear
     2300000: backpack
     2300002: belt
     2300004: body
@@ -32,6 +34,7 @@ ModelImporter:
     2300008: hair
     2300010: shirt
     2300012: sleeve
+    2300014: ear
     3300000: backpack
     3300002: belt
     3300004: body
@@ -39,6 +42,7 @@ ModelImporter:
     3300008: hair
     3300010: shirt
     3300012: sleeve
+    3300014: ear
     4300000: body
     4300002: sleeve
     4300004: shirt
@@ -46,6 +50,7 @@ ModelImporter:
     4300008: belt
     4300010: face
     4300012: hair
+    4300014: ear
     9500000: //RootNode
   materials:
     importMaterials: 1

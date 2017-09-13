@@ -31,7 +31,7 @@ public class BreakOnImpactWith : MonoBehaviour
 
 			m_chunkModel.SetActive (true);
 
-			m_entranceVector = GameObject.Find ("Player").GetComponent<Player> ().m_dashDirection;
+//			m_entranceVector = GameObject.Find ("Player").GetComponent<Player> ().m_dashDirection;
 			m_isBroken = true;
 			audiosrc.pitch = 1 + Random.Range (-0.4f, 0.3f);
 		}

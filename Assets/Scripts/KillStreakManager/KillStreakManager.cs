@@ -48,7 +48,7 @@ public class KillStreakManager : MonoBehaviour
             if (m_killStreak >= 5)
             {
                 Player.m_Player.m_currHealth += (Player.m_Player.m_maxHealth * 0.10f);
-                Debug.Log(Player.m_Player.m_currHealth);
+//                Debug.Log(Player.m_Player.m_currHealth);
             }
 
             if (m_killStreak >= 10)

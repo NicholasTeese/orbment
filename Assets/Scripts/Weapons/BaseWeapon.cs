@@ -19,6 +19,12 @@ public class BaseWeapon : MonoBehaviour
     protected List<GameObject> m_projectilePool = new List<GameObject>();
     protected List<Bullet> m_projectileScripts = new List<Bullet>();
 
+    public GameObject m_SBasic;
+    public GameObject m_SLighting;
+    public GameObject m_SFire;
+    public GameObject m_SIce;
+
+
     protected List<Bullet> m_activePool = new List<Bullet>();
 
 
@@ -26,6 +32,13 @@ public class BaseWeapon : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        //m_SBasic = GameObject.Find("Basic_Staff");
+        //m_SLighting = GameObject.Find("Lightning_Staff");
+        //m_SFire = GameObject.Find("Fire_Staff");
+        //m_SIce = GameObject.Find("Ice_Staff");
+
+        //if (m_SBasic != null)
+        //    m_SBasic.SetActive(true);
 
         //object pooling
         if (m_projectile != null)
@@ -42,6 +55,53 @@ public class BaseWeapon : MonoBehaviour
                     projectileScript.m_weaponFiredFrom = this;
                     projectileScript.m_id = m_id;
                     m_projectileScripts.Add(projectileScript);
+                }
+                if(m_id == "Player")
+                {
+                    switch (m_projectileScripts[0].m_type)
+                    {
+                        case Bullet.ProjectileType.Normal:
+                            {
+                                m_SBasic.SetActive(true);
+                                m_SLighting.SetActive(false);
+                                m_SFire.SetActive(false);
+                                m_SIce.SetActive(false);
+
+                                break;
+                            }
+                        case Bullet.ProjectileType.Lightning:
+                            {
+                                m_SBasic.SetActive(false);
+                                m_SLighting.SetActive(true);
+                                m_SFire.SetActive(false);
+                                m_SIce.SetActive(false);
+
+                                break;
+                            }
+                        case Bullet.ProjectileType.FireBall:
+                            {
+                                m_SBasic.SetActive(false);
+                                m_SLighting.SetActive(false);
+                                m_SFire.SetActive(true);
+                                m_SIce.SetActive(false);
+
+                                break;
+                            }
+                        case Bullet.ProjectileType.IceShard:
+                            {
+                                m_SBasic.SetActive(false);
+                                m_SLighting.SetActive(false);
+                                m_SFire.SetActive(false);
+                                m_SIce.SetActive(true);
+
+                                break;
+                            }
+                        default:
+                            {
+                                Debug.Log("Projectile type could not be found. " + m_projectileScripts[0].m_type);
+                                break;
+                            }
+                    }
                 }
             }
         }
@@ -92,6 +152,9 @@ public class BaseWeapon : MonoBehaviour
 
     public void SetProjectile(GameObject a_projectile)
     {
+//        Debug.Log("m = " + m_projectile);
+//        Debug.Log("a = " + a_projectile);
+
         //clear pool
         m_projectilePool.Clear();
         m_projectileScripts.Clear();
@@ -100,5 +163,5 @@ public class BaseWeapon : MonoBehaviour
         m_projectile = a_projectile;
 
         Start();
+        }
     }
-}
