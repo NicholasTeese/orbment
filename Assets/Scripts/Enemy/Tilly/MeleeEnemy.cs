@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class MeleeEnemy : MonoBehaviour
+public class MeleeEnemy : Enemy
 {
     public enum Behaviour
     {
@@ -38,12 +38,12 @@ public class MeleeEnemy : MonoBehaviour
         m_navMeshAgent.speed = m_fMoveSpeed;
     }
 
-    private void Update()
+    new private void Update()
     {
-        Debug.Log(m_eBehaviour);
+        //Debug.Log(m_eBehaviour);
         //Debug.Log(m_foir.inSight);
         //Debug.Log(m_foir.m_target);
-
+        base.Update();
         Vector3 V_targetOffset = new Vector3(m_target.transform.position.x, transform.position.y, m_target.transform.position.z);
 
         switch (m_eBehaviour)
