@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class BomberEnemy : MonoBehaviour
+public class BomberEnemy : Enemy
 {
     public enum Behaviour
     {
@@ -15,8 +15,8 @@ public class BomberEnemy : MonoBehaviour
 
     private float m_fHealth = 50.0f;
     private float m_fWanderSpeed = 3.5f;
-    private float m_fRetreatSpeed = 50.0f;
-    private float m_fViewDistance = 10.0f;
+    private float m_fRetreatSpeed = 10.0f;
+    private float m_fHideTime = 10.0f;
 
     private Behaviour m_eBehaviour = Behaviour.WANDERING;
 
@@ -30,13 +30,16 @@ public class BomberEnemy : MonoBehaviour
 
     private void Awake()
     {
-        m_hidingSpots = HidingSpotManager.m_hidingSpotManager.HidingSpots;
-
         m_navMeshAgent = GetComponent<NavMeshAgent>();
         m_navMeshAgent.destination = GetWanderPosition(transform.position);
         m_navMeshAgent.speed = m_fWanderSpeed;
 
         m_findOBjectsInRadius = GetComponent<FindObjectsInRadius>();
+    }
+
+    private void Start()
+    {
+        m_hidingSpots = HidingSpotManager.m_hidingSpotManager.HidingSpots;
     }
 
     private void Update()
@@ -73,7 +76,7 @@ public class BomberEnemy : MonoBehaviour
             m_eBehaviour = Behaviour.RETREATING;
         }
 
-        if (Vector3.Distance(transform.position, m_v3RetreatPosition) <= 1.0f)
+        if (Vector3.Distance(transform.position, m_v3RetreatPosition) <= 3.0f && m_eBehaviour == Behaviour.RETREATING)
         {
             m_navMeshAgent.speed = m_fWanderSpeed;
             m_eBehaviour = Behaviour.HIDING;
@@ -101,13 +104,19 @@ public class BomberEnemy : MonoBehaviour
 
             case Behaviour.HIDING:
                 {
+                    m_fHideTime -= Time.deltaTime;
 
+                    if (m_fHideTime <= 0.0f)
+                    {
+                        m_fHideTime = 10.0f;
+                        m_eBehaviour = Behaviour.WANDERING;
+                    }
                     break;
                 }
 
             case Behaviour.DEAD:
                 {
-
+                    Destroy(GetComponent<BomberEnemy>());
                     break;
                 }
 

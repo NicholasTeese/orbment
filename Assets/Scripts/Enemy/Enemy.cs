@@ -8,7 +8,9 @@ public class Enemy : Entity
     {
         Hunter,
         Defender,
-        Protector
+        Protector,
+        MELEE,
+        BOMBER
     }
 
     public EnemyType m_type;
