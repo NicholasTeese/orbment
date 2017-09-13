@@ -261,7 +261,7 @@ public class Player : Entity
     void FixedUpdate()
     {
         //mouse aiming
-        if (InputManager.SecondaryInputHold() == Vector3.zero)
+        if (InputManager.SecondaryInput() == Vector3.zero)
         {
             RaycastHit hit;
             float rayLength = 1000;
@@ -278,11 +278,11 @@ public class Player : Entity
             }
         }
 
-        if (InputManager.SecondaryInputHold() != Vector3.zero)
+        if (InputManager.SecondaryInput() != Vector3.zero)
         {
             Debug.Log("Joy");
             Vector3 playerTojoy = Vector3.zero;
-            playerTojoy = InputManager.SecondaryInputHold();
+            playerTojoy = InputManager.SecondaryInput();
             Quaternion newRotation = Quaternion.LookRotation(playerTojoy);
             transform.rotation = newRotation;
         }

@@ -41,7 +41,7 @@ public class PerkTreeManager : MonoBehaviour
             m_selectedPerk.OnClick();
         }
 
-        Vector3 v3PrimaryInputDirection = InputManager.PrimaryInputHold();
+        Vector3 v3PrimaryInputDirection = InputManager.PrimaryInput();
 
         // Forward.
         if (v3PrimaryInputDirection.z >= m_fInputBuffer)

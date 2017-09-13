@@ -10,7 +10,7 @@ public class ControllerInputTest : MonoBehaviour
 
 	private void Update ()
     {
-        Vector3 v3PrimaryInputDirection = InputManager.PrimaryInputHold();
+        Vector3 v3PrimaryInputDirection = InputManager.PrimaryInput();
 
         if (v3PrimaryInputDirection.z >= m_fInputBuffer)
         {
@@ -19,7 +19,7 @@ public class ControllerInputTest : MonoBehaviour
                 if (!m_bIsPressed)
                 {
                     m_bIsPressed = true;
-                    v3PrimaryInputDirection = InputManager.PrimaryInputHold();
+                    v3PrimaryInputDirection = InputManager.PrimaryInput();
                 }
             }
             else if (v3PrimaryInputDirection.x >= m_fInputBuffer)
@@ -27,7 +27,7 @@ public class ControllerInputTest : MonoBehaviour
                 if (!m_bIsPressed)
                 {
                     m_bIsPressed = true;
-                    v3PrimaryInputDirection = InputManager.PrimaryInputHold();
+                    v3PrimaryInputDirection = InputManager.PrimaryInput();
                 }
             }
         }
@@ -38,7 +38,7 @@ public class ControllerInputTest : MonoBehaviour
                 if (!m_bIsPressed)
                 {
                     m_bIsPressed = true;
-                    v3PrimaryInputDirection = InputManager.PrimaryInputHold();
+                    v3PrimaryInputDirection = InputManager.PrimaryInput();
                 }
             }
             else if (v3PrimaryInputDirection.x >= m_fInputBuffer)
@@ -46,7 +46,7 @@ public class ControllerInputTest : MonoBehaviour
                 if (!m_bIsPressed)
                 {
                     m_bIsPressed = true;
-                    v3PrimaryInputDirection = InputManager.PrimaryInputHold();
+                    v3PrimaryInputDirection = InputManager.PrimaryInput();
                 }
             }
         }
