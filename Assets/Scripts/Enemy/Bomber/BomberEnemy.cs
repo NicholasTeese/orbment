@@ -13,7 +13,6 @@ public class BomberEnemy : Enemy
         DEAD
     }
 
-    private float m_fHealth = 50.0f;
     private float m_fWanderSpeed = 3.5f;
     private float m_fRetreatSpeed = 10.0f;
     private float m_fHideTime = 10.0f;
@@ -37,8 +36,9 @@ public class BomberEnemy : Enemy
         m_findOBjectsInRadius = GetComponent<FindObjectsInRadius>();
     }
 
-    private void Start()
+    private new void Start()
     {
+        base.Start();
         m_hidingSpots = HidingSpotManager.m_hidingSpotManager.HidingSpots;
     }
 
@@ -51,9 +51,12 @@ public class BomberEnemy : Enemy
 
     private void CheckBehaviour()
     {
-        if (m_fHealth <= 0.0f)
+        if (m_currHealth <= 0.0f && m_eBehaviour != Behaviour.DEAD)
         {
             m_eBehaviour = Behaviour.DEAD;
+            GameObject bomb = Instantiate(Resources.Load("Prefabs/Enemies/Bomber/Bomb") as GameObject);
+            bomb.transform.position = transform.position;
+            bomb.transform.SetParent(BombManager.m_bombManager.transform);
             return;
         }
 
@@ -98,7 +101,7 @@ public class BomberEnemy : Enemy
 
             case Behaviour.RETREATING:
                 {
-                    m_navMeshAgent.destination = m_v3RetreatPosition;
+                    m_navMeshAgent.SetDestination(m_v3RetreatPosition);
                     break;
                 }
 
@@ -116,7 +119,6 @@ public class BomberEnemy : Enemy
 
             case Behaviour.DEAD:
                 {
-                    Destroy(GetComponent<BomberEnemy>());
                     break;
                 }
 

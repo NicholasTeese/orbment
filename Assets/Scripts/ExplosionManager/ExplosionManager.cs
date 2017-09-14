@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ExplosionManager : MonoBehaviour
 {
+    public static ExplosionManager m_explosionManager;
+
     /// <summary>
     /// Object pooled explosions
     /// </summary>
@@ -28,6 +30,18 @@ public class ExplosionManager : MonoBehaviour
 
 
     public int m_poolAmount = 20;//amount of each type of explosion
+
+    private void Awake()
+    {
+        if (m_explosionManager == null)
+        {
+            m_explosionManager = this;
+        }
+        else if (m_explosionManager != this)
+        {
+            Destroy(m_explosionManager);
+        }
+    }
 
     // Use this for initialization
     void Start()
