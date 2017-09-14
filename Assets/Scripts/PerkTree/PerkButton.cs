@@ -89,6 +89,11 @@ public class PerkButton : MonoBehaviour
     /// <param name="a_strPerkDescription"></param>
     public void OnCursorEnter(string a_strPerkDescription)
     {
+        if (m_perkUpgradeConfirmation.activeSelf)
+        {
+            return;
+        }
+
         m_bIsCursorOver = true;
         PerkTreeManager.m_perkTreeManager.m_selectedPerkButton.IsHighlighted = false;
         PerkTreeManager.m_perkTreeManager.m_selectedPerkButton = GetComponent<PerkButton>();
