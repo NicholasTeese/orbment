@@ -117,11 +117,10 @@ public class Player : Entity
             Destroy(gameObject);
         }
 
-        int L_P = LayerMask.NameToLayer("Player");
-        int L_O = LayerMask.NameToLayer("Collectable");
-        Debug.Log("Player Layer: " + L_P);
-        Debug.Log("Orb Layer: " + L_O);
-
+        //int L_P = LayerMask.NameToLayer("Player");
+        //int L_O = LayerMask.NameToLayer("Collectable");
+        //Debug.Log("Player Layer: " + L_P);
+        //Debug.Log("Orb Layer: " + L_O);
         //Physics.IgnoreLayerCollision(L_O, L_P);
     }
 
@@ -396,13 +395,13 @@ public class Player : Entity
             return;
         }
         
-        if(body != null)
-        {
-            if(body.GetComponent<MeleeEnemy>().m_type == Enemy.EnemyType.MELEE)
-            {
-                Debug.Log("Collide");
-                m_bImpacted = true;
-            }
-        }
+        //if(body != null)
+        //{
+        //    if(body.GetComponent<MeleeEnemy>().m_type == Enemy.EnemyType.MELEE)
+        //    {
+        //        //Debug.Log("Collide");
+        //        m_bImpacted = true;
+        //    }
+        //}
     }
 }

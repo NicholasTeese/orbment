@@ -40,7 +40,7 @@ public class MeleeEnemy : Enemy
 
     new private void Update()
     {
-        //Debug.Log(m_eBehaviour);
+        Debug.Log(m_eBehaviour);
         //Debug.Log(m_foir.inSight);
         //Debug.Log(m_foir.m_target);
 
@@ -170,7 +170,9 @@ public class MeleeEnemy : Enemy
         {
             if (Player.m_Player.m_iImpactTimer == 0)
             {
+                //Debug.Log("Impacted");
                 Player.m_Player.m_currHealth -= (int)DamagePercent;
+                //m_explosionManager.RequestExplosion(transform.position, m_v3ChargeTarget, Explosion.ExplosionType.SmallBlood, 0.0f);
             }
             Player.m_Player.m_iImpactTimer += (Time.deltaTime * 2);
             if (Player.m_Player.m_iImpactTimer > 2)
@@ -189,10 +191,30 @@ public class MeleeEnemy : Enemy
 
             if (m_bulletScript != null && m_bulletScript.m_id == "Player")
             {
-                //m_navMeshAgent.SetDestination(collision.collider.transform.position - m_bulletScript.m_direction);
+                m_navMeshAgent.SetDestination(collision.collider.transform.position - m_bulletScript.m_direction);
                 //m_navMeshAgent.transform.LookAt(collision.collider.transform.position - m_bulletScript.m_direction);
             }
         }
+        if (collision.collider.CompareTag("Player"))
+        {
+            Debug.Log("PlayerHit");
+            Player.m_Player.m_bImpacted = true;
+        }
+        Entity Target = null;
+
+        Target = collision.collider.GetComponent<Entity>();
+        if (Target != null)
+            Debug.Log(Target.name);
+    }
+
+    void OnCollisionStay(Collision collision)
+    {
+        if (collision.collider.CompareTag("Player"))
+        {
+            Debug.Log("PlayerHit");
+            Player.m_Player.m_bImpacted = true;
+        }
+
     }
 
     private Vector3 GetWanderPosition(Vector3 a_v3CurrentPosition)
