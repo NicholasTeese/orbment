@@ -39,7 +39,10 @@ public class Enemy : Entity
 
             if (m_bulletScript != null && m_bulletScript.m_id == "Player")
             {
-                m_agent.SetDestination(collision.collider.transform.position - m_bulletScript.m_direction); // Travel to bullet origin
+                if (m_type != EnemyType.BOMBER)
+                {
+                    m_agent.SetDestination(collision.collider.transform.position - m_bulletScript.m_direction); // Travel to bullet origin
+                }
                 //m_agent.transform.LookAt(collision.collider.transform.position - m_bulletScript.m_direction); // Look at bullet origin
             }
         }        
@@ -47,7 +50,7 @@ public class Enemy : Entity
 
     new private void OnGUI()
     {
-        if (gameManager.perkOpen || gameManager.paused)
+        if (GameManager.m_GameManager.perkOpen || GameManager.m_GameManager.paused)
         {
             return;
         }
