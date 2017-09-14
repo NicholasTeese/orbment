@@ -7,11 +7,21 @@ public class PerkTreeManager : MonoBehaviour
     private uint m_uiAvailiablePerks = 0;
     public uint AvailiablePerks { get { return m_uiAvailiablePerks; } }
 
+    private int m_iPerkTreeIndex = 1;
+
     private float m_fInputBuffer = 0.2f;
 
     private bool m_bIsPressed = false;
+    private bool m_bPerkTreeIsSelected = false;
 
-    public PerkButton m_selectedPerk;
+    [Header("Perk Trees")]
+    public List<PerkTreeButton> m_perkTrees = new List<PerkTreeButton>();
+
+    [Header("Selected Perk Tree")]
+    public PerkTreeButton m_selectedPerkTreeButton;
+
+    [Header("Selected Perk Button")]
+    public PerkButton m_selectedPerkButton;
 
     [HideInInspector]
     public Player m_player;
@@ -20,7 +30,8 @@ public class PerkTreeManager : MonoBehaviour
 
     private void Awake()
     {
-        m_selectedPerk.IsHighLighted = true;
+        m_selectedPerkTreeButton.IsHighlighted = true;
+        m_selectedPerkButton.IsHighlighted = true;
 
         m_player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 
@@ -38,21 +49,94 @@ public class PerkTreeManager : MonoBehaviour
     {
         if (InputManager.AButton())
         {
-            m_selectedPerk.OnClick();
+            if (!m_bPerkTreeIsSelected)
+            {
+                m_bPerkTreeIsSelected = true;
+                m_selectedPerkButton.IsHighlighted = true;
+                m_selectedPerkTreeButton.OnClick();
+            }
+            else
+            {
+                if (m_selectedPerkButton.IsHighlighted)
+                {
+                    m_selectedPerkButton.OnClick();
+                }
+                else
+                {
+                    m_bPerkTreeIsSelected = false;
+                    m_selectedPerkButton.m_backButton.GetComponent<PerkTreeBackButton>().IsHightlighted = false;
+                    m_selectedPerkButton.m_backButton.GetComponent<PerkTreeBackButton>().OnClick();
+                }
+            }
         }
 
+        if (!m_bPerkTreeIsSelected)
+        {
+            NaviagatePerkTrees();
+        }
+        else
+        {
+            NavigateSelectedPerkTree();
+        }
+    }
+
+    private void NaviagatePerkTrees()
+    {
+        Vector3 v3PrimaryInputDirection = InputManager.PrimaryInput();
+
+        // Right.
+        if (v3PrimaryInputDirection.x >= m_fInputBuffer)
+        {
+            if (!m_bIsPressed)
+            {
+                m_bIsPressed = true;
+                ++m_iPerkTreeIndex;
+                m_iPerkTreeIndex = Mathf.Clamp(m_iPerkTreeIndex, 0, 2);
+                m_selectedPerkTreeButton.IsHighlighted = false;
+                m_selectedPerkTreeButton = m_perkTrees[m_iPerkTreeIndex];
+                m_selectedPerkTreeButton.IsHighlighted = true;
+            }
+        }
+        // Left.
+        else if (v3PrimaryInputDirection.x <= -m_fInputBuffer)
+        {
+            if (!m_bIsPressed)
+            {
+                m_bIsPressed = true;
+                --m_iPerkTreeIndex;
+                m_iPerkTreeIndex = Mathf.Clamp(m_iPerkTreeIndex, 0, 2);
+                m_selectedPerkTreeButton.IsHighlighted = false;
+                m_selectedPerkTreeButton = m_perkTrees[m_iPerkTreeIndex];
+                m_selectedPerkTreeButton.IsHighlighted = true;
+            }
+        }
+        else
+        {
+            m_bIsPressed = false;
+        }
+    }
+
+    private void NavigateSelectedPerkTree()
+    {
         Vector3 v3PrimaryInputDirection = InputManager.PrimaryInput();
 
         // Forward.
         if (v3PrimaryInputDirection.z >= m_fInputBuffer)
         {
-            // If there is only one child perk, make it selected.
-            if (m_selectedPerk.m_childPerks.Count == 1 && !m_bIsPressed)
+            if (!m_selectedPerkButton.IsHighlighted)
             {
                 m_bIsPressed = true;
-                m_selectedPerk.IsHighLighted = false;
-                m_selectedPerk = m_selectedPerk.m_childPerks[0].GetComponent<PerkButton>();
-                m_selectedPerk.IsHighLighted = true;
+                m_selectedPerkButton.IsHighlighted = true;
+                m_selectedPerkButton.m_backButton.GetComponent<PerkTreeBackButton>().IsHightlighted = false;
+            }
+
+            // If there is only one child perk, make it selected.
+            if (m_selectedPerkButton.m_childPerks.Count == 1 && !m_bIsPressed)
+            {
+                m_bIsPressed = true;
+                m_selectedPerkButton.IsHighlighted = false;
+                m_selectedPerkButton = m_selectedPerkButton.m_childPerks[0].GetComponent<PerkButton>();
+                m_selectedPerkButton.IsHighlighted = true;
             }
 
             // Forward & Left.
@@ -60,19 +144,19 @@ public class PerkTreeManager : MonoBehaviour
             {
                 if (!m_bIsPressed)
                 {
-                    if (m_selectedPerk.m_childPerks[0].transform.position.x < m_selectedPerk.m_childPerks[1].transform.position.x)
+                    if (m_selectedPerkButton.m_childPerks[0].transform.position.x < m_selectedPerkButton.m_childPerks[1].transform.position.x)
                     {
                         m_bIsPressed = true;
-                        m_selectedPerk.IsHighLighted = false;
-                        m_selectedPerk = m_selectedPerk.m_childPerks[0].GetComponent<PerkButton>();
-                        m_selectedPerk.IsHighLighted = true;
+                        m_selectedPerkButton.IsHighlighted = false;
+                        m_selectedPerkButton = m_selectedPerkButton.m_childPerks[0].GetComponent<PerkButton>();
+                        m_selectedPerkButton.IsHighlighted = true;
                     }
                     else
                     {
                         m_bIsPressed = true;
-                        m_selectedPerk.IsHighLighted = false;
-                        m_selectedPerk = m_selectedPerk.m_childPerks[1].GetComponent<PerkButton>();
-                        m_selectedPerk.IsHighLighted = true;
+                        m_selectedPerkButton.IsHighlighted = false;
+                        m_selectedPerkButton = m_selectedPerkButton.m_childPerks[1].GetComponent<PerkButton>();
+                        m_selectedPerkButton.IsHighlighted = true;
                     }
                 }
             }
@@ -81,19 +165,19 @@ public class PerkTreeManager : MonoBehaviour
             {
                 if (!m_bIsPressed)
                 {
-                    if (m_selectedPerk.m_childPerks[0].transform.position.x > m_selectedPerk.m_childPerks[1].transform.position.x)
+                    if (m_selectedPerkButton.m_childPerks[0].transform.position.x > m_selectedPerkButton.m_childPerks[1].transform.position.x)
                     {
                         m_bIsPressed = true;
-                        m_selectedPerk.IsHighLighted = false;
-                        m_selectedPerk = m_selectedPerk.m_childPerks[0].GetComponent<PerkButton>();
-                        m_selectedPerk.IsHighLighted = true;
+                        m_selectedPerkButton.IsHighlighted = false;
+                        m_selectedPerkButton = m_selectedPerkButton.m_childPerks[0].GetComponent<PerkButton>();
+                        m_selectedPerkButton.IsHighlighted = true;
                     }
                     else
                     {
                         m_bIsPressed = true;
-                        m_selectedPerk.IsHighLighted = false;
-                        m_selectedPerk = m_selectedPerk.m_childPerks[1].GetComponent<PerkButton>();
-                        m_selectedPerk.IsHighLighted = true;
+                        m_selectedPerkButton.IsHighlighted = false;
+                        m_selectedPerkButton = m_selectedPerkButton.m_childPerks[1].GetComponent<PerkButton>();
+                        m_selectedPerkButton.IsHighlighted = true;
                     }
                 }
             }
@@ -101,73 +185,24 @@ public class PerkTreeManager : MonoBehaviour
         // Backward.
         else if (v3PrimaryInputDirection.z <= -m_fInputBuffer)
         {
-            if (m_selectedPerk.m_parentPerk != null && !m_bIsPressed)
+            if (m_selectedPerkButton.m_parentPerk != null && !m_bIsPressed)
             {
                 m_bIsPressed = true;
-                m_selectedPerk.IsHighLighted = false;
-                m_selectedPerk = m_selectedPerk.m_parentPerk.GetComponent<PerkButton>();
-                m_selectedPerk.IsHighLighted = true;
+                m_selectedPerkButton.IsHighlighted = false;
+                m_selectedPerkButton = m_selectedPerkButton.m_parentPerk.GetComponent<PerkButton>();
+                m_selectedPerkButton.IsHighlighted = true;
+            }
+            else if (m_selectedPerkButton.m_parentPerk == null && !m_bIsPressed)
+            {
+                m_bIsPressed = true;
+                m_selectedPerkButton.IsHighlighted = false;
+                m_selectedPerkButton.m_backButton.GetComponent<PerkTreeBackButton>().IsHightlighted = true;
             }
         }
         else
         {
             m_bIsPressed = false;
         }
-
-        //x if (InputManager.PrimaryInputDown() != Vector3.zero)
-        //x {
-        //x     if (InputManager.PrimaryInputHold().z > 0.5f)
-        //x     {
-        //x         if (m_selectedPerk.m_childPerks.Count == 0)
-        //x         {
-        //x             return;
-        //x         }
-        //x 
-        //x         if (m_selectedPerk.m_childPerks.Count == 1)
-        //x         {
-        //x             m_selectedPerk.IsHighLighted = false;
-        //x             m_selectedPerk = m_selectedPerk.m_childPerks[0].GetComponent<PerkButton>();
-        //x             m_selectedPerk.IsHighLighted = true;
-        //x         }
-        //x         else if (InputManager.PrimaryHorizontal() < 0.0f)
-        //x         {
-        //x             if (m_selectedPerk.m_childPerks[0].transform.position.x < m_selectedPerk.m_childPerks[1].transform.position.x)
-        //x             {
-        //x                 m_selectedPerk.IsHighLighted = false;
-        //x                 m_selectedPerk = m_selectedPerk.m_childPerks[0].GetComponent<PerkButton>();
-        //x                 m_selectedPerk.IsHighLighted = true;
-        //x             }
-        //x             else
-        //x             {
-        //x                 m_selectedPerk.IsHighLighted = false;
-        //x                 m_selectedPerk = m_selectedPerk.m_childPerks[1].GetComponent<PerkButton>();
-        //x                 m_selectedPerk.IsHighLighted = true;
-        //x             }
-        //x         }
-        //x         else
-        //x         {
-        //x             if (m_selectedPerk.m_childPerks[0].transform.position.x > m_selectedPerk.m_childPerks[1].transform.position.x)
-        //x             {
-        //x                 m_selectedPerk.IsHighLighted = false;
-        //x                 m_selectedPerk = m_selectedPerk.m_childPerks[0].GetComponent<PerkButton>();
-        //x                 m_selectedPerk.IsHighLighted = true;
-        //x             }
-        //x             else
-        //x             {
-        //x                 m_selectedPerk.IsHighLighted = false;
-        //x                 m_selectedPerk = m_selectedPerk.m_childPerks[1].GetComponent<PerkButton>();
-        //x                 m_selectedPerk.IsHighLighted = true;
-        //x             }
-        //x         }
-        //x     }
-        //x     else if (InputManager.PrimaryInputHold().z < 0.0f && m_selectedPerk.m_parentPerk != null)
-        //x     {
-        //x         m_selectedPerk.IsHighLighted = false;
-        //x         m_selectedPerk = m_selectedPerk.m_parentPerk.GetComponent<PerkButton>();
-        //x         m_selectedPerk.IsHighLighted = true;
-        //x     }
-        //x }
-
     }
 
     public void IncrementAvailiablePerks()

@@ -9,15 +9,17 @@ public class PerkButton : MonoBehaviour
     private float m_fGrowShrinkSpeed = 0.05f;
 
     private bool m_bIsHighlighted = false;
-    public bool IsHighLighted { get { return m_bIsHighlighted; } set { m_bIsHighlighted = value; } }
+    public bool IsHighlighted { get { return m_bIsHighlighted; } set { m_bIsHighlighted = value; } }
     private bool m_bIsPurchased = false;
     public bool IsPurchased { get { return m_bIsPurchased; } }
     private bool m_bChildPathChosen = false;
-    private bool m_bCursorIsOver = false;
+    private bool m_bIsCursorOver = false;
 
     private string m_strPerkName;
 
     private Button m_perkIconButton;
+
+    private StartingWeapon m_startingWeapon;
 
     [Header("Parent Perks")]
     public GameObject m_parentPerk = null;
@@ -32,12 +34,16 @@ public class PerkButton : MonoBehaviour
     public Image m_branchImage;
 
     [Header("Perk Description Text")]
-    public Text m_perkDescriptionText;
+    public Text m_perkCanvasDescription;
 
     [Header("Perk Wings Script")]
     public PerkWings m_perkWings;
 
-    private StartingWeapon m_startingWeapon;
+    [Header("Perk Upgrade Confirmation")]
+    public GameObject m_perkUpgradeConfirmation;
+
+    [Header("Back Button")]
+    public GameObject m_backButton;
 
     private void Awake()
     {
@@ -83,23 +89,23 @@ public class PerkButton : MonoBehaviour
     /// <param name="a_strPerkDescription"></param>
     public void OnCursorEnter(string a_strPerkDescription)
     {
-        m_bCursorIsOver = true;
-        PerkTreeManager.m_perkTreeManager.m_selectedPerk.IsHighLighted = false;
-        PerkTreeManager.m_perkTreeManager.m_selectedPerk = GetComponent<PerkButton>();
-        PerkTreeManager.m_perkTreeManager.m_selectedPerk.IsHighLighted = true;
+        m_bIsCursorOver = true;
+        PerkTreeManager.m_perkTreeManager.m_selectedPerkButton.IsHighlighted = false;
+        PerkTreeManager.m_perkTreeManager.m_selectedPerkButton = GetComponent<PerkButton>();
+        PerkTreeManager.m_perkTreeManager.m_selectedPerkButton.IsHighlighted = true;
 
         if (m_childPerks.Count > 0)
         {
             foreach (GameObject child in m_childPerks)
             {
-                if (child.GetComponent<PerkButton>().m_bCursorIsOver)
+                if (child.GetComponent<PerkButton>().m_bIsCursorOver)
                 {
                     return;
                 }
             }
         }
 
-        m_perkDescriptionText.text = a_strPerkDescription;
+        m_perkCanvasDescription.text = a_strPerkDescription;
     }
 
     /// <summary>
@@ -107,7 +113,7 @@ public class PerkButton : MonoBehaviour
     /// </summary>
     public void OnCursorExit()
     {
-        m_bCursorIsOver = false;
+        m_bIsCursorOver = false;
     }
 
     /// <summary>
@@ -119,7 +125,7 @@ public class PerkButton : MonoBehaviour
         // If there are no available perks, exit the function.
         if (PerkTreeManager.m_perkTreeManager.AvailiablePerks == 0)
         {
-            Debug.Log("No availiable perks to spend.");
+            Debug.Log("No available perks to spend.");
             return;
         }
 
@@ -132,20 +138,28 @@ public class PerkButton : MonoBehaviour
                 return;
             }
 
-            // Set this perk's parent perk's child parth to be chosen.
-            m_parentPerk.GetComponent<PerkButton>().m_bChildPathChosen = true;
+            // Set this perk's parent perk's child path to be chosen.
+            //m_parentPerk.GetComponent<PerkButton>().m_bChildPathChosen = true;
         }
 
-        // Perchase this perk.
-        PurchasePerk();
+        // Purchase this perk.
+        //PurchasePerk();
+        m_perkUpgradeConfirmation.SetActive(true);
     }
 
     /// <summary>
     /// Is called when a perk is purchased.
     /// </summary>
     /// <param name="a_strPerkName"></param>
-    private void PurchasePerk()
+    public void PurchasePerk()
     {
+        m_perkUpgradeConfirmation.SetActive(false);
+
+        if (m_parentPerk != null)
+        {
+            m_parentPerk.GetComponent<PerkButton>().m_bChildPathChosen = true;
+        }
+
         // Set the perk to be purchased.
         m_bIsPurchased = true;
         // Decrement the amount of available perks.
@@ -153,9 +167,8 @@ public class PerkButton : MonoBehaviour
 
         // If the perk is successfully applied change the perk images to be active.
         CheckFireTree();
-
-        //TODO: CheckIceTree(a_strPerkName);
-        //TODO: CheckLightningTree(a_strPerkName);
+        CheckIceTree();
+        CheckLightningTree();
     }
 
     /// <summary>
@@ -243,7 +256,7 @@ public class PerkButton : MonoBehaviour
                     break;
                 }
 
-            // God mode enabled for 5 seconds when player reaches highest killstreak (4D).
+            // God mode enabled for 5 seconds when player reaches highest kill streak (4D).
             case "FirePerk_4D":
                 {
                     Player.m_Player.GodModeIsAvailable = true;
@@ -259,39 +272,157 @@ public class PerkButton : MonoBehaviour
         }
     }
 
-    //TODO: /// <summary>
-    //TODO: /// Checks ice tree perks to apply perk to.
-    //TODO: /// </summary>
-    //TODO: /// <param name="a_strPerkName"></param>
-    //TODO: private void CheckIceTree(string a_strPerkName)
-    //TODO: {
-    //TODO:     switch (a_strPerkName)
-    //TODO:     {
-    //TODO:         // Ice bullet (1).
-    //TODO:         case "IceBullet":
-    //TODO:             {
-    //TODO:                 m_startingWeapon.SetProjectile(Resources.Load("Prefabs/Projectiles/IceShard") as GameObject);
-    //TODO:                 break;
-    //TODO:             }
-    //TODO:     }
-    //TODO: }
-    //TODO: 
-    //TODO: /// <summary>
-    //TODO: /// Checks lightning tree perk to apply perk to.
-    //TODO: /// </summary>
-    //TODO: /// <param name="a_strPerkName"></param>
-    //TODO: private void CheckLightningTree(string a_strPerkName)
-    //TODO: {
-    //TODO:     switch (a_strPerkName)
-    //TODO:     {
-    //TODO:         // Lightning bullet (1).
-    //TODO:         case "LightningBullet":
-    //TODO:             {
-    //TODO:                 m_startingWeapon.SetProjectile(Resources.Load("Prefabs/Projectiles/LightningBall") as GameObject);
-    //TODO:                 break;
-    //TODO:             }
-    //TODO:     }
-    //TODO: }
+    /// <summary>
+    /// Checks ice tree perks to apply perk to.
+    /// </summary>
+    /// <param name="a_strPerkName"></param>
+    private void CheckIceTree()
+    {
+        switch (m_strPerkName)
+        {
+            // Ice bullet (1).
+            case "Ice_1A":
+                {
+                    m_startingWeapon.SetProjectile(Resources.Load("Prefabs/Projectiles/IceShard") as GameObject);
+                    break;
+                }
+
+            case "Ice_2A":
+                {
+
+                    break;
+                }
+
+            case "Ice_2B":
+                {
+
+                    break;
+                }
+
+            case "Ice_3A":
+                {
+
+                    break;
+                }
+
+            case "Ice_3B":
+                {
+
+                    break;
+                }
+
+            case "Ice_3C":
+                {
+                    break;
+                }
+
+            case "Ice_3D":
+                {
+
+                    break;
+                }
+
+            case "Ice_4A":
+                {
+
+                    break;
+                }
+
+            case "Ice_4B":
+                {
+
+                    break;
+                }
+
+            case "Ice_4C":
+                {
+
+                    break;
+                }
+
+            case "Ice_4D":
+                {
+
+                    break;
+                }
+        }
+    }
+    
+    /// <summary>
+    /// Checks lightning tree perk to apply perk to.
+    /// </summary>
+    /// <param name="a_strPerkName"></param>
+    private void CheckLightningTree()
+    {
+        switch (m_strPerkName)
+        {
+            // Lightning bullet (1A).
+            case "Lightning_1A":
+                {
+                    m_startingWeapon.SetProjectile(Resources.Load("Prefabs/Projectiles/LightningBall") as GameObject);
+                    break;
+                }
+
+            case "Lightning_2A":
+                {
+
+                    break;
+                }
+
+            case "Lightning_2B":
+                {
+
+                    break;
+                }
+
+            case "Lightning_3A":
+                {
+
+                    break;
+                }
+
+            case "Lightning_3B":
+                {
+
+                    break;
+                }
+
+            case "Lightning_3C":
+                {
+                    break;
+                }
+
+            case "Lightning_3D":
+                {
+
+                    break;
+                }
+
+            case "Lightning_4A":
+                {
+
+                    break;
+                }
+
+            case "Lightning_4B":
+                {
+
+                    break;
+                }
+
+            case "Lightning_4C":
+                {
+
+                    break;
+                }
+
+            case "Lightning_4D":
+                {
+
+                    break;
+                }
+        }
+    }
 
     private void ActivateChildPerk()
     {
