@@ -109,6 +109,11 @@ public class Entity : MonoBehaviour
         m_killStreakManager = GameObject.FindObjectOfType<KillStreakManager>();
 
         LevelUpdate();
+        if (gameManager.name == "Bomber")
+        {
+            Debug.Log(m_oldHealth);
+            Debug.Log(m_currHealth);   
+        }
         m_oldHealth = m_currHealth;
     }
 
