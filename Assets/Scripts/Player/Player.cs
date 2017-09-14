@@ -103,6 +103,9 @@ public class Player : Entity
     private int m_iEnemiesOnFire = 0;
     public int EnemiesOnFire { get; set; }
 
+    public bool m_bImpacted = false;
+    public float m_iImpactTimer = 0;
+
     void Awake()
     {
         if (m_Player == null)
@@ -113,7 +116,15 @@ public class Player : Entity
         {
             Destroy(gameObject);
         }
+
+        int L_P = LayerMask.NameToLayer("Player");
+        int L_O = LayerMask.NameToLayer("Collectable");
+        Debug.Log("Player Layer: " + L_P);
+        Debug.Log("Orb Layer: " + L_O);
+
+        //Physics.IgnoreLayerCollision(L_O, L_P);
     }
+
     new void Start()
     {
 
@@ -260,6 +271,7 @@ public class Player : Entity
 
     void FixedUpdate()
     {
+        
         //mouse aiming
         if (InputManager.SecondaryInput() == Vector3.zero)
         {
@@ -371,6 +383,25 @@ public class Player : Entity
 
                 m_spentOrbs[i].SetActive(true);
                 count++;                
+            }
+        }
+    }
+
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+//        Debug.Log(hit.collider.name);
+        Rigidbody body = hit.collider.attachedRigidbody;
+        if(body == null)
+        {
+            return;
+        }
+        
+        if(body != null)
+        {
+            if(body.GetComponent<MeleeEnemy>().m_type == Enemy.EnemyType.MELEE)
+            {
+                Debug.Log("Collide");
+                m_bImpacted = true;
             }
         }
     }

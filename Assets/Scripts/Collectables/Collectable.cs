@@ -36,6 +36,8 @@ public class Collectable : MonoBehaviour
             m_playerMana = m_playerRef.GetComponent<Mana>();
         }
         m_rigidBody = this.GetComponent<Rigidbody>();
+
+        Physics.IgnoreCollision(GetComponent<Collider>(), m_playerRef.GetComponent<Collider>());
     }
 
     // Update is called once per frame

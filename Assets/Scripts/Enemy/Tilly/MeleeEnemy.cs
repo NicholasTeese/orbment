@@ -106,6 +106,8 @@ public class MeleeEnemy : Enemy
 
                     if (m_foir.m_target != null)
                     {
+                        m_v3ChargeTarget = V_targetOffset;
+                        this.transform.LookAt(V_targetOffset);
                         transform.position = Vector3.MoveTowards(transform.position, m_v3ChargeTarget, (m_fChargeSpeed * Time.deltaTime));
                     }
                     else
@@ -160,6 +162,25 @@ public class MeleeEnemy : Enemy
         }
     }
 
+    void FixedUpdate()
+    {
+        float DamagePercent = Player.m_Player.m_maxHealth * 0.25f;
+
+        if (Player.m_Player.m_bImpacted)
+        {
+            if (Player.m_Player.m_iImpactTimer == 0)
+            {
+                Player.m_Player.m_currHealth -= (int)DamagePercent;
+            }
+            Player.m_Player.m_iImpactTimer += (Time.deltaTime * 2);
+            if (Player.m_Player.m_iImpactTimer > 2)
+            {
+                Player.m_Player.m_bImpacted = false;
+                Player.m_Player.m_iImpactTimer = 0;
+            }
+        }
+    }
+
     void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.CompareTag("Bullet"))
@@ -171,10 +192,6 @@ public class MeleeEnemy : Enemy
                 //m_navMeshAgent.SetDestination(collision.collider.transform.position - m_bulletScript.m_direction);
                 //m_navMeshAgent.transform.LookAt(collision.collider.transform.position - m_bulletScript.m_direction);
             }
-        }
-        if (collision.collider.CompareTag("Player"))
-        {
-            Debug.Log("hit");
         }
     }
 
