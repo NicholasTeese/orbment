@@ -18,6 +18,7 @@ public class MeleeEnemy : Enemy
 
     private float m_fPrepareChargeTime = 2.0f;
     private float m_fRecoverTime = 0.5f;
+    public float timer;
 
     private Behaviour m_eBehaviour = Behaviour.WANDERING;
 
@@ -83,15 +84,15 @@ public class MeleeEnemy : Enemy
 
                     m_fPrepareChargeTime -= Time.deltaTime;
 
-                        this.transform.LookAt(V_targetOffset);
-                        if (m_fPrepareChargeTime <= 0.0f)
-                        {
-                            m_v3ChargeTarget = V_targetOffset;//new Vector3(m_target.transform.position.x, transform.position.y, m_target.transform.position.z);
-                            m_navMeshAgent.enabled = false;
-                            m_fPrepareChargeTime = 2.0f;
-                            m_eBehaviour = Behaviour.CHARGING;
-                            break;
-                        }
+                    this.transform.LookAt(V_targetOffset);
+                    if (m_fPrepareChargeTime <= 0.0f)
+                    {
+                        m_v3ChargeTarget = V_targetOffset;//new Vector3(m_target.transform.position.x, transform.position.y, m_target.transform.position.z);
+                        m_navMeshAgent.enabled = false;
+                        m_fPrepareChargeTime = 2.0f;
+                        m_eBehaviour = Behaviour.CHARGING;
+                        break;
+                    }
 
                     break;
                 }
@@ -106,7 +107,12 @@ public class MeleeEnemy : Enemy
 
                     if (m_foir.m_target != null)
                     {
-                        m_v3ChargeTarget = V_targetOffset;
+                        if (timer <= 3)
+                        {
+                            timer += Time.time * 1.5f;
+                            m_v3ChargeTarget = V_targetOffset;
+                        }
+
                         this.transform.LookAt(V_targetOffset);
                         transform.position = Vector3.MoveTowards(transform.position, m_v3ChargeTarget, (m_fChargeSpeed * Time.deltaTime));
                         if (DamageCheck())
@@ -117,7 +123,6 @@ public class MeleeEnemy : Enemy
                         m_eBehaviour = Behaviour.RECOVERING;
                         break;
                     }
-                    
                     break;
                 }
 
@@ -233,7 +238,7 @@ public class MeleeEnemy : Enemy
     {
         if (m_foir.m_target != null)
         {
-            if (Vector3.Distance(transform.position, m_target.transform.position) < 1.0f)
+            if (Vector3.Distance(transform.position, m_target.transform.position) <= 1.5f)
                 return true;
             else
                 return false;
