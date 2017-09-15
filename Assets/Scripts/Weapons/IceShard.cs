@@ -6,6 +6,38 @@ public class IceShard : Bullet
 {
     private bool m_hasIceSplinter = false;
 
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+
+        if (!Player.m_Player.IceSplatterUnlocked)
+        {
+            return;
+        }
+
+        int iIceSplinter = Random.Range(0, 2);
+
+        if (iIceSplinter == 0)
+        {
+            m_hasIceSplinter = false;
+        }
+        else if (iIceSplinter == 1)
+        {
+            m_hasIceSplinter = true;
+        }
+        else
+        {
+            Debug.Log(gameObject.name + "ice splinter rolled an invalid number.");
+        }
+    }
+
+    protected override void Disable()
+    {
+        base.Disable();
+
+        m_hasIceSplinter = false;
+    }
+
     protected override void OnCollisionEnter(Collision collision)
     {
         base.OnCollisionEnter(collision);

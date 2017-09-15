@@ -46,8 +46,13 @@ public class OnFire : StatusEffect
 
         if (m_timer >= m_lifetime)
         {
-            if (m_entity != null)
+            if (m_entity != null && Player.m_Player.BurningSpeedBoost)
             {
+                if (Player.m_Player.AdditionalBurningSpeedBoost)
+                {
+                    --Player.m_Player.EnemiesOnFire;
+                }
+                --Player.m_Player.EnemiesOnFire;
                 m_entity.m_onFire = false;
             }
 

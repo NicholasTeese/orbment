@@ -199,17 +199,17 @@ public class PerkButton : MonoBehaviour
                     break;
                 }
 
-            // Increase player max health by 50% (2B).
+            // Increase player max health by 20% (2B).
             case "FirePerk_2B":
                 {
-                    Player.m_Player.m_maxHealth += (Player.m_Player.m_maxHealth * 0.5f);
+                    Player.m_Player.m_maxHealth += (Player.m_Player.m_maxHealth * 0.2f);
                     break;
                 }
 
             // Give player speed boost based on how many enemies are burning (3A).
             case "FirePerk_3A":
                 {
-                    //TODO: Implement.
+                    Player.m_Player.BurningSpeedBoost = true;
                     break;
                 }
 
@@ -240,7 +240,7 @@ public class PerkButton : MonoBehaviour
             // Increase player speed boost based on how many enemies are burning (4A).
             case "FirePerk_4A":
                 {
-                    //TODO: Implement.
+                    Player.m_Player.AdditionalBurningSpeedBoost = true;
                     break;
                 }
 
@@ -270,7 +270,7 @@ public class PerkButton : MonoBehaviour
 
             default:
                 {
-                    Debug.Log("Perk could not be found to be applied.");
+                    Debug.Log("Perk could not be found in fire tree to be applied.");
                     break;
                 }
 
@@ -285,69 +285,86 @@ public class PerkButton : MonoBehaviour
     {
         switch (m_strPerkName)
         {
-            // Ice bullet (1).
-            case "Ice_1A":
+            // Ice bullet (1A).
+            case "IcePerk_1A":
                 {
                     m_startingWeapon.SetProjectile(Resources.Load("Prefabs/Projectiles/IceShard") as GameObject);
                     break;
                 }
 
-            case "Ice_2A":
+            // Increase player max mana by 20% (2A).
+            case "IcePerk_2A":
                 {
-
+                    Player.m_Player.gameObject.GetComponent<Mana>().m_maxMana += (Player.m_Player.gameObject.GetComponent<Mana>().m_maxMana * 0.2f);
                     break;
                 }
 
-            case "Ice_2B":
+            // Increase player max health by 20% (2B).
+            case "IcePerk_2B":
                 {
-
+                    Player.m_Player.m_maxHealth += (Player.m_Player.m_maxHealth * 0.2f);
                     break;
                 }
 
-            case "Ice_3A":
+            // Freeze (stun) enemies for 2 seconds (3A.)
+            case "IcePerk_3A":
                 {
-
+                    //TODO: Implement.
                     break;
                 }
 
-            case "Ice_3B":
+            // Ice bullets splatter (3B).
+            case "IcePerk_3B":
                 {
-
+                    Player.m_Player.IceSplatterUnlocked = true;
                     break;
                 }
 
-            case "Ice_3C":
+            // Gain 25% armor when attacked by 3 or more enemies (3C).
+            case "IcePerk_3C":
                 {
+                    //TODO: Implement.
                     break;
                 }
 
-            case "Ice_3D":
+            //TODO: Think of.
+            case "IcePerk_3D":
                 {
-
+                    //TODO: Implement.
                     break;
                 }
 
-            case "Ice_4A":
+            // Freeze (stun) causes damage over time (4A).
+            case "IcePerk_4A":
                 {
-
+                    //TODO: Implement.
                     break;
                 }
 
-            case "Ice_4B":
+            // Ice splatter drags enemies in (4B).
+            case "IcePerk_4B":
                 {
-
+                    //TODO: Implement.
+                    break;
+                }
+            
+            // Gain 50% armour (4C).
+            case "IcePerk_4C":
+                {
+                    //TODO: Implement.
                     break;
                 }
 
-            case "Ice_4C":
+            //TODO: Think of.
+            case "IcePerk_4D":
                 {
-
+                    //TODO: Implement.
                     break;
                 }
 
-            case "Ice_4D":
+            default:
                 {
-
+                    Debug.Log("Perk could not be found in ice tree to be applied.");
                     break;
                 }
         }
@@ -362,68 +379,85 @@ public class PerkButton : MonoBehaviour
         switch (m_strPerkName)
         {
             // Lightning bullet (1A).
-            case "Lightning_1A":
+            case "LightningPerk_1A":
                 {
                     m_startingWeapon.SetProjectile(Resources.Load("Prefabs/Projectiles/LightningBall") as GameObject);
                     break;
                 }
 
-            case "Lightning_2A":
+            // Increase player max mana by 20% (2A).
+            case "LightningPerk_2A":
                 {
-
+                    Player.m_Player.gameObject.GetComponent<Mana>().m_maxMana += (Player.m_Player.gameObject.GetComponent<Mana>().m_maxMana * 0.2f);
                     break;
                 }
 
-            case "Lightning_2B":
+            // Increase player speed by 50% (2B).
+            case "LightningPerk_2B":
                 {
-
+                    Player.m_Player.m_currSpeed += (Player.m_Player.m_currSpeed * 0.5f);
                     break;
                 }
 
-            case "Lightning_3A":
+            // Small bolt, chance hit, area damage (3A).
+            case "LightningPerk_3A":
                 {
-
+                    //TODO: Implement.
                     break;
                 }
 
-            case "Lightning_3B":
+            // Dash consumes 50% less mana (3B).
+            case "LightningPerk_3B":
                 {
-
+                    Player.m_Player.m_dashManaCost -= (Player.m_Player.m_dashManaCost * 0.5f);
                     break;
                 }
 
-            case "Lightning_3C":
+            // Dash does lightning damage (3C).
+            case "LightningPerk_3C":
                 {
+                    //TODO: Implement.
                     break;
                 }
 
-            case "Lightning_3D":
+            // Recall, go back 3 seconds (3D).
+            case "LightningPerk_3D":
                 {
-
+                    //TODO: Implement.
                     break;
                 }
 
-            case "Lightning_4A":
+            // God bolt, chance hit, instant kill (4A).
+            case "LightningPerk_4A":
                 {
-
+                    //TODO: Implement.
                     break;
                 }
 
-            case "Lightning_4B":
+            // Dash consumes no mana (4B).
+            case "LightningPerk_4B":
                 {
-
+                    Player.m_Player.m_dashManaCost = 0;
                     break;
                 }
 
-            case "Lightning_4C":
+            // Increase dash damage (4C).
+            case "LightningPerk_4C":
                 {
-
+                    //TODO: Implement.
                     break;
                 }
 
-            case "Lightning_4D":
+            // Shorter recall cool down (4D).
+            case "LightningPerk_4D":
                 {
+                    //TODO: Implement.
+                    break;
+                }
 
+            default:
+                {
+                    Debug.Log("Perk could not be found in lightning tree to be applied.");
                     break;
                 }
         }
