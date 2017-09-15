@@ -65,7 +65,7 @@ public class Bullet : MonoBehaviour
         Physics.IgnoreLayerCollision(L_Bullet, L_Ground);
     }
 
-    protected void OnEnable()
+    protected virtual void OnEnable()
     {
         m_light = this.GetComponent<Light>();
         m_collider = this.GetComponent<Collider>();
@@ -95,7 +95,7 @@ public class Bullet : MonoBehaviour
     }
 
     //is in camera view?
-    protected void Disable()
+    protected virtual void Disable()
     {
 
         m_timer = 0.0f;

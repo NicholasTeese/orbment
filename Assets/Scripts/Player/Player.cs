@@ -98,10 +98,16 @@ public class Player : Entity
     public int AdditionalBurnDPS { get; set; }
 
     private bool m_bBurningSpeedBoost = false;
-    public bool BurningSpeedBoost { get; set; }
+    public bool BurningSpeedBoost { get { return m_bBurningSpeedBoost; } set { m_bBurningSpeedBoost = value; } }
+
+    private bool m_bAdditionalBurningSpeedBoost = false;
+    public bool AdditionalBurningSpeedBoost { get { return m_bAdditionalBurningSpeedBoost; } set { m_bAdditionalBurningSpeedBoost = value; } }
+
+    private bool m_bIceSplatterUnlocked = false;
+    public bool IceSplatterUnlocked { get { return m_bIceSplatterUnlocked; } set { m_bIceSplatterUnlocked = value; } }
 
     private int m_iEnemiesOnFire = 0;
-    public int EnemiesOnFire { get; set; }
+    public int EnemiesOnFire { get { return m_iEnemiesOnFire; } set { m_iEnemiesOnFire = value; } }
 
     public bool m_bImpacted = false;
     public float m_iImpactTimer = 0;
@@ -306,7 +312,7 @@ public class Player : Entity
         else
         {
             //movement
-            m_charCont.Move(m_movement * m_currSpeed * m_currSpeedMult * Time.deltaTime);
+            m_charCont.Move(m_movement * (m_currSpeed + m_iEnemiesOnFire) * m_currSpeedMult * Time.deltaTime);
         }
     }
 

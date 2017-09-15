@@ -222,6 +222,10 @@ public class Entity : MonoBehaviour
             
             if (!gameObject.CompareTag("Player") && Player.m_Player.BurningSpeedBoost)
             {
+                if (Player.m_Player.AdditionalBurningSpeedBoost)
+                {
+                    ++Player.m_Player.EnemiesOnFire;
+                }
                 ++Player.m_Player.EnemiesOnFire;
             }
         }
