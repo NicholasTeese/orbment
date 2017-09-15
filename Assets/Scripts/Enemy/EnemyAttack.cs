@@ -27,7 +27,9 @@ public class EnemyAttack : MonoBehaviour
         }
         if (m_foir != null && m_foir.inRange)
         {
-            this.transform.LookAt(m_foir.m_target);
+            Vector3 V_targetOffset = new Vector3(m_foir.m_target.transform.position.x, transform.position.y, m_foir.m_target.transform.position.z);
+
+            this.transform.LookAt(V_targetOffset);//m_foir.m_target.transform.position.x, transform.position.y, m_foir.m_target.transform.position.z);
             if (m_attackTimer >= m_attackInterval)
             {
                 m_attackTimer = 0.0f;

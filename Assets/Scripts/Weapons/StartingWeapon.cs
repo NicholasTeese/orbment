@@ -28,6 +28,7 @@ public class StartingWeapon : BaseWeapon
             m_activePool[i].m_isCrit = a_hasCrit;
             m_activePool[i].m_direction = a_direction;
             m_activePool[i].m_damage = m_activePool[i].m_baseDamage + damagePerProjectile;
+            //Debug.Log(m_activePool[i].transform.localScale);
 
             if(a_hasCrit)
             {

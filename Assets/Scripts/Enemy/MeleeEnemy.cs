@@ -112,7 +112,7 @@ public class MeleeEnemy : Enemy
                             timer += Time.time * 1.5f;
                             m_v3ChargeTarget = V_targetOffset;
                         }
-
+                        
                         this.transform.LookAt(V_targetOffset);
                         transform.position = Vector3.MoveTowards(transform.position, m_v3ChargeTarget, (m_fChargeSpeed * Time.deltaTime));
                         if (DamageCheck())

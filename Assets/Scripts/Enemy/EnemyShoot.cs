@@ -42,8 +42,10 @@ public class EnemyShoot : MonoBehaviour
                 if (m_foir.m_target != null && m_enemyScript != null)
                 {
                     //shoot
-                    m_shootDir = m_foir.m_target.position - this.transform.position;
-                    m_weapon.Fire(m_shootDir.normalized, m_enemyScript.m_currDamage, false, 1);
+                    Vector3 V_targetOffset = new Vector3(m_foir.m_target.transform.position.x - this.transform.position.x, transform.position.y - this.transform.position.y, m_foir.m_target.transform.position.z - this.transform.position.z);
+                    //Debug.Log(V_targetOffset);
+                    m_shootDir = (m_foir.m_target.position - this.transform.position);
+                    m_weapon.Fire(V_targetOffset.normalized, m_enemyScript.m_currDamage, false, 1);
                 }
             }
 

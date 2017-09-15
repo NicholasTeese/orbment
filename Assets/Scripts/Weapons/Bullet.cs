@@ -59,14 +59,21 @@ public class Bullet : MonoBehaviour
     // Use this for initialization
     protected virtual void Start()
     {
+        Debug.Log(this.transform.localScale);
         m_bColliding = false;
         m_explosionManager = GameObject.FindObjectOfType<ExplosionManager>();
         m_trail = this.GetComponent<TrailRenderer>();
         Physics.IgnoreLayerCollision(L_Bullet, L_Ground);
     }
 
-    protected virtual void OnEnable()
+    protected void OnEnable()
     {
+        Vector3 uniformScale = new Vector3(0.6f, 0.6f, 0.6f);
+        if (m_id == "Enemy")
+        {
+            this.transform.localScale = uniformScale;
+        }
+
         m_light = this.GetComponent<Light>();
         m_collider = this.GetComponent<Collider>();
         m_renderer = this.GetComponent<MeshRenderer>();
@@ -95,7 +102,7 @@ public class Bullet : MonoBehaviour
     }
 
     //is in camera view?
-    protected virtual void Disable()
+    protected void Disable()
     {
 
         m_timer = 0.0f;
@@ -127,6 +134,7 @@ public class Bullet : MonoBehaviour
 
     protected virtual void OnCollisionEnter(Collision a_collision)
     {
+//        Debug.Log(a_collision.collider.name);
         if (m_bColliding)
         {
             if (!a_collision.collider.CompareTag("Player"))
