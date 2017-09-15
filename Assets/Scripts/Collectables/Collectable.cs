@@ -37,7 +37,7 @@ public class Collectable : MonoBehaviour
         }
         m_rigidBody = this.GetComponent<Rigidbody>();
 
-        Physics.IgnoreCollision(GetComponent<Collider>(), m_playerRef.GetComponent<Collider>());
+        //Physics.IgnoreCollision(GetComponent<Collider>(), m_playerRef.GetComponent<Collider>());
     }
 
     // Update is called once per frame
@@ -58,6 +58,22 @@ public class Collectable : MonoBehaviour
         else
         {
             m_manaCap = false;
+        }
+
+        if (m_type == CollectableType.GreenOrb)
+        {
+            if(m_healthCap)
+                Physics.IgnoreCollision(GetComponent<Collider>(), m_playerRef.GetComponent<Collider>(), true);
+            else
+                Physics.IgnoreCollision(GetComponent<Collider>(), m_playerRef.GetComponent<Collider>(), false);
+        }
+
+        if (m_type == CollectableType.BlueOrb)
+        {
+            if(m_manaCap)
+                Physics.IgnoreCollision(GetComponent<Collider>(), m_playerRef.GetComponent<Collider>(), true);
+            else
+                Physics.IgnoreCollision(GetComponent<Collider>(), m_playerRef.GetComponent<Collider>(), false);
         }
     }
 

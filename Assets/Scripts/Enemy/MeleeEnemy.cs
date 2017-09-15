@@ -109,6 +109,8 @@ public class MeleeEnemy : Enemy
                         m_v3ChargeTarget = V_targetOffset;
                         this.transform.LookAt(V_targetOffset);
                         transform.position = Vector3.MoveTowards(transform.position, m_v3ChargeTarget, (m_fChargeSpeed * Time.deltaTime));
+                        if (DamageCheck())
+                            Player.m_Player.m_bImpacted = true;                        
                     }
                     else
                     {
@@ -195,27 +197,29 @@ public class MeleeEnemy : Enemy
                 //m_navMeshAgent.transform.LookAt(collision.collider.transform.position - m_bulletScript.m_direction);
             }
         }
-        if (collision.collider.CompareTag("Player"))
-        {
-            Debug.Log("PlayerHit");
-            Player.m_Player.m_bImpacted = true;
-        }
-        Entity Target = null;
-
-        Target = collision.collider.GetComponent<Entity>();
-        if (Target != null)
-            Debug.Log(Target.name);
+        #region
+        //  if (collision.collider.CompareTag("Player"))
+        //  {
+        //      Debug.Log("PlayerHit");
+        //      Player.m_Player.m_bImpacted = true;
+        //  }
+        //  Entity Target = null;
+        //
+        //  Target = collision.collider.GetComponent<Entity>();
+        //  if (Target != null)
+        //      Debug.Log(Target.name);
+        #endregion
     }
 
-    void OnCollisionStay(Collision collision)
-    {
-        if (collision.collider.CompareTag("Player"))
-        {
-            Debug.Log("PlayerHit");
-            Player.m_Player.m_bImpacted = true;
-        }
-
-    }
+    //void OnCollisionStay(Collision collision)
+    //{
+    //    if (collision.collider.CompareTag("Player"))
+    //    {
+    //        Debug.Log("PlayerHit");
+    //        Player.m_Player.m_bImpacted = true;
+    //    }
+    //
+    //}
 
     private Vector3 GetWanderPosition(Vector3 a_v3CurrentPosition)
     {
@@ -223,5 +227,17 @@ public class MeleeEnemy : Enemy
         float fZOffset = Random.Range(-5, 5);
 
         return new Vector3(a_v3CurrentPosition.x + fXOffset, a_v3CurrentPosition.y, a_v3CurrentPosition.z + fZOffset);
+    }
+
+    private bool DamageCheck()
+    {
+        if (m_foir.m_target != null)
+        {
+            if (Vector3.Distance(transform.position, m_target.transform.position) < 1.0f)
+                return true;
+            else
+                return false;
+        }
+        else return false;
     }
 }
