@@ -42,10 +42,8 @@ public class IsoCam : MonoBehaviour
     {
         if (m_target != null)
         {
-          
            this.transform.position = Vector3.MoveTowards(this.transform.position, m_target.transform.position + offset, m_camMoveSpeed);
            this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, Quaternion.LookRotation(m_target.transform.position - this.transform.position), m_camRotSpeed);
-
         }
 
         if(m_shake)
