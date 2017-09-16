@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -110,10 +110,9 @@ public class GameManager : MonoBehaviour
     {
 
 	}
-	public void RestartGame()
+	public void RestartLevel()
     {
-		Scene loadedLevel = SceneManager.GetActiveScene ();
-		SceneManager.LoadScene (loadedLevel.buildIndex);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 	}
 	public void StartGame()
     {

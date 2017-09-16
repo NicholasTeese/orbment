@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(FindObjectsInRadius))]
@@ -31,7 +31,8 @@ public class EnemyShoot : MonoBehaviour
         }
         if (m_foir != null && m_foir.inRange)
         {
-            this.transform.LookAt(m_foir.m_target);
+            transform.LookAt(new Vector3(m_foir.m_target.position.x, transform.position.y, m_foir.m_target.position.z));
+
             if (m_attackTimer >= m_attackInterval)
             {
                 m_attackTimer = 0.0f;
