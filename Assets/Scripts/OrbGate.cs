@@ -13,8 +13,9 @@ public class OrbGate : MonoBehaviour
     private Player m_Player;
     private Animator m_Animator;
 
-    public int m_numOfOrbsForOpen = 20;
+    public int m_numOfOrbsForOpen;
     public int m_currNumOrbsInvested = 0;
+    private int m_iTotalOrbs;
 
     public float m_fDivisionRate;
     public float m_reduction;
@@ -36,6 +37,7 @@ public class OrbGate : MonoBehaviour
             m_origScale = m_visualLock.transform.localScale.x;
             m_fDivisionRate = m_visualLock.transform.localScale.x / m_numOfOrbsForOpen;
             m_reduction = 0;
+            m_iTotalOrbs = m_numOfOrbsForOpen;
         }
 
         m_Player = FindObjectOfType<Player>();
@@ -75,7 +77,7 @@ public class OrbGate : MonoBehaviour
             if (m_numOfOrbsForOpen > 0)
             {
                 m_currNumOrbsInvested = m_currNumOrbsInvested + orbsPassed;
-                m_numOfOrbsForOpen = 20 - m_currNumOrbsInvested;
+                m_numOfOrbsForOpen = m_iTotalOrbs - m_currNumOrbsInvested;
                 SpendOrb(m_Player.m_orbsCollected);
             }
             else
