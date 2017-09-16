@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -297,7 +297,7 @@ public class Player : Entity
 
         if (InputManager.SecondaryInput() != Vector3.zero)
         {
-            Debug.Log("Joy");
+            //Debug.Log("Joy");
             Vector3 playerTojoy = Vector3.zero;
             playerTojoy = InputManager.SecondaryInput();
             Quaternion newRotation = Quaternion.LookRotation(playerTojoy);

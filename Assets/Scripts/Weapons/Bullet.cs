@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -59,7 +59,6 @@ public class Bullet : MonoBehaviour
     // Use this for initialization
     protected virtual void Start()
     {
-        Debug.Log(this.transform.localScale);
         m_bColliding = false;
         m_explosionManager = GameObject.FindObjectOfType<ExplosionManager>();
         m_trail = this.GetComponent<TrailRenderer>();
