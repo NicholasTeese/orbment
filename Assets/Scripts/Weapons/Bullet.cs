@@ -59,6 +59,10 @@ public class Bullet : MonoBehaviour
     // Use this for initialization
     protected virtual void Start()
     {
+<<<<<<< HEAD
+//        Debug.Log(this.transform.localScale);
+=======
+>>>>>>> b98b926983a08d3a6a2bb1c39d41f5a2b35f4556
         m_bColliding = false;
         m_explosionManager = GameObject.FindObjectOfType<ExplosionManager>();
         m_trail = this.GetComponent<TrailRenderer>();
@@ -67,11 +71,14 @@ public class Bullet : MonoBehaviour
 
     protected void OnEnable()
     {
+        #region
+        // "FOOTBALL BUG"
         Vector3 uniformScale = new Vector3(0.6f, 0.6f, 0.6f);
         if (m_id == "Enemy")
         {
             this.transform.localScale = uniformScale;
         }
+        #endregion
 
         m_light = this.GetComponent<Light>();
         m_collider = this.GetComponent<Collider>();
