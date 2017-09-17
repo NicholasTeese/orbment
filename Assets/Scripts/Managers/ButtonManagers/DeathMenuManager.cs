@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class DeathMenuManager : MonoBehaviour
 {
@@ -21,14 +20,14 @@ public class DeathMenuManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        List<BaseButton> m_buttons = new List<BaseButton>();
+        List<BaseButton> lButtons = new List<BaseButton>();
 
         foreach (Transform child in transform)
         {
-            m_buttons.Add(child.GetComponent<BaseButton>());
+            lButtons.Add(child.GetComponent<BaseButton>());
         }
 
-        m_selectedButton = m_buttons[0];
+        m_selectedButton = lButtons[0];
         m_selectedButton.IsMousedOver = true;
     }
 }

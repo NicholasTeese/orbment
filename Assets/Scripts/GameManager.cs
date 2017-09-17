@@ -1,12 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-	public bool gameStart = false;
 	public bool paused = false;
     public bool dead = false;
 
@@ -27,46 +25,38 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
-	private void Start ()
-    {
-        gameStart = true;
-	}
 	
 	void Update ()
     {
-        if (gameStart == true)
+        if (Input.GetKeyUp(KeyCode.Escape) || InputManager.StartButton())
         {
-            if (Input.GetKeyUp(KeyCode.Escape) || InputManager.StartButton())
+            if (!paused)
             {
-                if (!paused)
-                {
-                    paused = true;
-                }
-                else
-                {
-                    paused = false;
-                }
-            }
-			if (paused)
-            {
-				Time.timeScale = 0.0f;
-                PauseMenuManager.m_pauseMenuCanvasManager.gameObject.SetActive(true);
-				hud.SetActive (false);
-			}
-            else if (dead == true)
-            {
-                Time.timeScale = 0.0f;
-                DeathMenuManager.m_deathMenuManager.gameObject.SetActive(true);
-                hud.SetActive(false);
+                paused = true;
             }
             else
             {
-                PauseMenuManager.m_pauseMenuCanvasManager.gameObject.SetActive(false);
-                hud.SetActive(true);
-                Time.timeScale = 1;
+                paused = false;
             }
-		}
+        }
+        if (paused)
+        {
+            Time.timeScale = 0.0f;
+            PauseMenuManager.m_pauseMenuCanvasManager.gameObject.SetActive(true);
+            hud.SetActive(false);
+        }
+        else if (dead == true)
+        {
+            Time.timeScale = 0.0f;
+            DeathMenuManager.m_deathMenuManager.gameObject.SetActive(true);
+            hud.SetActive(false);
+        }
+        else
+        {
+            PauseMenuManager.m_pauseMenuCanvasManager.gameObject.SetActive(false);
+            hud.SetActive(true);
+            Time.timeScale = 1;
+        }
 	}
 
 	public void ContinueGame()
@@ -88,9 +78,5 @@ public class GameManager : MonoBehaviour
 	public void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-	}
-	public void StartGame()
-    {
-		gameStart = true;
 	}
 }

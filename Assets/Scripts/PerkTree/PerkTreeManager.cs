@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,7 +11,7 @@ public class PerkTreeManager : MonoBehaviour
 
     private float m_fInputBuffer = 0.2f;
 
-    private bool m_bIsPressed = false;
+    private bool m_bInputRecieved = false;
     private bool m_bPerkTreeIsSelected = false;
 
     [Header("Perk Trees")]
@@ -87,9 +87,9 @@ public class PerkTreeManager : MonoBehaviour
         // Right.
         if (v3PrimaryInputDirection.x >= m_fInputBuffer)
         {
-            if (!m_bIsPressed)
+            if (!m_bInputRecieved)
             {
-                m_bIsPressed = true;
+                m_bInputRecieved = true;
                 ++m_iPerkTreeIndex;
                 m_iPerkTreeIndex = Mathf.Clamp(m_iPerkTreeIndex, 0, 2);
                 m_selectedPerkTreeButton.IsHighlighted = false;
@@ -100,9 +100,9 @@ public class PerkTreeManager : MonoBehaviour
         // Left.
         else if (v3PrimaryInputDirection.x <= -m_fInputBuffer)
         {
-            if (!m_bIsPressed)
+            if (!m_bInputRecieved)
             {
-                m_bIsPressed = true;
+                m_bInputRecieved = true;
                 --m_iPerkTreeIndex;
                 m_iPerkTreeIndex = Mathf.Clamp(m_iPerkTreeIndex, 0, 2);
                 m_selectedPerkTreeButton.IsHighlighted = false;
@@ -112,7 +112,7 @@ public class PerkTreeManager : MonoBehaviour
         }
         else
         {
-            m_bIsPressed = false;
+            m_bInputRecieved = false;
         }
     }
 
@@ -125,15 +125,15 @@ public class PerkTreeManager : MonoBehaviour
         {
             if (!m_selectedPerkButton.IsHighlighted)
             {
-                m_bIsPressed = true;
+                m_bInputRecieved = true;
                 m_selectedPerkButton.IsHighlighted = true;
                 m_selectedPerkButton.m_backButton.GetComponent<PerkTreeBackButton>().IsHightlighted = false;
             }
 
             // If there is only one child perk, make it selected.
-            if (m_selectedPerkButton.m_childPerks.Count == 1 && !m_bIsPressed)
+            if (m_selectedPerkButton.m_childPerks.Count == 1 && !m_bInputRecieved)
             {
-                m_bIsPressed = true;
+                m_bInputRecieved = true;
                 m_selectedPerkButton.IsHighlighted = false;
                 m_selectedPerkButton = m_selectedPerkButton.m_childPerks[0].GetComponent<PerkButton>();
                 m_selectedPerkButton.IsHighlighted = true;
@@ -142,18 +142,18 @@ public class PerkTreeManager : MonoBehaviour
             // Forward & Left.
             if (v3PrimaryInputDirection.x <= -m_fInputBuffer)
             {
-                if (!m_bIsPressed)
+                if (!m_bInputRecieved)
                 {
                     if (m_selectedPerkButton.m_childPerks[0].transform.position.x < m_selectedPerkButton.m_childPerks[1].transform.position.x)
                     {
-                        m_bIsPressed = true;
+                        m_bInputRecieved = true;
                         m_selectedPerkButton.IsHighlighted = false;
                         m_selectedPerkButton = m_selectedPerkButton.m_childPerks[0].GetComponent<PerkButton>();
                         m_selectedPerkButton.IsHighlighted = true;
                     }
                     else
                     {
-                        m_bIsPressed = true;
+                        m_bInputRecieved = true;
                         m_selectedPerkButton.IsHighlighted = false;
                         m_selectedPerkButton = m_selectedPerkButton.m_childPerks[1].GetComponent<PerkButton>();
                         m_selectedPerkButton.IsHighlighted = true;
@@ -163,18 +163,18 @@ public class PerkTreeManager : MonoBehaviour
             // Forward & Right.
             else if (v3PrimaryInputDirection.x >= m_fInputBuffer)
             {
-                if (!m_bIsPressed)
+                if (!m_bInputRecieved)
                 {
                     if (m_selectedPerkButton.m_childPerks[0].transform.position.x > m_selectedPerkButton.m_childPerks[1].transform.position.x)
                     {
-                        m_bIsPressed = true;
+                        m_bInputRecieved = true;
                         m_selectedPerkButton.IsHighlighted = false;
                         m_selectedPerkButton = m_selectedPerkButton.m_childPerks[0].GetComponent<PerkButton>();
                         m_selectedPerkButton.IsHighlighted = true;
                     }
                     else
                     {
-                        m_bIsPressed = true;
+                        m_bInputRecieved = true;
                         m_selectedPerkButton.IsHighlighted = false;
                         m_selectedPerkButton = m_selectedPerkButton.m_childPerks[1].GetComponent<PerkButton>();
                         m_selectedPerkButton.IsHighlighted = true;
@@ -185,23 +185,23 @@ public class PerkTreeManager : MonoBehaviour
         // Backward.
         else if (v3PrimaryInputDirection.z <= -m_fInputBuffer)
         {
-            if (m_selectedPerkButton.m_parentPerk != null && !m_bIsPressed)
+            if (m_selectedPerkButton.m_parentPerk != null && !m_bInputRecieved)
             {
-                m_bIsPressed = true;
+                m_bInputRecieved = true;
                 m_selectedPerkButton.IsHighlighted = false;
                 m_selectedPerkButton = m_selectedPerkButton.m_parentPerk.GetComponent<PerkButton>();
                 m_selectedPerkButton.IsHighlighted = true;
             }
-            else if (m_selectedPerkButton.m_parentPerk == null && !m_bIsPressed)
+            else if (m_selectedPerkButton.m_parentPerk == null && !m_bInputRecieved)
             {
-                m_bIsPressed = true;
+                m_bInputRecieved = true;
                 m_selectedPerkButton.IsHighlighted = false;
                 m_selectedPerkButton.m_backButton.GetComponent<PerkTreeBackButton>().IsHightlighted = true;
             }
         }
         else
         {
-            m_bIsPressed = false;
+            m_bInputRecieved = false;
         }
     }
 
