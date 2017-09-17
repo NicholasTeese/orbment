@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -50,7 +50,7 @@ public class Enemy : Entity
 
     new private void OnGUI()
     {
-        if (GameManager.m_GameManager.perkOpen || GameManager.m_GameManager.paused)
+        if (ExpManager.m_experiencePointsManager.PerkTreeOpen || GameManager.m_gameManager.paused)
         {
             return;
         }

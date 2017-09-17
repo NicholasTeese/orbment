@@ -3,58 +3,38 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+
 public class GameManager : MonoBehaviour
 {
-    public static GameManager m_GameManager;
-    public GameObject PerkCam;
-    public GameObject PerkScreen;
-	public GameObject Buffer; //AA added this
-    public GameObject Tree;
-
-    public bool perkOpen = false;
 	public bool gameStart = false;
 	public bool paused = false;
     public bool dead = false;
-    public bool inRange = false;
 
-	public GameObject healthBar;
-    public GameObject pauseMenu;
+	public GameObject m_healthBar;
     public GameObject deathMenu;
     public GameObject hud;
 
-	void Awake()
+    public static GameManager m_gameManager;
+
+    private void Awake()
     {
-        if (m_GameManager == null)
+        if (m_gameManager == null)
         {
-            m_GameManager = this;
+            m_gameManager = this;
         }
-        else if (m_GameManager != this)
+        else if (m_gameManager != this)
         {
             Destroy(gameObject);
         }
     }
     
-    // Use this for initialization
-	void Start ()
+	private void Start ()
     {
-        PerkCam.SetActive(false);
-        PerkScreen.SetActive(false); //AA changed this
         gameStart = true;
-		//Buffer.SetActive(true); //AA added this
 	}
 	
-	// Update is called once per frame
 	void Update ()
     {
-        //pause game
-        if(inRange)
-        {
-		    if (Input.GetKeyDown(KeyCode.Tab) || InputManager.BackButton())
-            {
-                EnablePerkTree();
-            }
-        }
-
         if (gameStart == true)
         {
             if (Input.GetKeyUp(KeyCode.Escape) || InputManager.StartButton())
@@ -70,30 +50,25 @@ public class GameManager : MonoBehaviour
             }
 			if (paused)
             {
-				Time.timeScale = 0;
-				pauseMenu.SetActive (true);
+				Time.timeScale = 0.0f;
+                PauseMenuManager.m_pauseMenuCanvasManager.gameObject.SetActive(true);
 				hud.SetActive (false);
 			}
-            else if(perkOpen)
-            {
-                Time.timeScale = 0;
-                hud.SetActive(false);
-                pauseMenu.SetActive(false);
-            }
             else if (dead == true)
             {
-                Time.timeScale = 0;
-                deathMenu.SetActive(true);
+                Time.timeScale = 0.0f;
+                DeathMenuManager.m_deathMenuManager.gameObject.SetActive(true);
                 hud.SetActive(false);
             }
             else
             {
-                pauseMenu.SetActive(false);
+                PauseMenuManager.m_pauseMenuCanvasManager.gameObject.SetActive(false);
                 hud.SetActive(true);
                 Time.timeScale = 1;
             }
 		}
 	}
+
 	public void ContinueGame()
     {
 		paused = false;
@@ -118,26 +93,4 @@ public class GameManager : MonoBehaviour
     {
 		gameStart = true;
 	}
-
-    public void EnablePerkTree()
-    {
-        if (!perkOpen)
-        {
-            PerkCam.SetActive(true);
-            PerkScreen.SetActive(true);
-            hud.SetActive(false);
-            perkOpen = true;
-
-            Time.timeScale = 0;
-        }
-        else
-        {
-            PerkCam.SetActive(false);
-            PerkScreen.SetActive(false);
-            hud.SetActive(true);
-
-            perkOpen = false;
-            Time.timeScale = 1;
-        }
-    }
 }

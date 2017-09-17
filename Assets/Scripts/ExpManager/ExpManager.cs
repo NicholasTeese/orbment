@@ -1,10 +1,16 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class ExpManager : MonoBehaviour
 {
-    public static ExpManager m_ExpManager;
+    private bool m_bUpgradeTreeInRange = false;
+    public bool UpgradeTreeInRange { get { return m_bUpgradeTreeInRange; } set { m_bUpgradeTreeInRange = value; } }
+    private bool m_bPerkTreeOpen = false;
+    public bool PerkTreeOpen { get { return m_bPerkTreeOpen; } set { m_bPerkTreeOpen = value; } }
+
+    private GameObject m_perkTreeCanvas;
+    private GameObject m_perkTreeCamera;
 
     public GameObject m_upgradeAvailableText;
     public GameObject m_upgradeUnavailableText;
@@ -18,16 +24,31 @@ public class ExpManager : MonoBehaviour
     public int m_playerLevel = 1;
     public float m_percentageAddedXPPerLvl = 0.25f;
 
-	private PerkManager m_PerkManager;
+    public static ExpManager m_experiencePointsManager;
 
-    // Use this for initialization
-    void Start()
+    private void Awake()
     {
-		m_PerkManager = FindObjectOfType<PerkManager>();
-        //m_gameManager = GetComponent<GameManager>();
+        if (m_experiencePointsManager == null)
+        {
+            m_experiencePointsManager = this;
+        }
+        else if (m_experiencePointsManager != this)
+        {
+            Destroy(gameObject);
+        }
+
+        m_perkTreeCanvas = GameObject.FindGameObjectWithTag("PerkTreeCanvas");
+        m_perkTreeCamera = GameObject.FindGameObjectWithTag("PerkTreeCamera");
     }
 
-    // Update is called once per frame
+    private void Start()
+    {
+        ValidateInitialisation();
+
+        m_perkTreeCamera.SetActive(false);
+        m_perkTreeCanvas.SetActive(false);
+    }
+
     void Update()
     {
 		XPSlider.GetComponent<Slider> ().maxValue = m_playerMaxXP;
@@ -47,7 +68,7 @@ public class ExpManager : MonoBehaviour
             LevelUp();
         }
 
-        if (GameManager.m_GameManager.inRange && !GameManager.m_GameManager.perkOpen)
+        if (m_bUpgradeTreeInRange && !m_bPerkTreeOpen)
         {
             if (PerkTreeManager.m_perkTreeManager.AvailiablePerks == 0)
             {
@@ -65,6 +86,18 @@ public class ExpManager : MonoBehaviour
             m_upgradeAvailableText.SetActive(false);
             m_upgradeUnavailableText.SetActive(false);
         }
+
+        if (Input.GetKeyDown(KeyCode.Tab) || InputManager.BackButton())
+        {
+            if (PerkTreeManager.m_perkTreeManager.AvailiablePerks != 0 && !m_bPerkTreeOpen)
+            {
+                EnablePerkTree();
+            }
+            else if (PerkTreeManager.m_perkTreeManager.AvailiablePerks != 0 && m_bPerkTreeOpen)
+            {
+                DisablePerkTree();
+            }
+        }
     }
 
 
@@ -74,6 +107,18 @@ public class ExpManager : MonoBehaviour
         //x GUI.DrawTexture(new Rect((Screen.width - m_expBarWidth)/2 + 200, 0, m_expBarWidth * (m_playerExperience/m_playerMaxXP), 25), m_expBarTexture);
     }
 
+    private void ValidateInitialisation()
+    {
+        if (m_perkTreeCanvas == null)
+        {
+            Debug.Log("PerkTreeCanvas was unable to be initialised.");
+        }
+
+        if (m_perkTreeCamera == null)
+        {
+            Debug.Log("PerkTreeCamera was unable to be initialised.");
+        }
+    }
 
     void LevelUp()
     {
@@ -86,5 +131,23 @@ public class ExpManager : MonoBehaviour
 		//x m_PerkManager.genPerkList();
 		//x m_PerkManager.leveledUp();
 		//x LevelUpUI.m_Singleton.showUI();
-	}  
+	}
+
+    private void EnablePerkTree()
+    {
+        m_perkTreeCamera.SetActive(true);
+        m_perkTreeCanvas.SetActive(true);
+        PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(false);
+        m_bPerkTreeOpen = true;
+        Time.timeScale = 0;
+    }
+
+    private void DisablePerkTree()
+    {
+        m_perkTreeCamera.SetActive(false);
+        m_perkTreeCanvas.SetActive(false);
+        PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(true);
+        m_bPerkTreeOpen = false;
+        Time.timeScale = 1;
+    }
 }

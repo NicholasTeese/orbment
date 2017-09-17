@@ -1,22 +1,22 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class UpgradeTree : MonoBehaviour
 {
-    private void OnTriggerStay(Collider collider)
+    private void OnTriggerStay(Collider a_collider)
     {
-        if (collider.CompareTag("Player"))
+        if (a_collider.CompareTag("Player"))
         {
-            GameManager.m_GameManager.inRange = true;
+            ExpManager.m_experiencePointsManager.UpgradeTreeInRange = true;
         }
     }
 
-    private void OnTriggerExit(Collider collider)
+    private void OnTriggerExit(Collider a_collider)
     {
-        if (collider.CompareTag("Player"))
+        if (a_collider.CompareTag("Player"))
         {
-            GameManager.m_GameManager.inRange = false;
+            ExpManager.m_experiencePointsManager.UpgradeTreeInRange = false;
         }
     }
 }

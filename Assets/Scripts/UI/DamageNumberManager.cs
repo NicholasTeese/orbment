@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,7 +13,7 @@ public class DamageNumberManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        m_canvas = GameObject.Find("Canvas");
+        m_canvas = GameObject.Find("HUDCanvas");
 
         if(m_dmgNumPrefab != null)
         {

@@ -20,14 +20,14 @@ public sealed class RestartLevelButton : BaseButton
 
     public override void OnClick()
     {
-        if (m_bIsMousedOver)
+        if (!m_bIsMousedOver)
         {
             Debug.Log(gameObject.name + " button cannot be clicked because 'm_bIsMouseOver' is " + m_bIsMousedOver + '.');
             return;
         }
 
         base.OnClick();
-        GameManager.m_GameManager.RestartLevel();
+        GameManager.m_gameManager.RestartLevel();
     }
 
     protected override void Update()

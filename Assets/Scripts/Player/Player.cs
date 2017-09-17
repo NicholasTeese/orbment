@@ -170,12 +170,15 @@ public class Player : Entity
 
         //Debug.Log(m_currSpeed);
 
-		if (m_currHealth <= 1) {
-			
-			GameObject.Find ("GameManager").GetComponent<GameManager> ().dead = true;
+		if (m_currHealth <= 0.0f) {
+
+            GameManager.m_gameManager.dead = true;
+			//x GameObject.Find ("GameManager").GetComponent<GameManager> ().dead = true;
 		}
-		GameObject.Find ("GameManager").GetComponent<GameManager> ().healthBar.GetComponent<Slider> ().maxValue = m_maxHealth;
-		GameObject.Find ("GameManager").GetComponent<GameManager> ().healthBar.GetComponent<Slider> ().value = m_currHealth;
+        GameManager.m_gameManager.m_healthBar.GetComponent<Slider>().maxValue = m_maxHealth;
+        GameManager.m_gameManager.m_healthBar.GetComponent<Slider>().value = m_currHealth;
+        //x GameObject.Find ("GameManager").GetComponent<GameManager> ().m_healthBar.GetComponent<Slider> ().maxValue = m_maxHealth;
+        //x GameObject.Find ("GameManager").GetComponent<GameManager> ().m_healthBar.GetComponent<Slider> ().value = m_currHealth;
         if (m_camera != null && m_currHealth < m_oldHealth)
         {
 
