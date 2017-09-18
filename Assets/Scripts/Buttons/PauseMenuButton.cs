@@ -5,6 +5,11 @@ public class PauseMenuButton : BaseButton
     public override void OnCursorEnter()
     {
         base.OnCursorEnter();
+
+        PauseMenuManager.m_pauseMenuCanvasManager.SelectedButtonIndex = m_iParentListIndex;
+        PauseMenuManager.m_pauseMenuCanvasManager.SelectedButton.IsMousedOver = false;
+        PauseMenuManager.m_pauseMenuCanvasManager.SelectedButton = PauseMenuManager.m_pauseMenuCanvasManager.ActivePanelButtons[m_iParentListIndex];
+        PauseMenuManager.m_pauseMenuCanvasManager.SelectedButton.IsMousedOver = true;
     }
 
     public override void OnCursorExit()
@@ -29,6 +34,8 @@ public class PauseMenuButton : BaseButton
                     PauseMenuManager.m_pauseMenuCanvasManager.m_optionsPanel.SetActive(false);
                     PauseMenuManager.m_pauseMenuCanvasManager.m_quitToMainMenuPanel.SetActive(false);
                     PauseMenuManager.m_pauseMenuCanvasManager.m_quitToDesktopPanel.SetActive(false);
+                    PauseMenuManager.m_pauseMenuCanvasManager.ResetSelectedButtonIndex();
+                    GameManager.m_gameManager.ContinueGame();
                     break;
                 }
 
@@ -42,6 +49,7 @@ public class PauseMenuButton : BaseButton
                     PauseMenuManager.m_pauseMenuCanvasManager.m_optionsPanel.SetActive(true);
                     PauseMenuManager.m_pauseMenuCanvasManager.m_quitToMainMenuPanel.SetActive(false);
                     PauseMenuManager.m_pauseMenuCanvasManager.m_quitToDesktopPanel.SetActive(false);
+                    PauseMenuManager.m_pauseMenuCanvasManager.ResetSelectedButtonIndex();
                     break;
                 }
 
@@ -55,6 +63,7 @@ public class PauseMenuButton : BaseButton
                     PauseMenuManager.m_pauseMenuCanvasManager.m_optionsPanel.SetActive(false);
                     PauseMenuManager.m_pauseMenuCanvasManager.m_quitToMainMenuPanel.SetActive(true);
                     PauseMenuManager.m_pauseMenuCanvasManager.m_quitToDesktopPanel.SetActive(false);
+                    PauseMenuManager.m_pauseMenuCanvasManager.ResetSelectedButtonIndex();
                     break;
                 }
 
@@ -68,6 +77,7 @@ public class PauseMenuButton : BaseButton
                     PauseMenuManager.m_pauseMenuCanvasManager.m_optionsPanel.SetActive(false);
                     PauseMenuManager.m_pauseMenuCanvasManager.m_quitToMainMenuPanel.SetActive(false);
                     PauseMenuManager.m_pauseMenuCanvasManager.m_quitToDesktopPanel.SetActive(true);
+                    PauseMenuManager.m_pauseMenuCanvasManager.ResetSelectedButtonIndex();
                     break;
                 }
             // End Main Panel.
@@ -83,6 +93,7 @@ public class PauseMenuButton : BaseButton
                     PauseMenuManager.m_pauseMenuCanvasManager.m_optionsPanel.SetActive(false);
                     PauseMenuManager.m_pauseMenuCanvasManager.m_quitToMainMenuPanel.SetActive(false);
                     PauseMenuManager.m_pauseMenuCanvasManager.m_quitToDesktopPanel.SetActive(false);
+                    PauseMenuManager.m_pauseMenuCanvasManager.ResetSelectedButtonIndex();
                     break;
                 }
             // Options Panel End.
@@ -104,6 +115,7 @@ public class PauseMenuButton : BaseButton
                     PauseMenuManager.m_pauseMenuCanvasManager.m_optionsPanel.SetActive(false);
                     PauseMenuManager.m_pauseMenuCanvasManager.m_quitToMainMenuPanel.SetActive(false);
                     PauseMenuManager.m_pauseMenuCanvasManager.m_quitToDesktopPanel.SetActive(false);
+                    PauseMenuManager.m_pauseMenuCanvasManager.ResetSelectedButtonIndex();
                     break;
                 }
             // Quit to Main Menu Panel End.
@@ -125,6 +137,7 @@ public class PauseMenuButton : BaseButton
                     PauseMenuManager.m_pauseMenuCanvasManager.m_optionsPanel.SetActive(false);
                     PauseMenuManager.m_pauseMenuCanvasManager.m_quitToMainMenuPanel.SetActive(false);
                     PauseMenuManager.m_pauseMenuCanvasManager.m_quitToDesktopPanel.SetActive(false);
+                    PauseMenuManager.m_pauseMenuCanvasManager.ResetSelectedButtonIndex();
                     break;
                 }
             // Quit to Desktop Panel End.

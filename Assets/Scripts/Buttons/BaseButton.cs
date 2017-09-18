@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class BaseButton : MonoBehaviour
 {
+    protected int m_iParentListIndex = 0;
+    public int ParentListIndex { get { return m_iParentListIndex; } set { m_iParentListIndex = value; } }
+
     protected float m_fGrowShrinkSpeed = 0.1f;
     protected float m_fGrowMultiplier = 1.5f;
     protected float m_fShrinkMultiplier = 1.0f;
@@ -13,6 +16,8 @@ public class BaseButton : MonoBehaviour
     public bool IsMousedOver { get { return m_bIsMousedOver; } set { m_bIsMousedOver = value; } }
 
     protected Button m_button;
+
+    public string m_strOnClickParameter;
 
     protected virtual void Awake()
     {
@@ -38,7 +43,7 @@ public class BaseButton : MonoBehaviour
 
     public virtual void OnCursorExit()
     {
-        m_bIsMousedOver = false;
+        
     }
 
     public virtual void OnClick()

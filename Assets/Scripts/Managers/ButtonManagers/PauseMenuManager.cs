@@ -5,6 +5,7 @@ using UnityEngine;
 public class PauseMenuManager : MonoBehaviour
 {
     private int m_iSelectedButtonIndex = 0;
+    public int SelectedButtonIndex { get { return m_iSelectedButtonIndex; } set { m_iSelectedButtonIndex = value; } }
 
     private float m_fInputBuffer = 0.2f;
 
@@ -59,34 +60,60 @@ public class PauseMenuManager : MonoBehaviour
     {
         if (InputManager.AButton())
         {
-            m_selectedButton.OnClick();
+            m_selectedButton.OnClick(m_selectedButton.m_strOnClickParameter);
         }
 
         Vector3 v3PrimaryInputDirection = InputManager.PrimaryInput();
-        NaviageButtons(v3PrimaryInputDirection, m_lMainPanelButtons);
+        NaviageButtons(v3PrimaryInputDirection, m_lActivePanelButtons);
     }
 
     private void InitialiseButtons()
     {
-        foreach (GameObject button in m_mainPanel.transform)
-        {
-            m_lMainPanelButtons.Add(button.GetComponent<BaseButton>());
-        }
+        int iParentListIndex = 0;
 
-        foreach (GameObject button in m_optionsPanel.transform)
+        foreach (Transform button in m_mainPanel.transform)
         {
-            m_lOptionsPanelButtons.Add(button.GetComponent<BaseButton>());
+            if (button.CompareTag("Button"))
+            {
+                m_lMainPanelButtons.Add(button.GetComponent<BaseButton>());
+                button.GetComponent<BaseButton>().ParentListIndex = iParentListIndex;
+                ++iParentListIndex;
+            }
         }
+        iParentListIndex = 0;
 
-        foreach (GameObject button in m_quitToMainMenuPanel.transform)
+        foreach (Transform button in m_optionsPanel.transform)
         {
-            m_lQuitToMainMenuPanelButtons.Add(button.GetComponent<BaseButton>());
+            if (button.CompareTag("Button"))
+            {
+                m_lOptionsPanelButtons.Add(button.GetComponent<BaseButton>());
+                button.GetComponent<BaseButton>().ParentListIndex = iParentListIndex;
+                ++iParentListIndex;
+            }
         }
+        iParentListIndex = 0;
 
-        foreach (GameObject button in m_quitToDesktopPanel.transform)
+        foreach (Transform button in m_quitToMainMenuPanel.transform)
         {
-            m_lQuitToDesktopPanelButtons.Add(button.GetComponent<BaseButton>());
+            if (button.CompareTag("Button"))
+            {
+                m_lQuitToMainMenuPanelButtons.Add(button.GetComponent<BaseButton>());
+                button.GetComponent<BaseButton>().ParentListIndex = iParentListIndex;
+                ++iParentListIndex;
+            }
         }
+        iParentListIndex = 0;
+
+        foreach (Transform button in m_quitToDesktopPanel.transform)
+        {
+            if (button.CompareTag("Button"))
+            {
+                m_lQuitToDesktopPanelButtons.Add(button.GetComponent<BaseButton>());
+                button.GetComponent<BaseButton>().ParentListIndex = iParentListIndex;
+                ++iParentListIndex;
+            }
+        }
+        iParentListIndex = 0;
     }
 
     private void NaviageButtons(Vector3 a_v3PrimaryInputDirection, List<BaseButton> a_lButtons)
@@ -139,5 +166,10 @@ public class PauseMenuManager : MonoBehaviour
         {
             m_bInputRecieved = false;
         }
+    }
+
+    public void ResetSelectedButtonIndex()
+    {
+        m_iSelectedButtonIndex = 0;
     }
 }
