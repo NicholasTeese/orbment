@@ -30,7 +30,7 @@ public class PauseMenuButton : BaseButton
                     PauseMenuManager.m_pauseMenuManager.m_quitToMainMenuPanel.SetActive(false);
                     PauseMenuManager.m_pauseMenuManager.m_quitToDesktopPanel.SetActive(false);
                     PauseMenuManager.m_pauseMenuManager.ResetSelectedButtonIndex();
-                    GameManager.m_gameManager.ContinueGame();
+                    GameManager.m_gameManager.GameIsPaused = false;
                     break;
                 }
 

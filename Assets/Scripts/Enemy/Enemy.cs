@@ -50,7 +50,7 @@ public class Enemy : Entity
 
     new private void OnGUI()
     {
-        if (ExpManager.m_experiencePointsManager.PerkTreeOpen || GameManager.m_gameManager.paused)
+        if (ExpManager.m_experiencePointsManager.PerkTreeOpen || GameManager.m_gameManager.GameIsPaused)
         {
             return;
         }

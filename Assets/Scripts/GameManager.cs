@@ -5,12 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-	public bool paused = false;
-    public bool dead = false;
+	private bool m_bGameIsPaused = false;
+    public bool GameIsPaused { get { return m_bGameIsPaused; } set { m_bGameIsPaused = value; } }
 
-	public GameObject m_healthBar;
+    public GameObject m_healthBar;
     public GameObject deathMenu;
-    public GameObject hud;
 
     public static GameManager m_gameManager;
 
@@ -25,64 +24,59 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-	
-	void Update ()
+
+    private void Start()
     {
-        if (Input.GetKeyUp(KeyCode.Escape) || InputManager.StartButton())
-        {
-            if (!paused)
-            {
-                paused = true;
-            }
-            else
-            {
-                paused = false;
-            }
-        }
-        if (paused)
-        {
-            Time.timeScale = 0.0f;
-            PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(true);
-            hud.SetActive(false);
-        }
-        else if (dead == true)
+        PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(false);
+        DeathMenuManager.m_deathMenuManager.gameObject.SetActive(false);
+        PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(true);
+    }
+
+    void Update ()
+    {
+        if (!Player.m_Player.IsAlive && !DeathMenuManager.m_deathMenuManager.gameObject.activeInHierarchy)
         {
             Time.timeScale = 0.0f;
             DeathMenuManager.m_deathMenuManager.gameObject.SetActive(true);
-            hud.SetActive(false);
+            PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(false);
         }
-        else
+
+        if (Input.GetKeyUp(KeyCode.Escape) || InputManager.StartButton())
         {
-            PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(false);
-            DeathMenuManager.m_deathMenuManager.gameObject.SetActive(false);
-            hud.SetActive(true);
-            Time.timeScale = 1;
+            if (!m_bGameIsPaused)
+            {
+                m_bGameIsPaused = true;
+                Time.timeScale = 0.0f;
+                PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(true);
+                PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(false);
+            }
+            else
+            {
+                m_bGameIsPaused = false;
+                Time.timeScale = 1;
+                PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(false);
+                DeathMenuManager.m_deathMenuManager.gameObject.SetActive(false);
+                PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(true);
+            }
         }
-	}
-
-	public void ContinueGame()
-    {
-		paused = false;
-	}
-	public void Options()
-    {
-
 	}
 	public void LoadMainMenu()
     {
-
-	}
-	public void QuitToDesktop()
-    {
-
-	}
-	public void RestartLevel()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-	}
+        SceneManager.LoadScene("MainMenu");
+    }
 
     public void LoadLevelOne()
     {
         SceneManager.LoadScene("Level1");
     }
+
+    public void QuitToDesktop()
+    {
+        Application.Quit();
+	}
+
+	public void RestartLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+	}
 }

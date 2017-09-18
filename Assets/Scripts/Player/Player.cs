@@ -170,9 +170,10 @@ public class Player : Entity
 
         //Debug.Log(m_currSpeed);
 
-		if (m_currHealth <= 0.0f) {
-
-            GameManager.m_gameManager.dead = true;
+		if (m_currHealth <= 0.0f)
+        {
+            m_bIsAlive = false;
+            //GameManager.m_gameManager.dead = true;
 			//x GameObject.Find ("GameManager").GetComponent<GameManager> ().dead = true;
 		}
         GameManager.m_gameManager.m_healthBar.GetComponent<Slider>().maxValue = m_maxHealth;

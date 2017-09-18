@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -14,6 +14,9 @@ using UnityEngine.UI;
 public class Entity : MonoBehaviour
 {
 	public GameManager gameManager;
+
+    protected bool m_bIsAlive = true;
+    public bool IsAlive { get { return m_bIsAlive; } }
 
     //TODO: Move perk related variables to the player class as other entities wont have perks.
     protected float m_fGodModeTimer = 5.0f;
@@ -200,6 +203,7 @@ public class Entity : MonoBehaviour
         {
             if (!m_bGodModeIsActive)
             {
+                m_bIsAlive = false;
                 m_explosionManager.RequestExplosion(this.transform.position, this.transform.forward, Explosion.ExplosionType.BigBlood, 0.0f);
                 m_explosionManager.RequestExplosion(this.transform.position, this.transform.forward, Explosion.ExplosionType.Gibs, 0.0f);
                 this.gameObject.SetActive(false);
