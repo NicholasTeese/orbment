@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
         if (paused)
         {
             Time.timeScale = 0.0f;
-            PauseMenuManager.m_pauseMenuCanvasManager.gameObject.SetActive(true);
+            PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(true);
             hud.SetActive(false);
         }
         else if (dead == true)
@@ -53,7 +53,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            PauseMenuManager.m_pauseMenuCanvasManager.gameObject.SetActive(false);
+            PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(false);
+            DeathMenuManager.m_deathMenuManager.gameObject.SetActive(false);
             hud.SetActive(true);
             Time.timeScale = 1;
         }
@@ -67,7 +68,7 @@ public class GameManager : MonoBehaviour
     {
 
 	}
-	public void QuitToMain()
+	public void LoadMainMenu()
     {
 
 	}
@@ -79,4 +80,9 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 	}
+
+    public void LoadLevelOne()
+    {
+        SceneManager.LoadScene("Level1");
+    }
 }

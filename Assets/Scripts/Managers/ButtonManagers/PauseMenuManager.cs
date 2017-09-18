@@ -31,15 +31,15 @@ public class PauseMenuManager : MonoBehaviour
     public GameObject m_quitToMainMenuPanel;
     public GameObject m_quitToDesktopPanel;
 
-    public static PauseMenuManager m_pauseMenuCanvasManager;
+    public static PauseMenuManager m_pauseMenuManager;
 
     private void Awake()
     {
-        if (m_pauseMenuCanvasManager == null)
+        if (m_pauseMenuManager == null)
         {
-            m_pauseMenuCanvasManager = this;
+            m_pauseMenuManager = this;
         }
-        else if (m_pauseMenuCanvasManager != this)
+        else if (m_pauseMenuManager != this)
         {
             Destroy(gameObject);
         }

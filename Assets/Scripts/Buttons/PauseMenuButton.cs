@@ -6,15 +6,10 @@ public class PauseMenuButton : BaseButton
     {
         base.OnCursorEnter();
 
-        PauseMenuManager.m_pauseMenuCanvasManager.SelectedButtonIndex = m_iParentListIndex;
-        PauseMenuManager.m_pauseMenuCanvasManager.SelectedButton.IsMousedOver = false;
-        PauseMenuManager.m_pauseMenuCanvasManager.SelectedButton = PauseMenuManager.m_pauseMenuCanvasManager.ActivePanelButtons[m_iParentListIndex];
-        PauseMenuManager.m_pauseMenuCanvasManager.SelectedButton.IsMousedOver = true;
-    }
-
-    public override void OnCursorExit()
-    {
-        base.OnCursorExit();
+        PauseMenuManager.m_pauseMenuManager.SelectedButtonIndex = m_iParentListIndex;
+        PauseMenuManager.m_pauseMenuManager.SelectedButton.IsMousedOver = false;
+        PauseMenuManager.m_pauseMenuManager.SelectedButton = PauseMenuManager.m_pauseMenuManager.ActivePanelButtons[m_iParentListIndex];
+        PauseMenuManager.m_pauseMenuManager.SelectedButton.IsMousedOver = true;
     }
 
     public override void OnClick(string a_strParameter)
@@ -23,104 +18,104 @@ public class PauseMenuButton : BaseButton
 
         switch (a_strParameter)
         {
-            // Start Main Panel.
+            // Main panel start.
             case "MainPanelContinue":
                 {
-                    PauseMenuManager.m_pauseMenuCanvasManager.ActivePanelButtons = PauseMenuManager.m_pauseMenuCanvasManager.MainPanelButtons;
-                    PauseMenuManager.m_pauseMenuCanvasManager.SelectedButton.IsMousedOver = false;
-                    PauseMenuManager.m_pauseMenuCanvasManager.SelectedButton = PauseMenuManager.m_pauseMenuCanvasManager.ActivePanelButtons[0];
-                    PauseMenuManager.m_pauseMenuCanvasManager.SelectedButton.IsMousedOver = true;
-                    PauseMenuManager.m_pauseMenuCanvasManager.m_mainPanel.SetActive(true);
-                    PauseMenuManager.m_pauseMenuCanvasManager.m_optionsPanel.SetActive(false);
-                    PauseMenuManager.m_pauseMenuCanvasManager.m_quitToMainMenuPanel.SetActive(false);
-                    PauseMenuManager.m_pauseMenuCanvasManager.m_quitToDesktopPanel.SetActive(false);
-                    PauseMenuManager.m_pauseMenuCanvasManager.ResetSelectedButtonIndex();
+                    PauseMenuManager.m_pauseMenuManager.ActivePanelButtons = PauseMenuManager.m_pauseMenuManager.MainPanelButtons;
+                    PauseMenuManager.m_pauseMenuManager.SelectedButton.IsMousedOver = false;
+                    PauseMenuManager.m_pauseMenuManager.SelectedButton = PauseMenuManager.m_pauseMenuManager.ActivePanelButtons[0];
+                    PauseMenuManager.m_pauseMenuManager.SelectedButton.IsMousedOver = true;
+                    PauseMenuManager.m_pauseMenuManager.m_mainPanel.SetActive(true);
+                    PauseMenuManager.m_pauseMenuManager.m_optionsPanel.SetActive(false);
+                    PauseMenuManager.m_pauseMenuManager.m_quitToMainMenuPanel.SetActive(false);
+                    PauseMenuManager.m_pauseMenuManager.m_quitToDesktopPanel.SetActive(false);
+                    PauseMenuManager.m_pauseMenuManager.ResetSelectedButtonIndex();
                     GameManager.m_gameManager.ContinueGame();
                     break;
                 }
 
             case "MainPanelOptions":
                 {
-                    PauseMenuManager.m_pauseMenuCanvasManager.ActivePanelButtons = PauseMenuManager.m_pauseMenuCanvasManager.OptionsPanelbuttons;
-                    PauseMenuManager.m_pauseMenuCanvasManager.SelectedButton.IsMousedOver = false;
-                    PauseMenuManager.m_pauseMenuCanvasManager.SelectedButton = PauseMenuManager.m_pauseMenuCanvasManager.ActivePanelButtons[0];
-                    PauseMenuManager.m_pauseMenuCanvasManager.SelectedButton.IsMousedOver = true;
-                    PauseMenuManager.m_pauseMenuCanvasManager.m_mainPanel.SetActive(false);
-                    PauseMenuManager.m_pauseMenuCanvasManager.m_optionsPanel.SetActive(true);
-                    PauseMenuManager.m_pauseMenuCanvasManager.m_quitToMainMenuPanel.SetActive(false);
-                    PauseMenuManager.m_pauseMenuCanvasManager.m_quitToDesktopPanel.SetActive(false);
-                    PauseMenuManager.m_pauseMenuCanvasManager.ResetSelectedButtonIndex();
+                    PauseMenuManager.m_pauseMenuManager.ActivePanelButtons = PauseMenuManager.m_pauseMenuManager.OptionsPanelbuttons;
+                    PauseMenuManager.m_pauseMenuManager.SelectedButton.IsMousedOver = false;
+                    PauseMenuManager.m_pauseMenuManager.SelectedButton = PauseMenuManager.m_pauseMenuManager.ActivePanelButtons[0];
+                    PauseMenuManager.m_pauseMenuManager.SelectedButton.IsMousedOver = true;
+                    PauseMenuManager.m_pauseMenuManager.m_mainPanel.SetActive(false);
+                    PauseMenuManager.m_pauseMenuManager.m_optionsPanel.SetActive(true);
+                    PauseMenuManager.m_pauseMenuManager.m_quitToMainMenuPanel.SetActive(false);
+                    PauseMenuManager.m_pauseMenuManager.m_quitToDesktopPanel.SetActive(false);
+                    PauseMenuManager.m_pauseMenuManager.ResetSelectedButtonIndex();
                     break;
                 }
 
             case "MainPanelQuitToMainMenu":
                 {
-                    PauseMenuManager.m_pauseMenuCanvasManager.ActivePanelButtons = PauseMenuManager.m_pauseMenuCanvasManager.QuitToMainMenuPanelButtons;
-                    PauseMenuManager.m_pauseMenuCanvasManager.SelectedButton.IsMousedOver = false;
-                    PauseMenuManager.m_pauseMenuCanvasManager.SelectedButton = PauseMenuManager.m_pauseMenuCanvasManager.ActivePanelButtons[0];
-                    PauseMenuManager.m_pauseMenuCanvasManager.SelectedButton.IsMousedOver = true;
-                    PauseMenuManager.m_pauseMenuCanvasManager.m_mainPanel.SetActive(false);
-                    PauseMenuManager.m_pauseMenuCanvasManager.m_optionsPanel.SetActive(false);
-                    PauseMenuManager.m_pauseMenuCanvasManager.m_quitToMainMenuPanel.SetActive(true);
-                    PauseMenuManager.m_pauseMenuCanvasManager.m_quitToDesktopPanel.SetActive(false);
-                    PauseMenuManager.m_pauseMenuCanvasManager.ResetSelectedButtonIndex();
+                    PauseMenuManager.m_pauseMenuManager.ActivePanelButtons = PauseMenuManager.m_pauseMenuManager.QuitToMainMenuPanelButtons;
+                    PauseMenuManager.m_pauseMenuManager.SelectedButton.IsMousedOver = false;
+                    PauseMenuManager.m_pauseMenuManager.SelectedButton = PauseMenuManager.m_pauseMenuManager.ActivePanelButtons[0];
+                    PauseMenuManager.m_pauseMenuManager.SelectedButton.IsMousedOver = true;
+                    PauseMenuManager.m_pauseMenuManager.m_mainPanel.SetActive(false);
+                    PauseMenuManager.m_pauseMenuManager.m_optionsPanel.SetActive(false);
+                    PauseMenuManager.m_pauseMenuManager.m_quitToMainMenuPanel.SetActive(true);
+                    PauseMenuManager.m_pauseMenuManager.m_quitToDesktopPanel.SetActive(false);
+                    PauseMenuManager.m_pauseMenuManager.ResetSelectedButtonIndex();
                     break;
                 }
 
             case "MainPanelQuitToDesktop":
                 {
-                    PauseMenuManager.m_pauseMenuCanvasManager.ActivePanelButtons = PauseMenuManager.m_pauseMenuCanvasManager.QuitToDesktopPanelButtons;
-                    PauseMenuManager.m_pauseMenuCanvasManager.SelectedButton.IsMousedOver = false;
-                    PauseMenuManager.m_pauseMenuCanvasManager.SelectedButton = PauseMenuManager.m_pauseMenuCanvasManager.ActivePanelButtons[0];
-                    PauseMenuManager.m_pauseMenuCanvasManager.SelectedButton.IsMousedOver = true;
-                    PauseMenuManager.m_pauseMenuCanvasManager.m_mainPanel.SetActive(false);
-                    PauseMenuManager.m_pauseMenuCanvasManager.m_optionsPanel.SetActive(false);
-                    PauseMenuManager.m_pauseMenuCanvasManager.m_quitToMainMenuPanel.SetActive(false);
-                    PauseMenuManager.m_pauseMenuCanvasManager.m_quitToDesktopPanel.SetActive(true);
-                    PauseMenuManager.m_pauseMenuCanvasManager.ResetSelectedButtonIndex();
+                    PauseMenuManager.m_pauseMenuManager.ActivePanelButtons = PauseMenuManager.m_pauseMenuManager.QuitToDesktopPanelButtons;
+                    PauseMenuManager.m_pauseMenuManager.SelectedButton.IsMousedOver = false;
+                    PauseMenuManager.m_pauseMenuManager.SelectedButton = PauseMenuManager.m_pauseMenuManager.ActivePanelButtons[0];
+                    PauseMenuManager.m_pauseMenuManager.SelectedButton.IsMousedOver = true;
+                    PauseMenuManager.m_pauseMenuManager.m_mainPanel.SetActive(false);
+                    PauseMenuManager.m_pauseMenuManager.m_optionsPanel.SetActive(false);
+                    PauseMenuManager.m_pauseMenuManager.m_quitToMainMenuPanel.SetActive(false);
+                    PauseMenuManager.m_pauseMenuManager.m_quitToDesktopPanel.SetActive(true);
+                    PauseMenuManager.m_pauseMenuManager.ResetSelectedButtonIndex();
                     break;
                 }
-            // End Main Panel.
+            // Main panel end.
 
-            // Options Panel Start.
+            // Options panel start
             case "OptionsPanelBack":
                 {
-                    PauseMenuManager.m_pauseMenuCanvasManager.ActivePanelButtons = PauseMenuManager.m_pauseMenuCanvasManager.MainPanelButtons;
-                    PauseMenuManager.m_pauseMenuCanvasManager.SelectedButton.IsMousedOver = false;
-                    PauseMenuManager.m_pauseMenuCanvasManager.SelectedButton = PauseMenuManager.m_pauseMenuCanvasManager.ActivePanelButtons[0];
-                    PauseMenuManager.m_pauseMenuCanvasManager.SelectedButton.IsMousedOver = true;
-                    PauseMenuManager.m_pauseMenuCanvasManager.m_mainPanel.SetActive(true);
-                    PauseMenuManager.m_pauseMenuCanvasManager.m_optionsPanel.SetActive(false);
-                    PauseMenuManager.m_pauseMenuCanvasManager.m_quitToMainMenuPanel.SetActive(false);
-                    PauseMenuManager.m_pauseMenuCanvasManager.m_quitToDesktopPanel.SetActive(false);
-                    PauseMenuManager.m_pauseMenuCanvasManager.ResetSelectedButtonIndex();
+                    PauseMenuManager.m_pauseMenuManager.ActivePanelButtons = PauseMenuManager.m_pauseMenuManager.MainPanelButtons;
+                    PauseMenuManager.m_pauseMenuManager.SelectedButton.IsMousedOver = false;
+                    PauseMenuManager.m_pauseMenuManager.SelectedButton = PauseMenuManager.m_pauseMenuManager.ActivePanelButtons[0];
+                    PauseMenuManager.m_pauseMenuManager.SelectedButton.IsMousedOver = true;
+                    PauseMenuManager.m_pauseMenuManager.m_mainPanel.SetActive(true);
+                    PauseMenuManager.m_pauseMenuManager.m_optionsPanel.SetActive(false);
+                    PauseMenuManager.m_pauseMenuManager.m_quitToMainMenuPanel.SetActive(false);
+                    PauseMenuManager.m_pauseMenuManager.m_quitToDesktopPanel.SetActive(false);
+                    PauseMenuManager.m_pauseMenuManager.ResetSelectedButtonIndex();
                     break;
                 }
-            // Options Panel End.
+            // Options panel end.
 
-            // Quit To Main Menu Panel Start.
+            // Quit to main menu panel start.
             case "QuitToMainMenuYes":
                 {
-                    GameManager.m_gameManager.QuitToMain();
+                    GameManager.m_gameManager.LoadMainMenu();
                     break;
                 }
 
             case "QuitToMainMenuNo":
                 {
-                    PauseMenuManager.m_pauseMenuCanvasManager.ActivePanelButtons = PauseMenuManager.m_pauseMenuCanvasManager.MainPanelButtons;
-                    PauseMenuManager.m_pauseMenuCanvasManager.SelectedButton.IsMousedOver = false;
-                    PauseMenuManager.m_pauseMenuCanvasManager.SelectedButton = PauseMenuManager.m_pauseMenuCanvasManager.ActivePanelButtons[0];
-                    PauseMenuManager.m_pauseMenuCanvasManager.SelectedButton.IsMousedOver = true;
-                    PauseMenuManager.m_pauseMenuCanvasManager.m_mainPanel.SetActive(true);
-                    PauseMenuManager.m_pauseMenuCanvasManager.m_optionsPanel.SetActive(false);
-                    PauseMenuManager.m_pauseMenuCanvasManager.m_quitToMainMenuPanel.SetActive(false);
-                    PauseMenuManager.m_pauseMenuCanvasManager.m_quitToDesktopPanel.SetActive(false);
-                    PauseMenuManager.m_pauseMenuCanvasManager.ResetSelectedButtonIndex();
+                    PauseMenuManager.m_pauseMenuManager.ActivePanelButtons = PauseMenuManager.m_pauseMenuManager.MainPanelButtons;
+                    PauseMenuManager.m_pauseMenuManager.SelectedButton.IsMousedOver = false;
+                    PauseMenuManager.m_pauseMenuManager.SelectedButton = PauseMenuManager.m_pauseMenuManager.ActivePanelButtons[0];
+                    PauseMenuManager.m_pauseMenuManager.SelectedButton.IsMousedOver = true;
+                    PauseMenuManager.m_pauseMenuManager.m_mainPanel.SetActive(true);
+                    PauseMenuManager.m_pauseMenuManager.m_optionsPanel.SetActive(false);
+                    PauseMenuManager.m_pauseMenuManager.m_quitToMainMenuPanel.SetActive(false);
+                    PauseMenuManager.m_pauseMenuManager.m_quitToDesktopPanel.SetActive(false);
+                    PauseMenuManager.m_pauseMenuManager.ResetSelectedButtonIndex();
                     break;
                 }
-            // Quit to Main Menu Panel End.
+            // Quit to main menu panel end.
 
-            // Quit To Desktop Panel Start.
+            // Quit to desktop panel start.
             case "QuitToDesktopYes":
                 {
                     GameManager.m_gameManager.QuitToDesktop();
@@ -129,18 +124,18 @@ public class PauseMenuButton : BaseButton
 
             case "QuitToDesktopNo":
                 {
-                    PauseMenuManager.m_pauseMenuCanvasManager.ActivePanelButtons = PauseMenuManager.m_pauseMenuCanvasManager.MainPanelButtons;
-                    PauseMenuManager.m_pauseMenuCanvasManager.SelectedButton.IsMousedOver = false;
-                    PauseMenuManager.m_pauseMenuCanvasManager.SelectedButton = PauseMenuManager.m_pauseMenuCanvasManager.ActivePanelButtons[0];
-                    PauseMenuManager.m_pauseMenuCanvasManager.SelectedButton.IsMousedOver = true;
-                    PauseMenuManager.m_pauseMenuCanvasManager.m_mainPanel.SetActive(true);
-                    PauseMenuManager.m_pauseMenuCanvasManager.m_optionsPanel.SetActive(false);
-                    PauseMenuManager.m_pauseMenuCanvasManager.m_quitToMainMenuPanel.SetActive(false);
-                    PauseMenuManager.m_pauseMenuCanvasManager.m_quitToDesktopPanel.SetActive(false);
-                    PauseMenuManager.m_pauseMenuCanvasManager.ResetSelectedButtonIndex();
+                    PauseMenuManager.m_pauseMenuManager.ActivePanelButtons = PauseMenuManager.m_pauseMenuManager.MainPanelButtons;
+                    PauseMenuManager.m_pauseMenuManager.SelectedButton.IsMousedOver = false;
+                    PauseMenuManager.m_pauseMenuManager.SelectedButton = PauseMenuManager.m_pauseMenuManager.ActivePanelButtons[0];
+                    PauseMenuManager.m_pauseMenuManager.SelectedButton.IsMousedOver = true;
+                    PauseMenuManager.m_pauseMenuManager.m_mainPanel.SetActive(true);
+                    PauseMenuManager.m_pauseMenuManager.m_optionsPanel.SetActive(false);
+                    PauseMenuManager.m_pauseMenuManager.m_quitToMainMenuPanel.SetActive(false);
+                    PauseMenuManager.m_pauseMenuManager.m_quitToDesktopPanel.SetActive(false);
+                    PauseMenuManager.m_pauseMenuManager.ResetSelectedButtonIndex();
                     break;
                 }
-            // Quit to Desktop Panel End.
+            // Quit to desktop panel end.
 
             default:
                 {
