@@ -13,7 +13,22 @@ public class PauseMenuManager : MonoBehaviour
     private BaseButton m_selectedButton;
     public BaseButton SelectedButton { get { return m_selectedButton; } set { m_selectedButton = value; } }
 
-    List<BaseButton> m_lButtons = new List<BaseButton>();
+    private List<BaseButton> m_lMainPanelButtons = new List<BaseButton>();
+    public List<BaseButton> MainPanelButtons { get { return m_lMainPanelButtons; } }
+    private List<BaseButton> m_lOptionsPanelButtons = new List<BaseButton>();
+    public List<BaseButton> OptionsPanelbuttons { get { return m_lOptionsPanelButtons; } }
+    private List<BaseButton> m_lQuitToMainMenuPanelButtons = new List<BaseButton>();
+    public List<BaseButton> QuitToMainMenuPanelButtons { get { return m_lQuitToMainMenuPanelButtons; } }
+    private List<BaseButton> m_lQuitToDesktopPanelButtons = new List<BaseButton>();
+    public List<BaseButton> QuitToDesktopPanelButtons { get { return m_lQuitToDesktopPanelButtons; } }
+    private List<BaseButton> m_lActivePanelButtons = new List<BaseButton>();
+    public List<BaseButton> ActivePanelButtons { get { return m_lActivePanelButtons; } set { m_lActivePanelButtons = value; } }
+
+    [Header("Pause Menu Panels")]
+    public GameObject m_mainPanel;
+    public GameObject m_optionsPanel;
+    public GameObject m_quitToMainMenuPanel;
+    public GameObject m_quitToDesktopPanel;
 
     public static PauseMenuManager m_pauseMenuCanvasManager;
 
@@ -28,18 +43,16 @@ public class PauseMenuManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        foreach (Transform child in transform)
-        {
-            m_lButtons.Add(child.GetComponent<BaseButton>());
-        }
+        InitialiseButtons();
 
-        m_selectedButton = m_lButtons[0];
+        m_mainPanel.SetActive(true);
+        m_optionsPanel.SetActive(false);
+        m_quitToMainMenuPanel.SetActive(false);
+        m_quitToDesktopPanel.SetActive(false);
+
+        m_lActivePanelButtons = m_lMainPanelButtons;
+        m_selectedButton = m_lActivePanelButtons[0];
         m_selectedButton.IsMousedOver = true;
-    }
-
-    private void Start()
-    {
-        ValidateInitialisation();
     }
 
     private void Update()
@@ -50,46 +63,73 @@ public class PauseMenuManager : MonoBehaviour
         }
 
         Vector3 v3PrimaryInputDirection = InputManager.PrimaryInput();
+        NaviageButtons(v3PrimaryInputDirection, m_lMainPanelButtons);
+    }
 
-        if (v3PrimaryInputDirection.z >= m_fInputBuffer)
+    private void InitialiseButtons()
+    {
+        foreach (GameObject button in m_mainPanel.transform)
+        {
+            m_lMainPanelButtons.Add(button.GetComponent<BaseButton>());
+        }
+
+        foreach (GameObject button in m_optionsPanel.transform)
+        {
+            m_lOptionsPanelButtons.Add(button.GetComponent<BaseButton>());
+        }
+
+        foreach (GameObject button in m_quitToMainMenuPanel.transform)
+        {
+            m_lQuitToMainMenuPanelButtons.Add(button.GetComponent<BaseButton>());
+        }
+
+        foreach (GameObject button in m_quitToDesktopPanel.transform)
+        {
+            m_lQuitToDesktopPanelButtons.Add(button.GetComponent<BaseButton>());
+        }
+    }
+
+    private void NaviageButtons(Vector3 a_v3PrimaryInputDirection, List<BaseButton> a_lButtons)
+    {
+        if (a_v3PrimaryInputDirection.z >= m_fInputBuffer)
         {
             if (!m_bInputRecieved)
             {
                 m_bInputRecieved = true;
 
-                if (m_selectedButton == m_lButtons[0])
+                if (m_selectedButton == a_lButtons[0])
                 {
                     m_selectedButton.IsMousedOver = false;
-                    m_selectedButton = m_lButtons[m_lButtons.Count - 1];
+                    m_selectedButton = a_lButtons[a_lButtons.Count - 1];
                     m_selectedButton.IsMousedOver = true;
-                    m_iSelectedButtonIndex = m_lButtons.Count - 1;
+                    m_iSelectedButtonIndex = a_lButtons.Count - 1;
                 }
                 else
                 {
                     m_selectedButton.IsMousedOver = false;
-                    m_selectedButton = m_lButtons[m_iSelectedButtonIndex - 1];
+                    m_selectedButton = a_lButtons[m_iSelectedButtonIndex - 1];
                     m_selectedButton.IsMousedOver = true;
                     --m_iSelectedButtonIndex;
                 }
             }
         }
-        else if (v3PrimaryInputDirection.z <= -m_fInputBuffer)
+        else if (a_v3PrimaryInputDirection.z <= -m_fInputBuffer)
         {
             if (!m_bInputRecieved)
             {
                 m_bInputRecieved = true;
 
-                if (m_selectedButton == m_lButtons[m_lButtons.Count - 1])
+                if (m_selectedButton == a_lButtons[a_lButtons.Count - 1])
                 {
                     m_selectedButton.IsMousedOver = false;
-                    m_selectedButton = m_lButtons[0];
+                    m_selectedButton = a_lButtons[0];
                     m_selectedButton.IsMousedOver = true;
                     m_iSelectedButtonIndex = 0;
                 }
                 else
                 {
                     m_selectedButton.IsMousedOver = false;
-                    m_selectedButton = m_lButtons[m_iSelectedButtonIndex + 1];
+                    m_selectedButton = a_lButtons[m_iSelectedButtonIndex + 1];
                     m_selectedButton.IsMousedOver = true;
                     ++m_iSelectedButtonIndex;
                 }
@@ -98,14 +138,6 @@ public class PauseMenuManager : MonoBehaviour
         else
         {
             m_bInputRecieved = false;
-        }
-    }
-
-    private void ValidateInitialisation()
-    {
-        if (m_selectedButton == null)
-        {
-            Debug.Log("SelectedButton was unable to be initialised.");
         }
     }
 }

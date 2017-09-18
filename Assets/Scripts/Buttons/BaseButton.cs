@@ -52,7 +52,11 @@ public class BaseButton : MonoBehaviour
 
     public virtual void OnClick(string a_strParameter)
     {
-
+        if (!m_bIsMousedOver)
+        {
+            Debug.Log(gameObject.name + " button cannot be clicked because 'm_bIsMouseOver' is " + m_bIsMousedOver + '.');
+            return;
+        }
     }
 
     protected virtual void Grow()
