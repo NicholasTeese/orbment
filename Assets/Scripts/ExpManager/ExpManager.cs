@@ -93,7 +93,7 @@ public class ExpManager : MonoBehaviour
             {
                 EnablePerkTree();
             }
-            else if (PerkTreeManager.m_perkTreeManager.AvailiablePerks != 0 && m_bPerkTreeOpen)
+            else if (m_bPerkTreeOpen)
             {
                 DisablePerkTree();
             }

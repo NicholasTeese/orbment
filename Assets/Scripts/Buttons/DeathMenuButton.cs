@@ -21,7 +21,7 @@ public class DeathMenuButton : BaseButton
             // Main panel start.
             case "MainPanelTryAgain":
                 {
-                    GameManager.m_gameManager.LoadLevelOne();
+                    GameManager.m_gameManager.RestartLevel();
                     break;
                 }
 
