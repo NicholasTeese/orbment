@@ -27,6 +27,11 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        if (SceneManager.GetActiveScene().name == "MainMenu")
+        {
+            return;
+        }
+
         PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(false);
         DeathMenuManager.m_deathMenuManager.gameObject.SetActive(false);
         PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(true);
@@ -34,6 +39,11 @@ public class GameManager : MonoBehaviour
 
     void Update ()
     {
+        if (SceneManager.GetActiveScene().name == "MainMenu")
+        {
+            return;
+        }
+
         if (!Player.m_Player.IsAlive && !DeathMenuManager.m_deathMenuManager.gameObject.activeInHierarchy)
         {
             Time.timeScale = 0.0f;
