@@ -189,6 +189,7 @@ public class PerkButton : MonoBehaviour
             case "FirePerk_1A":
                 {
                     m_startingWeapon.SetProjectile(Resources.Load("Prefabs/Projectiles/FireBall") as GameObject);
+//                    Player.m_Player.m_currentProjectile = GameObject.Find("FireBall");
                     break;
                 }
 
