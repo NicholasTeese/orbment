@@ -70,6 +70,16 @@ public class GameManager : MonoBehaviour
             }
         }
 	}
+
+    public void Continue()
+    {
+        m_bGameIsPaused = false;
+        Time.timeScale = 1;
+        PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(false);
+        DeathMenuManager.m_deathMenuManager.gameObject.SetActive(false);
+        PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(true);
+    }
+
 	public void LoadMainMenu()
     {
         SceneManager.LoadScene("MainMenu");
