@@ -116,13 +116,13 @@ public class PauseMenuButton : BaseButton
             // Quit to main menu panel end.
 
             // Quit to desktop panel start.
-            case "QuitToDesktopYes":
+            case "QuitToDesktopPanelYes":
                 {
                     GameManager.m_gameManager.QuitToDesktop();
                     break;
                 }
 
-            case "QuitToDesktopNo":
+            case "QuitToDesktopPanelNo":
                 {
                     PauseMenuManager.m_pauseMenuManager.ActivePanelButtons = PauseMenuManager.m_pauseMenuManager.MainPanelButtons;
                     PauseMenuManager.m_pauseMenuManager.SelectedButton.IsMousedOver = false;

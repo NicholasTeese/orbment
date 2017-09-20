@@ -65,6 +65,11 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
+    public void LoadTutorial()
+    {
+        SceneManager.LoadScene("Tutorial");
+    }
+
     public void LoadLevelOne()
     {
         SceneManager.LoadScene("Level1");
@@ -72,10 +77,14 @@ public class GameManager : MonoBehaviour
 
     public void QuitToDesktop()
     {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
         Application.Quit();
-	}
+#endif
+    }
 
-	public void RestartLevel()
+    public void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 	}
