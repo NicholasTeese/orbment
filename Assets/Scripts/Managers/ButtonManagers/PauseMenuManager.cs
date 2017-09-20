@@ -64,7 +64,7 @@ public class PauseMenuManager : MonoBehaviour
         }
 
         Vector3 v3PrimaryInputDirection = InputManager.PrimaryInput();
-        NaviageButtons(v3PrimaryInputDirection, m_lActivePanelButtons);
+        NavigateButtons(v3PrimaryInputDirection, m_lActivePanelButtons);
     }
 
     private void InitialiseButtons()
@@ -116,7 +116,7 @@ public class PauseMenuManager : MonoBehaviour
         iParentListIndex = 0;
     }
 
-    private void NaviageButtons(Vector3 a_v3PrimaryInputDirection, List<BaseButton> a_lButtons)
+    private void NavigateButtons(Vector3 a_v3PrimaryInputDirection, List<BaseButton> a_lButtons)
     {
         if (a_v3PrimaryInputDirection.z >= m_fInputBuffer)
         {

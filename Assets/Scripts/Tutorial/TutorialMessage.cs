@@ -5,34 +5,23 @@ using UnityEngine.UI;
 
 public class TutorialMessage : MonoBehaviour
 {
-    private float m_fTimer = 3.0f;
+    public string m_strMessage;
 
-    private Text m_message;
+    public Text m_message;
 
-    public List<Transform> m_messageTriggers = new List<Transform>();
-
-    private void Awake()
+    private void OnTriggerStay(Collider other)
     {
-        m_message = GetComponent<Text>();
+        if (other.GetComponentInParent<Transform>().name == "PlayerAlpha")
+        {
+            m_message.text = m_strMessage;
+        }
     }
 
-    private void Update()
+    private void OnTriggerExit(Collider other)
     {
-        //m_fTimer -= Time.deltaTime;
-
-        //if (m_fTimer <= 0.0f)
-        //{
-        //    m_message.text = "";
-        //    m_fTimer = 3.0f;
-        //}
-
-        //foreach (Transform messageTrigger in m_messageTriggers)
-        //{
-        //    if (Vector3.Distance(messageTrigger.position, Player.m_Player.transform.position) <= 2.0f)
-        //    {
-        //        Debug.Log(m_message.text);
-        //        m_message.text = messageTrigger.GetComponent<TutMessage>().m_strMessage;
-        //    }
-        //}
+        if (other.GetComponentInParent<Transform>().name == "PlayerAlpha")
+        {
+            m_message.text = "";
+        }
     }
 }
