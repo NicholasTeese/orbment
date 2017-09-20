@@ -56,6 +56,7 @@ public class BaseWeapon : MonoBehaviour
                     projectileScript.m_id = m_id;
                     m_projectileScripts.Add(projectileScript);
                 }
+                // Staff switching
                 if(m_id == "Player")
                 {
                     switch (m_projectileScripts[0].m_type)

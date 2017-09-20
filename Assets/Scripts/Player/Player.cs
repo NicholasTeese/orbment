@@ -21,7 +21,8 @@ public class Player : Entity
 
     public static Player m_Player;
 
-	public AudioClip fire_shot;
+    public AudioClip basic_shot;
+    public AudioClip fire_shot;
 	public AudioClip ice_shot;
 	public AudioClip lightning_shot;
 	public AudioSource shootingAudioSource;
@@ -136,7 +137,6 @@ public class Player : Entity
         base.Start();
         PoolSpentOrbs();
 
-
         m_charCont = this.GetComponent<CharacterController>();
         m_manaPool = this.GetComponent<Mana>();
         m_camera = GameObject.FindObjectOfType<IsoCam>();
@@ -221,11 +221,14 @@ public class Player : Entity
                         //fire
                         m_currWeapon.Fire(this.transform.forward, m_damage * m_currDamageMult, m_hasCrit, m_critDmgMult);
 
-						//Johns Code [Sorry]
+                        //Johns Code [Sorry]
 
-						//Shooting Audio
-
-						if (m_currentProjectile.name == "FireBall") {
+                        //Shooting Audio
+                        if (m_currentProjectile.name == "PlayerBullet") {
+                            shootingAudioSource.pitch = 1 + Random.Range(0f, 0.5f);
+                            shootingAudioSource.PlayOneShot(basic_shot, 0.7f);
+                        }
+                        if (m_currentProjectile.name == "FireBall") {
 							shootingAudioSource.pitch = 1 + Random.Range(0f, 0.5f);
 							shootingAudioSource.PlayOneShot (fire_shot, 0.7f);
 						}
