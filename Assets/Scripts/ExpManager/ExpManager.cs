@@ -89,14 +89,22 @@ public class ExpManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Tab) || InputManager.BackButton())
         {
-            if (PerkTreeManager.m_perkTreeManager.AvailiablePerks != 0 && !m_bPerkTreeOpen)
+            if(!GameManager.m_gameManager.GameIsPaused)
             {
-                EnablePerkTree();
+                if (PerkTreeManager.m_perkTreeManager.AvailiablePerks != 0 && !m_bPerkTreeOpen)
+                {
+                    EnablePerkTree();
+                }
+                else if (m_bPerkTreeOpen)
+                {
+                    DisablePerkTree();
+                }    
             }
-            else if (m_bPerkTreeOpen)
-            {
-                DisablePerkTree();
-            }
+        }
+
+        if(Input.GetKeyDown(KeyCode.Escape) && m_bPerkTreeOpen)
+        {
+            DisablePerkTree();
         }
     }
 

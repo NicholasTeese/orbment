@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
         PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(false);
         DeathMenuManager.m_deathMenuManager.gameObject.SetActive(false);
         PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(true);
+
+        Time.timeScale = 1;
     }
 
     void Update ()
@@ -51,22 +53,25 @@ public class GameManager : MonoBehaviour
             PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(false);
         }
 
-        if (Input.GetKeyUp(KeyCode.Escape) || InputManager.StartButton())
+        if(!ExpManager.m_experiencePointsManager.PerkTreeOpen)
         {
-            if (!m_bGameIsPaused)
+            if (Input.GetKeyDown(KeyCode.Escape) || InputManager.StartButton())
             {
-                m_bGameIsPaused = true;
-                Time.timeScale = 0.0f;
-                PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(true);
-                PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(false);
-            }
-            else
-            {
-                m_bGameIsPaused = false;
-                Time.timeScale = 1;
-                PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(false);
-                DeathMenuManager.m_deathMenuManager.gameObject.SetActive(false);
-                PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(true);
+                if (!m_bGameIsPaused)
+                {
+                    m_bGameIsPaused = true;
+                    Time.timeScale = 0.0f;
+                    PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(true);
+                    PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(false);
+                }
+                else
+                {
+                    m_bGameIsPaused = false;
+                    Time.timeScale = 1;
+                    PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(false);
+                    DeathMenuManager.m_deathMenuManager.gameObject.SetActive(false);
+                    PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(true);
+                }
             }
         }
 	}
