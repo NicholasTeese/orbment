@@ -16,12 +16,20 @@ public class FindObjectsInRadius : MonoBehaviour
     private Vector3 leftPoint;
     private Vector3 rightPoint;
     private Collider[] insideSphere;
-    public Transform m_target;
+
     public bool m_manualSetTarget;
+    [HideInInspector]
+    public Transform m_target;
+
+    private void Awake()
+    {
+
+    }
     // Use this for initialization
     void Start()
     {
         direction = this.transform.forward;
+        m_target = Player.m_Player.transform;
     }
 
     //maybe turn this into a call so it's not run every frame?

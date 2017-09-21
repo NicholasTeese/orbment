@@ -10,6 +10,20 @@ public class DamageNumberManager : MonoBehaviour
     private List<GameObject> m_dmgNums = new List<GameObject>();
     private List<DamageNumber> m_dmgTexts = new List<DamageNumber>();
     private GameObject m_canvas;
+
+    public static DamageNumberManager m_damageNumbersManager;
+
+    private void Awake()
+    {
+        if (m_damageNumbersManager == null)
+        {
+            m_damageNumbersManager = this;
+        }
+        else if (m_damageNumbersManager != this)
+        {
+            Destroy(gameObject);
+        }
+    }
     // Use this for initialization
     void Start()
     {

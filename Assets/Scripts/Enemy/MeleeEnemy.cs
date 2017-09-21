@@ -32,11 +32,17 @@ public class MeleeEnemy : Enemy
 
     private void Awake()
     {
+
         m_foir = this.GetComponent<FindObjectsInRadius>();
         //m_foir.m_sightAngle = 360;
         m_navMeshAgent = GetComponent<NavMeshAgent>();
         m_navMeshAgent.destination = GetWanderPosition(transform.position);
         m_navMeshAgent.speed = m_fMoveSpeed;
+    }
+
+    private void Start()
+    {
+        m_target = Player.m_Player.transform.gameObject;
     }
 
     new private void Update()

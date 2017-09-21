@@ -13,7 +13,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class Entity : MonoBehaviour
 {
-	public GameManager gameManager;
+	private GameManager gameManager;
 
     protected bool m_bIsAlive = true;
     public bool IsAlive { get { return m_bIsAlive; } }
@@ -106,7 +106,7 @@ public class Entity : MonoBehaviour
             m_originalMoveSpeed = m_agent.speed;
         }
         m_expManager = GameObject.FindObjectOfType<ExpManager>();
-        m_damageNumbersManager = GameObject.FindObjectOfType<DamageNumberManager>();
+        m_damageNumbersManager = DamageNumberManager.m_damageNumbersManager;
         m_statusEffectManager = GameObject.FindObjectOfType<StatusEffectManager>();
         m_explosionManager = GameObject.FindObjectOfType<ExplosionManager>();
         m_killStreakManager = GameObject.FindObjectOfType<KillStreakManager>();
