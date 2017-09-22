@@ -98,7 +98,7 @@ public class Entity : MonoBehaviour
     // Use this for initialization
     protected void Start()
     {
-		gameManager = GameObject.Find ("GameManager").GetComponent<GameManager> ();
+        gameManager = GameManager.m_gameManager;//GameObject.Find ("GameManager").GetComponent<GameManager> ();
         m_agent = this.GetComponent<NavMeshAgent>();
         
         if (m_agent != null)
@@ -112,11 +112,11 @@ public class Entity : MonoBehaviour
         m_killStreakManager = GameObject.FindObjectOfType<KillStreakManager>();
 
         LevelUpdate();
-        if (gameManager.name == "Bomber")
-        {
-            Debug.Log(m_oldHealth);
-            Debug.Log(m_currHealth);   
-        }
+        //if (gameManager.name == "Bomber")      // Why? This will never happen. 
+        //{
+        //    Debug.Log(m_oldHealth);
+        //    Debug.Log(m_currHealth);   
+        //}
         m_oldHealth = m_currHealth;
     }
 
@@ -145,8 +145,6 @@ public class Entity : MonoBehaviour
     // Update is called once per frame
     protected void Update()
     {
-		
-		
         HealthUpdate();
 
         ////Check for RamboMode

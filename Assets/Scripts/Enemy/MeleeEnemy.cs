@@ -40,14 +40,14 @@ public class MeleeEnemy : Enemy
         m_navMeshAgent.speed = m_fMoveSpeed;
     }
 
-    private void Start()
+    new private void Start()
     {
         m_target = Player.m_Player.transform.gameObject;
     }
 
     new private void Update()
     {
-        Debug.Log(m_eBehaviour);
+        //Debug.Log(m_eBehaviour);
         //Debug.Log(m_foir.inSight);
         //Debug.Log(m_foir.m_target);
 
