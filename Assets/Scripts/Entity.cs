@@ -181,11 +181,7 @@ public class Entity : MonoBehaviour
             {
                 textColor = Color.green;
             }
-
-
             m_damageNumbersManager.CreateDamageNumber(Mathf.Abs(m_oldHealth - m_currHealth).ToString(), this.transform, textColor);
-
-
         }
 
         //cant go above max

@@ -42,6 +42,7 @@ public class MeleeEnemy : Enemy
 
     new private void Start()
     {
+        base.Start();
         m_target = Player.m_Player.transform.gameObject;
     }
 
