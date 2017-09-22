@@ -32,7 +32,6 @@ public class MeleeEnemy : Enemy
 
     private void Awake()
     {
-
         m_foir = this.GetComponent<FindObjectsInRadius>();
         //m_foir.m_sightAngle = 360;
         m_navMeshAgent = GetComponent<NavMeshAgent>();
@@ -48,9 +47,6 @@ public class MeleeEnemy : Enemy
 
     new private void Update()
     {
-        //Debug.Log(m_eBehaviour);
-        //Debug.Log(m_foir.inSight);
-        //Debug.Log(m_foir.m_target);
 
         base.Update();
 
@@ -59,6 +55,7 @@ public class MeleeEnemy : Enemy
         switch (m_eBehaviour)
         {
             case Behaviour.WANDERING:
+                #region
                 {
                     // Choose point to wander to
                     if (Vector3.Distance(transform.position, m_navMeshAgent.destination) <= 1.0f)
@@ -77,8 +74,10 @@ public class MeleeEnemy : Enemy
                     }
                     break;
                 }
+            #endregion
 
             case Behaviour.PREPARING:
+                #region
                 {
                     // cease wander
                     m_navMeshAgent.destination = transform.position;
@@ -103,8 +102,10 @@ public class MeleeEnemy : Enemy
 
                     break;
                 }
+            #endregion
 
             case Behaviour.CHARGING:
+                #region
                 {
                     if (Vector3.Distance(transform.position, m_v3ChargeTarget) <= 1.0f)
                     {
@@ -119,11 +120,11 @@ public class MeleeEnemy : Enemy
                             timer += Time.time * 1.5f;
                             m_v3ChargeTarget = V_targetOffset;
                         }
-                        
+
                         this.transform.LookAt(V_targetOffset);
                         transform.position = Vector3.MoveTowards(transform.position, m_v3ChargeTarget, (m_fChargeSpeed * Time.deltaTime));
                         if (DamageCheck())
-                            Player.m_Player.m_bImpacted = true;                        
+                            Player.m_Player.m_bImpacted = true;
                     }
                     else
                     {
@@ -132,8 +133,10 @@ public class MeleeEnemy : Enemy
                     }
                     break;
                 }
+            #endregion
 
             case Behaviour.RECOVERING:
+                #region
                 {
                     if (m_fRecoverTime <= 0.0f)
                     {
@@ -167,6 +170,7 @@ public class MeleeEnemy : Enemy
                     m_fRecoverTime -= Time.deltaTime;
                     break;
                 }
+            #endregion
 
             default:
                 {
@@ -184,7 +188,6 @@ public class MeleeEnemy : Enemy
         {
             if (Player.m_Player.m_iImpactTimer == 0)
             {
-                //Debug.Log("Impacted");
                 Player.m_Player.m_currHealth -= (int)DamagePercent;
                 //m_explosionManager.RequestExplosion(transform.position, m_v3ChargeTarget, Explosion.ExplosionType.SmallBlood, 0.0f);
             }
@@ -209,29 +212,7 @@ public class MeleeEnemy : Enemy
                 //m_navMeshAgent.transform.LookAt(collision.collider.transform.position - m_bulletScript.m_direction);
             }
         }
-        #region
-        //  if (collision.collider.CompareTag("Player"))
-        //  {
-        //      Debug.Log("PlayerHit");
-        //      Player.m_Player.m_bImpacted = true;
-        //  }
-        //  Entity Target = null;
-        //
-        //  Target = collision.collider.GetComponent<Entity>();
-        //  if (Target != null)
-        //      Debug.Log(Target.name);
-        #endregion
     }
-
-    //void OnCollisionStay(Collision collision)
-    //{
-    //    if (collision.collider.CompareTag("Player"))
-    //    {
-    //        Debug.Log("PlayerHit");
-    //        Player.m_Player.m_bImpacted = true;
-    //    }
-    //
-    //}
 
     private Vector3 GetWanderPosition(Vector3 a_v3CurrentPosition)
     {

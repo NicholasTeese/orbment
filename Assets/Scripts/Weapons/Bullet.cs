@@ -69,8 +69,9 @@ public class Bullet : MonoBehaviour
     protected void OnEnable()
     {
         #region
-        // "FOOTBALL BUG"
-        Vector3 uniformScale = new Vector3(0.6f, 0.6f, 0.6f);
+        // "FOOTBALL BUG" - Caused by not setting the size of the bullets
+        // Vector3 uniformScale = new Vector3(0.2f, 0.2f, 0.6f); // Arrows
+        Vector3 uniformScale = new Vector3(0.5f, 0.5f, 0.5f);
         if (m_id == "Enemy")
         {
             this.transform.localScale = uniformScale;
