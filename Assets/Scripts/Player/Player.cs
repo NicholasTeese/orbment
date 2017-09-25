@@ -27,7 +27,9 @@ public class Player : Entity
 	public AudioClip lightning_shot;
 	public AudioSource shootingAudioSource;
 
-	//End of Johns Variables
+    //End of Johns Variables
+
+    private Vector3 m_v3LastMousePosition = Vector3.zero;
 
 
     [Header("Damage Deviation Range")]
@@ -285,7 +287,7 @@ public class Player : Entity
     {
         
         //mouse aiming
-        if (InputManager.SecondaryInput() == Vector3.zero)
+        if (InputManager.SecondaryInput() == Vector3.zero && m_v3LastMousePosition != Input.mousePosition)
         {
             RaycastHit hit;
             float rayLength = 1000;
@@ -304,6 +306,7 @@ public class Player : Entity
 
         if (InputManager.SecondaryInput() != Vector3.zero)
         {
+            m_v3LastMousePosition = Input.mousePosition;
             //Debug.Log("Joy");
             Vector3 playerTojoy = Vector3.zero;
             playerTojoy = InputManager.SecondaryInput();
