@@ -52,11 +52,9 @@ public class ExplosionManager : MonoBehaviour
 
         for (int numType = 0; numType < m_explosionPrefabs.Length; ++numType)
         {
-
             List<ExplosionItem> explosionType = new List<ExplosionItem>();
             for (uint i = 0; i < m_poolAmount; ++i)
             {
-
                 if (m_explosionPrefabs[numType] != null)
                 {
                     ExplosionItem newExplosion = new ExplosionItem();
@@ -67,11 +65,12 @@ public class ExplosionManager : MonoBehaviour
                         newExplosion.m_shockWaveStrength = explosionScript.m_shockWaveStrength;
                         newExplosion.m_type = explosionScript.m_type;
                     }
+
                     newExplosion.m_object.SetActive(false);
                     explosionType.Add(newExplosion);
-
                 }
             }
+
             m_explosionPool.Add(explosionType);
         }
     }

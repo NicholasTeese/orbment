@@ -44,6 +44,7 @@ public class BomberEnemy : Enemy
 
     private new void Update()
     {
+        Debug.Log(m_eBehaviour);
         base.Update();
         CheckBehaviour();
         PerformBehavior();
