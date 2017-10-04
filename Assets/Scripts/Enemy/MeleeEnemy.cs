@@ -22,6 +22,8 @@ public class MeleeEnemy : Enemy
 
     private Behaviour m_eBehaviour = Behaviour.WANDERING;
 
+    private Animator m_Animator;
+
     private Vector3 m_v3ChargeTarget = Vector3.zero;
 
     public GameObject m_target;
@@ -34,6 +36,7 @@ public class MeleeEnemy : Enemy
     {
         m_foir = this.GetComponent<FindObjectsInRadius>();
         //m_foir.m_sightAngle = 360;
+//        m_Animator.GetComponent<Animator>();
         m_navMeshAgent = GetComponent<NavMeshAgent>();
         m_navMeshAgent.destination = GetWanderPosition(transform.position);
         m_navMeshAgent.speed = m_fMoveSpeed;
@@ -67,6 +70,7 @@ public class MeleeEnemy : Enemy
                         if (Vector3.Distance(transform.position, m_target.transform.position) <= 15.0f)
                         {
                             // set behaviour to prepare charge
+                            //m_Animator.SetBool("Walking2Recovery", true);
                             m_eBehaviour = Behaviour.PREPARING;
                             break;
                         }
@@ -84,6 +88,8 @@ public class MeleeEnemy : Enemy
                     if (Vector3.Distance(transform.position, m_target.transform.position) > 15.0f)
                     {
                         m_fPrepareChargeTime = 2.0f;
+                        //m_Animator.SetBool("Walking2Recovery", false);
+                        //m_Animator.SetBool("Recovery2Walking", true);
                         m_eBehaviour = Behaviour.WANDERING;
                     }
 
@@ -95,6 +101,8 @@ public class MeleeEnemy : Enemy
                         m_v3ChargeTarget = V_targetOffset;//new Vector3(m_target.transform.position.x, transform.position.y, m_target.transform.position.z);
                         m_navMeshAgent.enabled = false;
                         m_fPrepareChargeTime = 2.0f;
+                        //m_Animator.SetBool("Walking2Recovery", false);
+                        //m_Animator.SetBool("Recovery2Charging", true);
                         m_eBehaviour = Behaviour.CHARGING;
                         break;
                     }
@@ -122,6 +130,8 @@ public class MeleeEnemy : Enemy
 
                     if (Vector3.Distance(transform.position, m_v3ChargeTarget) <= 1.0f)
                     {
+                        //m_Animator.SetBool("Recovery2Charging", false);
+                        //m_Animator.SetBool("Charging2Recovery", true);
                         m_eBehaviour = Behaviour.RECOVERING;
                         break;
                     }
@@ -151,6 +161,7 @@ public class MeleeEnemy : Enemy
                             m_navMeshAgent.enabled = true;
                             m_navMeshAgent.speed = m_fMoveSpeed;
                             m_fRecoverTime = 3.0f;
+                            //m_Animator.SetBool("Recovery2Walking", true);
                             m_eBehaviour = Behaviour.WANDERING;
                             break;
                         }
