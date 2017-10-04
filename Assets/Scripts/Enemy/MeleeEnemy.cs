@@ -47,7 +47,6 @@ public class MeleeEnemy : Enemy
 
     new private void Update()
     {
-
         base.Update();
 
         Vector3 V_targetOffset = new Vector3(m_target.transform.position.x, transform.position.y, m_target.transform.position.z);
@@ -107,26 +106,21 @@ public class MeleeEnemy : Enemy
             case Behaviour.CHARGING:
                 #region
                 {
+                    if (timer <= 3)
+                    {
+                        timer += Time.time * 1.5f;
+                        m_v3ChargeTarget = V_targetOffset;
+                    }
+                    
+                    this.transform.LookAt(V_targetOffset);
+                    transform.position = Vector3.MoveTowards(transform.position, m_v3ChargeTarget, (m_fChargeSpeed * Time.deltaTime));
+
+                    if (DamageCheck())
+                    {
+                        Player.m_Player.m_bImpacted = true;
+                    }
+
                     if (Vector3.Distance(transform.position, m_v3ChargeTarget) <= 1.0f)
-                    {
-                        m_eBehaviour = Behaviour.RECOVERING;
-                        break;
-                    }
-
-                    if (m_foir.m_target != null)
-                    {
-                        if (timer <= 3)
-                        {
-                            timer += Time.time * 1.5f;
-                            m_v3ChargeTarget = V_targetOffset;
-                        }
-
-                        this.transform.LookAt(V_targetOffset);
-                        transform.position = Vector3.MoveTowards(transform.position, m_v3ChargeTarget, (m_fChargeSpeed * Time.deltaTime));
-                        if (DamageCheck())
-                            Player.m_Player.m_bImpacted = true;
-                    }
-                    else
                     {
                         m_eBehaviour = Behaviour.RECOVERING;
                         break;
@@ -224,13 +218,11 @@ public class MeleeEnemy : Enemy
 
     private bool DamageCheck()
     {
-        if (m_foir.m_target != null)
+        if (Vector3.Distance(transform.position, m_target.transform.position) <= 1.5f)
         {
-            if (Vector3.Distance(transform.position, m_target.transform.position) <= 1.5f)
-                return true;
-            else
-                return false;
+            return true;
         }
-        else return false;
+
+            return false;
     }
 }
