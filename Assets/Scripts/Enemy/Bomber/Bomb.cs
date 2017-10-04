@@ -51,9 +51,19 @@ public class Bomb : MonoBehaviour
         }
         else if (m_fFuseTimer <= 0.0f && !m_bHasExploded)
         {
-            ExplosionManager.m_explosionManager.RequestExplosion(transform.position, transform.forward, Explosion.ExplosionType.Fire, 100.0f);
+            GameObject explosion = Instantiate(Resources.Load("Prefabs/Explosions/FireExplosion") as GameObject);
+            explosion.transform.position = transform.position + new Vector3(0.0f, 0.5f, 0.0f);
+            explosion.transform.SetParent(BombManager.m_bombManager.transform);
             m_bHasExploded = true;
-            Destroy(gameObject);
+            gameObject.SetActive(false);
+
+            if (Vector3.Distance(transform.position, Player.m_Player.transform.position) <= 3.0f)
+            {
+                Player.m_Player.m_currHealth -= 200.0f;
+            }
+
+            Destroy(explosion, 1.0f);
+            Destroy(gameObject, 5.0f);
         }
     }
 }
