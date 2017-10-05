@@ -33,6 +33,20 @@ public class IsoCam : MonoBehaviour
 
     GameObject parent = null;
 
+    public static IsoCam m_playerCamera = null;
+
+    private void Awake()
+    {
+        if (m_playerCamera == null)
+        {
+            m_playerCamera = this;
+        }
+        else if (m_playerCamera != null)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     // Use this for initialization
     void Start()
     {

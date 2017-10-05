@@ -146,6 +146,7 @@ public class ExpManager : MonoBehaviour
         m_perkTreeCamera.SetActive(true);
         m_perkTreeCanvas.SetActive(true);
         PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(false);
+        IsoCam.m_playerCamera.gameObject.SetActive(false);
         m_bPerkTreeOpen = true;
         Time.timeScale = 0;
     }
@@ -155,6 +156,7 @@ public class ExpManager : MonoBehaviour
         m_perkTreeCamera.SetActive(false);
         m_perkTreeCanvas.SetActive(false);
         PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(true);
+        IsoCam.m_playerCamera.gameObject.SetActive(true);
         m_bPerkTreeOpen = false;
         Time.timeScale = 1;
     }
