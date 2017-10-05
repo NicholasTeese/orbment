@@ -49,6 +49,12 @@ public class MeleeEnemy : Enemy
 
     new private void Update()
     {
+        //!? YES I KNOW THIS IS TERRIBLE DON'T JUSDGE ME!
+        if (Vector3.Distance(transform.position, Player.m_Player.transform.position) > 10.0f)
+        {
+            return;
+        }
+
         base.Update();
 
         Vector3 V_targetOffset = new Vector3(m_target.transform.position.x, transform.position.y, m_target.transform.position.z);
@@ -93,7 +99,7 @@ public class MeleeEnemy : Enemy
                     m_Animator.SetBool("Recovery2Walking", false);
 
                     // cease wander
-                    m_navMeshAgent.destination = transform.position;
+                    //m_navMeshAgent.destination = transform.position;
                     // If player retreats far enough away before enemy charges, return to wander
                     if (Vector3.Distance(transform.position, m_target.transform.position) > 15.0f)
                     {
@@ -245,29 +251,36 @@ public class MeleeEnemy : Enemy
 
             if (m_bulletScript != null && m_bulletScript.m_id == "Player")
             {
-                m_navMeshAgent.SetDestination(collision.collider.transform.position - m_bulletScript.m_direction);
+                //m_navMeshAgent.SetDestination(collision.collider.transform.position - m_bulletScript.m_direction);
                 //m_navMeshAgent.transform.LookAt(collision.collider.transform.position - m_bulletScript.m_direction);
             }
         }
 
-        if (collision.collider.CompareTag("Obstruction"))
-        {
-            m_v3ChargeTarget = transform.position;
-            m_eBehaviour = Behaviour.RECOVERING;
-        }
+        //if (collision.collider.CompareTag("Obstruction"))
+        //{
+        //    m_v3ChargeTarget = transform.position;
+        //    m_eBehaviour = Behaviour.RECOVERING;
+        //}
 
-        if (collision.collider.CompareTag("Destructible"))
-        {
-            //break wall
-        }
+        //if (collision.collider.CompareTag("Destructible"))
+        //{
+        //    //break wall
+        //}
     }
 
     private Vector3 GetWanderPosition(Vector3 a_v3CurrentPosition)
     {
-        float fXOffset = Random.Range(-5, 5);
-        float fZOffset = Random.Range(-5, 5);
+        Vector3 v3NewPosition = new Vector3(a_v3CurrentPosition.x + Random.Range(-2, 2), a_v3CurrentPosition.y, a_v3CurrentPosition.z + Random.Range(-2, 2));
+        NavMeshHit navMeshHit;
 
-        return new Vector3(a_v3CurrentPosition.x + fXOffset, a_v3CurrentPosition.y, a_v3CurrentPosition.z + fZOffset);
+        if (NavMesh.SamplePosition(v3NewPosition, out navMeshHit, 4.0f, NavMesh.AllAreas))
+        {
+            return v3NewPosition;
+        }
+        else
+        {
+            return GetWanderPosition(a_v3CurrentPosition);
+        }
     }
 
     private bool DamageCheck()

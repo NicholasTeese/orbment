@@ -14,6 +14,7 @@ public class EnemyShoot : MonoBehaviour
     private float m_attackTimer = 0.0f;
     private Vector3 m_shootDir;
     private Enemy m_enemyScript;
+
     // Use this for initialization
     void Start()
     {
@@ -25,6 +26,12 @@ public class EnemyShoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //!? YES I KNOW THIS IS TERRIBLE DON'T JUSDGE ME!
+        if (Vector3.Distance(transform.position, Player.m_Player.transform.position) > 10.0f)
+        {
+            return;
+        }
+
         if (!m_canAttack)
         {
             return;

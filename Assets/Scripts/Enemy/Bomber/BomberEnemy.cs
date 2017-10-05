@@ -27,6 +27,9 @@ public class BomberEnemy : Enemy
 
     private FindObjectsInRadius m_findOBjectsInRadius;
 
+    [Header("Holds the hiding spots that the bomber can flee towards.")]
+    public GameObject m_hidingSpotHolder = null;
+
     private void Awake()
     {
         m_navMeshAgent = GetComponent<NavMeshAgent>();
@@ -39,11 +42,21 @@ public class BomberEnemy : Enemy
     private new void Start()
     {
         base.Start();
-        m_hidingSpots = HidingSpotManager.m_hidingSpotManager.HidingSpots;
+
+        foreach (Transform hidingSpot in m_hidingSpotHolder.transform)
+        {
+            m_hidingSpots.Add(hidingSpot.gameObject);
+        }
     }
 
     private new void Update()
     {
+        //!? YES I KNOW THIS IS TERRIBLE DON'T JUSDGE ME!
+        if (Vector3.Distance(transform.position, Player.m_Player.transform.position) > 10.0f)
+        {
+            return;
+        }
+
         base.Update();
         CheckBehaviour();
         PerformBehavior();
@@ -62,18 +75,22 @@ public class BomberEnemy : Enemy
 
         if (m_findOBjectsInRadius.inSight && m_eBehaviour != Behaviour.RETREATING)
         {
-            foreach (GameObject hidingSpot in m_hidingSpots)
-            {
-                if (m_v3RetreatPosition == Vector3.zero)
-                {
-                    m_v3RetreatPosition = hidingSpot.transform.position;
-                }
+            int iHidingSpotIndex = Random.Range(0, m_hidingSpots.Count);
+
+            m_v3RetreatPosition = m_hidingSpots[iHidingSpotIndex].transform.position;
+
+            //foreach (GameObject hidingSpot in m_hidingSpots)
+            //{
+            //    if (m_v3RetreatPosition == Vector3.zero)
+            //    {
+            //        m_v3RetreatPosition = hidingSpot.transform.position;
+            //    }
             
-                if (Vector3.Distance(Player.m_Player.transform.position, hidingSpot.transform.position) > Vector3.Distance(Player.m_Player.transform.position, m_v3RetreatPosition))
-                {
-                    m_v3RetreatPosition = hidingSpot.transform.position;
-                }
-            }
+            //    if (Vector3.Distance(Player.m_Player.transform.position, hidingSpot.transform.position) > Vector3.Distance(Player.m_Player.transform.position, m_v3RetreatPosition))
+            //    {
+            //        m_v3RetreatPosition = hidingSpot.transform.position;
+            //    }
+            //}
 
             m_navMeshAgent.speed = m_fRetreatSpeed;
             m_eBehaviour = Behaviour.RETREATING;
