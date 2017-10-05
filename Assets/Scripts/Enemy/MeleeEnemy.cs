@@ -35,8 +35,7 @@ public class MeleeEnemy : Enemy
     private void Awake()
     {
         m_foir = this.GetComponent<FindObjectsInRadius>();
-        //m_foir.m_sightAngle = 360;
-//        m_Animator.GetComponent<Animator>();
+        m_Animator = GetComponent<Animator>();
         m_navMeshAgent = GetComponent<NavMeshAgent>();
         m_navMeshAgent.destination = GetWanderPosition(transform.position);
         m_navMeshAgent.speed = m_fMoveSpeed;
@@ -59,6 +58,11 @@ public class MeleeEnemy : Enemy
             case Behaviour.WANDERING:
                 #region
                 {
+                    m_Animator.SetBool("Walking2Recovery", false);
+                    m_Animator.SetBool("Charge2Recovery", false);
+                    m_Animator.SetBool("Charge2Walking", false);
+                    m_Animator.SetBool("Recovery2Charge", false);
+                    m_Animator.SetBool("Recovery2Walking", false);
                     // Choose point to wander to
                     if (Vector3.Distance(transform.position, m_navMeshAgent.destination) <= 1.0f)
                     {
@@ -70,7 +74,7 @@ public class MeleeEnemy : Enemy
                         if (Vector3.Distance(transform.position, m_target.transform.position) <= 15.0f)
                         {
                             // set behaviour to prepare charge
-                            //m_Animator.SetBool("Walking2Recovery", true);
+                            m_Animator.SetBool("Walking2Recovery", true);
                             m_eBehaviour = Behaviour.PREPARING;
                             break;
                         }
@@ -82,14 +86,20 @@ public class MeleeEnemy : Enemy
             case Behaviour.PREPARING:
                 #region
                 {
+                    m_Animator.SetBool("Walking2Recovery", false);
+                    m_Animator.SetBool("Charge2Recovery", false);
+                    m_Animator.SetBool("Charge2Walking", false);
+                    m_Animator.SetBool("Recovery2Charge", false);
+                    m_Animator.SetBool("Recovery2Walking", false);
+
                     // cease wander
                     m_navMeshAgent.destination = transform.position;
                     // If player retreats far enough away before enemy charges, return to wander
                     if (Vector3.Distance(transform.position, m_target.transform.position) > 15.0f)
                     {
                         m_fPrepareChargeTime = 2.0f;
-                        //m_Animator.SetBool("Walking2Recovery", false);
-                        //m_Animator.SetBool("Recovery2Walking", true);
+                        m_Animator.SetBool("Walking2Recovery", false);
+                        m_Animator.SetBool("Recovery2Walking", true);
                         m_eBehaviour = Behaviour.WANDERING;
                     }
 
@@ -98,13 +108,23 @@ public class MeleeEnemy : Enemy
                     this.transform.LookAt(V_targetOffset);
                     if (m_fPrepareChargeTime <= 0.0f)
                     {
-                        m_v3ChargeTarget = V_targetOffset;//new Vector3(m_target.transform.position.x, transform.position.y, m_target.transform.position.z);
-                        m_navMeshAgent.enabled = false;
-                        m_fPrepareChargeTime = 2.0f;
-                        //m_Animator.SetBool("Walking2Recovery", false);
-                        //m_Animator.SetBool("Recovery2Charging", true);
-                        m_eBehaviour = Behaviour.CHARGING;
-                        break;
+                        if (m_foir.m_target != null)
+                        {
+                          m_v3ChargeTarget = V_targetOffset;
+                          m_navMeshAgent.enabled = false;
+                          m_fPrepareChargeTime = 2.0f;
+                          m_Animator.SetBool("Walking2Recovery", false);
+                          m_Animator.SetBool("Recovery2Charge", true);
+                          m_eBehaviour = Behaviour.CHARGING;
+                          break;
+                        }
+                        else
+                        {
+                            m_fPrepareChargeTime = 2.0f;
+                            m_Animator.SetBool("Walking2Recovery", false);
+                            m_Animator.SetBool("Recovery2Walking", true);
+                            m_eBehaviour = Behaviour.WANDERING;
+                        }
                     }
 
                     break;
@@ -114,9 +134,15 @@ public class MeleeEnemy : Enemy
             case Behaviour.CHARGING:
                 #region
                 {
+                    m_Animator.SetBool("Walking2Recovery", false);
+                    m_Animator.SetBool("Charge2Recovery", false);
+                    m_Animator.SetBool("Charge2Walking", false);
+                    m_Animator.SetBool("Recovery2Charge", false);
+                    m_Animator.SetBool("Recovery2Walking", false);
+
                     if (timer <= 3)
                     {
-                        timer += Time.time * 1.5f;
+                        timer += Time.time;// * 1.5f;
                         m_v3ChargeTarget = V_targetOffset;
                     }
                     
@@ -130,8 +156,8 @@ public class MeleeEnemy : Enemy
 
                     if (Vector3.Distance(transform.position, m_v3ChargeTarget) <= 1.0f)
                     {
-                        //m_Animator.SetBool("Recovery2Charging", false);
-                        //m_Animator.SetBool("Charging2Recovery", true);
+                        m_Animator.SetBool("Recovery2Charge", false);
+                        m_Animator.SetBool("Charge2Recovery", true);
                         m_eBehaviour = Behaviour.RECOVERING;
                         break;
                     }
@@ -142,6 +168,12 @@ public class MeleeEnemy : Enemy
             case Behaviour.RECOVERING:
                 #region
                 {
+                    m_Animator.SetBool("Walking2Recovery", false);
+                    m_Animator.SetBool("Charge2Recovery", false);
+                    m_Animator.SetBool("Charge2Walking", false);
+                    m_Animator.SetBool("Recovery2Charge", false);
+                    m_Animator.SetBool("Recovery2Walking", false);
+
                     if (m_fRecoverTime <= 0.0f)
                     {
                         if (Vector3.Distance(transform.position, m_target.transform.position) >= 4.0f)
@@ -161,7 +193,7 @@ public class MeleeEnemy : Enemy
                             m_navMeshAgent.enabled = true;
                             m_navMeshAgent.speed = m_fMoveSpeed;
                             m_fRecoverTime = 3.0f;
-                            //m_Animator.SetBool("Recovery2Walking", true);
+                            m_Animator.SetBool("Recovery2Walking", true);
                             m_eBehaviour = Behaviour.WANDERING;
                             break;
                         }
@@ -216,6 +248,17 @@ public class MeleeEnemy : Enemy
                 m_navMeshAgent.SetDestination(collision.collider.transform.position - m_bulletScript.m_direction);
                 //m_navMeshAgent.transform.LookAt(collision.collider.transform.position - m_bulletScript.m_direction);
             }
+        }
+
+        if (collision.collider.CompareTag("Obstruction"))
+        {
+            m_v3ChargeTarget = transform.position;
+            m_eBehaviour = Behaviour.RECOVERING;
+        }
+
+        if (collision.collider.CompareTag("Destructible"))
+        {
+            //break wall
         }
     }
 
