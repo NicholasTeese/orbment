@@ -28,7 +28,9 @@ public class Enemy : Entity
         base.Update();
         // kill code for debugging
         if (Input.GetKey(KeyCode.E) && Input.GetKey(KeyCode.Equals) && Input.GetKey(KeyCode.Alpha0))
+        {
             this.m_currHealth = 0;
+        }
     }
 
     void OnCollisionEnter(Collision collision)

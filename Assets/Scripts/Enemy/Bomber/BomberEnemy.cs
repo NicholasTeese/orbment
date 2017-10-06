@@ -57,6 +57,21 @@ public class BomberEnemy : Enemy
             return;
         }
 
+        if (m_currHealth <= 0)
+        {
+            m_expManager.m_playerExperience += m_experienceValue;
+            if (m_killStreakManager != null)
+            {
+                m_killStreakManager.AddKill();
+            }
+        }
+
+        // kill code for debugging
+        if (Input.GetKey(KeyCode.E) && Input.GetKey(KeyCode.Equals) && Input.GetKey(KeyCode.Alpha0))
+        {
+            this.m_currHealth = 0;
+        }
+
         base.Update();
         CheckBehaviour();
         PerformBehavior();
