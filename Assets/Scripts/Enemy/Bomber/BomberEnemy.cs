@@ -67,7 +67,7 @@ public class BomberEnemy : Enemy
         if (m_currHealth <= 0.0f && m_eBehaviour != Behaviour.DEAD)
         {
             m_eBehaviour = Behaviour.DEAD;
-            GameObject bomb = Instantiate(Resources.Load("Prefabs/Enemies/Beta/Bomber/Bomb") as GameObject);
+            GameObject bomb = Instantiate(Resources.Load("Prefabs/Enemies/Bomber/Bomb_Beta") as GameObject);
             bomb.transform.position = transform.position;
             bomb.transform.SetParent(BombManager.m_bombManager.transform);
             return;
