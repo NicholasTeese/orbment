@@ -79,19 +79,6 @@ public class BomberEnemy : Enemy
 
             m_v3RetreatPosition = m_hidingSpots[iHidingSpotIndex].transform.position;
 
-            //foreach (GameObject hidingSpot in m_hidingSpots)
-            //{
-            //    if (m_v3RetreatPosition == Vector3.zero)
-            //    {
-            //        m_v3RetreatPosition = hidingSpot.transform.position;
-            //    }
-            
-            //    if (Vector3.Distance(Player.m_Player.transform.position, hidingSpot.transform.position) > Vector3.Distance(Player.m_Player.transform.position, m_v3RetreatPosition))
-            //    {
-            //        m_v3RetreatPosition = hidingSpot.transform.position;
-            //    }
-            //}
-
             m_navMeshAgent.speed = m_fRetreatSpeed;
             m_eBehaviour = Behaviour.RETREATING;
         }
