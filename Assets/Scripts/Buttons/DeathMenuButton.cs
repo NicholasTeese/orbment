@@ -31,9 +31,9 @@ public class DeathMenuButton : BaseButton
                     DeathMenuManager.m_deathMenuManager.SelectedButton.IsMousedOver = false;
                     DeathMenuManager.m_deathMenuManager.SelectedButton = DeathMenuManager.m_deathMenuManager.ActivePanelButtons[0];
                     DeathMenuManager.m_deathMenuManager.SelectedButton.IsMousedOver = true;
-                    DeathMenuManager.m_deathMenuManager.m_mainPanel.SetActive(false);
-                    DeathMenuManager.m_deathMenuManager.m_quitToMainMenuPanel.SetActive(true);
-                    DeathMenuManager.m_deathMenuManager.m_quitToDesktopPanel.SetActive(false);
+                    DeathMenuManager.m_deathMenuManager.MainPanel.SetActive(false);
+                    DeathMenuManager.m_deathMenuManager.QuitToMainMenuPanel.SetActive(true);
+                    DeathMenuManager.m_deathMenuManager.QuitToDesktopPanel.SetActive(false);
                     DeathMenuManager.m_deathMenuManager.ResetSelectedButtonIndex();
                     break;
                 }
@@ -44,9 +44,9 @@ public class DeathMenuButton : BaseButton
                     DeathMenuManager.m_deathMenuManager.SelectedButton.IsMousedOver = false;
                     DeathMenuManager.m_deathMenuManager.SelectedButton = DeathMenuManager.m_deathMenuManager.ActivePanelButtons[0];
                     DeathMenuManager.m_deathMenuManager.SelectedButton.IsMousedOver = true;
-                    DeathMenuManager.m_deathMenuManager.m_mainPanel.SetActive(false);
-                    DeathMenuManager.m_deathMenuManager.m_quitToMainMenuPanel.SetActive(false);
-                    DeathMenuManager.m_deathMenuManager.m_quitToDesktopPanel.SetActive(true);
+                    DeathMenuManager.m_deathMenuManager.MainPanel.SetActive(false);
+                    DeathMenuManager.m_deathMenuManager.QuitToMainMenuPanel.SetActive(false);
+                    DeathMenuManager.m_deathMenuManager.QuitToDesktopPanel.SetActive(true);
                     DeathMenuManager.m_deathMenuManager.ResetSelectedButtonIndex();
                     break;
                 }
@@ -65,9 +65,9 @@ public class DeathMenuButton : BaseButton
                     DeathMenuManager.m_deathMenuManager.SelectedButton.IsMousedOver = false;
                     DeathMenuManager.m_deathMenuManager.SelectedButton = DeathMenuManager.m_deathMenuManager.ActivePanelButtons[0];
                     DeathMenuManager.m_deathMenuManager.SelectedButton.IsMousedOver = true;
-                    DeathMenuManager.m_deathMenuManager.m_mainPanel.SetActive(true);
-                    DeathMenuManager.m_deathMenuManager.m_quitToMainMenuPanel.SetActive(false);
-                    DeathMenuManager.m_deathMenuManager.m_quitToDesktopPanel.SetActive(false);
+                    DeathMenuManager.m_deathMenuManager.MainPanel.SetActive(true);
+                    DeathMenuManager.m_deathMenuManager.QuitToMainMenuPanel.SetActive(false);
+                    DeathMenuManager.m_deathMenuManager.QuitToDesktopPanel.SetActive(false);
                     DeathMenuManager.m_deathMenuManager.ResetSelectedButtonIndex();
                     break;
                 }
@@ -86,9 +86,9 @@ public class DeathMenuButton : BaseButton
                     DeathMenuManager.m_deathMenuManager.SelectedButton.IsMousedOver = false;
                     DeathMenuManager.m_deathMenuManager.SelectedButton = DeathMenuManager.m_deathMenuManager.ActivePanelButtons[0];
                     DeathMenuManager.m_deathMenuManager.SelectedButton.IsMousedOver = true;
-                    DeathMenuManager.m_deathMenuManager.m_mainPanel.SetActive(true);
-                    DeathMenuManager.m_deathMenuManager.m_quitToMainMenuPanel.SetActive(false);
-                    DeathMenuManager.m_deathMenuManager.m_quitToDesktopPanel.SetActive(false);
+                    DeathMenuManager.m_deathMenuManager.MainPanel.SetActive(true);
+                    DeathMenuManager.m_deathMenuManager.QuitToMainMenuPanel.SetActive(false);
+                    DeathMenuManager.m_deathMenuManager.QuitToDesktopPanel.SetActive(false);
                     DeathMenuManager.m_deathMenuManager.ResetSelectedButtonIndex();
                     break;
                 }

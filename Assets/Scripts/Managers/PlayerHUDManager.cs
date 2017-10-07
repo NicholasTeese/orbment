@@ -20,7 +20,10 @@ public class PlayerHUDManager : MonoBehaviour
         {
             Destroy(transform.parent.gameObject);
         }
+    }
 
+    private void Start()
+    {
         m_healthBar = transform.Find("Health_Bar").gameObject;
     }
 }

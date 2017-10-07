@@ -14,10 +14,8 @@ public class IsoCam : MonoBehaviour
 {
     public float m_camMoveSpeed = 10;
     public float m_camRotSpeed = 10;
-    public Material m_flashRed;
+    private Material m_flashRed;
 
-
-    public GameObject m_target;
     private Vector3 offset;
 
     private bool m_shake = false;
@@ -31,8 +29,6 @@ public class IsoCam : MonoBehaviour
     private float m_flashDuration = 0.0f;
     private float m_intensity = 0.0f;
 
-    GameObject parent = null;
-
     public static IsoCam m_playerCamera = null;
 
     private void Awake()
@@ -45,21 +41,23 @@ public class IsoCam : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        m_flashRed = Resources.Load("Materials/FlashRed") as Material;
     }
 
     // Use this for initialization
     void Start()
     {
-        offset = this.transform.position - m_target.transform.position;
+        offset = this.transform.position - Player.m_Player.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (m_target != null)
+        if (Player.m_Player != null)
         {
-           this.transform.position = Vector3.MoveTowards(this.transform.position, m_target.transform.position + offset, m_camMoveSpeed);
-           this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, Quaternion.LookRotation(m_target.transform.position - this.transform.position), m_camRotSpeed);
+           this.transform.position = Vector3.MoveTowards(this.transform.position, Player.m_Player.transform.position + offset, m_camMoveSpeed);
+           this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, Quaternion.LookRotation(Player.m_Player.transform.position - this.transform.position), m_camRotSpeed);
         }
 
         if(m_shake)
@@ -99,63 +97,6 @@ public class IsoCam : MonoBehaviour
                 m_flashRed.SetFloat("_Intensity", 0.0f);
             }
         }
-
-        //TODO: Waiting on partially transparent textures.
-        //Debug.DrawRay(transform.position, (Player.m_Player.transform.position - transform.position), Color.red);
-        //Ray ray = GetComponent<Camera>().ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
-        //int iLayerMask = LayerMask.GetMask("Object");
-        //RaycastHit rayCastHit;
-        //if (Physics.Raycast(ray, out rayCastHit, 1000, iLayerMask))
-        //{
-        //    Debug.Log(rayCastHit.transform.name);
-
-        //    if (rayCastHit.transform.parent != null && rayCastHit.transform.parent.gameObject.layer == 16)
-        //    {
-        //        parent = rayCastHit.transform.parent.gameObject;
-        //        Color color = parent.transform.GetComponent<MeshRenderer>().material.color;
-        //        parent.transform.GetComponent<MeshRenderer>().material.color = new Color(color.r, color.g, color.b, 0.3f);
-
-        //        //if (parent.transform.childCount != 0)
-        //        //{
-        //        //    foreach (GameObject leaf in parent.transform)
-        //        //    {
-        //        //        Color colorr = parent.transform.GetComponent<MeshRenderer>().material.color;
-        //        //        leaf.transform.GetComponent<MeshRenderer>().material.color = new Color(color.r, color.g, color.b, 0.3f);
-        //        //    }
-        //        //}
-        //    }
-        //    else
-        //    {
-        //        parent = rayCastHit.transform.gameObject;
-        //        Color color = parent.transform.GetComponent<MeshRenderer>().material.color;
-        //        parent.transform.GetComponent<MeshRenderer>().material.color = new Color(color.r, color.g, color.b, 0.3f);
-
-        //        //if (parent.transform.childCount != 0)
-        //        //{
-        //        //    foreach (GameObject leaf in parent.transform)
-        //        //    {
-        //        //        Color colorr = parent.transform.GetComponent<MeshRenderer>().material.color;
-        //        //        leaf.transform.GetComponent<MeshRenderer>().material.color = new Color(color.r, color.g, color.b, 0.3f);
-        //        //    }
-        //        //}
-        //    }
-        //}
-        //else if (parent != null)
-        //{
-        //    Debug.Log("Nothing");
-        //    Color color = parent.transform.GetComponent<MeshRenderer>().material.color;
-        //    parent.transform.GetComponent<MeshRenderer>().material.color = new Color(color.r, color.g, color.b, 1.0f);
-        //    parent = null;
-
-        //    //if (parent.transform.childCount != 0)
-        //    //{
-        //    //    foreach (GameObject leaf in parent.transform)
-        //    //    {
-        //    //        Color colorr = parent.transform.GetComponent<MeshRenderer>().material.color;
-        //    //        leaf.transform.GetComponent<MeshRenderer>().material.color = new Color(color.r, color.g, color.b, 0.3f);
-        //    //    }
-        //    //}
-        //}
     }
 
     public void Shake(float a_shakeAmount, float a_shakeDuration)

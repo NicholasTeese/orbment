@@ -122,7 +122,7 @@ public class Player : Entity
         {
             m_Player = this;
         }
-        else if ( m_Player != this)
+        else if (m_Player != this)
         {
             Destroy(gameObject);
         }
@@ -130,7 +130,6 @@ public class Player : Entity
 
     new void Start()
     {
-
         base.Start();
         PoolSpentOrbs();
 

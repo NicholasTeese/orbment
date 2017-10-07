@@ -1,11 +1,10 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Collectable : MonoBehaviour
 {
 	AudioManager audioManager;
-    Player m_playerRef;
     Mana m_playerMana;
     private Rigidbody m_rigidBody;
     public bool m_healthCap;
@@ -30,10 +29,9 @@ public class Collectable : MonoBehaviour
         m_healthCap = true;
         m_manaCap = true;
 		audioManager = GameObject.Find ("AudioManager").GetComponent<AudioManager>();
-        m_playerRef = GameObject.FindObjectOfType<Player>();
-        if(m_playerRef != null)
+        if(Player.m_Player = null)
         {
-            m_playerMana = m_playerRef.GetComponent<Mana>();
+            m_playerMana = Player.m_Player.GetComponent<Mana>();
         }
         m_rigidBody = this.GetComponent<Rigidbody>();
 
@@ -43,7 +41,7 @@ public class Collectable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((m_playerRef.m_currHealth + m_healAmount) > m_playerRef.m_maxHealth)
+        if ((Player.m_Player.m_currHealth + m_healAmount) > Player.m_Player.m_maxHealth)
         {
             m_healthCap = true;
         }
@@ -63,17 +61,17 @@ public class Collectable : MonoBehaviour
         if (m_type == CollectableType.GreenOrb)
         {
             if(m_healthCap)
-                Physics.IgnoreCollision(GetComponent<Collider>(), m_playerRef.GetComponent<Collider>(), true);
+                Physics.IgnoreCollision(GetComponent<Collider>(), Player.m_Player.GetComponent<Collider>(), true);
             else
-                Physics.IgnoreCollision(GetComponent<Collider>(), m_playerRef.GetComponent<Collider>(), false);
+                Physics.IgnoreCollision(GetComponent<Collider>(), Player.m_Player.GetComponent<Collider>(), false);
         }
 
         if (m_type == CollectableType.BlueOrb)
         {
             if(m_manaCap)
-                Physics.IgnoreCollision(GetComponent<Collider>(), m_playerRef.GetComponent<Collider>(), true);
+                Physics.IgnoreCollision(GetComponent<Collider>(), Player.m_Player.GetComponent<Collider>(), true);
             else
-                Physics.IgnoreCollision(GetComponent<Collider>(), m_playerRef.GetComponent<Collider>(), false);
+                Physics.IgnoreCollision(GetComponent<Collider>(), Player.m_Player.GetComponent<Collider>(), false);
         }
     }
 
@@ -85,10 +83,10 @@ public class Collectable : MonoBehaviour
             {
                 case CollectableType.YellowOrb:
                     {
-                        if(m_playerRef)
+                        if(Player.m_Player)
                         {
-							//GameObject.Find ("OrbCollected").GetComponent<Animator> ().SetTrigger ("orbCollected");
-                            m_playerRef.m_orbsCollected++;
+                            //GameObject.Find ("OrbCollected").GetComponent<Animator> ().SetTrigger ("orbCollected");
+                            Player.m_Player.m_orbsCollected++;
 							audioManager.OrbPickUp();
                             this.gameObject.SetActive(false);
                         }
@@ -97,7 +95,7 @@ public class Collectable : MonoBehaviour
 
                 case CollectableType.GreenOrb:
                     {
-                        if (m_playerRef)
+                        if (Player.m_Player)
                         {
                             if (m_healthCap)
                             {
@@ -105,7 +103,7 @@ public class Collectable : MonoBehaviour
                             }
                             else
                             {
-                                m_playerRef.m_currHealth += m_healAmount;
+                                Player.m_Player.m_currHealth += m_healAmount;
                                 audioManager.OrbPickUp();
                                 this.gameObject.SetActive(false);
                             }

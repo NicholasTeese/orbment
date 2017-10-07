@@ -118,7 +118,7 @@ public class LevelManager : MonoBehaviour
         DontDestroyOnLoad(ExpManager.m_experiencePointsManager.gameObject);
 
         // Actors.
-        //DontDestroyOnLoad(Player.m_Player.gameObject);
+        DontDestroyOnLoad(Player.m_Player.gameObject);
 
         // Canvasses.
         DontDestroyOnLoad(PlayerHUDManager.m_playerHUDManager.transform.parent);

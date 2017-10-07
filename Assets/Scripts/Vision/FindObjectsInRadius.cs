@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,7 +29,7 @@ public class FindObjectsInRadius : MonoBehaviour
     void Start()
     {
         direction = this.transform.forward;
-        m_target = Player.m_Player.transform;
+        //m_target = Player.m_Player.transform;
     }
 
     //maybe turn this into a call so it's not run every frame?

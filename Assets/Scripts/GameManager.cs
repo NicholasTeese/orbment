@@ -24,15 +24,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        //x if (SceneManager.GetActiveScene().name == "MainMenu")
-        //x {
-        //x     return;
-        //x }
-
-        //x PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(false);
-        //x DeathMenuManager.m_deathMenuManager.gameObject.SetActive(false);
-        //x PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(true);
-
         Time.timeScale = 1;
     }
 

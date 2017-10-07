@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class ExpManager : MonoBehaviour
 {
     private bool m_bUpgradeTreeInRange = false;
@@ -9,15 +10,14 @@ public class ExpManager : MonoBehaviour
     private bool m_bPerkTreeOpen = false;
     public bool PerkTreeOpen { get { return m_bPerkTreeOpen; } set { m_bPerkTreeOpen = value; } }
 
-    private GameObject m_perkTreeCanvas;
-    private GameObject m_perkTreeCamera;
+    private GameObject m_upgradeAvailableText;
+    private GameObject m_upgradeUnavailableText;
+	private GameObject Xpfiller;
+	private GameObject XPSlider;
 
-    public GameObject m_upgradeAvailableText;
-    public GameObject m_upgradeUnavailableText;
-	public GameObject Xpfiller;
-	public GameObject XPSlider;
-    public Texture2D m_expBarTexture;
-    public Texture2D m_emptyBarTexture;
+    private Texture2D m_experienceBarFull;
+    private Texture2D m_experienceBarEmpty;
+
     public int m_expBarWidth = 500;
     public float m_playerExperience = 0.0f;
     public float m_playerMaxXP = 50.0f;
@@ -36,17 +36,20 @@ public class ExpManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        m_perkTreeCanvas = GameObject.FindGameObjectWithTag("PerkTreeCanvas");
-        m_perkTreeCamera = GameObject.FindGameObjectWithTag("PerkTreeCamera");
     }
 
     private void Start()
     {
-        ValidateInitialisation();
+        PerkTreeManager.m_perkTreeManager.gameObject.SetActive(false);
+        PerkTreeCamera.m_perkTreeCamera.gameObject.SetActive(false);
 
-        m_perkTreeCamera.SetActive(false);
-        m_perkTreeCanvas.SetActive(false);
+        m_upgradeAvailableText = GameObject.FindGameObjectWithTag("UpgradeAvailableText");
+        m_upgradeUnavailableText = GameObject.FindGameObjectWithTag("UpgradeUnavailableText");
+        Xpfiller = PlayerHUDManager.m_playerHUDManager.transform.Find("ExperienceBar").Find("ExperienceFiller").gameObject;
+        XPSlider = PlayerHUDManager.m_playerHUDManager.transform.Find("ExperienceBar").Find("ExperienceSlider").gameObject;
+
+        m_experienceBarFull = Resources.Load("Textures/Experience_Bar_Full") as Texture2D;
+        m_experienceBarEmpty = Resources.Load("Textures/Experience_Bar_Empty") as Texture2D;
     }
 
     void Update()
@@ -108,43 +111,18 @@ public class ExpManager : MonoBehaviour
         }
     }
 
-
-    private void OnGUI()
-    {
-        //x GUI.DrawTexture(new Rect((Screen.width - m_expBarWidth)/2, 200, m_expBarWidth, 25), m_emptyBarTexture);
-        //x GUI.DrawTexture(new Rect((Screen.width - m_expBarWidth)/2 + 200, 0, m_expBarWidth * (m_playerExperience/m_playerMaxXP), 25), m_expBarTexture);
-    }
-
-    private void ValidateInitialisation()
-    {
-        if (m_perkTreeCanvas == null)
-        {
-            Debug.Log("PerkTreeCanvas was unable to be initialised.");
-        }
-
-        if (m_perkTreeCamera == null)
-        {
-            Debug.Log("PerkTreeCamera was unable to be initialised.");
-        }
-    }
-
     void LevelUp()
     {
-        //x perkUpgradeUI.SetActive (true);
-
         m_playerExperience = m_playerExperience - m_playerMaxXP;
         m_playerMaxXP += m_percentageAddedXPPerLvl*m_playerMaxXP;
         m_playerLevel++;
         PerkTreeManager.m_perkTreeManager.IncrementAvailiablePerks();
-		//x m_PerkManager.genPerkList();
-		//x m_PerkManager.leveledUp();
-		//x LevelUpUI.m_Singleton.showUI();
 	}
 
     private void EnablePerkTree()
     {
-        m_perkTreeCamera.SetActive(true);
-        m_perkTreeCanvas.SetActive(true);
+        PerkTreeManager.m_perkTreeManager.gameObject.SetActive(true);
+        PerkTreeCamera.m_perkTreeCamera.gameObject.SetActive(true);
         PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(false);
         IsoCam.m_playerCamera.gameObject.SetActive(false);
         m_bPerkTreeOpen = true;
@@ -153,8 +131,8 @@ public class ExpManager : MonoBehaviour
 
     private void DisablePerkTree()
     {
-        m_perkTreeCamera.SetActive(false);
-        m_perkTreeCanvas.SetActive(false);
+        PerkTreeManager.m_perkTreeManager.gameObject.SetActive(false);
+        PerkTreeCamera.m_perkTreeCamera.gameObject.SetActive(false);
         PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(true);
         IsoCam.m_playerCamera.gameObject.SetActive(true);
         m_bPerkTreeOpen = false;
