@@ -51,6 +51,12 @@ public class BomberEnemy : Enemy
 
     private new void Update()
     {
+        // kill code for debugging
+        if (Input.GetKey(KeyCode.E) && Input.GetKey(KeyCode.Equals) && Input.GetKey(KeyCode.Alpha0))
+        {
+            this.m_currHealth = 0;
+        }
+
         //!? YES I KNOW THIS IS TERRIBLE DON'T JUSDGE ME!
         if (Vector3.Distance(transform.position, Player.m_Player.transform.position) > 10.0f)
         {
@@ -64,12 +70,6 @@ public class BomberEnemy : Enemy
             {
                 m_killStreakManager.AddKill();
             }
-        }
-
-        // kill code for debugging
-        if (Input.GetKey(KeyCode.E) && Input.GetKey(KeyCode.Equals) && Input.GetKey(KeyCode.Alpha0))
-        {
-            this.m_currHealth = 0;
         }
 
         base.Update();

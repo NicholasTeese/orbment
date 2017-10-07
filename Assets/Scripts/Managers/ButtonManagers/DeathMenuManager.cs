@@ -38,7 +38,7 @@ public class DeathMenuManager : MonoBehaviour
         }
         else if (m_deathMenuManager != this)
         {
-            Destroy(gameObject);
+            Destroy(transform.parent.gameObject);
         }
 
         InitialiseButtons();

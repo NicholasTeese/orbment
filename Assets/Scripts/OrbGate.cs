@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -47,7 +47,7 @@ public class OrbGate : MonoBehaviour
     public void OnTriggerStay(Collider other)
     {
         //maybe check layer instead? or if it has the Player script
-        if (other.gameObject == m_Player.gameObject && !m_isOpen)
+        if (other.gameObject == Player.m_Player.gameObject && !m_isOpen)
         {
             m_playerIsNear = true;
             //hold e to spend orbs

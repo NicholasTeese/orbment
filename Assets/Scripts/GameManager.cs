@@ -8,10 +8,7 @@ public class GameManager : MonoBehaviour
 	private bool m_bGameIsPaused = false;
     public bool GameIsPaused { get { return m_bGameIsPaused; } set { m_bGameIsPaused = value; } }
 
-    public GameObject m_healthBar;
-    public GameObject deathMenu;
-
-    public static GameManager m_gameManager;
+    public static GameManager m_gameManager = null;
 
     private void Awake()
     {
@@ -27,21 +24,21 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        if (SceneManager.GetActiveScene().name == "MainMenu")
-        {
-            return;
-        }
+        //x if (SceneManager.GetActiveScene().name == "MainMenu")
+        //x {
+        //x     return;
+        //x }
 
-        PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(false);
-        DeathMenuManager.m_deathMenuManager.gameObject.SetActive(false);
-        PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(true);
+        //x PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(false);
+        //x DeathMenuManager.m_deathMenuManager.gameObject.SetActive(false);
+        //x PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(true);
 
         Time.timeScale = 1;
     }
 
     void Update ()
     {
-        if (SceneManager.GetActiveScene().name == "MainMenu")
+        if (SceneManager.GetActiveScene().name == LevelManager.m_strMainMenuSceneName)
         {
             return;
         }

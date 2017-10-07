@@ -17,6 +17,12 @@ public class Enemy : Entity
 
     new void Update()
     {
+        // kill code for debugging
+        if (Input.GetKey(KeyCode.E) && Input.GetKey(KeyCode.Equals) && Input.GetKey(KeyCode.Alpha0))
+        {
+            this.m_currHealth = 0;
+        }
+
         if (m_currHealth <= 0)
         {
             m_expManager.m_playerExperience += m_experienceValue;
@@ -26,11 +32,7 @@ public class Enemy : Entity
             }
         }
         base.Update();
-        // kill code for debugging
-        if (Input.GetKey(KeyCode.E) && Input.GetKey(KeyCode.Equals) && Input.GetKey(KeyCode.Alpha0))
-        {
-            this.m_currHealth = 0;
-        }
+
     }
 
     void OnCollisionEnter(Collision collision)
