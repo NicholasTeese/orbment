@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -55,8 +55,8 @@ public class IceShard : Bullet
 
         if (m_hasIceSplinter && !collision.collider.CompareTag(m_id))
         {
-            m_explosionManager.RequestExplosion(this.transform.position, this.transform.forward, Explosion.ExplosionType.Ice, m_damage);
-            m_explosionManager.RequestExplosion(this.transform.position, this.transform.forward, Explosion.ExplosionType.Shockwave, 0.0f);
+            ExplosionManager.m_explosionManager.RequestExplosion(this.transform.position, this.transform.forward, Explosion.ExplosionType.Ice, m_damage);
+            ExplosionManager.m_explosionManager.RequestExplosion(this.transform.position, this.transform.forward, Explosion.ExplosionType.Shockwave, 0.0f);
         }
 
         if (!collision.collider.CompareTag(m_id))

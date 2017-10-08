@@ -1,10 +1,10 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ExplosionManager : MonoBehaviour
 {
-    public static ExplosionManager m_explosionManager;
+    public static ExplosionManager m_explosionManager = null;
 
     /// <summary>
     /// Object pooled explosions

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,7 +32,7 @@ public class FireBall : Bullet
         //base.OnCollisionEnter(collision);
         if (!collision.collider.CompareTag(m_id))
         {
-            m_explosionManager.RequestExplosion(this.transform.position, -m_direction, Explosion.ExplosionType.BulletImpact, 0.0f);
+            ExplosionManager.m_explosionManager.RequestExplosion(this.transform.position, -m_direction, Explosion.ExplosionType.BulletImpact, 0.0f);
 
             m_enemy = collision.collider.GetComponent<Entity>();
             //do base damage
@@ -42,7 +42,7 @@ public class FireBall : Bullet
                 m_enemy.m_currHealth -= m_damage;
                 m_enemy.m_recentDamageTaken = m_damage;
 
-                m_explosionManager.RequestExplosion(this.transform.position, -m_direction, Explosion.ExplosionType.SmallBlood, 0.0f);
+                ExplosionManager.m_explosionManager.RequestExplosion(this.transform.position, -m_direction, Explosion.ExplosionType.SmallBlood, 0.0f);
             }
             Disable();
         }
@@ -78,8 +78,8 @@ public class FireBall : Bullet
 
         if (m_hasSplashDamagePerk && !collision.collider.CompareTag(m_id))
         {
-            m_explosionManager.RequestExplosion(this.transform.position, this.transform.forward, Explosion.ExplosionType.Fire, m_damage);
-            m_explosionManager.RequestExplosion(this.transform.position, this.transform.forward, Explosion.ExplosionType.Shockwave, 0.0f);
+            ExplosionManager.m_explosionManager.RequestExplosion(this.transform.position, this.transform.forward, Explosion.ExplosionType.Fire, m_damage);
+            ExplosionManager.m_explosionManager.RequestExplosion(this.transform.position, this.transform.forward, Explosion.ExplosionType.Shockwave, 0.0f);
         }
 
         if (!collision.collider.CompareTag(m_id))

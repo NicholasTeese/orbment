@@ -20,6 +20,7 @@ public class LevelManager : MonoBehaviour
     private Vector3 m_v3PlayerCameraLevelOneStartPosition = new Vector3(-3.33f, 13.7f, -38.26f);
     private Vector3 m_v3PlayerCameraLevelTwoStartPosition = new Vector3(-3.33f, 13.7f, -38.26f);
 
+    // Static reference to the LevelManager.
     public static LevelManager m_levelManager = null;
 
     // Variable getters and setters.
@@ -61,6 +62,11 @@ public class LevelManager : MonoBehaviour
 
     private void OnSceneLoadComplete(Scene a_scene, LoadSceneMode a_loadSceneMode)
     {
+        // Deactivate cameras from previous scene.
+        //!? Is required to stop black screen bug when loaded between scenes.
+        PerkTreeCamera.m_perkTreeCamera.gameObject.SetActive(false);
+        IsoCam.m_playerCamera.gameObject.SetActive(false);
+
         switch (a_scene.name)
         {
             case m_strMainMenuSceneName:
@@ -86,7 +92,6 @@ public class LevelManager : MonoBehaviour
 
                     // Initialise cameras.
                     IsoCam.m_playerCamera.gameObject.SetActive(true);
-                    PerkTreeCamera.m_perkTreeCamera.gameObject.SetActive(false);
 
                     // Initialise pooling.
                     EnemyLootManager.m_enemyLootManager.DisableOrbs();
@@ -107,7 +112,6 @@ public class LevelManager : MonoBehaviour
 
                     // Initialise cameras.
                     IsoCam.m_playerCamera.gameObject.SetActive(true);
-                    PerkTreeCamera.m_perkTreeCamera.gameObject.SetActive(false);
 
                     // Initialise pooling.
                     EnemyLootManager.m_enemyLootManager.DisableOrbs();
@@ -127,9 +131,6 @@ public class LevelManager : MonoBehaviour
                     IsoCam.m_playerCamera.transform.position = m_v3PlayerCameraLevelTwoStartPosition;
 
                     // Initialise cameras.
-                    IsoCam.m_playerCamera.gameObject.SetActive(true);
-                    PerkTreeCamera.m_perkTreeCamera.gameObject.SetActive(false);
-                    IsoCam.m_playerCamera.gameObject.SetActive(false);
                     IsoCam.m_playerCamera.gameObject.SetActive(true);
 
                     // Initialise pooling.
@@ -154,6 +155,7 @@ public class LevelManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         DontDestroyOnLoad(GameManager.m_gameManager.gameObject);
         DontDestroyOnLoad(ExpManager.m_experiencePointsManager.gameObject);
+        DontDestroyOnLoad(ExplosionManager.m_explosionManager.gameObject);
 
         // Actors.
         DontDestroyOnLoad(Player.m_Player.gameObject);

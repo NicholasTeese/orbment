@@ -25,6 +25,9 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Time.timeScale = 1;
+
+        PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(false);
+        DeathMenuManager.m_deathMenuManager.gameObject.SetActive(false);
     }
 
     void Update ()
