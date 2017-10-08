@@ -279,7 +279,6 @@ public class Player : Entity
 
     void FixedUpdate()
     {
-        
         //mouse aiming
         if (InputManager.SecondaryInput() == Vector3.zero && m_v3LastMousePosition != Input.mousePosition)
         {

@@ -15,13 +15,22 @@ public class LevelManager : MonoBehaviour
     private Vector3 m_v3PlayerTutorialStartPosition = new Vector3(-3.33f, 0.0f, -34.77f);
     private Vector3 m_v3PlayerLevelOneStartPosition = new Vector3(-3.33f, 0.0f, -34.77f);
     private Vector3 m_v3PlayerLevelTwoStartPosition = new Vector3(-3.33f, 0.0f, -34.77f);
+    // Cameras level start positions.
+    private Vector3 m_v3PlayerCameraTutorialStartPosition = new Vector3(-3.33f, 13.7f, -38.26f);
+    private Vector3 m_v3PlayerCameraLevelOneStartPosition = new Vector3(-3.33f, 13.7f, -38.26f);
+    private Vector3 m_v3PlayerCameraLevelTwoStartPosition = new Vector3(-3.33f, 13.7f, -38.26f);
 
     public static LevelManager m_levelManager = null;
 
     // Variable getters and setters.
+    // Player level start positions.
     public Vector3 PlayerTutorialStartPosition { get { return m_v3PlayerTutorialStartPosition; } }
     public Vector3 PlayerLevelOneStartPosition { get { return m_v3PlayerLevelOneStartPosition; } }
     public Vector3 PlayerLevelTwoStartPosition { get { return m_v3PlayerLevelTwoStartPosition; } }
+    // Cameras level start positions.
+    public Vector3 PlayerCameraTutorialStartPosition { get { return m_v3PlayerCameraTutorialStartPosition; } }
+    public Vector3 PlayerCameraLevelOneStartPosition { get { return m_v3PlayerCameraLevelOneStartPosition; } }
+    public Vector3 PlayerCameraLevelTwoStartPosition { get { return m_v3PlayerCameraLevelTwoStartPosition; } }
 
     private void Awake()
     {
@@ -56,7 +65,7 @@ public class LevelManager : MonoBehaviour
         {
             case m_strMainMenuSceneName:
                 {
-                    // InitialiseCanvasses.
+                    // Initialise Canvasses.
                     PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(false);
                     DeathMenuManager.m_deathMenuManager.gameObject.SetActive(false);
                     PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(false);
@@ -65,37 +74,66 @@ public class LevelManager : MonoBehaviour
 
             case m_strTutorialSceneName:
                 {
-                    // InitialiseCanvasses.
+                    // Initialise canvasses.
                     PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(false);
                     DeathMenuManager.m_deathMenuManager.gameObject.SetActive(false);
                     PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(true);
 
-                    // Set Player's new position.
+                    // Set player's new position.
                     Player.m_Player.transform.position = m_v3PlayerTutorialStartPosition;
+                    // Set player camera's new position.
+                    IsoCam.m_playerCamera.transform.position = m_v3PlayerCameraTutorialStartPosition;
+
+                    // Initialise cameras.
+                    IsoCam.m_playerCamera.gameObject.SetActive(true);
+                    PerkTreeCamera.m_perkTreeCamera.gameObject.SetActive(false);
+
+                    // Initialise pooling.
+                    EnemyLootManager.m_enemyLootManager.DisableOrbs();
                     break;
                 }
 
             case m_strLevelOneSceneName:
                 {
-                    // InitialiseCanvasses.
+                    // Initialise canvasses.
                     PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(false);
                     DeathMenuManager.m_deathMenuManager.gameObject.SetActive(false);
                     PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(true);
 
-                    // Set Player's new position.
+                    // Set player's new position.
                     Player.m_Player.transform.position = m_v3PlayerLevelOneStartPosition;
+                    // Set player camera's new position.
+                    IsoCam.m_playerCamera.transform.position = m_v3PlayerCameraLevelOneStartPosition;
+
+                    // Initialise cameras.
+                    IsoCam.m_playerCamera.gameObject.SetActive(true);
+                    PerkTreeCamera.m_perkTreeCamera.gameObject.SetActive(false);
+
+                    // Initialise pooling.
+                    EnemyLootManager.m_enemyLootManager.DisableOrbs();
                     break;
                 }
 
             case m_strLevelTwoSceneName:
                 {
-                    // InitialiseCanvasses.
+                    // Initialise canvasses.
                     PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(false);
                     DeathMenuManager.m_deathMenuManager.gameObject.SetActive(false);
                     PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(true);
 
-                    // Set Player's new position.
+                    // Set player's new position.
                     Player.m_Player.transform.position = m_v3PlayerLevelTwoStartPosition;
+                    // Set player camera's new position.
+                    IsoCam.m_playerCamera.transform.position = m_v3PlayerCameraLevelTwoStartPosition;
+
+                    // Initialise cameras.
+                    IsoCam.m_playerCamera.gameObject.SetActive(true);
+                    PerkTreeCamera.m_perkTreeCamera.gameObject.SetActive(false);
+                    IsoCam.m_playerCamera.gameObject.SetActive(false);
+                    IsoCam.m_playerCamera.gameObject.SetActive(true);
+
+                    // Initialise pooling.
+                    EnemyLootManager.m_enemyLootManager.DisableOrbs();
                     break;
                 }
 
@@ -128,5 +166,41 @@ public class LevelManager : MonoBehaviour
         // Cameras.
         DontDestroyOnLoad(IsoCam.m_playerCamera.gameObject);
         DontDestroyOnLoad(PerkTreeCamera.m_perkTreeCamera.gameObject);
+    }
+
+    public void LoadNextLevel()
+    {
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case m_strMainMenuSceneName:
+                {
+                    SceneManager.LoadScene(m_strTutorialSceneName);
+                    break;
+                }
+
+            case m_strTutorialSceneName:
+                {
+                    SceneManager.LoadScene(m_strLevelOneSceneName);
+                    break;
+                }
+
+            case m_strLevelOneSceneName:
+                {
+                    SceneManager.LoadScene(m_strLevelTwoSceneName);
+                    break;
+                }
+
+            case m_strLevelTwoSceneName:
+                {
+                    SceneManager.LoadScene(m_strMainMenuSceneName);
+                    break;
+                }
+
+            default:
+                {
+                    Debug.Log("Scene name: " + SceneManager.GetActiveScene().name + " not recognised.");
+                    break;
+                }
+        }
     }
 }
