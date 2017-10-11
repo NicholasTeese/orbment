@@ -32,7 +32,7 @@ public class Bullet : MonoBehaviour
     private int L_Ground;
     private int L_Bullet;
 
-    protected ExplosionManager m_explosionManager;
+    //x protected ExplosionManager m_explosionManager;
     protected Entity m_enemy = null;
 
     public Player m_playerRef = null;
@@ -61,7 +61,7 @@ public class Bullet : MonoBehaviour
     {
 //        Debug.Log(this.transform.localScale);
         m_bColliding = false;
-        m_explosionManager = GameObject.FindObjectOfType<ExplosionManager>();
+        //x m_explosionManager = GameObject.FindObjectOfType<ExplosionManager>();
         m_trail = this.GetComponent<TrailRenderer>();
         Physics.IgnoreLayerCollision(L_Bullet, L_Ground);
     }
@@ -163,7 +163,7 @@ public class Bullet : MonoBehaviour
 
         if (!a_collision.collider.CompareTag(m_id))
         {
-            m_explosionManager.RequestExplosion(transform.position, -m_direction, Explosion.ExplosionType.BulletImpact, 0.0f);
+            ExplosionManager.m_explosionManager.RequestExplosion(transform.position, -m_direction, Explosion.ExplosionType.BulletImpact, 0.0f);
 
             m_enemy = a_collision.collider.GetComponent<Entity>();
             //do base damage
@@ -176,7 +176,7 @@ public class Bullet : MonoBehaviour
                     m_enemy.m_recentDamageTaken = m_damage;
                 }
 
-                m_explosionManager.RequestExplosion(transform.position, -m_direction, Explosion.ExplosionType.SmallBlood, 0.0f);
+                ExplosionManager.m_explosionManager.RequestExplosion(transform.position, -m_direction, Explosion.ExplosionType.SmallBlood, 0.0f);
             }
             Disable();
         }           

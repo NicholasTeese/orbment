@@ -11,22 +11,28 @@ public class DeathMenuManager : MonoBehaviour
 
     private bool m_bInputRecieved = false;
 
+    private GameObject m_mainPanel = null;
+    private GameObject m_quitToMainMenuPanel = null;
+    private GameObject m_quitToDesktopPanel = null;
+
     private BaseButton m_selectedButton;
-    public BaseButton SelectedButton { get { return m_selectedButton; } set { m_selectedButton = value; } }
 
     private List<BaseButton> m_lMainPanelButtons = new List<BaseButton>();
-    public List<BaseButton> MainPanelButtons { get { return m_lMainPanelButtons; } }
     private List<BaseButton> m_lQuitToMainMenuPanelButtons = new List<BaseButton>();
-    public List<BaseButton> QuitToMainMenuPanelButtons { get { return m_lQuitToMainMenuPanelButtons; } }
     private List<BaseButton> m_lQuitToDesktopPanelButtons = new List<BaseButton>();
-    public List<BaseButton> QuitToDesktopPanelButtons { get { return m_lQuitToDesktopPanelButtons; } }
     private List<BaseButton> m_lActivePanelButtons = new List<BaseButton>();
-    public List<BaseButton> ActivePanelButtons { get { return m_lActivePanelButtons; } set { m_lActivePanelButtons = value; } }
 
-    [Header("Pause Menu Panels")]
-    public GameObject m_mainPanel;
-    public GameObject m_quitToMainMenuPanel;
-    public GameObject m_quitToDesktopPanel;
+    // Variable getters and setters.
+    public GameObject MainPanel { get { return m_mainPanel; } set { m_mainPanel = value; } }
+    public GameObject QuitToMainMenuPanel { get { return m_quitToMainMenuPanel; } set { m_quitToMainMenuPanel = value; } }
+    public GameObject QuitToDesktopPanel { get { return m_quitToDesktopPanel; } set { m_quitToDesktopPanel = value; } }
+
+    public BaseButton SelectedButton { get { return m_selectedButton; } set { m_selectedButton = value; } }
+
+    public List<BaseButton> MainPanelButtons { get { return m_lMainPanelButtons; } }
+    public List<BaseButton> QuitToMainMenuPanelButtons { get { return m_lQuitToMainMenuPanelButtons; } }
+    public List<BaseButton> QuitToDesktopPanelButtons { get { return m_lQuitToDesktopPanelButtons; } }
+    public List<BaseButton> ActivePanelButtons { get { return m_lActivePanelButtons; } set { m_lActivePanelButtons = value; } }
 
     public static DeathMenuManager m_deathMenuManager;
 
@@ -38,8 +44,12 @@ public class DeathMenuManager : MonoBehaviour
         }
         else if (m_deathMenuManager != this)
         {
-            Destroy(gameObject);
+            Destroy(transform.parent.gameObject);
         }
+
+        m_mainPanel = transform.Find("MainPanel").gameObject;
+        m_quitToMainMenuPanel = transform.Find("QuitToMainMenuPanel").gameObject;
+        m_quitToDesktopPanel = transform.Find("QuitToDesktopPanel").gameObject;
 
         InitialiseButtons();
 

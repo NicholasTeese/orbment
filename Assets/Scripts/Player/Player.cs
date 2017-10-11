@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(CharacterController))]
 
@@ -121,21 +122,14 @@ public class Player : Entity
         {
             m_Player = this;
         }
-        else if ( m_Player != this)
+        else if (m_Player != this)
         {
             Destroy(gameObject);
         }
-
-        //int L_P = LayerMask.NameToLayer("Player");
-        //int L_O = LayerMask.NameToLayer("Collectable");
-        //Debug.Log("Player Layer: " + L_P);
-        //Debug.Log("Orb Layer: " + L_O);
-        //Physics.IgnoreLayerCollision(L_O, L_P);
     }
 
     new void Start()
     {
-
         base.Start();
         PoolSpentOrbs();
 
@@ -178,8 +172,8 @@ public class Player : Entity
             //GameManager.m_gameManager.dead = true;
 			//x GameObject.Find ("GameManager").GetComponent<GameManager> ().dead = true;
 		}
-        GameManager.m_gameManager.m_healthBar.GetComponent<Slider>().maxValue = m_maxHealth;
-        GameManager.m_gameManager.m_healthBar.GetComponent<Slider>().value = m_currHealth;
+        PlayerHUDManager.m_playerHUDManager.HealthBar.GetComponent<Slider>().maxValue = m_maxHealth;
+        PlayerHUDManager.m_playerHUDManager.HealthBar.GetComponent<Slider>().value = m_currHealth;
         //x GameObject.Find ("GameManager").GetComponent<GameManager> ().m_healthBar.GetComponent<Slider> ().maxValue = m_maxHealth;
         //x GameObject.Find ("GameManager").GetComponent<GameManager> ().m_healthBar.GetComponent<Slider> ().value = m_currHealth;
         if (m_camera != null && m_currHealth < m_oldHealth)
@@ -285,7 +279,6 @@ public class Player : Entity
 
     void FixedUpdate()
     {
-        
         //mouse aiming
         if (InputManager.SecondaryInput() == Vector3.zero && m_v3LastMousePosition != Input.mousePosition)
         {

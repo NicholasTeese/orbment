@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,7 +13,7 @@ public class LightningBall : Bullet
         //set on fire
         if (m_enemy != null)
         {
-            m_explosionManager.RequestExplosion(collision.collider.transform.position, this.transform.forward, Explosion.ExplosionType.Lightning, m_damage);
+            ExplosionManager.m_explosionManager.RequestExplosion(collision.collider.transform.position, this.transform.forward, Explosion.ExplosionType.Lightning, m_damage);
 
 
             if(!m_hasGodBolt && m_playerRef != null && m_playerRef.m_perks.Contains(PerkID.GodBolt) && !collision.collider.CompareTag(m_id))
@@ -26,8 +26,8 @@ public class LightningBall : Bullet
             {
                 if (Random.Range(0, 100) <= m_godBoltChance)
                 {
-                    m_explosionManager.RequestExplosion(this.transform.position, this.transform.forward, Explosion.ExplosionType.GodLightning, m_damage);
-                    m_explosionManager.RequestExplosion(this.transform.position, this.transform.forward, Explosion.ExplosionType.Shockwave, 0.0f);
+                    ExplosionManager.m_explosionManager.RequestExplosion(this.transform.position, this.transform.forward, Explosion.ExplosionType.GodLightning, m_damage);
+                    ExplosionManager.m_explosionManager.RequestExplosion(this.transform.position, this.transform.forward, Explosion.ExplosionType.Shockwave, 0.0f);
                 }
             }
         }

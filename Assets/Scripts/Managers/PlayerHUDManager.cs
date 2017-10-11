@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class PlayerHUDManager : MonoBehaviour
 {
-    public static PlayerHUDManager m_playerHUDManager;
+    private GameObject m_healthBar = null;
+
+    public static PlayerHUDManager m_playerHUDManager = null;
+
+    public GameObject HealthBar { get { return m_healthBar; } set { m_healthBar = value; } }
 
     private void Awake()
     {
@@ -14,7 +18,12 @@ public class PlayerHUDManager : MonoBehaviour
         }
         else if (m_playerHUDManager != this)
         {
-            Destroy(gameObject);
+            Destroy(transform.parent.gameObject);
         }
+    }
+
+    private void Start()
+    {
+        m_healthBar = transform.Find("Health_Bar").gameObject;
     }
 }

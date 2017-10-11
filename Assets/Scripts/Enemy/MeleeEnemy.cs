@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -26,7 +26,7 @@ public class MeleeEnemy : Enemy
 
     private Vector3 m_v3ChargeTarget = Vector3.zero;
 
-    public GameObject m_target;
+    //private GameObject m_target;
 
     private NavMeshAgent m_navMeshAgent;
 
@@ -44,11 +44,17 @@ public class MeleeEnemy : Enemy
     new private void Start()
     {
         base.Start();
-        m_target = Player.m_Player.transform.gameObject;
+        //m_target = Player.m_Player.transform.gameObject;
     }
 
     new private void Update()
     {
+        // kill code for debugging
+        if (Input.GetKey(KeyCode.E) && Input.GetKey(KeyCode.Equals) && Input.GetKey(KeyCode.Alpha0))
+        {
+            this.m_currHealth = 0;
+        }
+
         //!? YES I KNOW THIS IS TERRIBLE DON'T JUSDGE ME!
         if (Vector3.Distance(transform.position, Player.m_Player.transform.position) > 10.0f)
         {
@@ -64,15 +70,9 @@ public class MeleeEnemy : Enemy
             }
         }
 
-        // kill code for debugging
-        if (Input.GetKey(KeyCode.E) && Input.GetKey(KeyCode.Equals) && Input.GetKey(KeyCode.Alpha0))
-        {
-            this.m_currHealth = 0;
-        }
-
         base.Update();
 
-        Vector3 V_targetOffset = new Vector3(m_target.transform.position.x, transform.position.y, m_target.transform.position.z);
+        Vector3 V_targetOffset = new Vector3(Player.m_Player.transform.position.x, transform.position.y, Player.m_Player.transform.position.z);
 
         switch (m_eBehaviour)
         {
@@ -92,7 +92,7 @@ public class MeleeEnemy : Enemy
                     // If enemy detects player
                     if (m_foir.m_target != null)
                     {
-                        if (Vector3.Distance(transform.position, m_target.transform.position) <= 15.0f)
+                        if (Vector3.Distance(transform.position, Player.m_Player.transform.position) <= 15.0f)
                         {
                             // set behaviour to prepare charge
                             m_Animator.SetBool("Walking2Recovery", true);
@@ -116,7 +116,7 @@ public class MeleeEnemy : Enemy
                     // cease wander
                     //m_navMeshAgent.destination = transform.position;
                     // If player retreats far enough away before enemy charges, return to wander
-                    if (Vector3.Distance(transform.position, m_target.transform.position) > 15.0f)
+                    if (Vector3.Distance(transform.position, Player.m_Player.transform.position) > 15.0f)
                     {
                         m_fPrepareChargeTime = 2.0f;
                         m_Animator.SetBool("Walking2Recovery", false);
@@ -197,11 +197,11 @@ public class MeleeEnemy : Enemy
 
                     if (m_fRecoverTime <= 0.0f)
                     {
-                        if (Vector3.Distance(transform.position, m_target.transform.position) >= 4.0f)
+                        if (Vector3.Distance(transform.position, Player.m_Player.transform.position) >= 4.0f)
                         {
                             if (m_foir.m_target != null)
                             {
-                                if (Vector3.Distance(transform.position, m_target.transform.position) <= 15.0f)
+                                if (Vector3.Distance(transform.position, Player.m_Player.transform.position) <= 15.0f)
                                 {
                                     m_navMeshAgent.enabled = true;
                                     m_navMeshAgent.speed = m_fMoveSpeed;
@@ -219,7 +219,7 @@ public class MeleeEnemy : Enemy
                             break;
                         }
 
-                        Vector3 v3RetreatDirection = transform.position - m_target.transform.position;
+                        Vector3 v3RetreatDirection = transform.position - Player.m_Player.transform.position;
                         v3RetreatDirection = new Vector3(v3RetreatDirection.x, 0.0f, v3RetreatDirection.z).normalized;
                         transform.position += v3RetreatDirection * m_fMoveSpeed * Time.deltaTime;
                         break;
@@ -270,17 +270,6 @@ public class MeleeEnemy : Enemy
                 //m_navMeshAgent.transform.LookAt(collision.collider.transform.position - m_bulletScript.m_direction);
             }
         }
-
-        //if (collision.collider.CompareTag("Obstruction"))
-        //{
-        //    m_v3ChargeTarget = transform.position;
-        //    m_eBehaviour = Behaviour.RECOVERING;
-        //}
-
-        //if (collision.collider.CompareTag("Destructible"))
-        //{
-        //    //break wall
-        //}
     }
 
     private Vector3 GetWanderPosition(Vector3 a_v3CurrentPosition)
@@ -300,7 +289,7 @@ public class MeleeEnemy : Enemy
 
     private bool DamageCheck()
     {
-        if (Vector3.Distance(transform.position, m_target.transform.position) <= 1.5f)
+        if (Vector3.Distance(transform.position, Player.m_Player.transform.position) <= 1.5f)
         {
             return true;
         }

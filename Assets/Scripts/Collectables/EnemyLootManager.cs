@@ -1,21 +1,34 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyLootManager : MonoBehaviour
 {
-    public GameObject[] collectablePrefabs;//originals
-    public int m_poolAmount = 20; // max amount per collectable type
-    public float m_lootsplosionForce = 10;
-
     public struct Item
     {
         public Collectable m_script;
         public GameObject m_object;
     }
 
+    public GameObject[] collectablePrefabs;//originals
+    public int m_poolAmount = 20; // max amount per collectable type
+    public float m_lootsplosionForce = 10;
+
     public List<List<Item>> m_pool = new List<List<Item>>();
 
+    public static EnemyLootManager m_enemyLootManager = null;
+
+    private void Awake()
+    {
+        if (m_enemyLootManager == null)
+        {
+            m_enemyLootManager = this;
+        }
+        else if (m_enemyLootManager != this)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     // Use this for initialization
     void Start()
@@ -45,6 +58,17 @@ public class EnemyLootManager : MonoBehaviour
                 }
             }
             m_pool.Add(m_newType);
+        }
+    }
+
+    public void DisableOrbs()
+    {
+        foreach (List<Item> orbPool in m_pool)
+        {
+            foreach (Item orb in orbPool)
+            {
+                orb.m_object.SetActive(false);
+            }
         }
     }
 
