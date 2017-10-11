@@ -8,6 +8,8 @@ public class Bomb : MonoBehaviour
     private float m_fFuseTimer = 3.0f;
     private float m_fLastColourSwitchTime;
 
+    public float m_fBombDamage;
+
     private bool m_bHasExploded = false;
 
     private Vector3 m_v3RollPosition = Vector3.zero;
@@ -20,6 +22,12 @@ public class Bomb : MonoBehaviour
 
         m_renderer = GetComponent<Renderer>();
         m_renderer.material.color = Color.black;
+
+        if (m_fBombDamage == 0.0f)
+        {
+            //if not set in inspector, default to 200
+            m_fBombDamage = 200.0f;
+        }
     }
 
     private void Start()
