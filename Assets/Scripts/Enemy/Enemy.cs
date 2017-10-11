@@ -13,7 +13,14 @@ public class Enemy : Entity
         BOMBER
     }
 
+    protected Collider m_collider;
+
     public EnemyType m_type;
+
+    protected void Awake()
+    {
+        m_collider = GetComponent<Collider>();
+    }
 
     new void Update()
     {
@@ -31,6 +38,12 @@ public class Enemy : Entity
                 m_killStreakManager.AddKill();
             }
         }
+
+        if (!CalculateFrustrum(IsoCam.m_playerCamera.FrustrumPlanes, m_collider))
+        {
+            return;
+        }
+
         base.Update();
 
     }
@@ -70,5 +83,15 @@ public class Enemy : Entity
             Vector2 screenPoint = Camera.main.WorldToScreenPoint(this.transform.position);
             GUI.Label(new Rect(screenPoint.x - 0.5f * m_healthBarWidth, Screen.height - screenPoint.y - 60, m_healthBarWidth, 50), "Lvl " + m_currLevel);
         }
+    }
+
+    protected bool CalculateFrustrum(Plane[] a_frustrumPlanes, Collider a_collider)
+    {
+        if (GeometryUtility.TestPlanesAABB(a_frustrumPlanes, a_collider.bounds))
+        {
+            return true;
+        }
+
+        return false;
     }
 }

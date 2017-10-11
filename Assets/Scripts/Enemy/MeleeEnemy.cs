@@ -32,8 +32,9 @@ public class MeleeEnemy : Enemy
 
     private FindObjectsInRadius m_foir;
 
-    private void Awake()
+    private new void Awake()
     {
+        base.Awake();
         m_foir = this.GetComponent<FindObjectsInRadius>();
         m_Animator = GetComponent<Animator>();
         m_navMeshAgent = GetComponent<NavMeshAgent>();
@@ -55,8 +56,7 @@ public class MeleeEnemy : Enemy
             this.m_currHealth = 0;
         }
 
-        //!? YES I KNOW THIS IS TERRIBLE DON'T JUSDGE ME!
-        if (Vector3.Distance(transform.position, Player.m_Player.transform.position) > 10.0f)
+        if (!CalculateFrustrum(IsoCam.m_playerCamera.FrustrumPlanes, m_collider))
         {
             return;
         }

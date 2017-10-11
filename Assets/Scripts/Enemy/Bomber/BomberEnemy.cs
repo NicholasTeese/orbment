@@ -30,8 +30,10 @@ public class BomberEnemy : Enemy
     [Header("Holds the hiding spots that the bomber can flee towards.")]
     public GameObject m_hidingSpotHolder = null;
 
-    private void Awake()
+    private new void Awake()
     {
+        base.Awake();
+
         m_navMeshAgent = GetComponent<NavMeshAgent>();
         m_navMeshAgent.destination = GetWanderPosition(transform.position);
         m_navMeshAgent.speed = m_fWanderSpeed;
@@ -57,12 +59,6 @@ public class BomberEnemy : Enemy
             this.m_currHealth = 0;
         }
 
-        //!? YES I KNOW THIS IS TERRIBLE DON'T JUSDGE ME!
-        if (Vector3.Distance(transform.position, Player.m_Player.transform.position) > 10.0f)
-        {
-            return;
-        }
-
         if (m_currHealth <= 0)
         {
             m_expManager.m_playerExperience += m_experienceValue;
@@ -70,6 +66,11 @@ public class BomberEnemy : Enemy
             {
                 m_killStreakManager.AddKill();
             }
+        }
+
+        if (!CalculateFrustrum(IsoCam.m_playerCamera.FrustrumPlanes, m_collider))
+        {
+            return;
         }
 
         base.Update();

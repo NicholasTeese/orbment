@@ -15,19 +15,21 @@ public class EnemyShoot : MonoBehaviour
     private Vector3 m_shootDir;
     private Enemy m_enemyScript;
 
+    private Collider m_collider;
+
     // Use this for initialization
     void Start()
     {
         m_enemyScript = this.GetComponent<Enemy>();
         m_weapon = this.GetComponent<BaseWeapon>();
         m_foir = this.GetComponent<FindObjectsInRadius>();
+        m_collider = GetComponent<Collider>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //!? YES I KNOW THIS IS TERRIBLE DON'T JUSDGE ME!
-        if (Vector3.Distance(transform.position, Player.m_Player.transform.position) > 10.0f)
+        if (!CalculateFrustrum(IsoCam.m_playerCamera.FrustrumPlanes, m_collider))
         {
             return;
         }
@@ -61,5 +63,15 @@ public class EnemyShoot : MonoBehaviour
             m_attackTimer += Time.deltaTime;
         }
 
+    }
+
+    private bool CalculateFrustrum(Plane[] a_frustrumPlanes, Collider a_collider)
+    {
+        if (GeometryUtility.TestPlanesAABB(a_frustrumPlanes, a_collider.bounds))
+        {
+            return true;
+        }
+
+        return false;
     }
 }

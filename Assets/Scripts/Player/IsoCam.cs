@@ -29,6 +29,11 @@ public class IsoCam : MonoBehaviour
     private float m_flashDuration = 0.0f;
     private float m_intensity = 0.0f;
 
+    private Plane[] m_frustrumPlanes = null;
+    public Plane[] FrustrumPlanes { get { m_frustrumPlanes = GeometryUtility.CalculateFrustumPlanes(m_camera); return m_frustrumPlanes; } }
+
+    private Camera m_camera;
+
     public static IsoCam m_playerCamera = null;
 
     private void Awake()
@@ -43,6 +48,8 @@ public class IsoCam : MonoBehaviour
         }
 
         m_flashRed = Resources.Load("Materials/FlashRed") as Material;
+
+        m_camera = GetComponent<Camera>();
     }
 
     // Use this for initialization
