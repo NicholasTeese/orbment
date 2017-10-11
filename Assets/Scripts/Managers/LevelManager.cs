@@ -154,8 +154,8 @@ public class LevelManager : MonoBehaviour
         // Managers.
         DontDestroyOnLoad(gameObject);
         DontDestroyOnLoad(GameManager.m_gameManager.gameObject);
-        DontDestroyOnLoad(ExpManager.m_experiencePointsManager.gameObject);
-        DontDestroyOnLoad(ExplosionManager.m_explosionManager.gameObject);
+        //DontDestroyOnLoad(ExpManager.m_experiencePointsManager.gameObject);
+        //DontDestroyOnLoad(ExplosionManager.m_explosionManager.gameObject);
 
         // Actors.
         DontDestroyOnLoad(Player.m_Player.gameObject);
