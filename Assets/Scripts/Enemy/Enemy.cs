@@ -15,11 +15,19 @@ public class Enemy : Entity
 
     protected Collider m_collider;
 
+    private Animator m_Animator;
+
     public EnemyType m_type;
 
     protected void Awake()
     {
+        m_Animator = GetComponent<Animator>();
         m_collider = GetComponent<Collider>();
+
+        if (m_type == EnemyType.Hunter)
+        {
+            //m_Animator.SetBool("Walking2Recovery", false);
+        }
     }
 
     new void Update()
@@ -62,7 +70,7 @@ public class Enemy : Entity
                 }
                 //m_agent.transform.LookAt(collision.collider.transform.position - m_bulletScript.m_direction); // Look at bullet origin
             }
-        }        
+        }
     }
 
     new private void OnGUI()

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class FindObjectsInRadius : MonoBehaviour
 {
+    //public static FindObjectsInRadius m_foir;
+
     public string m_targetTag;
     public float m_sightRadius = 20;
     public float m_sightAngle = 45;

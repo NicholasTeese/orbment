@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
     public bool GameIsPaused { get { return m_bGameIsPaused; } set { m_bGameIsPaused = value; } }
 
     public static GameManager m_gameManager = null;
+    //private GameObject m_cursor = null;
+    public Texture2D m_crosshair = null;
+    public Vector2 offset;
 
     private void Awake()
     {
@@ -22,6 +25,10 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        Cursor.lockState = CursorLockMode.Confined;
+        offset = new Vector2(1.0f, 1.0f);
+        Cursor.SetCursor(m_crosshair, offset, CursorMode.Auto);
     }
 
     private void Start()
@@ -34,6 +41,7 @@ public class GameManager : MonoBehaviour
 
     void Update ()
     {
+        //Debug.Log(offset);
         if (SceneManager.GetActiveScene().name == LevelManager.m_strMainMenuSceneName)
         {
             return;

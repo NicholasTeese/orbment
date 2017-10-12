@@ -26,7 +26,6 @@ public class ProtectorVision : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
         insideSphere = Physics.OverlapSphere(this.transform.position, m_sightRadius);
         float closest = Mathf.Infinity;
         foreach (Collider col in insideSphere)
@@ -45,8 +44,6 @@ public class ProtectorVision : MonoBehaviour
             }
         }
     }
-
-
 
     private void OnDrawGizmos()
     {
