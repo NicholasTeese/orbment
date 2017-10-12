@@ -56,6 +56,7 @@ public class DeathMenuManager : MonoBehaviour
         m_mainPanel.SetActive(true);
         m_quitToMainMenuPanel.SetActive(false);
         m_quitToDesktopPanel.SetActive(false);
+        gameObject.SetActive(false);
 
         m_lActivePanelButtons = m_lMainPanelButtons;
         m_selectedButton = m_lActivePanelButtons[0];

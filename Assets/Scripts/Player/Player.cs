@@ -413,4 +413,9 @@ public class Player : Entity
         //    }
         //}
     }
+
+    public void ResetPlayer()
+    {
+
+    }
 }
