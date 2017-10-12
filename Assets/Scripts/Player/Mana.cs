@@ -11,7 +11,7 @@ using UnityEngine.UI;
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 public class Mana : MonoBehaviour
 {
-	public GameObject manaBar;
+	private GameObject manaBar;
     public Texture2D m_manaBarTexture;
     public Texture2D m_emptyBarTexture;
     public int m_manaBarWidth = 500;
@@ -20,13 +20,13 @@ public class Mana : MonoBehaviour
 
     void Start()
     {
-
+        manaBar = PlayerHUDManager.m_playerHUDManager.transform.Find("ManaBar").gameObject;
     }
 
     void Update()
     {
-        manaBar.GetComponent<Slider> ().value = m_currentMana;
-		manaBar.GetComponent<Slider> ().maxValue = m_maxMana;
+        manaBar.GetComponent<Slider>().value = m_currentMana;
+		manaBar.GetComponent<Slider>().maxValue = m_maxMana;
     }
 
     private void OnGUI()

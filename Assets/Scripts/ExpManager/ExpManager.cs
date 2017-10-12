@@ -94,7 +94,7 @@ public class ExpManager : MonoBehaviour
         {
             if(!GameManager.m_gameManager.GameIsPaused)
             {
-                if (PerkTreeManager.m_perkTreeManager.AvailiablePerks != 0 && !m_bPerkTreeOpen)
+                if (!m_bPerkTreeOpen)
                 {
                     EnablePerkTree();
                 }

@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        Time.timeScale = 1;
+
         if (m_gameManager == null)
         {
             m_gameManager = this;
@@ -34,7 +36,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
 
         PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(false);
-        DeathMenuManager.m_deathMenuManager.gameObject.SetActive(false);
+        //DeathMenuManager.m_deathMenuManager.gameObject.SetActive(false);
     }
 
     void Update ()
