@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PerkTreeManager : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class PerkTreeManager : MonoBehaviour
 
     private bool m_bInputRecieved = false;
     private bool m_bPerkTreeIsSelected = false;
+
+    private Image m_backgroundImage = null;
 
     [Header("Perk Trees")]
     public List<PerkTreeButton> m_perkTrees = new List<PerkTreeButton>();
@@ -32,6 +35,11 @@ public class PerkTreeManager : MonoBehaviour
     {
         m_selectedPerkTreeButton.IsHighlighted = true;
         m_selectedPerkButton.IsHighlighted = true;
+
+        m_backgroundImage = transform.Find("Background_Panel").GetComponent<Image>();
+        Color newColor = m_backgroundImage.color;
+        newColor.a = 1.0f;
+        m_backgroundImage.color = newColor;
 
         m_player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 

@@ -5,6 +5,7 @@ using UnityEngine;
 public class BreakOnImpactWith : MonoBehaviour
 {
     private int wallHealth = 100;
+    public int WallHealth { get { return wallHealth; } set { wallHealth = value; } }
     public AudioSource audiosrc;
     public string m_tag;
     public GameObject m_faceModel;
@@ -43,13 +44,9 @@ public class BreakOnImpactWith : MonoBehaviour
             }
         }
     }
+
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Bullet")
-        {
-            wallHealth -= 45;
-        }
-
         if (other.CompareTag(m_tag) && !m_isBroken)
         {
             ///if player
