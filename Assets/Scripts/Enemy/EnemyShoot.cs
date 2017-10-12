@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(FindObjectsInRadius))]
 
-public class EnemyShoot : Enemy
+public class EnemyShoot : MonoBehaviour
 {
 //    private int m_damagePerProjectile;
     public float m_attackInterval = 1.0f;
@@ -14,23 +14,20 @@ public class EnemyShoot : Enemy
     private float m_attackTimer = 0.0f;
     private Vector3 m_shootDir;
     private Enemy m_enemyScript;
-
     private Collider m_collider;
-
-    // Use this for initialization
-    new void Start()
+    void Start()
     {
-        base.Start();
+        //base.Start();
         m_enemyScript = this.GetComponent<Enemy>();
         m_weapon = this.GetComponent<BaseWeapon>();
         m_foir = this.GetComponent<FindObjectsInRadius>();
         m_collider = GetComponent<Collider>();
     }
 
-    // Update is called once per frame
-    new void Update()
+
+    void Update()
     {
-        base.Update();
+        //base.Update();
         if (!CalculateFrustrum(IsoCam.m_playerCamera.FrustrumPlanes, m_collider))
         {
             return;
@@ -62,19 +59,15 @@ public class EnemyShoot : Enemy
             }
             m_attackTimer += Time.deltaTime;
         }
-
     }
 
-    private void AnimateGoblin()
+    private bool CalculateFrustrum(Plane[] a_frustrumPlanes, Collider a_collider)
     {
-        if (m_type == EnemyType.Hunter)
+        if (GeometryUtility.TestPlanesAABB(a_frustrumPlanes, a_collider.bounds))
         {
-            if (m_foir.m_target == null)
-            {
-
-            }
-
+            return true;
         }
-        else return;
+
+        return false;
     }
 }
