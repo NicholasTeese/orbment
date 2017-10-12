@@ -15,14 +15,18 @@ public class Enemy : Entity
 
     protected Collider m_collider;
 
-    private Animator m_Animator;
+    protected Animator m_Animator;
 
     public EnemyType m_type;
+
+    protected Vector3 m_v3TravelDir = Vector3.zero;
 
     protected void Awake()
     {
         m_Animator = GetComponent<Animator>();
         m_collider = GetComponent<Collider>();
+
+        m_v3TravelDir = transform.position;
 
         if (m_type == EnemyType.Hunter)
         {
@@ -66,6 +70,7 @@ public class Enemy : Entity
             {
                 if (m_type != EnemyType.BOMBER)
                 {
+                    m_v3TravelDir = m_bulletScript.m_direction;
                     m_agent.SetDestination(collision.collider.transform.position - m_bulletScript.m_direction); // Travel to bullet origin
                 }
                 //m_agent.transform.LookAt(collision.collider.transform.position - m_bulletScript.m_direction); // Look at bullet origin

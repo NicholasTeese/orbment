@@ -22,7 +22,7 @@ public class MeleeEnemy : Enemy
 
     private Behaviour m_eBehaviour = Behaviour.WANDERING;
 
-    private Animator m_Animator;
+    //private Animator m_Animator;
 
     private Vector3 m_v3ChargeTarget = Vector3.zero;
 
@@ -36,7 +36,7 @@ public class MeleeEnemy : Enemy
     {
         base.Awake();
         m_foir = this.GetComponent<FindObjectsInRadius>();
-        m_Animator = GetComponent<Animator>();
+        //m_Animator = GetComponent<Animator>();
         m_navMeshAgent = GetComponent<NavMeshAgent>();
         m_navMeshAgent.destination = GetWanderPosition(transform.position);
         m_navMeshAgent.speed = m_fMoveSpeed;
