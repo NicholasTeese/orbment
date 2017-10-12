@@ -26,6 +26,18 @@ public class MainMenuButton : BaseButton
                     break;
                 }
 
+            case "MainPanelOptions":
+                {
+                    MainMenuManager.m_mainMenuManager.ActivePanelButtons = MainMenuManager.m_mainMenuManager.OptionsPanelButtons;
+                    MainMenuManager.m_mainMenuManager.SelectedButton.IsMousedOver = false;
+                    MainMenuManager.m_mainMenuManager.SelectedButton = MainMenuManager.m_mainMenuManager.ActivePanelButtons[0];
+                    MainMenuManager.m_mainMenuManager.SelectedButton.IsMousedOver = true;
+                    MainMenuManager.m_mainMenuManager.m_mainPanel.SetActive(false);
+                    MainMenuManager.m_mainMenuManager.m_optionsPanel.SetActive(true);
+                    MainMenuManager.m_mainMenuManager.ResetSelectedButtonIndex();
+                    break;
+                }
+
             case "MainPanelQuitToDesktop":
                 {
                     MainMenuManager.m_mainMenuManager.ActivePanelButtons = MainMenuManager.m_mainMenuManager.QuitToDesktopPanelButtons;
@@ -34,6 +46,18 @@ public class MainMenuButton : BaseButton
                     MainMenuManager.m_mainMenuManager.SelectedButton.IsMousedOver = true;
                     MainMenuManager.m_mainMenuManager.m_mainPanel.SetActive(false);
                     MainMenuManager.m_mainMenuManager.m_quitToDesktopPanel.SetActive(true);
+                    MainMenuManager.m_mainMenuManager.ResetSelectedButtonIndex();
+                    break;
+                }
+
+            case "OptionsPanelBack":
+                {
+                    MainMenuManager.m_mainMenuManager.ActivePanelButtons = MainMenuManager.m_mainMenuManager.MainPanelButtons;
+                    MainMenuManager.m_mainMenuManager.SelectedButton.IsMousedOver = false;
+                    MainMenuManager.m_mainMenuManager.SelectedButton = MainMenuManager.m_mainMenuManager.ActivePanelButtons[0];
+                    MainMenuManager.m_mainMenuManager.SelectedButton.IsMousedOver = true;
+                    MainMenuManager.m_mainMenuManager.m_mainPanel.SetActive(true);
+                    MainMenuManager.m_mainMenuManager.m_optionsPanel.SetActive(false);
                     MainMenuManager.m_mainMenuManager.ResetSelectedButtonIndex();
                     break;
                 }

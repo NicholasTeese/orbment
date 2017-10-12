@@ -15,14 +15,18 @@ public class MainMenuManager : MonoBehaviour
     public BaseButton SelectedButton { get { return m_selectedButton; } set { m_selectedButton = value; } }
 
     private List<BaseButton> m_lMainPanelButtons = new List<BaseButton>();
-    public List<BaseButton> MainPanelButtons { get { return m_lMainPanelButtons; } }
+    private List<BaseButton> m_lOptionsPanelButtons = new List<BaseButton>();
     private List<BaseButton> m_lQuitToDesktopPanelButtons = new List<BaseButton>();
-    public List<BaseButton> QuitToDesktopPanelButtons { get { return m_lQuitToDesktopPanelButtons; } }
     private List<BaseButton> m_lActivePanelButtons = new List<BaseButton>();
+   
+    public List<BaseButton> MainPanelButtons { get { return m_lMainPanelButtons; } }
+    public List<BaseButton> OptionsPanelButtons { get { return m_lOptionsPanelButtons; } set { m_lOptionsPanelButtons = value; } }
+    public List<BaseButton> QuitToDesktopPanelButtons { get { return m_lQuitToDesktopPanelButtons; } }
     public List<BaseButton> ActivePanelButtons { get { return m_lActivePanelButtons; } set { m_lActivePanelButtons = value; } }
 
     [Header("Pause Menu Panels")]
     public GameObject m_mainPanel;
+    public GameObject m_optionsPanel;
     public GameObject m_quitToDesktopPanel;
 
     public static MainMenuManager m_mainMenuManager;
@@ -41,6 +45,7 @@ public class MainMenuManager : MonoBehaviour
         IntitialiseButtons();
 
         m_mainPanel.SetActive(true);
+        m_optionsPanel.SetActive(false);
         m_quitToDesktopPanel.SetActive(false);
 
         m_lActivePanelButtons = m_lMainPanelButtons;
@@ -68,6 +73,17 @@ public class MainMenuManager : MonoBehaviour
             if (button.CompareTag("Button"))
             {
                 m_lMainPanelButtons.Add(button.GetComponent<BaseButton>());
+                button.GetComponent<BaseButton>().ParentListIndex = iParentListIndex;
+                ++iParentListIndex;
+            }
+        }
+        iParentListIndex = 0;
+
+        foreach (Transform button in m_optionsPanel.transform)
+        {
+            if (button.CompareTag("Button"))
+            {
+                m_lOptionsPanelButtons.Add(button.GetComponent<BaseButton>());
                 button.GetComponent<BaseButton>().ParentListIndex = iParentListIndex;
                 ++iParentListIndex;
             }

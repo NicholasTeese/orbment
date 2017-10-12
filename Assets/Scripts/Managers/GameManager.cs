@@ -35,7 +35,11 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
 
-        PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(false);
+        if (SceneManager.GetActiveScene().name != "Beta_Main_Menu")
+        {
+            PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(false);
+        }
+
         //DeathMenuManager.m_deathMenuManager.gameObject.SetActive(false);
     }
 

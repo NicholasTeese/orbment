@@ -52,7 +52,10 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        InitialiseDontDestroyOnLoad();
+        if (SceneManager.GetActiveScene().name != m_strMainMenuSceneName)
+        {
+            InitialiseDontDestroyOnLoad();
+        }
     }
 
     private void OnDisable()
@@ -64,17 +67,20 @@ public class LevelManager : MonoBehaviour
     {
         // Deactivate cameras from previous scene.
         //!? Is required to stop black screen bug when loaded between scenes.
-        PerkTreeCamera.m_perkTreeCamera.gameObject.SetActive(false);
-        IsoCam.m_playerCamera.gameObject.SetActive(false);
+        if (SceneManager.GetActiveScene().name != m_strMainMenuSceneName)
+        {
+            PerkTreeCamera.m_perkTreeCamera.gameObject.SetActive(false);
+            IsoCam.m_playerCamera.gameObject.SetActive(false);
+        }
 
         switch (a_scene.name)
         {
             case m_strMainMenuSceneName:
                 {
                     // Initialise Canvasses.
-                    PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(false);
-                    DeathMenuManager.m_deathMenuManager.gameObject.SetActive(false);
-                    PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(false);
+                    //PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(false);
+                    //DeathMenuManager.m_deathMenuManager.gameObject.SetActive(false);
+                    //PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(false);
                     break;
                 }
 
