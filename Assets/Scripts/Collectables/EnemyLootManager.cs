@@ -11,7 +11,7 @@ public class EnemyLootManager : MonoBehaviour
     }
 
     public GameObject[] collectablePrefabs;//originals
-    public int m_poolAmount = 20; // max amount per collectable type
+    public int m_poolAmount = 20; // max amount per collectible type
     public float m_lootsplosionForce = 10;
 
     public List<List<Item>> m_pool = new List<List<Item>>();
@@ -78,7 +78,7 @@ public class EnemyLootManager : MonoBehaviour
         {
             if(m_pool[i][0].m_script.m_type == a_type)
             {
-                //found correct type of collectable
+                //found correct type of collectible
 
                 //dig in
                 int spawnAmount = Random.Range(minAmount, maxAmount);
