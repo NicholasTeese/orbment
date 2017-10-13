@@ -190,7 +190,6 @@ public class Player : Entity
         m_damage = m_currDamage + Random.Range(-m_damageDeviation, m_damageDeviation);
 
         //mouse hold fire
-//        if (Input.GetKey(KeyCode.UpArrow) && Time.timeScale != 0)
         if ((Input.GetMouseButton(0) || InputManager.RightTriggerHold()) && Time.timeScale != 0.0f)
         {
             
@@ -218,19 +217,23 @@ public class Player : Entity
                         //Johns Code [Sorry]
 
                         //Shooting Audio
-                        if (m_currentProjectile.name == "PlayerBullet") {
+                        if (m_currentProjectile.name == "PlayerBullet")
+                        {
                             shootingAudioSource.pitch = 1 + Random.Range(0f, 0.5f);
                             shootingAudioSource.PlayOneShot(basic_shot, 0.7f);
                         }
-                        if (m_currentProjectile.name == "FireBall") {
+                        else if (m_currentProjectile.name == "FireBall")
+                        {
 							shootingAudioSource.pitch = 1 + Random.Range(0f, 0.5f);
 							shootingAudioSource.PlayOneShot (fire_shot, 0.7f);
 						}
-						if (m_currentProjectile.name == "IceShard") {
+						else if (m_currentProjectile.name == "IceShard")
+                        {
 							shootingAudioSource.pitch = 1 + Random.Range(0f, 0.5f);
 							shootingAudioSource.PlayOneShot (ice_shot, 0.7f);
 						}
-						if (m_currentProjectile.name == "LightningBall") {
+						else if (m_currentProjectile.name == "LightningBall")
+                        {
 							shootingAudioSource.pitch = 1 + Random.Range(-0.1f, 0.6f);
 							shootingAudioSource.PlayOneShot (lightning_shot, 0.7f);
 						}

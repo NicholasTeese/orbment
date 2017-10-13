@@ -4,31 +4,25 @@ using UnityEngine;
 
 public class StartingWeapon : BaseWeapon
 {
-    //public static StartingWeapon m_startingWeapon;
+    private AudioClip m_basicBullet;
+    private AudioClip m_fireBullet;
 
-    //private void Awake()
-    //{
-    //    if (m_startingWeapon == null)
-    //    {
-    //        m_startingWeapon = this;
-    //    }
-    //    else if (m_startingWeapon != this)
-    //    {
-    //        //Destroy(gameObject);
-    //    }
-    //}
+    private AudioSource m_weaponAudioSource;
+
+    private void Awake()
+    {
+        //m_basicBullet = Resources.Load("")
+    }
 
     public override void Fire(Vector3 a_direction, int damagePerProjectile, bool a_hasCrit, float a_critMult)
     {
         base.PoolToActive(a_direction, damagePerProjectile, 1);
-
 
         for (int i = 0; i < m_activePool.Count; ++i)
         {
             m_activePool[i].m_isCrit = a_hasCrit;
             m_activePool[i].m_direction = a_direction;
             m_activePool[i].m_damage = m_activePool[i].m_baseDamage + damagePerProjectile;
-            //Debug.Log(m_activePool[i].transform.localScale);
 
             if(a_hasCrit)
             {
