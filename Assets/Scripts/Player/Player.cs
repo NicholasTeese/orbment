@@ -217,28 +217,28 @@ public class Player : Entity
                         //Johns Code [Sorry]
 
                         //Shooting Audio
-                        if (m_currentProjectile.name == "PlayerBullet")
-                        {
-                            shootingAudioSource.pitch = 1 + Random.Range(0f, 0.5f);
-                            shootingAudioSource.PlayOneShot(basic_shot, 0.7f);
-                        }
-                        else if (m_currentProjectile.name == "FireBall")
-                        {
-							shootingAudioSource.pitch = 1 + Random.Range(0f, 0.5f);
-							shootingAudioSource.PlayOneShot (fire_shot, 0.7f);
-						}
-						else if (m_currentProjectile.name == "IceShard")
-                        {
-							shootingAudioSource.pitch = 1 + Random.Range(0f, 0.5f);
-							shootingAudioSource.PlayOneShot (ice_shot, 0.7f);
-						}
-						else if (m_currentProjectile.name == "LightningBall")
-                        {
-							shootingAudioSource.pitch = 1 + Random.Range(-0.1f, 0.6f);
-							shootingAudioSource.PlayOneShot (lightning_shot, 0.7f);
-						}
+                        //if (m_currentProjectile.name == "PlayerBullet")
+                        //{
+                        //    shootingAudioSource.pitch = 1 + Random.Range(0f, 0.5f);
+                        //    shootingAudioSource.PlayOneShot(basic_shot, 0.7f);
+                        //}
+                        //else if (m_currentProjectile.name == "FireBall")
+                        //{
+						//	shootingAudioSource.pitch = 1 + Random.Range(0f, 0.5f);
+						//	shootingAudioSource.PlayOneShot (fire_shot, 0.7f);
+						//}
+                        //else if (m_currentProjectile.name == "IceShard")
+                        //{
+                        //    shootingAudioSource.pitch = 1 + Random.Range(0f, 0.5f);
+                        //    shootingAudioSource.PlayOneShot(ice_shot, 0.7f);
+                        //}
+                        //else if (m_currentProjectile.name == "LightningBall")
+                        //{
+                        //    shootingAudioSource.pitch = 1 + Random.Range(-0.1f, 0.6f);
+                        //    shootingAudioSource.PlayOneShot(lightning_shot, 0.7f);
+                        //}
 
-						//End of Johns Code
+                        //End of Johns Code
                         if (m_camera != null)
                         {
                             m_camera.Shake(2.5f, m_playerFiringInterval);
