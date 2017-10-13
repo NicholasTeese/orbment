@@ -20,13 +20,13 @@ public class Mana : MonoBehaviour
 
     void Start()
     {
-        manaBar = PlayerHUDManager.m_playerHUDManager.transform.Find("ManaBar").gameObject;
+        manaBar = PlayerHUDManager.m_playerHUDManager.transform.Find("Mana_Bar").Find("Mana_Bar_Full").gameObject;
     }
 
     void Update()
     {
-        manaBar.GetComponent<Slider>().value = m_currentMana;
-		manaBar.GetComponent<Slider>().maxValue = m_maxMana;
+        manaBar.GetComponent<Image>().fillAmount = m_currentMana / m_maxMana;
+		//manaBar.GetComponent<Slider>().maxValue = m_maxMana;
     }
 
     private void OnGUI()
