@@ -172,10 +172,8 @@ public class Player : Entity
             //GameManager.m_gameManager.dead = true;
 			//x GameObject.Find ("GameManager").GetComponent<GameManager> ().dead = true;
 		}
-        PlayerHUDManager.m_playerHUDManager.HealthBar.GetComponent<Slider>().maxValue = m_maxHealth;
-        PlayerHUDManager.m_playerHUDManager.HealthBar.GetComponent<Slider>().value = m_currHealth;
-        //x GameObject.Find ("GameManager").GetComponent<GameManager> ().m_healthBar.GetComponent<Slider> ().maxValue = m_maxHealth;
-        //x GameObject.Find ("GameManager").GetComponent<GameManager> ().m_healthBar.GetComponent<Slider> ().value = m_currHealth;
+        //PlayerHUDManager.m_playerHUDManager.HealthBar.GetComponent<Image>().maxValue = m_maxHealth;
+        PlayerHUDManager.m_playerHUDManager.HealthBar.GetComponent<Image>().fillAmount = m_currHealth / m_maxHealth;
         if (m_camera != null && m_currHealth < m_oldHealth)
         {
 

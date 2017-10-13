@@ -24,6 +24,6 @@ public class PlayerHUDManager : MonoBehaviour
 
     private void Start()
     {
-        m_healthBar = transform.Find("Health_Bar").gameObject;
+        m_healthBar = transform.Find("Health_Bar").Find("Health_Bar_Full").gameObject;
     }
 }
