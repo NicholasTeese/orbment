@@ -48,21 +48,19 @@ public class KillStreakManager : MonoBehaviour
         {
             ResetKillStreak();
         }
-
-        Debug.Log(m_killStreak);
     }
 
-    private List<Sprite> InitialiseKillStreakSprites()
-    {
-        List<Sprite> killStreakImages = new List<Sprite>();
-        killStreakImages.Add(Resources.Load("Textures/UI/KillStreak/2") as Sprite);
-        killStreakImages.Add(Resources.Load("Textures/UI/KillStreak/3") as Sprite);
-        killStreakImages.Add(Resources.Load("Textures/UI/KillStreak/4") as Sprite);
-        killStreakImages.Add(Resources.Load("Textures/UI/KillStreak/5") as Sprite);
-        killStreakImages.Add(Resources.Load("Textures/UI/KillStreak/6") as Sprite);
-        killStreakImages.Add(Resources.Load("Textures/UI/KillStreak/10") as Sprite);
-        return killStreakImages;
-    }
+    //x private List<Sprite> InitialiseKillStreakSprites()
+    //x {
+    //x     List<Sprite> killStreakImages = new List<Sprite>();
+    //x     killStreakImages.Add(Resources.Load("Textures/UI/KillStreak/2") as Sprite);
+    //x     killStreakImages.Add(Resources.Load("Textures/UI/KillStreak/3") as Sprite);
+    //x     killStreakImages.Add(Resources.Load("Textures/UI/KillStreak/4") as Sprite);
+    //x     killStreakImages.Add(Resources.Load("Textures/UI/KillStreak/5") as Sprite);
+    //x     killStreakImages.Add(Resources.Load("Textures/UI/KillStreak/6") as Sprite);
+    //x     killStreakImages.Add(Resources.Load("Textures/UI/KillStreak/10") as Sprite);
+    //x     return killStreakImages;
+    //x }
 
     private void DisplayKillStreak(int a_iKillStreak)
     {

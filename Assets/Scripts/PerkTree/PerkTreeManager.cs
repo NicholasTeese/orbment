@@ -17,6 +17,10 @@ public class PerkTreeManager : MonoBehaviour
 
     private Image m_backgroundImage = null;
 
+    [Header("Perk Tree Button Max & Min Indexes")]
+    public int m_iMinimumIndex;
+    public int m_iMaximumIndex;
+
     [Header("Perk Trees")]
     public List<PerkTreeButton> m_perkTrees = new List<PerkTreeButton>();
 
@@ -99,7 +103,7 @@ public class PerkTreeManager : MonoBehaviour
             {
                 m_bInputRecieved = true;
                 ++m_iPerkTreeIndex;
-                m_iPerkTreeIndex = Mathf.Clamp(m_iPerkTreeIndex, 0, 2);
+                m_iPerkTreeIndex = Mathf.Clamp(m_iPerkTreeIndex, m_iMinimumIndex, m_iMaximumIndex);
                 m_selectedPerkTreeButton.IsHighlighted = false;
                 m_selectedPerkTreeButton = m_perkTrees[m_iPerkTreeIndex];
                 m_selectedPerkTreeButton.IsHighlighted = true;
@@ -112,7 +116,7 @@ public class PerkTreeManager : MonoBehaviour
             {
                 m_bInputRecieved = true;
                 --m_iPerkTreeIndex;
-                m_iPerkTreeIndex = Mathf.Clamp(m_iPerkTreeIndex, 0, 2);
+                m_iPerkTreeIndex = Mathf.Clamp(m_iPerkTreeIndex, m_iMinimumIndex, m_iMaximumIndex);
                 m_selectedPerkTreeButton.IsHighlighted = false;
                 m_selectedPerkTreeButton = m_perkTrees[m_iPerkTreeIndex];
                 m_selectedPerkTreeButton.IsHighlighted = true;

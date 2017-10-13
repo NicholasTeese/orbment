@@ -175,7 +175,7 @@ public class MeleeEnemy : Enemy
                         Player.m_Player.m_bImpacted = true;
                     }
 
-                    if (Vector3.Distance(transform.position, m_v3ChargeTarget) <= 1.0f)
+                    if (Vector3.Distance(transform.position, m_v3ChargeTarget) <= 1.5f)
                     {
                         m_Animator.SetBool("Recovery2Charge", false);
                         m_Animator.SetBool("Charge2Recovery", true);

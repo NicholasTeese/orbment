@@ -43,9 +43,21 @@ public class PerkTreeButton : MonoBehaviour
 
     public void OnClick()
     {
-        m_firePerkTreeButton.gameObject.SetActive(false);
-        m_icePerkTreeButton.gameObject.SetActive(false);
-        m_lightningPerkTreeButton.gameObject.SetActive(false);
+        if (m_firePerkTreeButton != null)
+        {
+            m_firePerkTreeButton.gameObject.SetActive(false);
+        }
+
+        if (m_icePerkTreeButton != null)
+        {
+            m_icePerkTreeButton.gameObject.SetActive(false);
+        }
+
+        if (m_lightningPerkTreeButton != null)
+        {
+            m_lightningPerkTreeButton.gameObject.SetActive(false);
+        }
+
         m_childPerkTree.SetActive(true);
     }
 

@@ -75,19 +75,19 @@ public class ExpManager : MonoBehaviour
         {
             if (PerkTreeManager.m_perkTreeManager.AvailiablePerks == 0)
             {
-                m_upgradeAvailableText.SetActive(false);
-                m_upgradeUnavailableText.SetActive(true);
+                //m_upgradeAvailableText.SetActive(false);
+                //m_upgradeUnavailableText.SetActive(true);
             }
             else
             {
-                m_upgradeAvailableText.SetActive(true);
-                m_upgradeUnavailableText.SetActive(false);
+                //m_upgradeAvailableText.SetActive(true);
+                //m_upgradeUnavailableText.SetActive(false);
             }
         }
         else
         {
-            m_upgradeAvailableText.SetActive(false);
-            m_upgradeUnavailableText.SetActive(false);
+            //m_upgradeAvailableText.SetActive(false);
+            //m_upgradeUnavailableText.SetActive(false);
         }
 
         if (Input.GetKeyDown(KeyCode.Tab) || InputManager.BackButton())
