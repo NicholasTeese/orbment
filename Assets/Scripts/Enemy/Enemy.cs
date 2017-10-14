@@ -13,6 +13,9 @@ public class Enemy : Entity
         BOMBER
     }
 
+    private bool m_bRunning = false;
+    public bool Running { get { return m_bRunning; } }
+
     protected Collider m_collider;
 
     protected Animator m_Animator;
@@ -66,6 +69,11 @@ public class Enemy : Entity
             return;
         }
 
+        if (Vector3.Distance(transform.position, m_agent.destination) <= 1.2f)
+        {
+            m_bRunning = false;
+        }
+
         base.Update();
 
     }
@@ -80,6 +88,7 @@ public class Enemy : Entity
             {
                 if (m_type != EnemyType.BOMBER)
                 {
+                    m_bRunning = true;
                     m_v3TravelDir = m_bulletScript.m_direction;
                     m_agent.SetDestination(collision.collider.transform.position - m_bulletScript.m_direction); // Travel to bullet origin
                 }

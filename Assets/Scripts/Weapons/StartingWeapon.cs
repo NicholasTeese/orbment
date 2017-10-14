@@ -35,9 +35,15 @@ public class StartingWeapon : BaseWeapon
                     break;
                 }
 
+            case "EnemyBullet":
+                {
+                    //m_audioSource.PlayOneShot(m_normalBullets[Random.Range(0, 4)]);
+                    break;
+                }
+
             default:
                 {
-                    Debug.Log(m_projectile.name + "not recognised.");
+                    Debug.Log(m_projectile.name + " not recognised.");
                     break;
                 }
         }
