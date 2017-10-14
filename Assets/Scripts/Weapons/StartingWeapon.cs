@@ -7,14 +7,14 @@ public class StartingWeapon : BaseWeapon
     private AudioClip[] m_normalBullets;
     private AudioClip[] m_fireBullets;
 
-    private AudioSource m_weaponAudioSource;
+    private AudioSource m_audioSource;
 
     private void Awake()
     {
         m_normalBullets = Resources.LoadAll<AudioClip>("Audio/Beta/Normal_Bullet");
         m_fireBullets = Resources.LoadAll<AudioClip>("Audio/Beta/Fire_Bullet");
 
-        m_weaponAudioSource = GetComponent<AudioSource>();
+        m_audioSource = GetComponent<AudioSource>();
     }
 
     public override void Fire(Vector3 a_direction, int damagePerProjectile, bool a_hasCrit, float a_critMult)
@@ -25,13 +25,13 @@ public class StartingWeapon : BaseWeapon
         {
             case "PlayerBullet":
                 {
-                    m_weaponAudioSource.PlayOneShot(m_normalBullets[Random.Range(0, 4)]);
+                    m_audioSource.PlayOneShot(m_normalBullets[Random.Range(0, 4)]);
                     break;
                 }
 
             case "FireBall":
                 {
-                    m_weaponAudioSource.PlayOneShot(m_fireBullets[Random.Range(0, 4)]);
+                    m_audioSource.PlayOneShot(m_fireBullets[Random.Range(0, 4)]);
                     break;
                 }
 

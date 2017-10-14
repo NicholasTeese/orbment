@@ -17,6 +17,9 @@ public class PerkTreeManager : MonoBehaviour
 
     private Image m_backgroundImage = null;
 
+    private AudioSource m_audioSource;
+    public AudioSource PerkTreeAudioSource { get { return m_audioSource; } }
+
     [Header("Perk Tree Button Max & Min Indexes")]
     public int m_iMinimumIndex;
     public int m_iMaximumIndex;
@@ -44,6 +47,8 @@ public class PerkTreeManager : MonoBehaviour
         Color newColor = m_backgroundImage.color;
         newColor.a = 1.0f;
         m_backgroundImage.color = newColor;
+
+        m_audioSource = GetComponent<AudioSource>();
 
         m_player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 

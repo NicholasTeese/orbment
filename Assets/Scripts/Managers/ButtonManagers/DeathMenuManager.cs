@@ -15,6 +15,9 @@ public class DeathMenuManager : MonoBehaviour
     private GameObject m_quitToMainMenuPanel = null;
     private GameObject m_quitToDesktopPanel = null;
 
+    private AudioSource m_audioSource;
+    public AudioSource DeathMenuAudioSource { get { return m_audioSource; } }
+
     private BaseButton m_selectedButton;
 
     private List<BaseButton> m_lMainPanelButtons = new List<BaseButton>();
@@ -50,6 +53,8 @@ public class DeathMenuManager : MonoBehaviour
         m_mainPanel = transform.Find("MainPanel").gameObject;
         m_quitToMainMenuPanel = transform.Find("QuitToMainMenuPanel").gameObject;
         m_quitToDesktopPanel = transform.Find("QuitToDesktopPanel").gameObject;
+
+        m_audioSource = transform.GetComponentInParent<AudioSource>();
 
         InitialiseButtons();
 

@@ -1,9 +1,18 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PerkTreeConfirmationButton : BaseButton
 {
+    private AudioClip m_perkAppliedAudioClip;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        m_perkAppliedAudioClip = Resources.Load("Audio/Beta/UI/Perk_Tree/Perk_Applied") as AudioClip;
+    }
+
     public override void OnCursorEnter()
     {
         base.OnCursorEnter();
@@ -22,6 +31,7 @@ public class PerkTreeConfirmationButton : BaseButton
         {
             case "MainPanelYes":
                 {
+                    PerkTreeManager.m_perkTreeManager.PerkTreeAudioSource.PlayOneShot(m_perkAppliedAudioClip);
                     PerkTreeManager.m_perkTreeManager.m_selectedPerkButton.PurchasePerk();
                     PerkTreeConfirmationManager.m_perkTreeConfirmationManager.gameObject.SetActive(false);
                     break;
@@ -29,6 +39,7 @@ public class PerkTreeConfirmationButton : BaseButton
 
             case "MainPanelNo":
                 {
+                    PerkTreeManager.m_perkTreeManager.PerkTreeAudioSource.PlayOneShot(m_menuClickAudioClip);
                     PerkTreeConfirmationManager.m_perkTreeConfirmationManager.gameObject.SetActive(false);
                     break;
                 }

@@ -15,12 +15,16 @@ public class BaseButton : MonoBehaviour
     protected bool m_bIsMousedOver = false;
     public bool IsMousedOver { get { return m_bIsMousedOver; } set { m_bIsMousedOver = value; } }
 
+    protected AudioClip m_menuClickAudioClip;
+
     protected Button m_button;
 
     public string m_strOnClickParameter;
 
     protected virtual void Awake()
     {
+        m_menuClickAudioClip = Resources.Load("Audio/Beta/UI/Menu_Click") as AudioClip;
+
         m_button = GetComponent<Button>();
     }
 

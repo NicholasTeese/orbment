@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,6 +16,9 @@ public class PerkButton : MonoBehaviour
     private bool m_bIsCursorOver = false;
 
     private string m_strPerkName;
+
+    private AudioClip m_perkSelectedAudioClip;
+    private AudioClip m_perkUnavailableAudioClip;
 
     private Button m_perkIconButton;
 
@@ -48,6 +51,9 @@ public class PerkButton : MonoBehaviour
     private void Awake()
     {
         m_strPerkName = transform.parent.name;
+
+        m_perkSelectedAudioClip = Resources.Load("Audio/Beta/UI/Perk_Tree/Perk_Selected") as AudioClip;
+        m_perkUnavailableAudioClip = Resources.Load("Audio/Beta/UI/Perk_Tree/Perk_Unavailable") as AudioClip;
 
         m_perkIconButton = GetComponent<Button>();
 
@@ -140,6 +146,7 @@ public class PerkButton : MonoBehaviour
             if (!m_parentPerk.GetComponent<PerkButton>().m_bIsPurchased || m_parentPerk.GetComponent<PerkButton>().m_bChildPathChosen)
             {
                 Debug.Log("Parent Perk not purchased or Child Perk path already chosen.");
+                PerkTreeManager.m_perkTreeManager.PerkTreeAudioSource.PlayOneShot(m_perkUnavailableAudioClip);
                 return;
             }
 
@@ -148,7 +155,7 @@ public class PerkButton : MonoBehaviour
         }
 
         // Purchase this perk.
-        //PurchasePerk();
+        PerkTreeManager.m_perkTreeManager.PerkTreeAudioSource.PlayOneShot(m_perkSelectedAudioClip);
         m_perkUpgradeConfirmation.SetActive(true);
     }
 

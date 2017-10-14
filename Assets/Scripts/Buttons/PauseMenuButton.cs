@@ -16,6 +16,8 @@ public class PauseMenuButton : BaseButton
     {
         base.OnClick(a_strParameter);
 
+        PauseMenuManager.m_pauseMenuManager.PauseMenuAudioSource.PlayOneShot(m_menuClickAudioClip);
+
         switch (a_strParameter)
         {
             // Main panel start.

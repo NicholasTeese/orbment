@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +10,9 @@ public class MainMenuManager : MonoBehaviour
     private float m_fInputBuffer = 0.2f;
 
     private bool m_bInputRecieved = false;
+
+    private AudioSource m_audioSource;
+    public AudioSource MainMenuAudioSource { get { return m_audioSource; } }
 
     private BaseButton m_selectedButton;
     public BaseButton SelectedButton { get { return m_selectedButton; } set { m_selectedButton = value; } }
@@ -41,6 +44,8 @@ public class MainMenuManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        m_audioSource = GetComponent<AudioSource>();
 
         IntitialiseButtons();
 

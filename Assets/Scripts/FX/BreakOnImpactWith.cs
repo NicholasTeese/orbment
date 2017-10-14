@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +6,11 @@ public class BreakOnImpactWith : MonoBehaviour
 {
     private int wallHealth = 100;
     public int WallHealth { get { return wallHealth; } set { wallHealth = value; } }
-    public AudioSource audiosrc;
+
+    private AudioClip[] m_wallBreaks;
+
+    private AudioSource m_audioSource;
+
     public string m_tag;
     public GameObject m_faceModel;
     public GameObject m_chunkModel;
@@ -14,6 +18,13 @@ public class BreakOnImpactWith : MonoBehaviour
     [HideInInspector]
     public Vector3 m_entranceVector;
     public bool m_isBroken = false;
+
+    private void Awake()
+    {
+        m_wallBreaks = Resources.LoadAll<AudioClip>("Audio/Beta/Environment/Wall_Break");
+
+        m_audioSource = GetComponent<AudioSource>();
+    }
 
     // Use this for initialization
     void Start()
@@ -26,6 +37,11 @@ public class BreakOnImpactWith : MonoBehaviour
     }
     void Update()
     {
+        if (wallHealth <= 0.0f && !m_isBroken)
+        {
+            m_audioSource.PlayOneShot(m_wallBreaks[Random.Range(0, m_wallBreaks.Length)]);
+        }
+
         if (wallHealth <= 0)
         {
             m_faceModel.SetActive(false);
@@ -33,7 +49,6 @@ public class BreakOnImpactWith : MonoBehaviour
             m_chunkModel.SetActive(true);
             
             m_isBroken = true;
-            audiosrc.pitch = 1 + Random.Range(-0.4f, 0.3f);
         }
         else
         {
@@ -56,7 +71,6 @@ public class BreakOnImpactWith : MonoBehaviour
             {
                 m_entranceVector = playerScript.m_dashDirection;
                 wallHealth -= 55;
-                audiosrc.pitch = 1 + Random.Range(-0.4f, 0.3f);
             }
         }
     }

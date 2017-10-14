@@ -16,6 +16,8 @@ public class DeathMenuButton : BaseButton
     {
         base.OnClick(a_strParameter);
 
+        DeathMenuManager.m_deathMenuManager.DeathMenuAudioSource.PlayOneShot(m_menuClickAudioClip);
+
         switch (a_strParameter)
         {
             // Main panel start.

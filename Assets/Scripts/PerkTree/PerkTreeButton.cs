@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +11,8 @@ public class PerkTreeButton : MonoBehaviour
 
     private bool m_bIsHightlighted = false;
     public bool IsHighlighted { get { return m_bIsHightlighted; } set { m_bIsHightlighted = value; } }
+
+    private AudioClip m_menuClick;
 
     private Button m_perkTreeButton;
 
@@ -27,6 +29,8 @@ public class PerkTreeButton : MonoBehaviour
 
     private void Awake()
     {
+        m_menuClick = Resources.Load("Audio/Beta/UI/Menu_Click") as AudioClip;
+
         m_perkTreeButton = GetComponent<Button>();
     }
 
@@ -43,6 +47,8 @@ public class PerkTreeButton : MonoBehaviour
 
     public void OnClick()
     {
+        PerkTreeManager.m_perkTreeManager.PerkTreeAudioSource.PlayOneShot(m_menuClick);
+
         if (m_firePerkTreeButton != null)
         {
             m_firePerkTreeButton.gameObject.SetActive(false);

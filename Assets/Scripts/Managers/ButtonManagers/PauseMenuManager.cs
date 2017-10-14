@@ -11,6 +11,9 @@ public class PauseMenuManager : MonoBehaviour
 
     private bool m_bInputRecieved = false;
 
+    private AudioSource m_audioSource;
+    public AudioSource PauseMenuAudioSource { get { return m_audioSource; } }
+
     private BaseButton m_selectedButton;
     public BaseButton SelectedButton { get { return m_selectedButton; } set { m_selectedButton = value; } }
 
@@ -43,6 +46,8 @@ public class PauseMenuManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        m_audioSource = transform.GetComponentInParent<AudioSource>();
 
         InitialiseButtons();
 

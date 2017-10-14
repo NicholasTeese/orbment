@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,6 +17,8 @@ public class MainMenuButton : BaseButton
     public override void OnClick(string a_strParameter)
     {
         base.OnClick(a_strParameter);
+
+        MainMenuManager.m_mainMenuManager.MainMenuAudioSource.PlayOneShot(m_menuClickAudioClip);
 
         switch (a_strParameter)
         {
