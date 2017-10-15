@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public bool GameIsPaused { get { return m_bGameIsPaused; } set { m_bGameIsPaused = value; } }
 
     public static GameManager m_gameManager = null;
-    public Texture2D m_crosshair;
+    private Texture2D m_crosshair;
     public Vector2 offset;
 
     private void Awake()
@@ -25,9 +25,19 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        offset = new Vector2(m_crosshair.width / 2.0f, m_crosshair.height / 2.0f);
         m_crosshair = Resources.Load("Textures/Beta/UI/Cursor_White") as Texture2D;
-        Cursor.visible = false;
+
+        offset = new Vector2(m_crosshair.width / 2.0f, m_crosshair.height / 2.0f);
+
+        if (SceneManager.GetActiveScene().name == "Beta_Main_Menu")
+        {
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.visible = false;
+        }
+
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.SetCursor(m_crosshair, offset, CursorMode.Auto);
     }
@@ -93,17 +103,17 @@ public class GameManager : MonoBehaviour
 
 	public void LoadMainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene(LevelManager.m_strMainMenuSceneName);
     }
 
     public void LoadTutorial()
     {
-        SceneManager.LoadScene("Tutorial");
+        SceneManager.LoadScene(LevelManager.m_strLevelOneSceneName);
     }
 
     public void LoadLevelOne()
     {
-        SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene(LevelManager.m_strLevelTwoSceneName);
     }
 
     public void QuitToDesktop()

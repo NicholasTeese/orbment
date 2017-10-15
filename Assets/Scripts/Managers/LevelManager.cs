@@ -11,6 +11,8 @@ public class LevelManager : MonoBehaviour
     public const string m_strLevelOneSceneName = "Beta_Level_1";
     public const string m_strLevelTwoSceneName = "Beta_Level_2";
 
+    private bool m_bSceneLoadComplete = false;
+
     // Player level start positions.
     private Vector3 m_v3PlayerTutorialStartPosition = new Vector3(-3.33f, 0.0f, -34.77f);
     private Vector3 m_v3PlayerLevelOneStartPosition = new Vector3(-3.33f, 0.0f, -34.77f);
@@ -19,6 +21,8 @@ public class LevelManager : MonoBehaviour
     private Vector3 m_v3PlayerCameraTutorialStartPosition = new Vector3(-3.33f, 13.7f, -38.26f);
     private Vector3 m_v3PlayerCameraLevelOneStartPosition = new Vector3(-3.33f, 13.7f, -38.26f);
     private Vector3 m_v3PlayerCameraLevelTwoStartPosition = new Vector3(-3.33f, 13.7f, -38.26f);
+
+    private AsyncOperation m_loadNextLevelAsyncOperation;
 
     // Static reference to the LevelManager.
     public static LevelManager m_levelManager = null;
@@ -32,6 +36,8 @@ public class LevelManager : MonoBehaviour
     public Vector3 PlayerCameraTutorialStartPosition { get { return m_v3PlayerCameraTutorialStartPosition; } }
     public Vector3 PlayerCameraLevelOneStartPosition { get { return m_v3PlayerCameraLevelOneStartPosition; } }
     public Vector3 PlayerCameraLevelTwoStartPosition { get { return m_v3PlayerCameraLevelTwoStartPosition; } }
+
+    public AsyncOperation LoadNextLevelAsyncOperation { get { return m_loadNextLevelAsyncOperation; } }
 
     private void Awake()
     {
@@ -77,10 +83,15 @@ public class LevelManager : MonoBehaviour
         {
             case m_strMainMenuSceneName:
                 {
-                    // Initialise Canvasses.
-                    //PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(false);
-                    //DeathMenuManager.m_deathMenuManager.gameObject.SetActive(false);
-                    //PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(false);
+                    if (IsoCam.m_playerCamera != null)
+                    {
+                        Destroy(IsoCam.m_playerCamera.gameObject);
+                    }
+
+                    if (PerkTreeCamera.m_perkTreeCamera != null)
+                    {
+                        Destroy(PerkTreeCamera.m_perkTreeCamera.gameObject);
+                    }
                     break;
                 }
 
@@ -150,6 +161,17 @@ public class LevelManager : MonoBehaviour
                     break;
                 }
         }
+
+        m_bSceneLoadComplete = true;
+    }
+
+    private void Update()
+    {
+        if (m_bSceneLoadComplete)
+        {
+            StartCoroutine(LoadNextLevelAsync(false));
+            m_bSceneLoadComplete = false;
+        }
     }
 
     private void InitialiseDontDestroyOnLoad()
@@ -174,31 +196,31 @@ public class LevelManager : MonoBehaviour
         DontDestroyOnLoad(PerkTreeCamera.m_perkTreeCamera.gameObject);
     }
 
-    public void LoadNextLevel()
+    public IEnumerator LoadNextLevelAsync(bool a_bActivateScene)
     {
         switch (SceneManager.GetActiveScene().name)
         {
             case m_strMainMenuSceneName:
                 {
-                    SceneManager.LoadScene(m_strTutorialSceneName);
+                    m_loadNextLevelAsyncOperation = SceneManager.LoadSceneAsync(m_strTutorialSceneName);
                     break;
                 }
 
             case m_strTutorialSceneName:
                 {
-                    SceneManager.LoadScene(m_strLevelOneSceneName);
+                    m_loadNextLevelAsyncOperation = SceneManager.LoadSceneAsync(m_strLevelOneSceneName);
                     break;
                 }
 
             case m_strLevelOneSceneName:
                 {
-                    SceneManager.LoadScene(m_strLevelTwoSceneName);
+                    m_loadNextLevelAsyncOperation = SceneManager.LoadSceneAsync(m_strLevelTwoSceneName);
                     break;
                 }
 
             case m_strLevelTwoSceneName:
                 {
-                    SceneManager.LoadScene(m_strMainMenuSceneName);
+                    m_loadNextLevelAsyncOperation = SceneManager.LoadSceneAsync(m_strMainMenuSceneName);
                     break;
                 }
 
@@ -207,6 +229,17 @@ public class LevelManager : MonoBehaviour
                     Debug.Log("Scene name: " + SceneManager.GetActiveScene().name + " not recognised.");
                     break;
                 }
+        }
+
+        m_loadNextLevelAsyncOperation.allowSceneActivation = a_bActivateScene;
+
+        if (!a_bActivateScene)
+        {
+            yield return null;
+        }
+        else
+        {
+            yield return m_loadNextLevelAsyncOperation;
         }
     }
 }
