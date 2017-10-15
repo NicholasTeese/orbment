@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 	private bool m_bGameIsPaused = false;
     public bool GameIsPaused { get { return m_bGameIsPaused; } set { m_bGameIsPaused = value; } }
 
-    private bool m_bShowCursor = false;
+    private bool m_bShowCursor = true;
     public bool ShowCursor { get { return m_bShowCursor; } set { m_bShowCursor = value; } }
 
     public static GameManager m_gameManager = null;
