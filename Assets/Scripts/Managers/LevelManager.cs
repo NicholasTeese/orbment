@@ -85,15 +85,7 @@ public class LevelManager : MonoBehaviour
         {
             case m_strMainMenuSceneName:
                 {
-                    if (IsoCam.m_playerCamera != null)
-                    {
-                        Destroy(IsoCam.m_playerCamera.gameObject);
-                    }
-
-                    if (PerkTreeCamera.m_perkTreeCamera != null)
-                    {
-                        Destroy(PerkTreeCamera.m_perkTreeCamera.gameObject);
-                    }
+                    DestroyAllDontDestroyOnLoad();
                     break;
                 }
 
@@ -205,15 +197,50 @@ public class LevelManager : MonoBehaviour
 
     public void DestroyAllDontDestroyOnLoad()
     {
-        Destroy(DebugLevelSwitcher.m_debugLevelSwitcher.transform.parent);
-        Destroy(gameObject);
-        Destroy(GameManager.m_gameManager.gameObject);
-        Destroy(Player.m_Player.gameObject);
-        Destroy(PlayerHUDManager.m_playerHUDManager.transform.parent);
-        Destroy(PerkTreeManager.m_perkTreeManager.gameObject);
-        Destroy(PauseMenuManager.m_pauseMenuManager.transform.parent); // This also handles the DeathMenuManager.
-        Destroy(IsoCam.m_playerCamera.gameObject);
-        Destroy(PerkTreeCamera.m_perkTreeCamera.gameObject);
+        if (DebugLevelSwitcher.m_debugLevelSwitcher != null)
+        {
+            Destroy(DebugLevelSwitcher.m_debugLevelSwitcher.transform.parent.gameObject);
+        }
+
+        if (LevelManager.m_levelManager != null)
+        {
+            Destroy(gameObject);
+        }
+
+        if (GameManager.m_gameManager != null)
+        {
+            Destroy(GameManager.m_gameManager.gameObject);
+        }
+
+        if (Player.m_Player != null)
+        {
+            Destroy(Player.m_Player.gameObject);
+        }
+
+        if (PlayerHUDManager.m_playerHUDManager != null)
+        {
+            Destroy(PlayerHUDManager.m_playerHUDManager.transform.parent.gameObject);
+        }
+
+        if (PerkTreeManager.m_perkTreeManager != null)
+        {
+            Destroy(PerkTreeManager.m_perkTreeManager.gameObject);
+        }
+
+        if (PauseMenuManager.m_pauseMenuManager != null)
+        {
+            Destroy(PauseMenuManager.m_pauseMenuManager.transform.parent.gameObject); // This also handles the DeathMenuManager.
+        }
+
+        if (IsoCam.m_playerCamera != null)
+        {
+            Destroy(IsoCam.m_playerCamera.gameObject);
+        }
+
+        if (PerkTreeCamera.m_perkTreeCamera != null)
+        {
+            Destroy(PerkTreeCamera.m_perkTreeCamera.gameObject);
+        }
     }
 
     public IEnumerator LoadNextLevelAsync(bool a_bActivateScene)
