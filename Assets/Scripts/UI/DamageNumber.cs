@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -33,7 +33,7 @@ public class DamageNumber : MonoBehaviour
     {
         if(parent != null)
         {
-            Vector2 screenPos = Camera.main.WorldToScreenPoint(parent.transform.position);
+            Vector2 screenPos = IsoCam.m_playerCamera.GetComponent<Camera>().WorldToScreenPoint(parent.transform.position);
             this.transform.position = screenPos + m_translation;
            
         }

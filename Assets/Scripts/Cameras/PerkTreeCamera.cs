@@ -16,7 +16,5 @@ public class PerkTreeCamera : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        DontDestroyOnLoad(gameObject);
     }
 }

@@ -3,6 +3,23 @@ using UnityEngine.UI;
 
 public class PauseMenuButton : BaseButton
 {
+    protected override void Awake()
+    {
+        base.Awake();
+
+        if (m_strOnClickParameter == "Show_Hide_Cursor")
+        {
+            if (Cursor.visible)
+            {
+                m_button.GetComponentInChildren<Text>().text = "Hide Cursor";
+            }
+            else
+            {
+                m_button.GetComponentInChildren<Text>().text = "Show Cursor";
+            }
+        }
+    }
+
     public override void OnCursorEnter()
     {
         base.OnCursorEnter();
@@ -81,6 +98,21 @@ public class PauseMenuButton : BaseButton
             // Main panel end.
 
             // Options panel start
+            case "Show_Hide_Cursor":
+                {
+                    if (GameManager.m_gameManager.ShowCursor)
+                    {
+                        GameManager.m_gameManager.ShowCursor = false;
+                        m_button.GetComponentInChildren<Text>().text = "Show Cursor";
+                    }
+                    else
+                    {
+                        GameManager.m_gameManager.ShowCursor = true;
+                        m_button.GetComponentInChildren<Text>().text = "Hide Cursor";
+                    }
+                    break;
+                }
+
             case "OptionsPanelBack":
                 {
                     PauseMenuManager.m_pauseMenuManager.ActivePanelButtons = PauseMenuManager.m_pauseMenuManager.MainPanelButtons;

@@ -289,7 +289,7 @@ public class MeleeEnemy : Enemy
 
     private bool DamageCheck()
     {
-        if (Vector3.Distance(transform.position, Player.m_Player.transform.position) <= 1.5f)
+        if (Vector3.Distance(transform.position, Player.m_Player.transform.position) <= 1.7f)
         {
             return true;
         }

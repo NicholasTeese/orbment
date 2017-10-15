@@ -28,6 +28,8 @@ public class LevelManager : MonoBehaviour
     public static LevelManager m_levelManager = null;
 
     // Variable getters and setters.
+    public string LevelOneSceneName { get { return m_strLevelOneSceneName; } }
+
     // Player level start positions.
     public Vector3 PlayerTutorialStartPosition { get { return m_v3PlayerTutorialStartPosition; } }
     public Vector3 PlayerLevelOneStartPosition { get { return m_v3PlayerLevelOneStartPosition; } }
@@ -60,7 +62,7 @@ public class LevelManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name != m_strMainMenuSceneName)
         {
-            InitialiseDontDestroyOnLoad();
+            //InitialiseDontDestroyOnLoad();
         }
     }
 
@@ -167,6 +169,11 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            m_loadNextLevelAsyncOperation.allowSceneActivation = true;
+        }
+
         if (m_bSceneLoadComplete)
         {
             StartCoroutine(LoadNextLevelAsync(false));
@@ -174,7 +181,7 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    private void InitialiseDontDestroyOnLoad()
+    public void InitialiseDontDestroyOnLoad()
     {
         // Debuggers.
         DontDestroyOnLoad(DebugLevelSwitcher.m_debugLevelSwitcher.transform.parent);
@@ -194,6 +201,19 @@ public class LevelManager : MonoBehaviour
         // Cameras.
         DontDestroyOnLoad(IsoCam.m_playerCamera.gameObject);
         DontDestroyOnLoad(PerkTreeCamera.m_perkTreeCamera.gameObject);
+    }
+
+    public void DestroyAllDontDestroyOnLoad()
+    {
+        Destroy(DebugLevelSwitcher.m_debugLevelSwitcher.transform.parent);
+        Destroy(gameObject);
+        Destroy(GameManager.m_gameManager.gameObject);
+        Destroy(Player.m_Player.gameObject);
+        Destroy(PlayerHUDManager.m_playerHUDManager.transform.parent);
+        Destroy(PerkTreeManager.m_perkTreeManager.gameObject);
+        Destroy(PauseMenuManager.m_pauseMenuManager.transform.parent); // This also handles the DeathMenuManager.
+        Destroy(IsoCam.m_playerCamera.gameObject);
+        Destroy(PerkTreeCamera.m_perkTreeCamera.gameObject);
     }
 
     public IEnumerator LoadNextLevelAsync(bool a_bActivateScene)

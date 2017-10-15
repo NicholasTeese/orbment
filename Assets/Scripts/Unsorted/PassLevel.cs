@@ -19,6 +19,7 @@ public class PassLevel : MonoBehaviour
     {
 		if (col.tag == "Player")
         {
+            LevelManager.m_levelManager.InitialiseDontDestroyOnLoad();
             LevelManager.m_levelManager.LoadNextLevelAsyncOperation.allowSceneActivation = true;
 		}
 	}

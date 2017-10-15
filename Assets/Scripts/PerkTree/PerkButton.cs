@@ -175,7 +175,10 @@ public class PerkButton : MonoBehaviour
         // Set the perk to be purchased.
         m_bIsPurchased = true;
         // Decrement the amount of available perks.
-        PerkTreeManager.m_perkTreeManager.DecrementAvailiablePerks();
+        if (PerkTreeManager.m_perkTreeManager.AvailiablePerks != 0)
+        {
+            PerkTreeManager.m_perkTreeManager.DecrementAvailiablePerks();
+        }
 
         // If the perk is successfully applied change the perk images to be active.
         CheckFireTree();
@@ -189,7 +192,6 @@ public class PerkButton : MonoBehaviour
     /// <param name="a_strPerkName"></param>
     private void CheckFireTree()
     {
-        //Debug.Log(m_strPerkName);
         switch (m_strPerkName)
         {
             // Fire bullet (1A).

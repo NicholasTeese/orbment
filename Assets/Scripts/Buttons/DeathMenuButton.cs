@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DeathMenuButton : BaseButton
 {
@@ -23,8 +24,9 @@ public class DeathMenuButton : BaseButton
             // Main panel start.
             case "MainPanelTryAgain":
                 {
-                    Destroy(Player.m_Player.gameObject);
-                    GameManager.m_gameManager.RestartLevel();
+                    string strLevelOne = LevelManager.m_levelManager.LevelOneSceneName;
+                    //LevelManager.m_levelManager.DestroyAllDontDestroyOnLoad();
+                    SceneManager.LoadScene(strLevelOne);
                     break;
                 }
 

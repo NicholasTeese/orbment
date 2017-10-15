@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
 	private bool m_bGameIsPaused = false;
     public bool GameIsPaused { get { return m_bGameIsPaused; } set { m_bGameIsPaused = value; } }
 
+    private bool m_bShowCursor = false;
+    public bool ShowCursor { get { return m_bShowCursor; } set { m_bShowCursor = value; } }
+
     public static GameManager m_gameManager = null;
     private Texture2D m_crosshair;
     public Vector2 offset;
@@ -54,6 +57,8 @@ public class GameManager : MonoBehaviour
 
     void Update ()
     {
+        CursorToggle();
+
         if (SceneManager.GetActiveScene().name == LevelManager.m_strMainMenuSceneName)
         {
             return;
@@ -91,6 +96,21 @@ public class GameManager : MonoBehaviour
             }
         }
 	}
+
+    private void CursorToggle()
+    {
+        if (Time.timeScale == 1)
+        {
+            if (m_bShowCursor)
+            {
+                Cursor.visible = true;
+            }
+            else
+            {
+                Cursor.visible = false;
+            }
+        }
+    }
 
     public void Continue()
     {

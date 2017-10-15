@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ExpManager : MonoBehaviour
 {
@@ -40,6 +41,14 @@ public class ExpManager : MonoBehaviour
 
     private void Start()
     {
+        if (SceneManager.GetActiveScene().name == LevelManager.m_strLevelOneSceneName)
+        {
+            // Initialise perk.
+            PerkTreeManager.m_perkTreeManager.m_selectedPerkTreeButton.m_childPerkTree.SetActive(true);
+            PerkTreeManager.m_perkTreeManager.m_selectedPerkButton.PurchasePerk();
+            PerkTreeManager.m_perkTreeManager.m_selectedPerkTreeButton.m_childPerkTree.SetActive(false);
+        }
+
         PerkTreeManager.m_perkTreeManager.gameObject.SetActive(false);
         PerkTreeCamera.m_perkTreeCamera.gameObject.SetActive(false);
 
