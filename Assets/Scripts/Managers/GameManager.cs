@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
         }
 
         offset = new Vector2(m_crosshair.width / 2.0f, m_crosshair.height / 2.0f);
-        m_crosshair = Resources.Load("Textures/Beta/UI/Cursor_White_Smaller") as Texture2D;
+        m_crosshair = Resources.Load("Textures/Beta/UI/Cursor_White") as Texture2D;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.SetCursor(m_crosshair, offset, CursorMode.Auto);
