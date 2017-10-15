@@ -9,8 +9,7 @@ public class GameManager : MonoBehaviour
     public bool GameIsPaused { get { return m_bGameIsPaused; } set { m_bGameIsPaused = value; } }
 
     public static GameManager m_gameManager = null;
-    //private GameObject m_cursor = null;
-    public Texture2D m_crosshair = null;
+    public Texture2D m_crosshair;
     public Vector2 offset;
 
     private void Awake()
@@ -26,8 +25,10 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+        offset = new Vector2(m_crosshair.width / 2.0f, m_crosshair.height / 2.0f);
+        m_crosshair = Resources.Load("Textures/Beta/UI/Cursor_White_Smaller") as Texture2D;
+        Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined;
-        offset = new Vector2(1.0f, 1.0f);
         Cursor.SetCursor(m_crosshair, offset, CursorMode.Auto);
     }
 
@@ -39,13 +40,10 @@ public class GameManager : MonoBehaviour
         {
             PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(false);
         }
-
-        //DeathMenuManager.m_deathMenuManager.gameObject.SetActive(false);
     }
 
     void Update ()
     {
-        //Debug.Log(offset);
         if (SceneManager.GetActiveScene().name == LevelManager.m_strMainMenuSceneName)
         {
             return;
@@ -56,6 +54,7 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0.0f;
             DeathMenuManager.m_deathMenuManager.gameObject.SetActive(true);
             PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(false);
+            Cursor.visible = true;
         }
 
         if(!ExpManager.m_experiencePointsManager.PerkTreeOpen)
@@ -68,6 +67,7 @@ public class GameManager : MonoBehaviour
                     Time.timeScale = 0.0f;
                     PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(true);
                     PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(false);
+                    Cursor.visible = true;
                 }
                 else
                 {
@@ -76,6 +76,7 @@ public class GameManager : MonoBehaviour
                     PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(false);
                     DeathMenuManager.m_deathMenuManager.gameObject.SetActive(false);
                     PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(true);
+                    Cursor.visible = false;
                 }
             }
         }

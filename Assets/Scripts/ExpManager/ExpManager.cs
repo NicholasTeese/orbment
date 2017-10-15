@@ -127,6 +127,7 @@ public class ExpManager : MonoBehaviour
         IsoCam.m_playerCamera.gameObject.SetActive(false);
         m_bPerkTreeOpen = true;
         Time.timeScale = 0;
+        Cursor.visible = true;
     }
 
     private void DisablePerkTree()
@@ -137,5 +138,6 @@ public class ExpManager : MonoBehaviour
         IsoCam.m_playerCamera.gameObject.SetActive(true);
         m_bPerkTreeOpen = false;
         Time.timeScale = 1;
+        Cursor.visible = false;
     }
 }
