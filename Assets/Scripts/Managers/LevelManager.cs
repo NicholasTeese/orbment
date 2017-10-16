@@ -85,7 +85,7 @@ public class LevelManager : MonoBehaviour
         {
             case m_strMainMenuSceneName:
                 {
-                    DestroyAllDontDestroyOnLoad();
+                    //DestroyAllDontDestroyOnLoad();
                     break;
                 }
 
