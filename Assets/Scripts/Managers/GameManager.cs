@@ -8,8 +8,10 @@ public class GameManager : MonoBehaviour
 	private bool m_bGameIsPaused = false;
     public bool GameIsPaused { get { return m_bGameIsPaused; } set { m_bGameIsPaused = value; } }
 
-    private bool m_bShowCursor = true;
+    private bool m_bShowCursor = false;
     public bool ShowCursor { get { return m_bShowCursor; } set { m_bShowCursor = value; } }
+
+    private Vector3 m_v3LastMousePosition = Vector3.zero;
 
     public static GameManager m_gameManager = null;
     private Texture2D m_crosshair;
@@ -18,6 +20,8 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Time.timeScale = 1;
+
+        m_v3LastMousePosition = Input.mousePosition;
 
         if (m_gameManager == null)
         {
@@ -99,16 +103,23 @@ public class GameManager : MonoBehaviour
 
     private void CursorToggle()
     {
-        if (Time.timeScale == 1)
+        if (InputManager.PrimaryInput() != Vector3.zero)
         {
-            if (m_bShowCursor)
-            {
-                Cursor.visible = true;
-            }
-            else
-            {
-                Cursor.visible = false;
-            }
+            m_v3LastMousePosition = Input.mousePosition;
+            m_bShowCursor = false;
+        }
+        else if (m_v3LastMousePosition != Input.mousePosition)
+        {
+            m_bShowCursor = true;
+        }
+        
+        if (m_bShowCursor)
+        {
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.visible = false;
         }
     }
 

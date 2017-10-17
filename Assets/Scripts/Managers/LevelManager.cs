@@ -164,6 +164,15 @@ public class LevelManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))
         {
             m_loadNextLevelAsyncOperation.allowSceneActivation = true;
+            
+            if (SceneManager.GetActiveScene().name != m_strLevelTwoSceneName || SceneManager.GetActiveScene().name != m_strMainMenuSceneName)
+            {
+                InitialiseDontDestroyOnLoad();
+            }
+            else if (SceneManager.GetActiveScene().name == m_strLevelTwoSceneName)
+            {
+                DestroyAllDontDestroyOnLoad();
+            }
         }
 
         if (m_bSceneLoadComplete)
@@ -183,7 +192,7 @@ public class LevelManager : MonoBehaviour
         DontDestroyOnLoad(GameManager.m_gameManager.gameObject);
 
         // Actors.
-        DontDestroyOnLoad(Player.m_Player.gameObject);
+        //DontDestroyOnLoad(Player.m_Player.gameObject);
 
         // Canvasses.
         DontDestroyOnLoad(PlayerHUDManager.m_playerHUDManager.transform.parent);
@@ -204,7 +213,7 @@ public class LevelManager : MonoBehaviour
 
         if (LevelManager.m_levelManager != null)
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
 
         if (GameManager.m_gameManager != null)

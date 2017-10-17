@@ -2,25 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 public class PassLevel : MonoBehaviour
 {
-	public string goToLevel;
 
-	void Start ()
+	void OnTriggerEnter(Collider a_collider)
     {
-		
-	}
-	
-	void Update ()
-    {
-		
-	}
-	void OnTriggerEnter(Collider col)
-    {
-		if (col.tag == "Player")
+		if (a_collider.tag == "Player")
         {
-            LevelManager.m_levelManager.InitialiseDontDestroyOnLoad();
-            LevelManager.m_levelManager.LoadNextLevelAsyncOperation.allowSceneActivation = true;
+            switch (SceneManager.GetActiveScene().name)
+            {
+                case LevelManager.m_strTutorialSceneName:
+                    {
+                        LevelManager.m_levelManager.InitialiseDontDestroyOnLoad();
+                        LevelManager.m_levelManager.LoadNextLevelAsyncOperation.allowSceneActivation = true;
+                        break;
+                    }
+
+                case LevelManager.m_strLevelOneSceneName:
+                    {
+                        LevelManager.m_levelManager.InitialiseDontDestroyOnLoad();
+                        LevelManager.m_levelManager.LoadNextLevelAsyncOperation.allowSceneActivation = true;
+                        break;
+                    }
+
+                case LevelManager.m_strLevelTwoSceneName:
+                    {
+                        LevelManager.m_levelManager.DestroyAllDontDestroyOnLoad();
+                        LevelManager.m_levelManager.LoadNextLevelAsyncOperation.allowSceneActivation = true;
+                        break;
+                    }
+            }
 		}
 	}
 }

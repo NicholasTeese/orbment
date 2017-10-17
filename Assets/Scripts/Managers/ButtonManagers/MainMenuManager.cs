@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainMenuManager : MonoBehaviour
 {
@@ -56,6 +57,18 @@ public class MainMenuManager : MonoBehaviour
         m_lActivePanelButtons = m_lMainPanelButtons;
         m_selectedButton = m_lActivePanelButtons[0];
         m_selectedButton.IsMousedOver = true;
+    }
+
+    private void Start()
+    {
+        if (GameManager.m_gameManager.ShowCursor)
+        {
+            m_optionsPanel.transform.Find("Show_Hide_Cursor_Button").GetComponentInChildren<Text>().text = "Hide Cursor";
+        }
+        else
+        {
+            m_optionsPanel.transform.Find("Show_Hide_Cursor_Button").GetComponentInChildren<Text>().text = "Show Cursor";
+        }
     }
 
     private void Update()

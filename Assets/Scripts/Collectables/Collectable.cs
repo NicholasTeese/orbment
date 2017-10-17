@@ -60,7 +60,7 @@ public class Collectable : MonoBehaviour
             m_manaCap = false;
         }
 
-        if (m_type == CollectableType.GreenOrb)
+        if (m_type == CollectableType.GreenOrb && Player.m_Player != null)
         {
             if(m_healthCap)
                 Physics.IgnoreCollision(GetComponent<Collider>(), Player.m_Player.GetComponent<Collider>(), true);
@@ -68,7 +68,7 @@ public class Collectable : MonoBehaviour
                 Physics.IgnoreCollision(GetComponent<Collider>(), Player.m_Player.GetComponent<Collider>(), false);
         }
 
-        if (m_type == CollectableType.BlueOrb)
+        if (m_type == CollectableType.BlueOrb && Player.m_Player != null)
         {
             if(m_manaCap)
                 Physics.IgnoreCollision(GetComponent<Collider>(), Player.m_Player.GetComponent<Collider>(), true);

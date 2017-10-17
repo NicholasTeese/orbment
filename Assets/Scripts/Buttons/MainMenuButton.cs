@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainMenuButton : BaseButton
 {
@@ -49,6 +50,21 @@ public class MainMenuButton : BaseButton
                     MainMenuManager.m_mainMenuManager.m_mainPanel.SetActive(false);
                     MainMenuManager.m_mainMenuManager.m_quitToDesktopPanel.SetActive(true);
                     MainMenuManager.m_mainMenuManager.ResetSelectedButtonIndex();
+                    break;
+                }
+
+            case "Show_Hide_Cursor":
+                {
+                    if (GameManager.m_gameManager.ShowCursor)
+                    {
+                        GameManager.m_gameManager.ShowCursor = false;
+                        m_button.GetComponentInChildren<Text>().text = "Show Cursor";
+                    }
+                    else
+                    {
+                        GameManager.m_gameManager.ShowCursor = true;
+                        m_button.GetComponentInChildren<Text>().text = "Hide Cursor";
+                    }
                     break;
                 }
 

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -60,7 +60,7 @@ public static class InputManager
     }
 
     /// <summary>
-    /// Returns the Y axis on the keybaord's secondary input & right thumb stick.
+    /// Returns the Y axis on the keyboard's secondary input & right thumb stick.
     /// Return value is clamped between -1 & 1.
     /// </summary>
     /// <returns></returns>
@@ -189,6 +189,52 @@ public static class InputManager
     public static bool BackButton()
     {
         return Input.GetButtonDown("BackButton");
+    }
+
+    public static bool AnyInput()
+    {
+        if (LeftTriggerDown())
+        {
+            return true;
+        }
+        else if (RightTriggerDown())
+        {
+            return true;
+        }
+        else if (AButton())
+        {
+            return true;
+        }
+        else if (BButton())
+        {
+            return true;
+        }
+        else if (XButton())
+        {
+            return true;
+        }
+        else if (YButton())
+        {
+            return true;
+        }
+        else if (StartButton())
+        {
+            return true;
+        }
+        else if (BButton())
+        {
+            return true;
+        }
+        else if (InputManager.PrimaryInput() != Vector3.zero)
+        {
+            return true;
+        }
+        else if (InputManager.SecondaryInput() != Vector3.zero)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     /// <summary>
