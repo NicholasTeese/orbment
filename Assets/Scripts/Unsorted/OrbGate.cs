@@ -29,6 +29,8 @@ public class OrbGate : MonoBehaviour
 
     private bool m_playerIsNear;
 
+    private GameObject m_orbSlot;
+
     public void Awake()
     {
         m_playerIsNear = false;
@@ -42,6 +44,8 @@ public class OrbGate : MonoBehaviour
 
         m_Player = FindObjectOfType<Player>();
         m_Animator = GetComponentInChildren<Animator>();
+
+        m_orbSlot = transform.Find("OrbSlot").gameObject;
     }
 
     public void OnTriggerStay(Collider other)
@@ -88,6 +92,7 @@ public class OrbGate : MonoBehaviour
                     m_visualLock.SetActive(false);
                 }
                 m_isOpen = true;
+                Destroy(m_orbSlot, 0.5f);
             }
         }
         else if (m_numOfOrbsForOpen <= 0)
@@ -98,6 +103,7 @@ public class OrbGate : MonoBehaviour
                 m_visualLock.SetActive(false);
             }
             m_isOpen = true;
+            Destroy(m_orbSlot, 0.5f);
         }
     }
 

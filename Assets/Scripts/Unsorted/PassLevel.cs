@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class PassLevel : MonoBehaviour
 {
-
 	void OnTriggerEnter(Collider a_collider)
     {
 		if (a_collider.tag == "Player")
