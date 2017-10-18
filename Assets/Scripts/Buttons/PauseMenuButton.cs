@@ -9,13 +9,13 @@ public class PauseMenuButton : BaseButton
 
         if (m_strOnClickParameter == "Show_Hide_Cursor")
         {
-            if (Cursor.visible)
+            if (!GameManager.m_gameManager.ForceHideCursor)
             {
-                m_button.GetComponentInChildren<Text>().text = "Hide Cursor";
+                m_button.GetComponentInChildren<Text>().text = "Force Hide Cursor";
             }
             else
             {
-                m_button.GetComponentInChildren<Text>().text = "Show Cursor";
+                m_button.GetComponentInChildren<Text>().text = "Force Show Cursor";
             }
         }
     }
@@ -100,15 +100,15 @@ public class PauseMenuButton : BaseButton
             // Options panel start
             case "Show_Hide_Cursor":
                 {
-                    if (GameManager.m_gameManager.ShowCursor)
+                    if (GameManager.m_gameManager.ForceHideCursor)
                     {
-                        GameManager.m_gameManager.ShowCursor = false;
-                        m_button.GetComponentInChildren<Text>().text = "Show Cursor";
+                        GameManager.m_gameManager.ForceHideCursor = false;
+                        m_button.GetComponentInChildren<Text>().text = "Force Hide Cursor";
                     }
                     else
                     {
-                        GameManager.m_gameManager.ShowCursor = true;
-                        m_button.GetComponentInChildren<Text>().text = "Hide Cursor";
+                        GameManager.m_gameManager.ForceHideCursor = true;
+                        m_button.GetComponentInChildren<Text>().text = "Force Show Cursor";
                     }
                     break;
                 }
