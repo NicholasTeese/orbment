@@ -53,6 +53,7 @@ public class ExpManager : MonoBehaviour
         PerkTreeCamera.m_perkTreeCamera.gameObject.SetActive(false);
 
         m_upgradeAvailableText = GameObject.FindGameObjectWithTag("UpgradeAvailableText");
+        m_upgradeAvailableText.SetActive(false);
         m_upgradeUnavailableText = GameObject.FindGameObjectWithTag("UpgradeUnavailableText");
         Xpfiller = PlayerHUDManager.m_playerHUDManager.transform.Find("ExperienceBar").Find("ExperienceFiller").gameObject;
         XPSlider = PlayerHUDManager.m_playerHUDManager.transform.Find("ExperienceBar").Find("ExperienceSlider").gameObject;
@@ -89,7 +90,7 @@ public class ExpManager : MonoBehaviour
             }
             else
             {
-                //m_upgradeAvailableText.SetActive(true);
+                m_upgradeAvailableText.SetActive(true);
                 //m_upgradeUnavailableText.SetActive(false);
             }
         }
