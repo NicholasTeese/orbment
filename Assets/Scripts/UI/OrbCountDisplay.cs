@@ -8,19 +8,32 @@ public class OrbCountDisplay : MonoBehaviour
     private Player m_playerRef;
     private OrbGate m_gateRef;
     private Text m_textDisplay;
+    private int m_iIndex;
+    private int m_iIndexEnd;
+    public List<OrbGate> GateList = new List<OrbGate>();
 
     void Start()
     {
         m_playerRef = GameObject.FindObjectOfType<Player>();
-        m_gateRef = GameObject.FindObjectOfType<OrbGate>();
-        m_textDisplay = this.GetComponent<Text>();
+        m_iIndex = 0;
+        m_gateRef = GateList[m_iIndex]; //GameObject.FindObjectOfType<OrbGate>();
+        m_iIndexEnd = GateList.Count - 1;
+        m_textDisplay = GetComponent<Text>();
     }
 
     void Update()
     {
         if (m_gateRef.m_isOpen)
         {
-            m_textDisplay.text = "Door unlocked!";
+            if (m_iIndex != GateList.Count - 1)
+            {
+                m_iIndex++;
+                m_gateRef = GateList[m_iIndex];
+            }
+            else
+            {
+                m_textDisplay.text = "Door unlocked!";
+            }
         }
         else
         {

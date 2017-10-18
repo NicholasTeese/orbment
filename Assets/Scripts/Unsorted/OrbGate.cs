@@ -92,7 +92,7 @@ public class OrbGate : MonoBehaviour
                     m_visualLock.SetActive(false);
                 }
                 m_isOpen = true;
-                Destroy(m_orbSlot, 0.5f);
+                //Destroy(m_orbSlot, 0.5f);
             }
         }
         else if (m_numOfOrbsForOpen <= 0)
@@ -103,7 +103,7 @@ public class OrbGate : MonoBehaviour
                 m_visualLock.SetActive(false);
             }
             m_isOpen = true;
-            Destroy(m_orbSlot, 0.5f);
+            //Destroy(m_orbSlot, 0.5f);
         }
     }
 
