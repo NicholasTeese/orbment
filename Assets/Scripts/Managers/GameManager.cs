@@ -103,8 +103,9 @@ public class GameManager : MonoBehaviour
 
     private void CursorToggle()
     {
-        if (InputManager.PrimaryInput() != Vector3.zero)
+        if (InputManager.SecondaryInput() != Vector3.zero)
         {
+            Debug.Log("Primary");
             m_v3LastMousePosition = Input.mousePosition;
             m_bShowCursor = false;
         }

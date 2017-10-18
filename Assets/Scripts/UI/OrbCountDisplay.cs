@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,8 +19,6 @@ public class OrbCountDisplay : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(m_iIndex);
-
         if (GateList[m_iIndex].m_isOpen)
         {
               if (m_iIndex != GateList.Count - 1)

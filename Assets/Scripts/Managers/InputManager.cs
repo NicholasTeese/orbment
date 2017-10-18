@@ -4,7 +4,7 @@ using UnityEngine;
 
 //------------------------------------------------------------------------------------------------
 // Description:  This script is a buffer between the Unity InputManager and the rest of the game,
-//               allowing a keybaord & a Xbox 360 controller to be use while the other is plugged
+//               allowing a keyboard & a Xbox 360 controller to be use while the other is plugged
 //               in.
 // Authors:      Taliesin Millhouse
 // Date Created: 5th September 2017

@@ -96,7 +96,7 @@ public class ExpManager : MonoBehaviour
         }
         else
         {
-            //m_upgradeAvailableText.SetActive(false);
+            m_upgradeAvailableText.SetActive(false);
             //m_upgradeUnavailableText.SetActive(false);
         }
 
