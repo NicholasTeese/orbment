@@ -6,10 +6,12 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
 	private bool m_bGameIsPaused = false;
-    public bool GameIsPaused { get { return m_bGameIsPaused; } set { m_bGameIsPaused = value; } }
+    private bool m_bShowCursor = true;
+    private bool m_bForceHideCursor = false;
 
-    private bool m_bShowCursor = false;
+    public bool GameIsPaused { get { return m_bGameIsPaused; } set { m_bGameIsPaused = value; } }
     public bool ShowCursor { get { return m_bShowCursor; } set { m_bShowCursor = value; } }
+    public bool ForceHideCursor { get { return m_bForceHideCursor; } set { m_bForceHideCursor = value; } }
 
     private Vector3 m_v3LastMousePosition = Vector3.zero;
 
@@ -63,6 +65,15 @@ public class GameManager : MonoBehaviour
     {
         CursorToggle();
 
+        if (m_bShowCursor)
+        {
+            Cursor.visible = true;
+        }
+        else if (!m_bShowCursor)
+        {
+            Cursor.visible = false;
+        }
+
         if (SceneManager.GetActiveScene().name == LevelManager.m_strMainMenuSceneName)
         {
             return;
@@ -103,6 +114,12 @@ public class GameManager : MonoBehaviour
 
     private void CursorToggle()
     {
+        if (m_bForceHideCursor)
+        {
+            m_bShowCursor = false;
+            return;
+        }
+
         if (InputManager.SecondaryInput() != Vector3.zero)
         {
             Debug.Log("Primary");
@@ -112,15 +129,6 @@ public class GameManager : MonoBehaviour
         else if (m_v3LastMousePosition != Input.mousePosition)
         {
             m_bShowCursor = true;
-        }
-        
-        if (m_bShowCursor)
-        {
-            Cursor.visible = true;
-        }
-        else
-        {
-            Cursor.visible = false;
         }
     }
 
