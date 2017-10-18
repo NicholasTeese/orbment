@@ -142,7 +142,7 @@ public class Collectable : MonoBehaviour
         if (other.tag == "OrbBoundary")
         {
             m_rigidBody.velocity = -m_rigidBody.velocity;
-//            Debug.Log("Exit Bounds");
+            Debug.Log("Exit Bounds");
         }
     }
 }
