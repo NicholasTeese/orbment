@@ -6,6 +6,7 @@ public class OrbGate : MonoBehaviour
 {
     public GUIStyle m_textStyle;
     public GameObject m_visualLock;
+    public int m_iIndexTracker;
 
     private float m_origScale = 1.0f;
     private float m_lockScale = 1.0f;
@@ -30,6 +31,7 @@ public class OrbGate : MonoBehaviour
     private bool m_playerIsNear;
 
     private GameObject m_orbSlot;
+    
 
     public void Awake()
     {
