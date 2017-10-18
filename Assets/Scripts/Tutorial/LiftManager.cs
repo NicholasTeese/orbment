@@ -25,8 +25,6 @@ public class LiftManager : MonoBehaviour
     {
         if (Move)
         {
-            //if (this.name == "Wall")
-            //{
             if (wall != null)
             {            
                 //if (transform.position.y > TargetPos)
@@ -43,7 +41,6 @@ public class LiftManager : MonoBehaviour
                 {
                     door.SetActive(false);
                 }
-
             }
             else
             {
