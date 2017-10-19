@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Collectable : MonoBehaviour
 {
-	AudioManager audioManager;
     Player m_playerRef;
     Mana m_playerMana;
     private Rigidbody m_rigidBody;
@@ -29,7 +28,6 @@ public class Collectable : MonoBehaviour
     {
         m_healthCap = true;
         m_manaCap = true;
-		audioManager = GameObject.Find ("AudioManager").GetComponent<AudioManager>();
         m_playerRef = GameObject.FindObjectOfType<Player>();
         if(Player.m_Player != null)
         {

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 4a309501cbc7a9b4ea750f09f0107df2
-timeCreated: 1508382199
+guid: f026528b50144da47b39937f09ca5400
+timeCreated: 1508451996
 licenseType: Pro
 ModelImporter:
   serializedVersion: 21
@@ -199,7 +199,7 @@ ModelImporter:
       name: Running_Right
       takeName: mixamo.com
       firstFrame: 0
-      lastFrame: 40
+      lastFrame: 20
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

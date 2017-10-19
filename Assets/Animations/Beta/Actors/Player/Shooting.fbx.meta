@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: f2a193f14c3ce2349a9f676d6b20b721
-timeCreated: 1508370167
+guid: ac3b15ccf1ad2b3499cb55695d7eaf60
+timeCreated: 1508451996
 licenseType: Pro
 ModelImporter:
   serializedVersion: 21
@@ -199,7 +199,7 @@ ModelImporter:
       name: Shooting
       takeName: mixamo.com
       firstFrame: 0
-      lastFrame: 24
+      lastFrame: 108
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
