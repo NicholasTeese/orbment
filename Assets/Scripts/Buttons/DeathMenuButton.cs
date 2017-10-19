@@ -24,7 +24,7 @@ public class DeathMenuButton : BaseButton
             // Main panel start.
             case "MainPanelTryAgain":
                 {
-                    string strLevelOne = LevelManager.m_levelManager.LevelOneSceneName;
+                    string strLevelOne = LevelManager.m_strLevelOneSceneName;
                     //LevelManager.m_levelManager.DestroyAllDontDestroyOnLoad();
                     SceneManager.LoadScene(strLevelOne);
                     break;

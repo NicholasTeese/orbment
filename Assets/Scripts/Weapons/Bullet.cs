@@ -33,7 +33,7 @@ public class Bullet : MonoBehaviour
     private int L_Bullet;
 
     //x protected ExplosionManager m_explosionManager;
-    protected Entity m_enemy = null;
+    protected Entity m_target = null;
 
     public Player m_playerRef = null;
 
@@ -110,7 +110,7 @@ public class Bullet : MonoBehaviour
     {
 
         m_timer = 0.0f;
-        m_enemy = null;
+        m_target = null;
         this.gameObject.SetActive(false);
         if (m_trail != null)
         {
@@ -165,15 +165,32 @@ public class Bullet : MonoBehaviour
         {
             ExplosionManager.m_explosionManager.RequestExplosion(transform.position, -m_direction, Explosion.ExplosionType.BulletImpact, 0.0f);
 
-            m_enemy = a_collision.collider.GetComponent<Entity>();
+            m_target = a_collision.collider.GetComponent<Entity>();
             //do base damage
-            if (m_enemy != null)
+            if (m_target != null)
             {
                 if (!a_collision.collider.CompareTag("Player") || !Player.m_Player.GodModeIsActive)
                 {
-                    m_enemy.m_beenCrit = m_isCrit;
-                    m_enemy.m_currHealth -= m_damage;
-                    m_enemy.m_recentDamageTaken = m_damage;
+                    if (Player.m_Player.IceShield == true)
+                    {
+                        float adjustedDamage = m_damage * 0.25f;
+                        m_target.m_beenCrit = m_isCrit;
+                        m_target.m_currHealth -= (int)adjustedDamage;
+                        m_target.m_recentDamageTaken = (int)adjustedDamage;
+                    }
+                    else if (Player.m_Player.IceShield == true)
+                    {
+                        float adjustedDamage = m_damage * 0.5f;
+                        m_target.m_beenCrit = m_isCrit;
+                        m_target.m_currHealth -= (int)adjustedDamage;
+                        m_target.m_recentDamageTaken = (int)adjustedDamage;
+                    }
+                    else
+                    {
+                        m_target.m_beenCrit = m_isCrit;
+                        m_target.m_currHealth -= m_damage;
+                        m_target.m_recentDamageTaken = m_damage;
+                    }
                 }
 
                 ExplosionManager.m_explosionManager.RequestExplosion(transform.position, -m_direction, Explosion.ExplosionType.SmallBlood, 0.0f);

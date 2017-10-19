@@ -81,15 +81,15 @@ public class Collectable : MonoBehaviour
     {
         if (collision.collider.CompareTag("Player"))
         {
+            Player.m_Player.OrbPickedUp();
+
             switch (m_type)
             {
                 case CollectableType.YellowOrb:
                     {
                         if(Player.m_Player)
                         {
-                            //GameObject.Find ("OrbCollected").GetComponent<Animator> ().SetTrigger ("orbCollected");
                             Player.m_Player.m_orbsCollected++;
-							audioManager.OrbPickUp();
                             this.gameObject.SetActive(false);
                         }
                         break;
@@ -106,7 +106,6 @@ public class Collectable : MonoBehaviour
                             else
                             {
                                 Player.m_Player.m_currHealth += m_healAmount;
-                                audioManager.OrbPickUp();
                                 this.gameObject.SetActive(false);
                             }
                         }
@@ -122,7 +121,6 @@ public class Collectable : MonoBehaviour
                         else
                         {
                             m_playerMana.m_currentMana += m_manaAmount;
-                            audioManager.OrbPickUp();
                             this.gameObject.SetActive(false);
                         }
                         break;

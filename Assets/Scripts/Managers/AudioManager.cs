@@ -1,22 +1,112 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-	public AudioSource collectableAudio;
+    private float m_fMusicVolume = 1.0f;
+    private float m_fMusicFadeInSpeed = 0.05f;
+    private float m_fMusicFadeOutSpeed = 0.25f;
 
-	public AudioClip orbPickUp;
-	public AudioClip dashAudio;
-	
-	public void OrbPickUp()
+    private bool m_bFadeIn = true;
+
+    private AudioClip m_mainMenuMusic;
+    private AudioClip m_daytimeMusic;
+
+    AudioSource m_audioSource;
+
+    public static AudioManager m_audioManager;
+
+    private void Awake()
     {
-		collectableAudio.PlayOneShot (orbPickUp, 0.7f);
-		collectableAudio.pitch = 1 + Random.Range (-0.3f, 0.3f);
-	}
-	public void DashSound()
+        if (m_audioManager == null)
+        {
+            m_audioManager = this;
+        }
+        else if (m_audioManager != this)
+        {
+            Destroy(gameObject);
+        }
+
+        m_mainMenuMusic = Resources.Load("Audio/Beta/Music/Main_Menu_Music") as AudioClip;
+        m_daytimeMusic = Resources.Load("Audio/Beta/Music/Daytime_Music") as AudioClip;
+
+        m_audioSource = GetComponent<AudioSource>();
+        m_audioSource.loop = true;
+        m_audioSource.volume = 0.0f;
+    }
+
+    private void Start()
     {
-		collectableAudio.PlayOneShot (dashAudio, 0.7f);
-		collectableAudio.pitch = 1 + Random.Range (-0.3f, 0.3f);
-	}
+        PlaySceneMusic(LevelManager.m_levelManager.CurrentSceneName);
+    }
+
+    private void Update()
+    {
+        if (m_bFadeIn)
+        {
+            AudioFadeIn(m_audioSource, m_fMusicFadeInSpeed, m_fMusicVolume);
+        }
+        else
+        {
+            AudioFadeOut(m_audioSource, m_fMusicFadeOutSpeed);
+        }
+    }
+
+    private void AudioFadeOut(AudioSource a_audioSource, float a_fFadeSpeed)
+    {
+        if (a_audioSource.volume <= 0.0f)
+        {
+            return;
+        }
+
+        a_audioSource.volume -= a_fFadeSpeed * Time.deltaTime;
+    }
+
+    private void AudioFadeIn(AudioSource a_audioSource, float a_fFadeSpeed, float a_fAudioVolume)
+    {
+        if (a_audioSource.volume >= a_fAudioVolume)
+        {
+            return;
+        }
+
+        a_audioSource.volume += a_fFadeSpeed * Time.deltaTime;
+    }
+
+    public void PlaySceneMusic(string a_strCurrentScene)
+    {
+        switch (a_strCurrentScene)
+        {
+            case LevelManager.m_strMainMenuSceneName:
+                {
+                    m_audioSource.clip = m_mainMenuMusic;
+                    m_audioSource.Play();
+                    break;
+                }
+
+            case LevelManager.m_strTutorialSceneName:
+                {
+
+                    break;
+                }
+
+            case LevelManager.m_strLevelOneSceneName:
+                {
+
+                    break;
+                }
+
+            case LevelManager.m_strLevelTwoSceneName:
+                {
+
+                    break;
+                }
+
+            default:
+                {
+                    Debug.Log(a_strCurrentScene + " scene name not recognised.");
+                    break;
+                }
+        }
+    }
 }

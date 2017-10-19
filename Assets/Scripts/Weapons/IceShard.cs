@@ -6,45 +6,45 @@ public class IceShard : Bullet
 {
     private bool m_hasIceSplinter = false;
 
-    //protected override void OnEnable()
-    //{
-    //    base.OnEnable();
+    new protected void OnEnable()
+    {
+        base.OnEnable();
 
-    //    if (!Player.m_Player.IceSplatterUnlocked)
-    //    {
-    //        return;
-    //    }
+        if (!Player.m_Player.IceSplatterUnlocked)
+        {
+            return;
+        }
 
-    //    int iIceSplinter = Random.Range(0, 2);
+        int iIceSplinter = Random.Range(0, 2);
 
-    //    if (iIceSplinter == 0)
-    //    {
-    //        m_hasIceSplinter = false;
-    //    }
-    //    else if (iIceSplinter == 1)
-    //    {
-    //        m_hasIceSplinter = true;
-    //    }
-    //    else
-    //    {
-    //        Debug.Log(gameObject.name + "ice splinter rolled an invalid number.");
-    //    }
-    //}
+        if (iIceSplinter == 0)
+        {
+            m_hasIceSplinter = false;
+        }
+        else if (iIceSplinter == 1)
+        {
+            m_hasIceSplinter = true;
+        }
+        else
+        {
+            Debug.Log(gameObject.name + "ice splinter rolled an invalid number.");
+        }
+    }
 
-    //protected override void Disable()
-    //{
-    //    base.Disable();
+    new protected void Disable()
+    {
+        base.Disable();
 
-    //    m_hasIceSplinter = false;
-    //}
+        m_hasIceSplinter = false;
+    }
 
     protected override void OnCollisionEnter(Collision collision)
     {
         base.OnCollisionEnter(collision);
         //set on fire
-        if (m_enemy != null)
+        if (m_target != null)
         {
-            m_enemy.m_causeSlow = true;
+            m_target.m_causeSlow = true;
         }
 
         if(!m_hasIceSplinter && m_playerRef != null && m_playerRef.m_perks.Contains(PerkID.IceSplinter))
