@@ -10,7 +10,8 @@ public class MeleeEnemy : Enemy
         WANDERING,
         PREPARING,
         CHARGING,
-        RECOVERING
+        RECOVERING,
+        FROZEN
     }
 
     private float m_fMoveSpeed = 2.0f;
@@ -21,12 +22,9 @@ public class MeleeEnemy : Enemy
     public float timer;
 
     private Behaviour m_eBehaviour = Behaviour.WANDERING;
-
-    //private Animator m_Animator;
-
+    private Behaviour m_eTempBehaviour = Behaviour.WANDERING;
+    
     private Vector3 m_v3ChargeTarget = Vector3.zero;
-
-    //private GameObject m_target;
 
     private NavMeshAgent m_navMeshAgent;
 
@@ -36,7 +34,6 @@ public class MeleeEnemy : Enemy
     {
         base.Awake();
         m_foir = this.GetComponent<FindObjectsInRadius>();
-        //m_Animator = GetComponent<Animator>();
         m_navMeshAgent = GetComponent<NavMeshAgent>();
         m_navMeshAgent.destination = GetWanderPosition(transform.position);
         m_navMeshAgent.speed = m_fMoveSpeed;
@@ -45,7 +42,6 @@ public class MeleeEnemy : Enemy
     new private void Start()
     {
         base.Start();
-        //m_target = Player.m_Player.transform.gameObject;
     }
 
     new private void Update()
@@ -54,6 +50,10 @@ public class MeleeEnemy : Enemy
         if (Input.GetKey(KeyCode.E) && Input.GetKey(KeyCode.Equals) && Input.GetKey(KeyCode.Alpha0))
         {
             this.m_currHealth = 0;
+        }
+        if (Input.GetKey(KeyCode.E) && Input.GetKey(KeyCode.Equals) && Input.GetKey(KeyCode.F))
+        {
+            Frozen = true;
         }
 
         if (!CalculateFrustrum(IsoCam.m_playerCamera.FrustrumPlanes, m_collider))
@@ -73,6 +73,13 @@ public class MeleeEnemy : Enemy
         base.Update();
 
         Vector3 V_targetOffset = new Vector3(Player.m_Player.transform.position.x, transform.position.y, Player.m_Player.transform.position.z);
+
+        if (Frozen)
+        {
+            m_navMeshAgent.destination = transform.position;
+            m_eTempBehaviour = m_eBehaviour;
+            m_eBehaviour = Behaviour.FROZEN;
+        }
 
         switch (m_eBehaviour)
         {
@@ -97,6 +104,7 @@ public class MeleeEnemy : Enemy
                             // set behaviour to prepare charge
                             m_Animator.SetBool("Walking2Recovery", true);
                             m_eBehaviour = Behaviour.PREPARING;
+                            m_eTempBehaviour = m_eBehaviour;
                             break;
                         }
                     }
@@ -122,6 +130,7 @@ public class MeleeEnemy : Enemy
                         m_Animator.SetBool("Walking2Recovery", false);
                         m_Animator.SetBool("Recovery2Walking", true);
                         m_eBehaviour = Behaviour.WANDERING;
+                        m_eTempBehaviour = m_eBehaviour;
                     }
 
                     m_fPrepareChargeTime -= Time.deltaTime;
@@ -137,6 +146,7 @@ public class MeleeEnemy : Enemy
                           m_Animator.SetBool("Walking2Recovery", false);
                           m_Animator.SetBool("Recovery2Charge", true);
                           m_eBehaviour = Behaviour.CHARGING;
+                          m_eTempBehaviour = m_eBehaviour;
                           break;
                         }
                         else
@@ -145,6 +155,7 @@ public class MeleeEnemy : Enemy
                             m_Animator.SetBool("Walking2Recovery", false);
                             m_Animator.SetBool("Recovery2Walking", true);
                             m_eBehaviour = Behaviour.WANDERING;
+                            m_eTempBehaviour = m_eBehaviour;
                         }
                     }
 
@@ -180,6 +191,7 @@ public class MeleeEnemy : Enemy
                         m_Animator.SetBool("Recovery2Charge", false);
                         m_Animator.SetBool("Charge2Recovery", true);
                         m_eBehaviour = Behaviour.RECOVERING;
+                        m_eTempBehaviour = m_eBehaviour;
                         break;
                     }
                     break;
@@ -207,6 +219,7 @@ public class MeleeEnemy : Enemy
                                     m_navMeshAgent.speed = m_fMoveSpeed;
                                     m_fRecoverTime = 3.0f;
                                     m_eBehaviour = Behaviour.PREPARING;
+                                    m_eTempBehaviour = m_eBehaviour;
                                     break;
                                 }
                             }
@@ -216,6 +229,7 @@ public class MeleeEnemy : Enemy
                             m_fRecoverTime = 3.0f;
                             m_Animator.SetBool("Recovery2Walking", true);
                             m_eBehaviour = Behaviour.WANDERING;
+                            m_eTempBehaviour = m_eBehaviour;
                             break;
                         }
 
@@ -229,6 +243,16 @@ public class MeleeEnemy : Enemy
                     break;
                 }
             #endregion
+
+            case Behaviour.FROZEN:
+                {
+                    Debug.Log(m_eBehaviour);
+                    Debug.Log(m_eTempBehaviour);
+
+                    StartCoroutine(FreezeTime());
+                    m_eBehaviour = m_eTempBehaviour;
+                    break;
+                }
 
             default:
                 {
@@ -293,7 +317,6 @@ public class MeleeEnemy : Enemy
         {
             return true;
         }
-
             return false;
     }
 }
