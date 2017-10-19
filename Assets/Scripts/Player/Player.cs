@@ -259,16 +259,8 @@ public class Player : Entity
         //get movement input
         m_movement = Vector3.forward * InputManager.PrimaryVertical() + Vector3.right * InputManager.PrimaryHorizontal();
 
-        if (m_movement != Vector3.zero)
-        {
-            m_animatior.SetBool("bIdling", false);
-            m_animatior.SetBool("bRunning", true);
-        }
-        else
-        {
-            m_animatior.SetBool("bRunning", false);
-            m_animatior.SetBool("bIdling", true);
-        }
+        m_animatior.SetFloat("fXAxis", m_movement.x);
+        m_animatior.SetFloat("fYAxis", m_movement.z);
     }
 
 
