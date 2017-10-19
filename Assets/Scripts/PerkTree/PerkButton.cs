@@ -320,6 +320,7 @@ public class PerkButton : MonoBehaviour
             case "IcePerk_3A":
                 {
                     //TODO: Implement.
+                    Player.m_Player.FreezeUnlocked = true;
                     break;
                 }
 
