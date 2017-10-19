@@ -64,7 +64,6 @@ public class DamageNumberManager : MonoBehaviour
             {
                 if (!m_dmgNums[i].activeInHierarchy)
                 {
-
                     m_dmgNums[i].SetActive(true);
                     m_dmgNums[i].transform.position = screenPos;
                     m_dmgTexts[i].m_text.text = number;
