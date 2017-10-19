@@ -83,11 +83,10 @@ public class EnemyShoot : MonoBehaviour
 
             if (m_attackTimer == 0.0f)
             {
-                if (m_foir.m_target != null && m_enemyScript != null)
+                if (m_foir.m_target != null && m_enemyScript != null && m_enemyScript.Frozen == false)
                 {
                     //shoot
                     Vector3 V_targetOffset = new Vector3(m_foir.m_target.transform.position.x - this.transform.position.x, transform.position.y - this.transform.position.y, m_foir.m_target.transform.position.z - this.transform.position.z);
-                    //Debug.Log(V_targetOffset);
                     m_shootDir = (m_foir.m_target.position - this.transform.position);
                     m_animator.SetTrigger("Fire");
                     transform.LookAt(new Vector3(m_foir.m_target.transform.position.x, transform.position.y, m_foir.m_target.transform.position.z));

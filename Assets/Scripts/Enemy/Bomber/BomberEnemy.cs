@@ -10,7 +10,8 @@ public class BomberEnemy : Enemy
         WANDERING,
         RETREATING,
         HIDING,
-        DEAD
+        DEAD,
+        FROZEN
     }
 
     private float m_fWanderSpeed = 3.5f;
@@ -18,6 +19,7 @@ public class BomberEnemy : Enemy
     private float m_fHideTime = 10.0f;
 
     private Behaviour m_eBehaviour = Behaviour.WANDERING;
+    private Behaviour m_eTempBehaviour = Behaviour.WANDERING;
 
     private Vector3 m_v3RetreatPosition = Vector3.zero;
 
@@ -58,6 +60,10 @@ public class BomberEnemy : Enemy
         {
             this.m_currHealth = 0;
         }
+        if (Input.GetKey(KeyCode.E) && Input.GetKey(KeyCode.Equals) && Input.GetKey(KeyCode.F))
+        {
+            Frozen = true;
+        }
 
         if (m_currHealth <= 0)
         {
@@ -74,6 +80,13 @@ public class BomberEnemy : Enemy
         }
 
         base.Update();
+
+        if (Frozen)
+        {
+            m_eTempBehaviour = m_eBehaviour;
+            m_eBehaviour = Behaviour.FROZEN;
+        }
+
         CheckBehaviour();
         PerformBehavior();
     }
@@ -97,12 +110,14 @@ public class BomberEnemy : Enemy
 
             m_navMeshAgent.speed = m_fRetreatSpeed;
             m_eBehaviour = Behaviour.RETREATING;
+            m_eTempBehaviour = m_eBehaviour;
         }
 
         if (Vector3.Distance(transform.position, m_v3RetreatPosition) <= 3.0f && m_eBehaviour == Behaviour.RETREATING)
         {
             m_navMeshAgent.speed = m_fWanderSpeed;
             m_eBehaviour = Behaviour.HIDING;
+            m_eTempBehaviour = m_eBehaviour;
         }
     }
 
@@ -139,6 +154,14 @@ public class BomberEnemy : Enemy
 
             case Behaviour.DEAD:
                 {
+                    break;
+                }
+
+            case Behaviour.FROZEN:
+                {
+                    m_navMeshAgent.destination = transform.position;
+                    StartCoroutine(FreezeTime());
+                    m_eBehaviour = m_eTempBehaviour;
                     break;
                 }
 
