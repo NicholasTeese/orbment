@@ -106,7 +106,6 @@ public class Player : Entity
 
     private bool m_bBurningSpeedBoost = false;
     private bool m_bAdditionalBurningSpeedBoost = false;
-    public bool AdditionalBurningSpeedBoost { get { return m_bAdditionalBurningSpeedBoost; } set { m_bAdditionalBurningSpeedBoost = value; } }
 
     private bool m_bFreezeUnlocked = false;
     public bool FreezeUnlocked { get { return m_bFreezeUnlocked; } set { m_bFreezeUnlocked = value; } }
@@ -118,8 +117,7 @@ public class Player : Entity
 
     private bool m_bIceArmor = false;
     public bool IceArmor { get { return m_bIceArmor; } set { m_bIceArmor = value; } }
-
-    private int m_iEnemiesOnFire = 0;
+    
     private Animator m_animatior;
 
     // Variable getters and setters.

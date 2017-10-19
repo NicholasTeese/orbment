@@ -42,9 +42,9 @@ public class IceShard : Bullet
     {
         base.OnCollisionEnter(collision);
         //set on fire
-        if (m_enemy != null)
+        if (m_target != null)
         {
-            m_enemy.m_causeSlow = true;
+            m_target.m_causeSlow = true;
         }
 
         if(!m_hasIceSplinter && m_playerRef != null && m_playerRef.m_perks.Contains(PerkID.IceSplinter))
