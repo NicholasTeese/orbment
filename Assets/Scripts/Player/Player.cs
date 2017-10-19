@@ -113,6 +113,12 @@ public class Player : Entity
     private bool m_bIceSplatterUnlocked = false;
     public bool IceSplatterUnlocked { get { return m_bIceSplatterUnlocked; } set { m_bIceSplatterUnlocked = value; } }
 
+    private bool m_bIceShield = false;
+    public bool IceShield { get { return m_bIceShield; } set { m_bIceShield = value; } }
+
+    private bool m_bIceArmor = false;
+    public bool IceArmor { get { return m_bIceArmor; } set { m_bIceArmor = value; } }
+
     private int m_iEnemiesOnFire = 0;
     public int EnemiesOnFire { get { return m_iEnemiesOnFire; } set { m_iEnemiesOnFire = value; } }
 
@@ -380,15 +386,6 @@ public class Player : Entity
         {
             return;
         }
-        
-        //if(body != null)
-        //{
-        //    if(body.GetComponent<MeleeEnemy>().m_type == Enemy.EnemyType.MELEE)
-        //    {
-        //        //Debug.Log("Collide");
-        //        m_bImpacted = true;
-        //    }
-        //}
     }
 
     public void ResetPlayer()

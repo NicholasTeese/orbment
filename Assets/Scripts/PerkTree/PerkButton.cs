@@ -319,7 +319,6 @@ public class PerkButton : MonoBehaviour
             // Freeze (stun) enemies for 2 seconds (3A.)
             case "IcePerk_3A":
                 {
-                    //TODO: Implement.
                     Player.m_Player.FreezeUnlocked = true;
                     break;
                 }
@@ -331,10 +330,10 @@ public class PerkButton : MonoBehaviour
                     break;
                 }
 
-            // Gain 25% armor when attacked by 3 or more enemies (3C).
+            // Gain 25% armor (3C).
             case "IcePerk_3C":
                 {
-                    //TODO: Implement.
+                    Player.m_Player.IceShield = true;
                     break;
                 }
 
@@ -362,7 +361,8 @@ public class PerkButton : MonoBehaviour
             // Gain 50% armour (4C).
             case "IcePerk_4C":
                 {
-                    //TODO: Implement.
+                    Player.m_Player.IceArmor = true;
+                    Player.m_Player.IceShield = false;
                     break;
                 }
 

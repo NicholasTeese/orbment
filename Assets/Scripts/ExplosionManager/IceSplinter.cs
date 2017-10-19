@@ -5,7 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(Explosion))]
 public class IceSplinter : MonoBehaviour
 {
-
     public float m_dmgPerProjectileRatio = 0.5f;
     private Explosion m_explosionScript;
 
@@ -32,8 +31,5 @@ public class IceSplinter : MonoBehaviour
             m_shards[i].m_damage = Mathf.CeilToInt( m_explosionScript.m_damage * m_dmgPerProjectileRatio);
             m_shards[i].gameObject.SetActive(true);
         }
-
-        
-
     }
 }
