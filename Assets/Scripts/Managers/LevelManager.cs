@@ -13,6 +13,8 @@ public class LevelManager : MonoBehaviour
 
     private bool m_bSceneLoadComplete = false;
 
+    private string m_strCurrentSceneName;
+
     // Player level start positions.
     private Vector3 m_v3PlayerTutorialStartPosition = new Vector3(-3.33f, 0.0f, -34.77f);
     private Vector3 m_v3PlayerLevelOneStartPosition = new Vector3(-3.33f, 0.0f, -34.77f);
@@ -28,7 +30,7 @@ public class LevelManager : MonoBehaviour
     public static LevelManager m_levelManager = null;
 
     // Variable getters and setters.
-    public string LevelOneSceneName { get { return m_strLevelOneSceneName; } }
+    public string CurrentSceneName { get { return m_strCurrentSceneName; } }
 
     // Player level start positions.
     public Vector3 PlayerTutorialStartPosition { get { return m_v3PlayerTutorialStartPosition; } }
@@ -85,12 +87,14 @@ public class LevelManager : MonoBehaviour
         {
             case m_strMainMenuSceneName:
                 {
-                    //DestroyAllDontDestroyOnLoad();
+                    m_strCurrentSceneName = m_strMainMenuSceneName;
                     break;
                 }
 
             case m_strTutorialSceneName:
                 {
+                    m_strCurrentSceneName = m_strTutorialSceneName;
+
                     // Initialise canvasses.
                     PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(false);
                     DeathMenuManager.m_deathMenuManager.gameObject.SetActive(false);
@@ -111,6 +115,8 @@ public class LevelManager : MonoBehaviour
 
             case m_strLevelOneSceneName:
                 {
+                    m_strCurrentSceneName = m_strLevelOneSceneName;
+
                     // Initialise canvasses.
                     PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(false);
                     DeathMenuManager.m_deathMenuManager.gameObject.SetActive(false);
@@ -131,6 +137,8 @@ public class LevelManager : MonoBehaviour
 
             case m_strLevelTwoSceneName:
                 {
+                    m_strCurrentSceneName = m_strLevelTwoSceneName;
+
                     // Initialise canvasses.
                     PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(false);
                     DeathMenuManager.m_deathMenuManager.gameObject.SetActive(false);
