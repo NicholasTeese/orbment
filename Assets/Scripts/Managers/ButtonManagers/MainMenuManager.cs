@@ -51,7 +51,7 @@ public class MainMenuManager : MonoBehaviour
 
         m_audioSource = GetComponent<AudioSource>();
 
-        m_fadeImage = transform.Find("Fade_Image").GetComponent<Image>();
+        //m_fadeImage = transform.Find("Fade_Image").GetComponent<Image>();
 
         IntitialiseButtons();
 
