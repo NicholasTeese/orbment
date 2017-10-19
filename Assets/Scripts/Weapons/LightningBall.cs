@@ -11,12 +11,12 @@ public class LightningBall : Bullet
     {
         base.OnCollisionEnter(collision);
         //set on fire
-        if (m_enemy != null)
+        if (m_target != null)
         {
             ExplosionManager.m_explosionManager.RequestExplosion(collision.collider.transform.position, this.transform.forward, Explosion.ExplosionType.Lightning, m_damage);
 
 
-            if(!m_hasGodBolt && m_playerRef != null && m_playerRef.m_perks.Contains(PerkID.GodBolt) && !collision.collider.CompareTag(m_id))
+            if(!m_hasGodBolt && Player.m_Player != null && Player.m_Player.m_perks.Contains(PerkID.GodBolt) && !collision.collider.CompareTag(m_id))
             {
                 //do once
                 m_hasGodBolt = true;

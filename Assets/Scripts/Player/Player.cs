@@ -1,8 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(CharacterController))]
 
@@ -18,21 +16,7 @@ using UnityEngine.SceneManagement;
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------
 public class Player : Entity
 {
-    //Johns Variables
-
-    public static Player m_Player;
-
-    public AudioClip basic_shot;
-    public AudioClip fire_shot;
-	public AudioClip ice_shot;
-	public AudioClip lightning_shot;
-	public AudioSource shootingAudioSource;
-
-    //End of Johns Variables
-
-    private Vector3 m_v3LastMousePosition = Vector3.zero;
-
-
+    //!? Unorganised variables.
     [Header("Damage Deviation Range")]
     public int m_damageDeviation = 3;
 
@@ -100,27 +84,28 @@ public class Player : Entity
 
     public bool m_bImpacted = false;
     public float m_iImpactTimer = 0;
+    //!? End of unorganised variables.
 
     private int m_iAdditionalBurnDPS = 0;
     private int m_iEnemiesOnFire = 0;
 
     private bool m_bBurningSpeedBoost = false;
     private bool m_bAdditionalBurningSpeedBoost = false;
-    public bool AdditionalBurningSpeedBoost { get { return m_bAdditionalBurningSpeedBoost; } set { m_bAdditionalBurningSpeedBoost = value; } }
-
     private bool m_bFreezeUnlocked = false;
-    public bool FreezeUnlocked { get { return m_bFreezeUnlocked; } set { m_bFreezeUnlocked = value; } }
-
     private bool m_bIceSplatterUnlocked = false;
-
     private bool m_bIceShield = false;
-    public bool IceShield { get { return m_bIceShield; } set { m_bIceShield = value; } }
-
     private bool m_bIceArmor = false;
-    public bool IceArmor { get { return m_bIceArmor; } set { m_bIceArmor = value; } }
 
-    private int m_iEnemiesOnFire = 0;
     private Animator m_animatior;
+
+    private AudioClip[] m_dash;
+    private AudioClip[] m_orbPickup;
+
+    private AudioSource m_audioSource;
+
+    private Vector3 m_v3LastMousePosition = Vector3.zero;
+
+    public static Player m_Player;
 
     // Variable getters and setters.
     public int EnemiesOnFire { get { return m_iEnemiesOnFire; } set { m_iEnemiesOnFire = value; } }
@@ -129,6 +114,9 @@ public class Player : Entity
     public bool IceSplatterUnlocked { get { return m_bIceSplatterUnlocked; } set { m_bIceSplatterUnlocked = value; } }
     public bool AdditionalBurningSpeedBoost { get { return m_bAdditionalBurningSpeedBoost; } set { m_bAdditionalBurningSpeedBoost = value; } }
     public bool BurningSpeedBoost { get { return m_bBurningSpeedBoost; } set { m_bBurningSpeedBoost = value; } }
+    public bool FreezeUnlocked { get { return m_bFreezeUnlocked; } set { m_bFreezeUnlocked = value; } }
+    public bool IceShield { get { return m_bIceShield; } set { m_bIceShield = value; } }
+    public bool IceArmor { get { return m_bIceArmor; } set { m_bIceArmor = value; } }
 
     void Awake()
     {
@@ -142,6 +130,11 @@ public class Player : Entity
         }
 
         m_animatior = transform.Find("Vince_Model_Beta").GetComponent<Animator>();
+
+        m_dash = Resources.LoadAll<AudioClip>("Audio/Beta/Actors/Player/Dash");
+        m_orbPickup = Resources.LoadAll<AudioClip>("Audio/Beta/Environment/Orb_Pickups");
+
+        m_audioSource = GetComponent<AudioSource>();
     }
 
     new void Start()
@@ -255,7 +248,7 @@ public class Player : Entity
         {
             if (m_dashTrail != null)
             {
-				GameObject.Find ("AudioManager").GetComponent<AudioManager> ().DashSound ();
+                m_audioSource.PlayOneShot(m_dash[Random.Range(0, m_dash.Length)]);
                 m_dashTrail.enabled = true;
             }
             m_dashDirection = m_movement.normalized;
@@ -405,8 +398,8 @@ public class Player : Entity
         }
     }
 
-    public void ResetPlayer()
+    public void OrbPickedUp()
     {
-
+        m_audioSource.PlayOneShot(m_orbPickup[Random.Range(0, m_orbPickup.Length)]);
     }
 }

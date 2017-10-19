@@ -10,10 +10,13 @@ public class MainMenuManager : MonoBehaviour
 
     private float m_fInputBuffer = 0.2f;
 
+    private bool m_bFadeIn = true;
     private bool m_bInputRecieved = false;
 
     private AudioSource m_audioSource;
     public AudioSource MainMenuAudioSource { get { return m_audioSource; } }
+
+    private Image m_fadeImage;
 
     private BaseButton m_selectedButton;
     public BaseButton SelectedButton { get { return m_selectedButton; } set { m_selectedButton = value; } }
@@ -48,6 +51,8 @@ public class MainMenuManager : MonoBehaviour
 
         m_audioSource = GetComponent<AudioSource>();
 
+        //m_fadeImage = transform.Find("Fade_Image").GetComponent<Image>();
+
         IntitialiseButtons();
 
         m_mainPanel.SetActive(true);
@@ -73,6 +78,15 @@ public class MainMenuManager : MonoBehaviour
 
     private void Update()
     {
+        if (m_bFadeIn)
+        {
+            //ImageFadeOut();
+        }
+        else
+        {
+            //ImageFadeIn();
+        }
+
         if (InputManager.AButton())
         {
             m_selectedButton.OnClick(m_selectedButton.m_strOnClickParameter);
@@ -80,6 +94,19 @@ public class MainMenuManager : MonoBehaviour
 
         Vector3 v3PrimaryInputDirection = InputManager.PrimaryInput();
         NavigateButtons(v3PrimaryInputDirection, m_lActivePanelButtons);
+    }
+
+    private void ImageFadeOut(Image a_fadeImage, float a_fFadeSpeed)
+    {
+
+    }
+
+    private void ImageFadeIn(Image a_fadeImage, float a_fFadeSpeed)
+    {
+        //if (a_fadeImage.color.a > 0.0f)
+        //{
+        //    a_fadeImage.GetComponent<Color>.a -= a_fFadeSpeed * Time.deltaTime;
+        //}
     }
 
     private void IntitialiseButtons()

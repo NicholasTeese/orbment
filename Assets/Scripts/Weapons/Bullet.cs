@@ -171,14 +171,14 @@ public class Bullet : MonoBehaviour
             {
                 if (!a_collision.collider.CompareTag("Player") || !Player.m_Player.GodModeIsActive)
                 {
-                    if (m_playerRef.IceShield == true)
+                    if (Player.m_Player.IceShield == true)
                     {
                         float adjustedDamage = m_damage * 0.25f;
                         m_target.m_beenCrit = m_isCrit;
                         m_target.m_currHealth -= (int)adjustedDamage;
                         m_target.m_recentDamageTaken = (int)adjustedDamage;
                     }
-                    else if (m_playerRef.IceShield == true)
+                    else if (Player.m_Player.IceShield == true)
                     {
                         float adjustedDamage = m_damage * 0.5f;
                         m_target.m_beenCrit = m_isCrit;

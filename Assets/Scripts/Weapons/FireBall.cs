@@ -34,13 +34,13 @@ public class FireBall : Bullet
         {
             ExplosionManager.m_explosionManager.RequestExplosion(this.transform.position, -m_direction, Explosion.ExplosionType.BulletImpact, 0.0f);
 
-            m_enemy = collision.collider.GetComponent<Entity>();
+            m_target = collision.collider.GetComponent<Entity>();
             //do base damage
-            if (m_enemy != null)
+            if (m_target != null)
             {
-                m_enemy.m_beenCrit = this.m_isCrit;
-                m_enemy.m_currHealth -= m_damage;
-                m_enemy.m_recentDamageTaken = m_damage;
+                m_target.m_beenCrit = this.m_isCrit;
+                m_target.m_currHealth -= m_damage;
+                m_target.m_recentDamageTaken = m_damage;
 
                 ExplosionManager.m_explosionManager.RequestExplosion(this.transform.position, -m_direction, Explosion.ExplosionType.SmallBlood, 0.0f);
             }
@@ -48,9 +48,9 @@ public class FireBall : Bullet
         }
 
         //set on fire
-        if (m_enemy != null)
+        if (m_target != null)
         {
-            if(!m_hasStunPerk && m_playerRef != null && m_playerRef.m_perks.Contains(PerkID.StunChance))
+            if(!m_hasStunPerk && Player.m_Player != null && Player.m_Player.m_perks.Contains(PerkID.StunChance))
             {
                 //do once
                 m_hasStunPerk = true;
@@ -59,10 +59,10 @@ public class FireBall : Bullet
             //stun
             if (m_hasStunPerk && Random.Range(0.0f, 100.0f) <= m_stunChance)
             {
-                m_enemy.m_causeStun = true;
+                m_target.m_causeStun = true;
             }
 
-            m_enemy.m_setOnFire = true;
+            m_target.m_setOnFire = true;
 
             Player.m_Player.m_currSpeedMult += 1;
         }
@@ -70,7 +70,7 @@ public class FireBall : Bullet
 
         //if AOE toggled on 
 
-        if(!m_hasSplashDamagePerk && m_playerRef != null && m_playerRef.m_perks.Contains(PerkID.SplashDamage))
+        if(!m_hasSplashDamagePerk && Player.m_Player != null && Player.m_Player.m_perks.Contains(PerkID.SplashDamage))
         {
             //do once
             m_hasSplashDamagePerk = true;
