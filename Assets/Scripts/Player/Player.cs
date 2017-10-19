@@ -98,12 +98,13 @@ public class Player : Entity
     public int m_poolAmountSpentOrbs = 15;
     private List<GameObject> m_spentOrbs = new List<GameObject>();
 
+    public bool m_bImpacted = false;
+    public float m_iImpactTimer = 0;
+
     private int m_iAdditionalBurnDPS = 0;
-    public int AdditionalBurnDPS { get; set; }
+    private int m_iEnemiesOnFire = 0;
 
     private bool m_bBurningSpeedBoost = false;
-    public bool BurningSpeedBoost { get { return m_bBurningSpeedBoost; } set { m_bBurningSpeedBoost = value; } }
-
     private bool m_bAdditionalBurningSpeedBoost = false;
     public bool AdditionalBurningSpeedBoost { get { return m_bAdditionalBurningSpeedBoost; } set { m_bAdditionalBurningSpeedBoost = value; } }
 
@@ -111,7 +112,6 @@ public class Player : Entity
     public bool FreezeUnlocked { get { return m_bFreezeUnlocked; } set { m_bFreezeUnlocked = value; } }
 
     private bool m_bIceSplatterUnlocked = false;
-    public bool IceSplatterUnlocked { get { return m_bIceSplatterUnlocked; } set { m_bIceSplatterUnlocked = value; } }
 
     private bool m_bIceShield = false;
     public bool IceShield { get { return m_bIceShield; } set { m_bIceShield = value; } }
@@ -120,10 +120,15 @@ public class Player : Entity
     public bool IceArmor { get { return m_bIceArmor; } set { m_bIceArmor = value; } }
 
     private int m_iEnemiesOnFire = 0;
-    public int EnemiesOnFire { get { return m_iEnemiesOnFire; } set { m_iEnemiesOnFire = value; } }
+    private Animator m_animatior;
 
-    public bool m_bImpacted = false;
-    public float m_iImpactTimer = 0;
+    // Variable getters and setters.
+    public int EnemiesOnFire { get { return m_iEnemiesOnFire; } set { m_iEnemiesOnFire = value; } }
+    public int AdditionalBurnDPS { get { return m_iAdditionalBurnDPS; } set { m_iAdditionalBurnDPS = value; } }
+
+    public bool IceSplatterUnlocked { get { return m_bIceSplatterUnlocked; } set { m_bIceSplatterUnlocked = value; } }
+    public bool AdditionalBurningSpeedBoost { get { return m_bAdditionalBurningSpeedBoost; } set { m_bAdditionalBurningSpeedBoost = value; } }
+    public bool BurningSpeedBoost { get { return m_bBurningSpeedBoost; } set { m_bBurningSpeedBoost = value; } }
 
     void Awake()
     {
@@ -135,6 +140,8 @@ public class Player : Entity
         {
             Destroy(gameObject);
         }
+
+        m_animatior = transform.Find("Vince_Model_Beta").GetComponent<Animator>();
     }
 
     new void Start()
@@ -159,7 +166,6 @@ public class Player : Entity
 
     }
 
-
     protected new void Update()
     {
         if (m_bGodModeIsActive)
@@ -173,8 +179,6 @@ public class Player : Entity
             }
         }
 
-        //Debug.Log(m_currSpeed);
-
 		if (m_currHealth <= 0.0f)
         {
             m_bIsAlive = false;
@@ -183,12 +187,12 @@ public class Player : Entity
         PlayerHUDManager.m_playerHUDManager.HealthBar.GetComponent<Image>().fillAmount = m_currHealth / m_maxHealth;
         if (m_camera != null && m_currHealth < m_oldHealth)
         {
-
             //shake cam if player hurt
             m_camera.FlashRed(0.5f);
             m_camera.Shake(10.0f, 0.1f);
 
         }
+
         base.Update();
 
         m_currLevel = m_expManager.m_playerLevel;
@@ -199,7 +203,6 @@ public class Player : Entity
         //mouse hold fire
         if ((Input.GetMouseButton(0) || InputManager.RightTriggerHold()) && Time.timeScale != 0.0f)
         {
-            
             if (m_playerFireTimer >= m_playerFiringInterval)
             {
                 m_playerFireTimer = 0.0f;
@@ -219,6 +222,7 @@ public class Player : Entity
                             m_hasCrit = true;
                         }
                         //fire
+                        m_animatior.SetBool("bShooting", true);
                         m_currWeapon.Fire(this.transform.forward, m_damage * m_currDamageMult, m_hasCrit, m_critDmgMult);
 
                         if (m_camera != null)
@@ -230,6 +234,10 @@ public class Player : Entity
                 }
             }
             m_playerFireTimer += Time.deltaTime;
+        }
+        else
+        {
+            m_animatior.SetBool("bShooting", false);
         }
 
         //regen mana when mouse up
@@ -257,6 +265,17 @@ public class Player : Entity
 
         //get movement input
         m_movement = Vector3.forward * InputManager.PrimaryVertical() + Vector3.right * InputManager.PrimaryHorizontal();
+
+        if (m_movement != Vector3.zero)
+        {
+            m_animatior.SetBool("bIdling", false);
+            m_animatior.SetBool("bRunning", true);
+        }
+        else
+        {
+            m_animatior.SetBool("bRunning", false);
+            m_animatior.SetBool("bIdling", true);
+        }
     }
 
 
@@ -314,9 +333,7 @@ public class Player : Entity
         {
             m_explosionManager.RequestExplosion(this.transform.position, this.transform.forward, Explosion.ExplosionType.AfterImage, 0.0f);
         }
-
-        //float ratio = m_dashTimer / m_dashTime;
-
+        
         if (m_dashTimer >= m_dashTime)
         {
             m_dashTimer = 0.0f;
@@ -380,8 +397,8 @@ public class Player : Entity
 
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
-//        Debug.Log(hit.collider.name);
         Rigidbody body = hit.collider.attachedRigidbody;
+
         if(body == null)
         {
             return;
