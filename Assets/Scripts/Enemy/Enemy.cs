@@ -92,13 +92,29 @@ public class Enemy : Entity
 
             if (m_bulletScript != null && m_bulletScript.m_id == "Player")
             {
-                if (m_type != EnemyType.BOMBER)
+                if (Player.m_Player.FreezeUnlocked != true)
                 {
-                    m_bRunning = true;
-                    m_v3TravelDir = m_bulletScript.m_direction;
-                    m_agent.SetDestination(collision.collider.transform.position - m_bulletScript.m_direction); // Travel to bullet origin
+                    if (m_type != EnemyType.BOMBER)
+                    {
+                        m_bRunning = true;
+                        m_v3TravelDir = m_bulletScript.m_direction;
+                        m_agent.SetDestination(collision.collider.transform.position - m_bulletScript.m_direction); // Travel to bullet origin
+                    }
+                    //m_agent.transform.LookAt(collision.collider.transform.position - m_bulletScript.m_direction); // Look at bullet origin
                 }
-                //m_agent.transform.LookAt(collision.collider.transform.position - m_bulletScript.m_direction); // Look at bullet origin
+                else
+                {
+                    if (m_type != EnemyType.BOMBER)
+                    {
+                        m_bRunning = true;
+                        m_v3TravelDir = m_bulletScript.m_direction;
+                        m_agent.SetDestination(collision.collider.transform.position - m_bulletScript.m_direction); // Travel to bullet origin
+                    }
+                    if (Random.Range(0, 99) <= 10)
+                    {
+                        Frozen = true;
+                    }
+                }
             }
         }
     }
