@@ -9,20 +9,20 @@ public class GameManager : MonoBehaviour
     private bool m_bShowCursor = true;
     private bool m_bForceHideCursor = false;
 
+    private Vector2 offset = Vector2.zero;
+
+    private Vector3 m_v3LastMousePosition = Vector3.zero;
+
+    private Texture2D m_crosshair;
+
+    public static GameManager m_gameManager;
+
     public bool GameIsPaused { get { return m_bGameIsPaused; } set { m_bGameIsPaused = value; } }
     public bool ShowCursor { get { return m_bShowCursor; } set { m_bShowCursor = value; } }
     public bool ForceHideCursor { get { return m_bForceHideCursor; } set { m_bForceHideCursor = value; } }
 
-    private Vector3 m_v3LastMousePosition = Vector3.zero;
-
-    public static GameManager m_gameManager = null;
-    private Texture2D m_crosshair;
-    public Vector2 offset;
-
     private void Awake()
     {
-        Time.timeScale = 1;
-
         m_v3LastMousePosition = Input.mousePosition;
 
         if (m_gameManager == null)
@@ -53,8 +53,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        Time.timeScale = 1;
-
         if (SceneManager.GetActiveScene().name != "Beta_Main_Menu")
         {
             PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(false);

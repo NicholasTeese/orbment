@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class InGameCanvas : MonoBehaviour
 {
-    private float m_fFadeSpeed = 0.4f;
+    private float m_fFadeInSpeed = 0.05f;
+    private float m_fFadeOutSpeed = 0.03f;
 
     private bool m_bFadeIn = true;
     private bool m_bFadeInComplete = false;
@@ -38,9 +39,10 @@ public class InGameCanvas : MonoBehaviour
     {
         if (m_bFadeIn && !m_bFadeInComplete)
         {
-            if (ImageFadeIn(m_fadeImage, m_fFadeSpeed))
+            if (ImageFadeIn(m_fadeImage, m_fFadeInSpeed))
             {
                 m_bFadeInComplete = true;
+                Time.timeScale = 1;
                 m_fadeImage.gameObject.SetActive(false);
             }
         }
@@ -48,7 +50,7 @@ public class InGameCanvas : MonoBehaviour
         {
             m_fadeImage.gameObject.SetActive(true);
 
-            if (ImageFadeOut(m_fadeImage, m_fFadeSpeed))
+            if (ImageFadeOut(m_fadeImage, m_fFadeOutSpeed))
             {
                 m_bFadeOutComplete = true;
                 if (SceneManager.GetActiveScene().name != LevelManager.m_strLevelTwoSceneName)
@@ -65,13 +67,13 @@ public class InGameCanvas : MonoBehaviour
         }
     }
 
-    private bool ImageFadeOut(Image a_fadeImage, float a_fFadeSpeed)
+    private bool ImageFadeIn(Image a_fadeImage, float a_fFadeSpeed)
     {
         Color imageColour = a_fadeImage.color;
 
-        if (imageColour.a < 1.0f)
+        if (imageColour.a > 0.0f)
         {
-            imageColour.a += a_fFadeSpeed * Time.deltaTime;
+            imageColour.a -= a_fFadeSpeed;
             a_fadeImage.color = imageColour;
             return false;
         }
@@ -79,13 +81,13 @@ public class InGameCanvas : MonoBehaviour
         return true;
     }
 
-    private bool ImageFadeIn(Image a_fadeImage, float a_fFadeSpeed)
+    private bool ImageFadeOut(Image a_fadeImage, float a_fFadeSpeed)
     {
         Color imageColour = a_fadeImage.color;
 
-        if (imageColour.a > 0.0f)
+        if (imageColour.a < 1.0f)
         {
-            imageColour.a -= a_fFadeSpeed * Time.deltaTime;
+            imageColour.a += a_fFadeSpeed;
             a_fadeImage.color = imageColour;
             return false;
         }

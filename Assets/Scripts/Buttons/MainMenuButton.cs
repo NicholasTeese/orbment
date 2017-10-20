@@ -25,7 +25,9 @@ public class MainMenuButton : BaseButton
         {
             case "MainPanelPlay":
                 {
+                    MainMenuManager.m_mainMenuManager.m_mainPanel.SetActive(false);
                     MainMenuManager.m_mainMenuManager.FadeIn = false;
+                    AudioManager.m_audioManager.FadeIn = false;
                     break;
                 }
 

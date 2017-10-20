@@ -64,7 +64,7 @@ public class LevelManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name != m_strMainMenuSceneName)
         {
-            //InitialiseDontDestroyOnLoad();
+
         }
     }
 
@@ -88,6 +88,11 @@ public class LevelManager : MonoBehaviour
             case m_strMainMenuSceneName:
                 {
                     m_strCurrentSceneName = m_strMainMenuSceneName;
+
+                    DontDestroyOnLoad(gameObject);
+                    DontDestroyOnLoad(AudioManager.m_audioManager.gameObject);
+
+                    AudioManager.m_audioManager.PlaySceneMusic(m_strCurrentSceneName);
                     break;
                 }
 
@@ -99,9 +104,13 @@ public class LevelManager : MonoBehaviour
                     PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(false);
                     DeathMenuManager.m_deathMenuManager.gameObject.SetActive(false);
                     PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(true);
+
                     InGameCanvas.m_inGameCanvas.FadeIn = true;
                     InGameCanvas.m_inGameCanvas.FadeInComplete = false;
                     InGameCanvas.m_inGameCanvas.FadeOutComplete = false;
+
+                    AudioManager.m_audioManager.PlaySceneMusic(m_strCurrentSceneName);
+                    AudioManager.m_audioManager.FadeIn = true;
 
                     // Set player's new position.
                     Player.m_Player.transform.position = m_v3PlayerTutorialStartPosition;
@@ -124,9 +133,13 @@ public class LevelManager : MonoBehaviour
                     PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(false);
                     DeathMenuManager.m_deathMenuManager.gameObject.SetActive(false);
                     PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(true);
+
                     InGameCanvas.m_inGameCanvas.FadeIn = true;
                     InGameCanvas.m_inGameCanvas.FadeInComplete = false;
                     InGameCanvas.m_inGameCanvas.FadeOutComplete = false;
+
+                    AudioManager.m_audioManager.PlaySceneMusic(m_strCurrentSceneName);
+                    AudioManager.m_audioManager.FadeIn = true;
 
                     // Set player's new position.
                     Player.m_Player.transform.position = m_v3PlayerLevelOneStartPosition;
@@ -149,9 +162,13 @@ public class LevelManager : MonoBehaviour
                     PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(false);
                     DeathMenuManager.m_deathMenuManager.gameObject.SetActive(false);
                     PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(true);
+
                     InGameCanvas.m_inGameCanvas.FadeIn = true;
                     InGameCanvas.m_inGameCanvas.FadeInComplete = false;
                     InGameCanvas.m_inGameCanvas.FadeOutComplete = false;
+
+                    AudioManager.m_audioManager.PlaySceneMusic(m_strCurrentSceneName);
+                    AudioManager.m_audioManager.FadeIn = true;
 
                     // Set player's new position.
                     Player.m_Player.transform.position = m_v3PlayerLevelTwoStartPosition;
@@ -207,6 +224,7 @@ public class LevelManager : MonoBehaviour
         // Managers.
         DontDestroyOnLoad(gameObject);
         DontDestroyOnLoad(GameManager.m_gameManager.gameObject);
+        DontDestroyOnLoad(AudioManager.m_audioManager.gameObject);
 
         // Actors.
         //DontDestroyOnLoad(Player.m_Player.gameObject);
@@ -228,14 +246,14 @@ public class LevelManager : MonoBehaviour
             Destroy(DebugLevelSwitcher.m_debugLevelSwitcher.transform.parent.gameObject);
         }
 
-        if (LevelManager.m_levelManager != null)
-        {
-            //Destroy(gameObject);
-        }
-
         if (GameManager.m_gameManager != null)
         {
             Destroy(GameManager.m_gameManager.gameObject);
+        }
+
+        if (AudioManager.m_audioManager != null)
+        {
+            Destroy(AudioManager.m_audioManager.gameObject);
         }
 
         if (Player.m_Player != null)

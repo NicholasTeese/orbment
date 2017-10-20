@@ -5,8 +5,8 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     private float m_fMusicVolume = 1.0f;
-    private float m_fMusicFadeInSpeed = 0.05f;
-    private float m_fMusicFadeOutSpeed = 0.25f;
+    private float m_fMusicFadeInSpeed = 0.001f;
+    private float m_fMusicFadeOutSpeed = 0.005f;
 
     private bool m_bFadeIn = true;
 
@@ -16,6 +16,8 @@ public class AudioManager : MonoBehaviour
     AudioSource m_audioSource;
 
     public static AudioManager m_audioManager;
+
+    public bool FadeIn { get { return m_bFadeIn; } set { m_bFadeIn = value; } }
 
     private void Awake()
     {
@@ -60,7 +62,7 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        a_audioSource.volume -= a_fFadeSpeed * Time.deltaTime;
+        a_audioSource.volume -= a_fFadeSpeed;
     }
 
     private void AudioFadeIn(AudioSource a_audioSource, float a_fFadeSpeed, float a_fAudioVolume)
@@ -70,7 +72,7 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        a_audioSource.volume += a_fFadeSpeed * Time.deltaTime;
+        a_audioSource.volume += a_fFadeSpeed;
     }
 
     public void PlaySceneMusic(string a_strCurrentScene)
@@ -79,26 +81,41 @@ public class AudioManager : MonoBehaviour
         {
             case LevelManager.m_strMainMenuSceneName:
                 {
-                    m_audioSource.clip = m_mainMenuMusic;
-                    m_audioSource.Play();
+                    if (m_audioSource.clip != m_mainMenuMusic)
+                    {
+                        m_audioSource.clip = m_mainMenuMusic;
+                        m_audioSource.Play();
+                    }
                     break;
                 }
 
             case LevelManager.m_strTutorialSceneName:
                 {
-
+                    if (m_audioSource.clip != m_daytimeMusic)
+                    {
+                        m_audioSource.clip = m_daytimeMusic;
+                        m_audioSource.Play();
+                    }
                     break;
                 }
 
             case LevelManager.m_strLevelOneSceneName:
                 {
-
+                    if (m_audioSource.clip != m_daytimeMusic)
+                    {
+                        m_audioSource.clip = m_daytimeMusic;
+                        m_audioSource.Play();
+                    }
                     break;
                 }
 
             case LevelManager.m_strLevelTwoSceneName:
                 {
-
+                    if (m_audioSource.clip != m_daytimeMusic)
+                    {
+                        m_audioSource.clip = m_daytimeMusic;
+                        m_audioSource.Play();
+                    }
                     break;
                 }
 

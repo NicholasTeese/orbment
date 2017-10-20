@@ -8,7 +8,7 @@ public class MainMenuManager : MonoBehaviour
     private int m_iSelectedButtonIndex = 0;
 
     private float m_fInputBuffer = 0.2f;
-    private float m_fFadeSpeed = 0.4f;
+    private float m_fFadeSpeed = 0.005f;
 
     private bool m_bFadeIn = true;
     private bool m_bFadeInComplete = false;
@@ -123,7 +123,7 @@ public class MainMenuManager : MonoBehaviour
 
         if (imageColour.a < 1.0f)
         {
-            imageColour.a += a_fFadeSpeed * Time.deltaTime;
+            imageColour.a += a_fFadeSpeed;
             a_fadeImage.color = imageColour;
             return false;
         }
@@ -137,7 +137,7 @@ public class MainMenuManager : MonoBehaviour
 
         if (imageColour.a > 0.0f)
         {
-            imageColour.a -= a_fFadeSpeed * Time.deltaTime;
+            imageColour.a -= a_fFadeSpeed;
             a_fadeImage.color = imageColour;
             return false;
         }

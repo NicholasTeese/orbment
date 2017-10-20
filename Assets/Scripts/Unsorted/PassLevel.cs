@@ -9,6 +9,8 @@ public class PassLevel : MonoBehaviour
     {
 		if (a_collider.tag == "Player")
         {
+            Time.timeScale = 0.0f;
+
             switch (SceneManager.GetActiveScene().name)
             {
                 case LevelManager.m_strTutorialSceneName:
