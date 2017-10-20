@@ -99,7 +99,7 @@ public class MeleeEnemy : Enemy
                     // If enemy detects player
                     if (m_foir.m_target != null)
                     {
-                        if (Vector3.Distance(transform.position, Player.m_Player.transform.position) <= 15.0f)
+                        if (Vector3.Distance(transform.position, Player.m_Player.transform.position) <= 17.0f)
                         {
                             // set behaviour to prepare charge
                             m_Animator.SetBool("Walking2Recovery", true);
@@ -124,7 +124,7 @@ public class MeleeEnemy : Enemy
                     // cease wander
                     //m_navMeshAgent.destination = transform.position;
                     // If player retreats far enough away before enemy charges, return to wander
-                    if (Vector3.Distance(transform.position, Player.m_Player.transform.position) > 15.0f)
+                    if (Vector3.Distance(transform.position, Player.m_Player.transform.position) > 17.0f)
                     {
                         m_fPrepareChargeTime = 2.0f;
                         m_Animator.SetBool("Walking2Recovery", false);
@@ -213,7 +213,7 @@ public class MeleeEnemy : Enemy
                         {
                             if (m_foir.m_target != null)
                             {
-                                if (Vector3.Distance(transform.position, Player.m_Player.transform.position) <= 15.0f)
+                                if (Vector3.Distance(transform.position, Player.m_Player.transform.position) <= 17.0f)
                                 {
                                     m_navMeshAgent.enabled = true;
                                     m_navMeshAgent.speed = m_fMoveSpeed;
