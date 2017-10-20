@@ -1,31 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PauseMenuManager : MonoBehaviour
 {
     private int m_iSelectedButtonIndex = 0;
-    public int SelectedButtonIndex { get { return m_iSelectedButtonIndex; } set { m_iSelectedButtonIndex = value; } }
 
     private float m_fInputBuffer = 0.2f;
 
     private bool m_bInputRecieved = false;
 
     private AudioSource m_audioSource;
-    public AudioSource PauseMenuAudioSource { get { return m_audioSource; } }
 
     private BaseButton m_selectedButton;
-    public BaseButton SelectedButton { get { return m_selectedButton; } set { m_selectedButton = value; } }
 
     private List<BaseButton> m_lMainPanelButtons = new List<BaseButton>();
-    public List<BaseButton> MainPanelButtons { get { return m_lMainPanelButtons; } }
     private List<BaseButton> m_lOptionsPanelButtons = new List<BaseButton>();
-    public List<BaseButton> OptionsPanelbuttons { get { return m_lOptionsPanelButtons; } }
     private List<BaseButton> m_lQuitToMainMenuPanelButtons = new List<BaseButton>();
-    public List<BaseButton> QuitToMainMenuPanelButtons { get { return m_lQuitToMainMenuPanelButtons; } }
     private List<BaseButton> m_lQuitToDesktopPanelButtons = new List<BaseButton>();
-    public List<BaseButton> QuitToDesktopPanelButtons { get { return m_lQuitToDesktopPanelButtons; } }
     private List<BaseButton> m_lActivePanelButtons = new List<BaseButton>();
+
+    // Variable getters and setters.
+    public int SelectedButtonIndex { get { return m_iSelectedButtonIndex; } set { m_iSelectedButtonIndex = value; } }
+
+    public AudioSource PauseMenuAudioSource { get { return m_audioSource; } }
+
+    public BaseButton SelectedButton { get { return m_selectedButton; } set { m_selectedButton = value; } }
+
+    public List<BaseButton> MainPanelButtons { get { return m_lMainPanelButtons; } }
+    public List<BaseButton> OptionsPanelbuttons { get { return m_lOptionsPanelButtons; } }
+    public List<BaseButton> QuitToMainMenuPanelButtons { get { return m_lQuitToMainMenuPanelButtons; } }
+    public List<BaseButton> QuitToDesktopPanelButtons { get { return m_lQuitToDesktopPanelButtons; } }
     public List<BaseButton> ActivePanelButtons { get { return m_lActivePanelButtons; } set { m_lActivePanelButtons = value; } }
 
     [Header("Pause Menu Panels")]

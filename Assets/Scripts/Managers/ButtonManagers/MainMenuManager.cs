@@ -6,17 +6,20 @@ using UnityEngine.UI;
 public class MainMenuManager : MonoBehaviour
 {
     private int m_iSelectedButtonIndex = 0;
-    public int SelectedButtonIndex { get { return m_iSelectedButtonIndex; } set { m_iSelectedButtonIndex = value; } }
 
     private float m_fInputBuffer = 0.2f;
+    private float m_fFadeSpeed = 0.4f;
 
     private bool m_bFadeIn = true;
+    private bool m_bFadeInComplete = false;
+    private bool m_bFadeOutComplete = false;
     private bool m_bInputRecieved = false;
 
     private AudioSource m_audioSource;
-    public AudioSource MainMenuAudioSource { get { return m_audioSource; } }
 
     private Image m_fadeImage;
+
+    private Color m_fadeImageColour;
 
     private BaseButton m_selectedButton;
     public BaseButton SelectedButton { get { return m_selectedButton; } set { m_selectedButton = value; } }
@@ -25,7 +28,13 @@ public class MainMenuManager : MonoBehaviour
     private List<BaseButton> m_lOptionsPanelButtons = new List<BaseButton>();
     private List<BaseButton> m_lQuitToDesktopPanelButtons = new List<BaseButton>();
     private List<BaseButton> m_lActivePanelButtons = new List<BaseButton>();
-   
+
+    public int SelectedButtonIndex { get { return m_iSelectedButtonIndex; } set { m_iSelectedButtonIndex = value; } }
+
+    public bool FadeIn { get { return m_bFadeIn; } set { m_bFadeIn = value; } }
+
+    public AudioSource MainMenuAudioSource { get { return m_audioSource; } }
+
     public List<BaseButton> MainPanelButtons { get { return m_lMainPanelButtons; } }
     public List<BaseButton> OptionsPanelButtons { get { return m_lOptionsPanelButtons; } set { m_lOptionsPanelButtons = value; } }
     public List<BaseButton> QuitToDesktopPanelButtons { get { return m_lQuitToDesktopPanelButtons; } }
@@ -51,7 +60,9 @@ public class MainMenuManager : MonoBehaviour
 
         m_audioSource = GetComponent<AudioSource>();
 
-        //m_fadeImage = transform.Find("Fade_Image").GetComponent<Image>();
+        m_fadeImage = transform.Find("Fade_Image").GetComponent<Image>();
+
+        m_fadeImageColour = m_fadeImage.color;
 
         IntitialiseButtons();
 
@@ -78,13 +89,23 @@ public class MainMenuManager : MonoBehaviour
 
     private void Update()
     {
-        if (m_bFadeIn)
+        if (m_bFadeIn && !m_bFadeInComplete)
         {
-            //ImageFadeOut();
+            if (ImageFadeIn(m_fadeImage, m_fFadeSpeed))
+            {
+                m_bFadeInComplete = true;
+                m_fadeImage.gameObject.SetActive(false);
+            }
         }
-        else
+        else if (!m_bFadeIn && !m_bFadeOutComplete)
         {
-            //ImageFadeIn();
+            m_fadeImage.gameObject.SetActive(true);
+
+            if (ImageFadeOut(m_fadeImage, m_fFadeSpeed))
+            {
+                m_bFadeOutComplete = true;
+                LevelManager.m_levelManager.LoadNextLevelAsyncOperation.allowSceneActivation = true;
+            }
         }
 
         if (InputManager.AButton())
@@ -96,17 +117,32 @@ public class MainMenuManager : MonoBehaviour
         NavigateButtons(v3PrimaryInputDirection, m_lActivePanelButtons);
     }
 
-    private void ImageFadeOut(Image a_fadeImage, float a_fFadeSpeed)
+    private bool ImageFadeOut(Image a_fadeImage, float a_fFadeSpeed)
     {
+        Color imageColour = a_fadeImage.color;
 
+        if (imageColour.a < 1.0f)
+        {
+            imageColour.a += a_fFadeSpeed * Time.deltaTime;
+            a_fadeImage.color = imageColour;
+            return false;
+        }
+
+        return true;
     }
 
-    private void ImageFadeIn(Image a_fadeImage, float a_fFadeSpeed)
+    private bool ImageFadeIn(Image a_fadeImage, float a_fFadeSpeed)
     {
-        //if (a_fadeImage.color.a > 0.0f)
-        //{
-        //    a_fadeImage.GetComponent<Color>.a -= a_fFadeSpeed * Time.deltaTime;
-        //}
+        Color imageColour = a_fadeImage.color;
+
+        if (imageColour.a > 0.0f)
+        {
+            imageColour.a -= a_fFadeSpeed * Time.deltaTime;
+            a_fadeImage.color = imageColour;
+            return false;
+        }
+
+        return true;
     }
 
     private void IntitialiseButtons()
