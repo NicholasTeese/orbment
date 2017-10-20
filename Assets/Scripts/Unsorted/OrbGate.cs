@@ -35,6 +35,8 @@ public class OrbGate : MonoBehaviour
     public void Awake()
     {
         m_playerIsNear = false;
+        m_numOfOrbsForOpen = CalculateNumberOfOrbsToOpen(m_enemySections);
+
         if (m_visualLock != null)
         {
             m_origScale = m_visualLock.transform.localScale.x;
@@ -48,7 +50,7 @@ public class OrbGate : MonoBehaviour
 
         m_orbSlot = transform.Find("OrbSlot").gameObject;
 
-        m_numOfOrbsForOpen = CalculateNumberOfOrbsToOpen(m_enemySections);
+
     }
 
     public void OnTriggerStay(Collider other)
