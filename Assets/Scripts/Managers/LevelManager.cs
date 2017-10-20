@@ -99,6 +99,9 @@ public class LevelManager : MonoBehaviour
                     PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(false);
                     DeathMenuManager.m_deathMenuManager.gameObject.SetActive(false);
                     PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(true);
+                    InGameCanvas.m_inGameCanvas.FadeIn = true;
+                    InGameCanvas.m_inGameCanvas.FadeInComplete = false;
+                    InGameCanvas.m_inGameCanvas.FadeOutComplete = false;
 
                     // Set player's new position.
                     Player.m_Player.transform.position = m_v3PlayerTutorialStartPosition;
@@ -121,6 +124,9 @@ public class LevelManager : MonoBehaviour
                     PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(false);
                     DeathMenuManager.m_deathMenuManager.gameObject.SetActive(false);
                     PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(true);
+                    InGameCanvas.m_inGameCanvas.FadeIn = true;
+                    InGameCanvas.m_inGameCanvas.FadeInComplete = false;
+                    InGameCanvas.m_inGameCanvas.FadeOutComplete = false;
 
                     // Set player's new position.
                     Player.m_Player.transform.position = m_v3PlayerLevelOneStartPosition;
@@ -143,6 +149,9 @@ public class LevelManager : MonoBehaviour
                     PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(false);
                     DeathMenuManager.m_deathMenuManager.gameObject.SetActive(false);
                     PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(true);
+                    InGameCanvas.m_inGameCanvas.FadeIn = true;
+                    InGameCanvas.m_inGameCanvas.FadeInComplete = false;
+                    InGameCanvas.m_inGameCanvas.FadeOutComplete = false;
 
                     // Set player's new position.
                     Player.m_Player.transform.position = m_v3PlayerLevelTwoStartPosition;

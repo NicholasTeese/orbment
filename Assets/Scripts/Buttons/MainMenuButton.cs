@@ -25,7 +25,7 @@ public class MainMenuButton : BaseButton
         {
             case "MainPanelPlay":
                 {
-                    LevelManager.m_levelManager.LoadNextLevelAsyncOperation.allowSceneActivation = true;
+                    MainMenuManager.m_mainMenuManager.FadeIn = false;
                     break;
                 }
 

@@ -13,22 +13,19 @@ public class PassLevel : MonoBehaviour
             {
                 case LevelManager.m_strTutorialSceneName:
                     {
-                        LevelManager.m_levelManager.InitialiseDontDestroyOnLoad();
-                        LevelManager.m_levelManager.LoadNextLevelAsyncOperation.allowSceneActivation = true;
+                        InGameCanvas.m_inGameCanvas.FadeIn = false;
                         break;
                     }
 
                 case LevelManager.m_strLevelOneSceneName:
                     {
-                        LevelManager.m_levelManager.InitialiseDontDestroyOnLoad();
-                        LevelManager.m_levelManager.LoadNextLevelAsyncOperation.allowSceneActivation = true;
+                        InGameCanvas.m_inGameCanvas.FadeIn = false;
                         break;
                     }
 
                 case LevelManager.m_strLevelTwoSceneName:
                     {
-                        LevelManager.m_levelManager.DestroyAllDontDestroyOnLoad();
-                        LevelManager.m_levelManager.LoadNextLevelAsyncOperation.allowSceneActivation = true;
+                        InGameCanvas.m_inGameCanvas.FadeIn = false;
                         break;
                     }
             }

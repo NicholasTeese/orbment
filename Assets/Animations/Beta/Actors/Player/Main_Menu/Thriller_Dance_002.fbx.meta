@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: e79ae3394bd5acc41a23b5b6bfaeedbc
-timeCreated: 1508370167
+guid: b5e00d75483350545a570f537a325fa2
+timeCreated: 1508454378
 licenseType: Pro
 ModelImporter:
   serializedVersion: 21
@@ -162,7 +162,7 @@ ModelImporter:
     4300008: GEO_sleeve
     4300010: GEO_head
     4300012: GEO_hair
-    7400000: Walking
+    7400000: Thriller_Dance_002
     9500000: //RootNode
     13700000: GEO_backpack
     13700002: GEO_belt
@@ -196,17 +196,17 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Walking
+      name: Thriller_Dance_002
       takeName: mixamo.com
       firstFrame: 0
-      lastFrame: 62
+      lastFrame: 565
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
