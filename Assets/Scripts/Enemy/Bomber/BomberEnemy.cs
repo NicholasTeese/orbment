@@ -27,6 +27,8 @@ public class BomberEnemy : Enemy
 
     private NavMeshAgent m_navMeshAgent;
 
+    private Animator m_animator;
+
     private FindObjectsInRadius m_findOBjectsInRadius;
 
     [Header("Holds the hiding spots that the bomber can flee towards.")]
@@ -39,6 +41,8 @@ public class BomberEnemy : Enemy
         m_navMeshAgent = GetComponent<NavMeshAgent>();
         m_navMeshAgent.destination = GetWanderPosition(transform.position);
         m_navMeshAgent.speed = m_fWanderSpeed;
+
+        m_animator = GetComponentInChildren<Animator>();
 
         m_findOBjectsInRadius = GetComponent<FindObjectsInRadius>();
     }
@@ -127,6 +131,10 @@ public class BomberEnemy : Enemy
         {
             case Behaviour.WANDERING:
                 {
+                    m_animator.SetBool("bWalking", true);
+                    m_animator.SetBool("bRunning", false);
+                    m_animator.SetBool("bHiding", false);
+
                     if (Vector3.Distance(transform.position, m_navMeshAgent.destination) <= 1.0f)
                     {
                         m_navMeshAgent.destination = GetWanderPosition(transform.position);
@@ -136,12 +144,20 @@ public class BomberEnemy : Enemy
 
             case Behaviour.RETREATING:
                 {
+                    m_animator.SetBool("bWalking", false);
+                    m_animator.SetBool("bRunning", true);
+                    m_animator.SetBool("bHiding", false);
+
                     m_navMeshAgent.SetDestination(m_v3RetreatPosition);
                     break;
                 }
 
             case Behaviour.HIDING:
                 {
+                    m_animator.SetBool("bWalking", false);
+                    m_animator.SetBool("bRunning", false);
+                    m_animator.SetBool("bHiding", true);
+
                     m_fHideTime -= Time.deltaTime;
 
                     if (m_fHideTime <= 0.0f)
