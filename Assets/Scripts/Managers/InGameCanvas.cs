@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class InGameCanvas : MonoBehaviour
 {
@@ -51,8 +52,16 @@ public class InGameCanvas : MonoBehaviour
             if (ImageFadeOut(m_fadeImage, m_fFadeSpeed))
             {
                 m_bFadeOutComplete = true;
-                LevelManager.m_levelManager.InitialiseDontDestroyOnLoad();
-                LevelManager.m_levelManager.LoadNextLevelAsyncOperation.allowSceneActivation = true;
+                if (SceneManager.GetActiveScene().name != LevelManager.m_strLevelTwoSceneName)
+                {
+                    LevelManager.m_levelManager.InitialiseDontDestroyOnLoad();
+                    LevelManager.m_levelManager.LoadNextLevelAsyncOperation.allowSceneActivation = true;
+                }
+                else
+                {
+                    LevelManager.m_levelManager.DestroyAllDontDestroyOnLoad();
+                    LevelManager.m_levelManager.LoadNextLevelAsyncOperation.allowSceneActivation = true;
+                }
             }
         }
     }
