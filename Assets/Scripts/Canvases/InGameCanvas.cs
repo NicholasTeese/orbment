@@ -38,7 +38,6 @@ public class InGameCanvas : MonoBehaviour
     {
         if (m_bFadeIn && !m_bFadeInComplete)
         {
-            Debug.Log("Fading");
             if (ImageFadeIn(m_fadeImage, m_fFadeSpeed))
             {
                 m_bFadeInComplete = true;
