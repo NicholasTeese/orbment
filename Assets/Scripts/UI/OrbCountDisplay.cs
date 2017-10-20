@@ -30,7 +30,7 @@ public class OrbCountDisplay : MonoBehaviour
         {
             if (m_playerRef != null && m_textDisplay != null)
             {
-                m_textDisplay.text = "Keys Collected " + m_playerRef.m_orbsCollected.ToString() + "/" + GateList[m_iIndex].m_numOfOrbsForOpen;
+                m_textDisplay.text = "Keys Collected " + m_playerRef.m_orbsCollected.ToString() + "/" + GateList[m_iIndex].NumberOfOrbsToOpen;
             }
         }
     }

@@ -14,24 +14,23 @@ public class OrbGate : MonoBehaviour
     private Player m_Player;
     private Animator m_Animator;
 
-    public int m_numOfOrbsForOpen;
+    private int m_numOfOrbsForOpen;
     public int m_currNumOrbsInvested = 0;
     private int m_iTotalOrbs;
 
     public float m_fDivisionRate;
     public float m_reduction;
 
-    //private float m_holdTimer = 0.0f;
-    //private float m_holdDuration = 0.1f;
-    //private float m_orbSpendRate = 0.02f;
-    //private float m_orbSpendTimer = 0.0f;
-
     public bool m_isOpen = false;
 
     private bool m_playerIsNear;
 
     private GameObject m_orbSlot;
-    
+
+    [Header("Enemy sections that open this door")]
+    public List<GameObject> m_enemySections = new List<GameObject>();
+
+    public int NumberOfOrbsToOpen { get { return m_numOfOrbsForOpen; } }
 
     public void Awake()
     {
@@ -48,6 +47,8 @@ public class OrbGate : MonoBehaviour
         m_Animator = GetComponentInChildren<Animator>();
 
         m_orbSlot = transform.Find("OrbSlot").gameObject;
+
+        m_numOfOrbsForOpen = CalculateNumberOfOrbsToOpen(m_enemySections);
     }
 
     public void OnTriggerStay(Collider other)
@@ -69,6 +70,18 @@ public class OrbGate : MonoBehaviour
         {
             m_playerIsNear = false;
         }
+    }
+
+    private int CalculateNumberOfOrbsToOpen(List<GameObject> a_enemySections)
+    {
+        int iOrbsToOpen = 0;
+
+        for (int iCount = 0; iCount < a_enemySections.Count; ++iCount)
+        {
+            iOrbsToOpen += a_enemySections[iCount].transform.childCount;
+        }
+
+        return iOrbsToOpen;
     }
 
     private void checkIfShouldOpen()
