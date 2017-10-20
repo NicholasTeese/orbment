@@ -25,7 +25,7 @@ public class Collectable : MonoBehaviour
 
     // Use this for initialization
     void Start()
-    {
+    {        
         m_healthCap = true;
         m_manaCap = true;
         m_playerRef = GameObject.FindObjectOfType<Player>();
