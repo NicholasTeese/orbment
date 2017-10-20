@@ -10,14 +10,14 @@ public class DropCollectable : MonoBehaviour
     public int m_manaDropChance = 0;
 
 
-    public int m_yellowOrbsMin = 1;
-    public int m_yellowOrbsMax = 3;
+    private int m_yellowOrbsMin = 1;
+    private int m_yellowOrbsMax = 1;
 
-    public int m_greenOrbsMin = 0;
-    public int m_greenOrbsMax = 3;
+    private int m_greenOrbsMin = 0;
+    private int m_greenOrbsMax = 1;
 
-    public int m_blueOrbsMin = 0;
-    public int m_blueOrbsMax = 3;
+    private int m_blueOrbsMin = 0;
+    private int m_blueOrbsMax = 1;
 
     private EnemyLootManager m_lootManager;
     private void Start()
