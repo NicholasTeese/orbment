@@ -94,6 +94,11 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     protected void FixedUpdate()
     {
+        if (!CalculateFrustrum(IsoCam.m_playerCamera.FrustrumPlanes, m_collider))
+        {
+            Disable();
+        }
+
         this.transform.position += m_direction * m_projectileSpeed * Time.deltaTime;
         CameraCheck();
         m_timer += Time.deltaTime;
@@ -138,7 +143,6 @@ public class Bullet : MonoBehaviour
 
     protected virtual void OnCollisionEnter(Collision a_collision)
     {
-//        Debug.Log(a_collision.collider.name);
         if (m_bColliding)
         {
             if (!a_collision.collider.CompareTag("Player"))
@@ -155,11 +159,6 @@ public class Bullet : MonoBehaviour
         }
 
         m_bColliding = true;
-
-        //if (m_id == "")
-        //{
-        //    return;
-        //}
 
         if (!a_collision.collider.CompareTag(m_id))
         {
@@ -197,5 +196,14 @@ public class Bullet : MonoBehaviour
             }
             Disable();
         }           
+    }
+
+    protected bool CalculateFrustrum(Plane[] a_frustrumPlanes, Collider a_collider)
+    {
+        if (GeometryUtility.TestPlanesAABB(a_frustrumPlanes, a_collider.bounds))
+        {
+            return true;
+        }
+        return false;
     }
 }
