@@ -5,38 +5,61 @@ using UnityEngine.UI;
 
 public class BaseButton : MonoBehaviour
 {
+    public enum Type
+    {
+        BUTTON,
+        SLIDER
+    }
+
     protected int m_iParentListIndex = 0;
-    public int ParentListIndex { get { return m_iParentListIndex; } set { m_iParentListIndex = value; } }
 
     protected float m_fGrowShrinkSpeed = 0.1f;
     protected float m_fGrowMultiplier = 1.5f;
     protected float m_fShrinkMultiplier = 1.0f;
 
     protected bool m_bIsMousedOver = false;
-    public bool IsMousedOver { get { return m_bIsMousedOver; } set { m_bIsMousedOver = value; } }
+
+    protected Type m_eType;
 
     protected AudioClip m_menuClickAudioClip;
 
     protected Button m_button;
 
+    protected Slider m_slider;
+
     public string m_strOnClickParameter;
+
+    public int ParentListIndex { get { return m_iParentListIndex; } set { m_iParentListIndex = value; } }
+
+    public bool IsMousedOver { get { return m_bIsMousedOver; } set { m_bIsMousedOver = value; } }
+
+    public Slider VolumeSlider { get { return m_slider; } }
 
     protected virtual void Awake()
     {
         m_menuClickAudioClip = Resources.Load("Audio/Beta/UI/Menu_Click") as AudioClip;
 
-        m_button = GetComponent<Button>();
+        if (GetComponent<Button>() != null)
+        {
+            m_eType = Type.BUTTON;
+            m_button = GetComponent<Button>();
+        }
+        else if (GetComponent<Slider>() != null)
+        {
+            m_eType = Type.SLIDER;
+            m_slider = GetComponent<Slider>();
+        }
     }
 
     protected virtual void Update()
     {
         if (m_bIsMousedOver)
         {
-            Grow();
+            Select();
         }
         else
         {
-            Shrink();
+            Deselect();
         }
     }
 
@@ -47,7 +70,7 @@ public class BaseButton : MonoBehaviour
 
     public virtual void OnCursorExit()
     {
-        
+        m_bIsMousedOver = false;   
     }
 
     public virtual void OnClick()
@@ -68,19 +91,46 @@ public class BaseButton : MonoBehaviour
         }
     }
 
-    protected virtual void Grow()
+    public virtual void OnValueChanged(string a_strParameter)
     {
-        if (transform.localScale.x < m_fGrowMultiplier)
+        if (!m_bIsMousedOver)
         {
-            transform.localScale += new Vector3(m_fGrowShrinkSpeed, m_fGrowShrinkSpeed, 0.0f);
+            Debug.Log(gameObject.name + " slider value cannot be changed because 'm_bIsMouseOver' is " + m_bIsMousedOver + '.');
+            return;
         }
     }
 
-    protected virtual void Shrink()
+    protected virtual void Select()
     {
-        if (transform.localScale.x > m_fShrinkMultiplier)
+        if (m_eType == Type.BUTTON)
         {
-            transform.localScale -= new Vector3(m_fGrowShrinkSpeed, m_fGrowShrinkSpeed, 0.0f);
+            if (transform.localScale.x < m_fGrowMultiplier)
+            {
+                transform.localScale += new Vector3(m_fGrowShrinkSpeed, m_fGrowShrinkSpeed, 0.0f);
+            }
+        }
+        else
+        {
+            ColorBlock colorBlock = m_slider.colors;
+            colorBlock.normalColor = Color.yellow;
+            m_slider.colors = colorBlock;
+        }
+    }
+
+    protected virtual void Deselect()
+    {
+        if (m_eType == Type.BUTTON)
+        {
+            if (transform.localScale.x > m_fShrinkMultiplier)
+            {
+                transform.localScale -= new Vector3(m_fGrowShrinkSpeed, m_fGrowShrinkSpeed, 0.0f);
+            }
+        }
+        else
+        {
+            ColorBlock colorBlock = m_slider.colors;
+            colorBlock.normalColor = Color.white;
+            m_slider.colors = colorBlock;
         }
     }
 }

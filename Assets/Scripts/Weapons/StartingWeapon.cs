@@ -7,8 +7,6 @@ public class StartingWeapon : BaseWeapon
     private AudioClip[] m_normalBullets;
     private AudioClip[] m_fireBullets;
 
-    private AudioSource m_audioSource;
-
     private void Awake()
     {
         m_normalBullets = Resources.LoadAll<AudioClip>("Audio/Beta/Normal_Bullet");

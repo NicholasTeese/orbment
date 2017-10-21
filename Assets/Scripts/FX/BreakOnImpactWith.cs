@@ -22,13 +22,13 @@ public class BreakOnImpactWith : MonoBehaviour
     private void Awake()
     {
         m_wallBreaks = Resources.LoadAll<AudioClip>("Audio/Beta/Environment/Wall_Break");
-
-        m_audioSource = GetComponent<AudioSource>();
     }
 
     // Use this for initialization
     void Start()
     {
+        m_audioSource = IsoCam.m_playerCamera.GetComponent<AudioSource>();
+
         if (m_chunkModel != null)
         {
             m_chunkModel.SetActive(false);

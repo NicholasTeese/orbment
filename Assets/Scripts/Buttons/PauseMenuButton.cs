@@ -56,7 +56,7 @@ public class PauseMenuButton : BaseButton
 
             case "MainPanelOptions":
                 {
-                    PauseMenuManager.m_pauseMenuManager.ActivePanelButtons = PauseMenuManager.m_pauseMenuManager.OptionsPanelbuttons;
+                    PauseMenuManager.m_pauseMenuManager.ActivePanelButtons = PauseMenuManager.m_pauseMenuManager.OptionsMainPanelButtons;
                     PauseMenuManager.m_pauseMenuManager.SelectedButton.IsMousedOver = false;
                     PauseMenuManager.m_pauseMenuManager.SelectedButton = PauseMenuManager.m_pauseMenuManager.ActivePanelButtons[0];
                     PauseMenuManager.m_pauseMenuManager.SelectedButton.IsMousedOver = true;
@@ -97,8 +97,65 @@ public class PauseMenuButton : BaseButton
                 }
             // Main panel end.
 
-            // Options panel start
-            case "Show_Hide_Cursor":
+            // Options panel start.
+            // Options main panel start.
+            case "Options_Main_Panel_Audio":
+                {
+                    PauseMenuManager.m_pauseMenuManager.ActivePanelButtons = PauseMenuManager.m_pauseMenuManager.OptionsAudioPanelButtons;
+                    PauseMenuManager.m_pauseMenuManager.SelectedButton.IsMousedOver = false;
+                    PauseMenuManager.m_pauseMenuManager.SelectedButton = PauseMenuManager.m_pauseMenuManager.ActivePanelButtons[0];
+                    PauseMenuManager.m_pauseMenuManager.SelectedButton.IsMousedOver = true;
+                    PauseMenuManager.m_pauseMenuManager.OptionsMainPanel.SetActive(false);
+                    PauseMenuManager.m_pauseMenuManager.OptionsAudioPanel.SetActive(true);
+                    PauseMenuManager.m_pauseMenuManager.OptionsGeneralPanel.SetActive(false);
+                    PauseMenuManager.m_pauseMenuManager.ResetSelectedButtonIndex();
+                    break;
+                }
+
+            case "Options_Main_Panel_General":
+                {
+                    PauseMenuManager.m_pauseMenuManager.ActivePanelButtons = PauseMenuManager.m_pauseMenuManager.OptionsGeneralPanelButtons;
+                    PauseMenuManager.m_pauseMenuManager.SelectedButton.IsMousedOver = false;
+                    PauseMenuManager.m_pauseMenuManager.SelectedButton = PauseMenuManager.m_pauseMenuManager.ActivePanelButtons[0];
+                    PauseMenuManager.m_pauseMenuManager.SelectedButton.IsMousedOver = true;
+                    PauseMenuManager.m_pauseMenuManager.OptionsMainPanel.SetActive(false);
+                    PauseMenuManager.m_pauseMenuManager.OptionsAudioPanel.SetActive(false);
+                    PauseMenuManager.m_pauseMenuManager.OptionsGeneralPanel.SetActive(true);
+                    PauseMenuManager.m_pauseMenuManager.ResetSelectedButtonIndex();
+                    break;
+                }
+
+            case "Options_Main_Panel_Back":
+                {
+                    PauseMenuManager.m_pauseMenuManager.ActivePanelButtons = PauseMenuManager.m_pauseMenuManager.MainPanelButtons;
+                    PauseMenuManager.m_pauseMenuManager.SelectedButton.IsMousedOver = false;
+                    PauseMenuManager.m_pauseMenuManager.SelectedButton = PauseMenuManager.m_pauseMenuManager.ActivePanelButtons[0];
+                    PauseMenuManager.m_pauseMenuManager.SelectedButton.IsMousedOver = true;
+                    PauseMenuManager.m_pauseMenuManager.m_mainPanel.SetActive(true);
+                    PauseMenuManager.m_pauseMenuManager.m_optionsPanel.SetActive(false);
+                    PauseMenuManager.m_pauseMenuManager.m_quitToMainMenuPanel.SetActive(false);
+                    PauseMenuManager.m_pauseMenuManager.m_quitToDesktopPanel.SetActive(false);
+                    PauseMenuManager.m_pauseMenuManager.ResetSelectedButtonIndex();
+                    break;
+                }
+            // Options main panel end.
+
+            // Options audio panel start.
+            case "Options_Audio_Panel_Back":
+                {
+                    PauseMenuManager.m_pauseMenuManager.ActivePanelButtons = PauseMenuManager.m_pauseMenuManager.OptionsMainPanelButtons;
+                    PauseMenuManager.m_pauseMenuManager.SelectedButton.IsMousedOver = false;
+                    PauseMenuManager.m_pauseMenuManager.SelectedButton = PauseMenuManager.m_pauseMenuManager.ActivePanelButtons[0];
+                    PauseMenuManager.m_pauseMenuManager.SelectedButton.IsMousedOver = true;
+                    PauseMenuManager.m_pauseMenuManager.OptionsMainPanel.SetActive(true);
+                    PauseMenuManager.m_pauseMenuManager.OptionsAudioPanel.SetActive(false);
+                    PauseMenuManager.m_pauseMenuManager.ResetSelectedButtonIndex();
+                    break;
+                }
+            // Options audio panel end.
+
+            // Options general panel start.
+            case "Options_General_Show_Hide_Cursor":
                 {
                     if (GameManager.m_gameManager.ForceHideCursor)
                     {
@@ -113,19 +170,18 @@ public class PauseMenuButton : BaseButton
                     break;
                 }
 
-            case "OptionsPanelBack":
+            case "Options_General_Back":
                 {
-                    PauseMenuManager.m_pauseMenuManager.ActivePanelButtons = PauseMenuManager.m_pauseMenuManager.MainPanelButtons;
+                    PauseMenuManager.m_pauseMenuManager.ActivePanelButtons = PauseMenuManager.m_pauseMenuManager.OptionsMainPanelButtons;
                     PauseMenuManager.m_pauseMenuManager.SelectedButton.IsMousedOver = false;
                     PauseMenuManager.m_pauseMenuManager.SelectedButton = PauseMenuManager.m_pauseMenuManager.ActivePanelButtons[0];
                     PauseMenuManager.m_pauseMenuManager.SelectedButton.IsMousedOver = true;
-                    PauseMenuManager.m_pauseMenuManager.m_mainPanel.SetActive(true);
-                    PauseMenuManager.m_pauseMenuManager.m_optionsPanel.SetActive(false);
-                    PauseMenuManager.m_pauseMenuManager.m_quitToMainMenuPanel.SetActive(false);
-                    PauseMenuManager.m_pauseMenuManager.m_quitToDesktopPanel.SetActive(false);
+                    PauseMenuManager.m_pauseMenuManager.OptionsMainPanel.SetActive(true);
+                    PauseMenuManager.m_pauseMenuManager.OptionsGeneralPanel.SetActive(false);
                     PauseMenuManager.m_pauseMenuManager.ResetSelectedButtonIndex();
                     break;
                 }
+            // Options general panel end.
             // Options panel end.
 
             // Quit to main menu panel start.
@@ -171,6 +227,50 @@ public class PauseMenuButton : BaseButton
                     break;
                 }
             // Quit to desktop panel end.
+
+            default:
+                {
+                    Debug.Log("Case for " + a_strParameter + "could not be found.");
+                    break;
+                }
+        }
+    }
+
+    public override void OnValueChanged(string a_strParameter)
+    {
+        base.OnValueChanged(a_strParameter);
+
+        switch (a_strParameter)
+        {
+            case "Master_Volume":
+                {
+                    AudioManager.m_audioManager.AdjustMasterVolume(m_slider.value);
+                    break;
+                }
+
+            case "Music_Volume":
+                {
+                    AudioManager.m_audioManager.AdjustMusicVolume(m_slider.value);
+                    break;
+                }
+
+            case "Bullet_Volume":
+                {
+                    AudioManager.m_audioManager.AdjustBulletVolume(m_slider.value);
+                    break;
+                }
+
+            case "Effects_Volume":
+                {
+                    AudioManager.m_audioManager.AdjustEffectsVolume(m_slider.value);
+                    break;
+                }
+
+            case "Menu_Volume":
+                {
+                    AudioManager.m_audioManager.AdjustMenuVolume(m_slider.value);
+                    break;
+                }
 
             default:
                 {
