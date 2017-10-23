@@ -55,12 +55,10 @@ public class SerializationManager : MonoBehaviour
         AudioManager.m_audioManager.BulletVolume = a_serializationData.m_optionsData.m_fBulletVolume;
         AudioManager.m_audioManager.EffectsVolume = a_serializationData.m_optionsData.m_fEffectsVolume;
         AudioManager.m_audioManager.MenuVolume = a_serializationData.m_optionsData.m_fMenuButtonVolume;
+        AudioManager.m_audioManager.UpdateVolumes();
 
         // Other misc options.
         GameManager.m_gameManager.ForceHideCursor = a_serializationData.m_optionsData.m_bForceHideCursor;
-
-        
-                    AudioManager.m_audioManager.UpdateVolumes();
     }
 
     /// <summary>
@@ -124,9 +122,7 @@ public class SerializationManager : MonoBehaviour
 
         // Initialise BinaryFormatter & FileStream at save directory.
         BinaryFormatter binaryFormatter = new BinaryFormatter();
-        FileStream fileStream = File.Open(m_strFullSaveFileDirectory, FileMode.Open);
-
-        // A save has not been made yet, return.
+        FileStream fileStream = File.Open(m_strFullSaveFileDirectory, FileMode.Open);     // A save has not been made yet, return.
         if (fileStream.Length == 0)
         {
             return;

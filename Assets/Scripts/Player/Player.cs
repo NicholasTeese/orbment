@@ -133,14 +133,14 @@ public class Player : Entity
 
         m_dash = Resources.LoadAll<AudioClip>("Audio/Beta/Actors/Player/Dash");
         m_orbPickup = Resources.LoadAll<AudioClip>("Audio/Beta/Environment/Orb_Pickups");
-
-        m_audioSource = IsoCam.m_playerCamera.GetComponent<AudioSource>();
     }
 
     new void Start()
     {
         base.Start();
         PoolSpentOrbs();
+
+        m_audioSource = IsoCam.m_playerCamera.GetComponent<AudioSource>();
 
         m_charCont = this.GetComponent<CharacterController>();
         m_manaPool = this.GetComponent<Mana>();

@@ -183,6 +183,7 @@ public class PauseMenuButton : BaseButton
                     break;
                 }
             // Options general panel end.
+
             // Options panel end.
 
             // Quit to main menu panel start.

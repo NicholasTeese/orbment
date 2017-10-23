@@ -51,7 +51,7 @@ public class BaseButton : MonoBehaviour
         }
     }
 
-    protected void OnEnable()
+    protected virtual void OnEnable()
     {
         switch (m_strOnClickParameter)
         {
@@ -129,11 +129,11 @@ public class BaseButton : MonoBehaviour
 
     public virtual void OnValueChanged(string a_strParameter)
     {
-        if (!m_bIsMousedOver)
-        {
-            Debug.Log(gameObject.name + " slider value cannot be changed because 'm_bIsMouseOver' is " + m_bIsMousedOver + '.');
-            return;
-        }
+        //if (!m_bIsMousedOver)
+        //{
+        //    Debug.Log(gameObject.name + " slider value cannot be changed because 'm_bIsMouseOver' is " + m_bIsMousedOver + '.');
+        //    return;
+        //}
     }
 
     protected virtual void Select()

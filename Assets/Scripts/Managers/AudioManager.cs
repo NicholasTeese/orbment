@@ -164,10 +164,26 @@ public class AudioManager : MonoBehaviour
     public void UpdateVolumes()
     {
         AudioListener.volume = m_fMasterVolume;
-        m_musicAudioSource.volume = m_fMusicVolume;
-        m_bulletAudioSource.volume = m_fBulletVolume;
-        m_effectsAudioSource.volume = m_fEffectsVolume;
-        m_menuAudioSource.volume = m_fEffectsVolume;
+
+        if (m_musicAudioSource != null)
+        {
+            m_musicAudioSource.volume = m_fMusicVolume;
+        }
+
+        if (m_bulletAudioSource != null)
+        {
+            m_bulletAudioSource.volume = m_fBulletVolume;
+        }
+
+        if (m_effectsAudioSource != null)
+        {
+            m_effectsAudioSource.volume = m_fEffectsVolume;
+        }
+
+        if (m_menuAudioSource != null)
+        {
+            m_menuAudioSource.volume = m_fEffectsVolume;
+        }
     }
 
     public void AdjustMasterVolume(float a_fMasterVolume)
@@ -179,24 +195,40 @@ public class AudioManager : MonoBehaviour
     public void AdjustMusicVolume(float a_fMusicVolume)
     {
         m_fMusicVolume = a_fMusicVolume;
-        m_musicAudioSource.volume = m_fMusicVolume;
+
+        if (m_musicAudioSource != null)
+        {
+            m_musicAudioSource.volume = m_fMusicVolume;
+        }
     }
 
     public void AdjustBulletVolume(float a_fBulletVolume)
     {
         m_fBulletVolume = a_fBulletVolume;
-        m_bulletAudioSource.volume = m_fBulletVolume;
+
+        if (m_bulletAudioSource != null)
+        {
+            m_bulletAudioSource.volume = m_fBulletVolume;
+        }
     }
 
     public void AdjustEffectsVolume(float a_fEffectsVolume)
     {
         m_fEffectsVolume = a_fEffectsVolume;
-        m_effectsAudioSource.volume = m_fEffectsVolume;
+
+        if (m_effectsAudioSource != null)
+        {
+            m_effectsAudioSource.volume = m_fEffectsVolume;
+        }
     }
 
     public void AdjustMenuVolume(float a_fMenuVolume)
     {
         m_fMenuVolume = a_fMenuVolume;
-        m_menuAudioSource.volume = m_fMenuVolume;
+
+        if (m_menuAudioSource != null)
+        {
+            m_menuAudioSource.volume = m_fMenuVolume;
+        }
     }
 }

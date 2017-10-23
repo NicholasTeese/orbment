@@ -55,25 +55,11 @@ public class MainMenuButton : BaseButton
                     break;
                 }
 
-            case "Show_Hide_Cursor":
-                {
-                    if (GameManager.m_gameManager.ShowCursor)
-                    {
-                        GameManager.m_gameManager.ShowCursor = false;
-                        m_button.GetComponentInChildren<Text>().text = "Show Cursor";
-                    }
-                    else
-                    {
-                        GameManager.m_gameManager.ShowCursor = true;
-                        m_button.GetComponentInChildren<Text>().text = "Hide Cursor";
-                    }
-                    break;
-                }
-
             // Options start.
             // Options main panel start.
             case "Options_Main_Panel_Audio":
                 {
+                    SerializationManager.m_serializationManager.Load();
                     MainMenuManager.m_mainMenuManager.ActivePanelButtons = MainMenuManager.m_mainMenuManager.OptionsAudioPanelButtons;
                     MainMenuManager.m_mainMenuManager.SelectedButton.IsMousedOver = false;
                     MainMenuManager.m_mainMenuManager.SelectedButton = MainMenuManager.m_mainMenuManager.ActivePanelButtons[0];
@@ -123,6 +109,51 @@ public class MainMenuButton : BaseButton
                     break;
                 }
             // Options main panel end.
+
+            // Options audio panel start.
+            case "Options_Audio_Panel_Back":
+                {
+                    SerializationManager.m_serializationManager.Save();
+                    MainMenuManager.m_mainMenuManager.ActivePanelButtons = MainMenuManager.m_mainMenuManager.OptionsMainPanelButtons;
+                    MainMenuManager.m_mainMenuManager.SelectedButton.IsMousedOver = false;
+                    MainMenuManager.m_mainMenuManager.SelectedButton = MainMenuManager.m_mainMenuManager.ActivePanelButtons[0];
+                    MainMenuManager.m_mainMenuManager.SelectedButton.IsMousedOver = true;
+                    MainMenuManager.m_mainMenuManager.OptionsMainPanel.SetActive(true);
+                    MainMenuManager.m_mainMenuManager.OptionsAudioPanel.SetActive(false);
+                    MainMenuManager.m_mainMenuManager.ResetSelectedButtonIndex();
+                    break;
+                }
+            // Options audio panel end.
+
+            // Options general panel start.
+            case "Options_General_Show_Hide_Cursor":
+                {
+                    if (GameManager.m_gameManager.ForceHideCursor)
+                    {
+                        GameManager.m_gameManager.ForceHideCursor = false;
+                        m_button.GetComponentInChildren<Text>().text = "Force Hide Cursor";
+                    }
+                    else
+                    {
+                        GameManager.m_gameManager.ForceHideCursor = true;
+                        m_button.GetComponentInChildren<Text>().text = "Force Show Cursor";
+                    }
+                    break;
+                }
+
+            case "Options_General_Back":
+                {
+                    MainMenuManager.m_mainMenuManager.ActivePanelButtons = MainMenuManager.m_mainMenuManager.OptionsMainPanelButtons;
+                    MainMenuManager.m_mainMenuManager.SelectedButton.IsMousedOver = false;
+                    MainMenuManager.m_mainMenuManager.SelectedButton = MainMenuManager.m_mainMenuManager.ActivePanelButtons[0];
+                    MainMenuManager.m_mainMenuManager.SelectedButton.IsMousedOver = true;
+                    MainMenuManager.m_mainMenuManager.OptionsMainPanel.SetActive(true);
+                    MainMenuManager.m_mainMenuManager.OptionsGeneralPanel.SetActive(false);
+                    MainMenuManager.m_mainMenuManager.ResetSelectedButtonIndex();
+                    break;
+                }
+            // Options general panel end.
+
             // Options end.
             case "QuitToDesktopPanelYes":
                 {
@@ -152,7 +183,7 @@ public class MainMenuButton : BaseButton
 
     public override void OnValueChanged(string a_strParameter)
     {
-        //base.OnValueChanged(a_strParameter);
+        base.OnValueChanged(a_strParameter);
 
         switch (a_strParameter)
         {
