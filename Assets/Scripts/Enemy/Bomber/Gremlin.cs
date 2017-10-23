@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class BomberEnemy : Enemy
+public class Gremlin : Enemy
 {
     public enum Behaviour
     {

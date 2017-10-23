@@ -13,8 +13,6 @@ using UnityEngine.UI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class Entity : MonoBehaviour
 {
-	private GameManager gameManager;
-
     protected bool m_bIsAlive = true;
     public bool IsAlive { get { return m_bIsAlive; } }
 
@@ -98,7 +96,7 @@ public class Entity : MonoBehaviour
     // Use this for initialization
     protected void Start()
     {
-        gameManager = GameManager.m_gameManager;//GameObject.Find ("GameManager").GetComponent<GameManager> ();
+        //gameManager = GameManager.m_gameManager;/
         m_agent = this.GetComponent<NavMeshAgent>();
         
         if (m_agent != null)
@@ -112,11 +110,7 @@ public class Entity : MonoBehaviour
         m_killStreakManager = GameObject.FindObjectOfType<KillStreakManager>();
 
         LevelUpdate();
-        //if (gameManager.name == "Bomber")      // Why? This will never happen. 
-        //{
-        //    Debug.Log(m_oldHealth);
-        //    Debug.Log(m_currHealth);   
-        //}
+
         m_oldHealth = m_currHealth;
     }
 
@@ -147,7 +141,6 @@ public class Entity : MonoBehaviour
     {
         HealthUpdate();
 
-        ////Check for RamboMode
         if (!m_hasRamboPerk && m_perks.Contains(PerkID.RamboMode))
         {
             m_hasRamboPerk = true;
@@ -189,10 +182,7 @@ public class Entity : MonoBehaviour
         {
             m_currHealth = m_maxHealth;
         }
-
-
-        //if dead
-
+        
         if (m_currHealth <= 0)
         {
             if (!m_bGodModeIsActive)
@@ -201,14 +191,11 @@ public class Entity : MonoBehaviour
                 m_explosionManager.RequestExplosion(this.transform.position, this.transform.forward, Explosion.ExplosionType.BigBlood, 0.0f);
                 m_explosionManager.RequestExplosion(this.transform.position, this.transform.forward, Explosion.ExplosionType.Gibs, 0.0f);
                 this.gameObject.SetActive(false);
-                //GameObject.Destroy(this.gameObject, Time.deltaTime);
             }
             else
             {
                 m_currHealth = 1;
             }
-
-            //handle death state
         }
 
         ///STATUS EFFECTS
@@ -258,10 +245,8 @@ public class Entity : MonoBehaviour
         m_oldHealth = m_currHealth;
     }
 
-
     public bool HealthBelowPercentCheck(float m_threshold)
     {
-
         if (m_currHealth <= m_maxHealth * (m_threshold / 100.0f))
         {
             return true;
@@ -270,20 +255,5 @@ public class Entity : MonoBehaviour
         {
             return false;
         }
-    }
-
-
-    protected void OnGUI()
-    {
-        //if (gameManager.perkOpen || gameManager.paused)
-        //{
-        //    return;
-        //}
-        //else if (m_currHealth != m_maxHealth)
-        //{
-        //    Vector2 screenPoint = Camera.main.WorldToScreenPoint(this.transform.position);
-        //    GUI.DrawTexture(new Rect(screenPoint.x - 0.5f * m_healthBarWidth, Screen.height - screenPoint.y - 40, m_healthBarWidth, 10), m_emptyBarTexture);
-        //    GUI.DrawTexture(new Rect(screenPoint.x - 0.5f * m_healthBarWidth, Screen.height - screenPoint.y - 40, m_healthBarWidth * ((float)m_currHealth / (float)m_maxHealth), 10), m_healthBarTexture);
-        //}
     }
 }

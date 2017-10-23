@@ -110,6 +110,7 @@ public class Enemy : Entity
                         m_v3TravelDir = m_bulletScript.m_direction;
                         m_agent.SetDestination(collision.collider.transform.position - m_bulletScript.m_direction); // Travel to bullet origin
                     }
+
                     if (Random.Range(0, 99) <= 10)
                     {
                         Frozen = true;
@@ -119,7 +120,7 @@ public class Enemy : Entity
         }
     }
 
-    new private void OnGUI()
+    private void OnGUI()
     {
         if (ExpManager.m_experiencePointsManager.PerkTreeOpen || GameManager.m_gameManager.GameIsPaused)
         {
@@ -133,7 +134,6 @@ public class Enemy : Entity
         }
         else
         {
-            base.OnGUI();
             Vector2 screenPoint = Camera.main.WorldToScreenPoint(this.transform.position);
             GUI.Label(new Rect(screenPoint.x - 0.5f * m_healthBarWidth, Screen.height - screenPoint.y - 60, m_healthBarWidth, 50), "Lvl " + m_currLevel);
         }
