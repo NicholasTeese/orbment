@@ -30,11 +30,14 @@ public class IsoCam : MonoBehaviour
     private float m_intensity = 0.0f;
 
     private Plane[] m_frustrumPlanes = null;
-    public Plane[] FrustrumPlanes { get { m_frustrumPlanes = GeometryUtility.CalculateFrustumPlanes(m_camera); return m_frustrumPlanes; } }
 
     private Camera m_camera;
 
     public static IsoCam m_playerCamera = null;
+
+    public Camera MainPlaterCamera { get { return m_camera; } }
+
+    public Plane[] FrustrumPlanes { get { m_frustrumPlanes = GeometryUtility.CalculateFrustumPlanes(m_camera); return m_frustrumPlanes; } }
 
     private void Awake()
     {

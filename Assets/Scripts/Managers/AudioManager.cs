@@ -15,8 +15,11 @@ public class AudioManager : MonoBehaviour
     private bool m_bFadeIn = true;
     private bool m_bFadeComplete = false;
 
+    // Music.
     private AudioClip m_mainMenuMusic;
     private AudioClip m_daytimeMusic;
+
+    private AudioClip[] m_enemyDeathClips;
 
     AudioSource m_musicAudioSource;
     AudioSource m_bulletAudioSource;
@@ -32,6 +35,10 @@ public class AudioManager : MonoBehaviour
     public float MenuVolume { get { return m_fMusicVolume; } set { m_fMenuVolume = value; } }
 
     public bool FadeIn { get { return m_bFadeIn; } set { m_bFadeIn = value; } }
+
+    public AudioClip[] EnemyDeathClips { get { return m_enemyDeathClips; } }
+
+    public AudioSource EffectsAudioSource { get { return m_effectsAudioSource; } }
 
     private void Awake()
     {

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,13 +11,27 @@ public class StatusEffectManager : MonoBehaviour
         public GameObject m_object;
         
     }
-
-   
+    
     public int m_poolAmount = 50;
     //originals
     public GameObject[] m_statusEffects;
 
     private List<List<StatusEffectItem>> m_pool = new List<List<StatusEffectItem>>();
+
+    public static StatusEffectManager m_statusEffectManager;
+
+    private void Awake()
+    {
+        if (m_statusEffectManager == null)
+        {
+            m_statusEffectManager = this;
+        }
+        else if (m_statusEffectManager != this)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     // Use this for initialization
     void Start()
     {
