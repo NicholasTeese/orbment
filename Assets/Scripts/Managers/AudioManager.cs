@@ -25,6 +25,12 @@ public class AudioManager : MonoBehaviour
 
     public static AudioManager m_audioManager;
 
+    public float MasterVolume { get { return m_fMasterVolume; } set { m_fMasterVolume = value; } }
+    public float MusicVolume { get { return m_fMusicVolume; } set { m_fMusicVolume = value; } }
+    public float BulletVolume { get { return m_fBulletVolume; } set { m_fBulletVolume = value; } }
+    public float EffectsVolume { get { return m_fEffectsVolume; } set { m_fEffectsVolume = value; } }
+    public float MenuVolume { get { return m_fMusicVolume; } set { m_fMenuVolume = value; } }
+
     public bool FadeIn { get { return m_bFadeIn; } set { m_bFadeIn = value; } }
 
     private void Awake()
@@ -48,9 +54,24 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        m_bulletAudioSource = Player.m_Player.m_currWeapon.BulletAudioSource;
-        m_effectsAudioSource = IsoCam.m_playerCamera.GetComponent<AudioSource>();
-        m_menuAudioSource = PauseMenuManager.m_pauseMenuManager.transform.parent.GetComponent<AudioSource>();
+        if (Player.m_Player != null)
+        {
+            m_bulletAudioSource = Player.m_Player.m_currWeapon.BulletAudioSource;
+        }
+
+        if (IsoCam.m_playerCamera != null)
+        {
+            m_effectsAudioSource = IsoCam.m_playerCamera.GetComponent<AudioSource>();
+        }
+
+        if (PauseMenuManager.m_pauseMenuManager != null)
+        {
+            m_menuAudioSource = PauseMenuManager.m_pauseMenuManager.transform.parent.GetComponent<AudioSource>();
+        }
+        else
+        {
+            m_menuAudioSource = MainMenuManager.m_mainMenuManager.GetComponent<AudioSource>();
+        }
 
         PlaySceneMusic(LevelManager.m_levelManager.CurrentSceneName);
     }
@@ -138,6 +159,15 @@ public class AudioManager : MonoBehaviour
                     break;
                 }
         }
+    }
+
+    public void UpdateVolumes()
+    {
+        AudioListener.volume = m_fMasterVolume;
+        m_musicAudioSource.volume = m_fMusicVolume;
+        m_bulletAudioSource.volume = m_fBulletVolume;
+        m_effectsAudioSource.volume = m_fEffectsVolume;
+        m_menuAudioSource.volume = m_fEffectsVolume;
     }
 
     public void AdjustMasterVolume(float a_fMasterVolume)

@@ -27,9 +27,46 @@ public class SerializationManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Options data being saved.
+    /// </summary>
+    /// <param name="a_serializationData"></param>
+    private void SaveOptionsData(SerializationData a_serializationData)
+    {
+        // Audio volume multipliers.
+        a_serializationData.m_optionsData.m_fMasterVolume = AudioManager.m_audioManager.MasterVolume;
+        a_serializationData.m_optionsData.m_fMusicVolume = AudioManager.m_audioManager.MusicVolume;
+        a_serializationData.m_optionsData.m_fBulletVolume = AudioManager.m_audioManager.BulletVolume;
+        a_serializationData.m_optionsData.m_fEffectsVolume = AudioManager.m_audioManager.EffectsVolume;
+        a_serializationData.m_optionsData.m_fMenuButtonVolume = AudioManager.m_audioManager.MenuVolume;
+
+        // Other misc options.
+        a_serializationData.m_optionsData.m_bForceHideCursor = GameManager.m_gameManager.ForceHideCursor;
+    }
+
+    /// <summary>
+    /// Options data being loaded.
+    /// </summary>
+    /// <param name="a_serializationData"></param>
+    private void LoadOptionsData(SerializationData a_serializationData)
+    {
+        // Audio volumes.
+        AudioManager.m_audioManager.MasterVolume = a_serializationData.m_optionsData.m_fMasterVolume;
+        AudioManager.m_audioManager.MusicVolume = a_serializationData.m_optionsData.m_fMusicVolume;
+        AudioManager.m_audioManager.BulletVolume = a_serializationData.m_optionsData.m_fBulletVolume;
+        AudioManager.m_audioManager.EffectsVolume = a_serializationData.m_optionsData.m_fEffectsVolume;
+        AudioManager.m_audioManager.MenuVolume = a_serializationData.m_optionsData.m_fMenuButtonVolume;
+
+        // Other misc options.
+        GameManager.m_gameManager.ForceHideCursor = a_serializationData.m_optionsData.m_bForceHideCursor;
+
+        
+                    AudioManager.m_audioManager.UpdateVolumes();
+    }
+
+    /// <summary>
     /// Save game data.
     /// </summary>
-    private void Save()
+    public void Save()
     {
         // Save does not have a name. Return.
         if (m_strSaveName == null)
@@ -77,7 +114,7 @@ public class SerializationManager : MonoBehaviour
     /// <summary>
     /// Load game data.
     /// </summary>
-    private void Load()
+    public void Load()
     {
         // If the save file does not exist, return.
         if (!File.Exists(m_strFullSaveFileDirectory))
@@ -87,44 +124,17 @@ public class SerializationManager : MonoBehaviour
 
         // Initialise BinaryFormatter & FileStream at save directory.
         BinaryFormatter binaryFormatter = new BinaryFormatter();
-        FileStream fileStream = File.Create(m_strFullSaveFileDirectory);
+        FileStream fileStream = File.Open(m_strFullSaveFileDirectory, FileMode.Open);
 
-        // Deserialize SerializationData & close FileStream.
+        // A save has not been made yet, return.
+        if (fileStream.Length == 0)
+        {
+            return;
+        }
+
+        // Deserialize SerializationData, load it & close FileStream.
         m_serializationData = (SerializationData)binaryFormatter.Deserialize(fileStream);
+        LoadOptionsData(m_serializationData);
         fileStream.Close();
-    }
-
-    /// <summary>
-    /// Options data being saved.
-    /// </summary>
-    /// <param name="a_serializationData"></param>
-    private void SaveOptionsData(SerializationData a_serializationData)
-    {
-        // Audio volume multipliers.
-        a_serializationData.m_optionsData.m_fMasterVolumeMultiplier = 1.0f;
-        a_serializationData.m_optionsData.m_fMusicVolumeMultiplier = 1.0f;
-        a_serializationData.m_optionsData.m_fBulletVolumeMultiplier = 1.0f;
-        a_serializationData.m_optionsData.m_fEffectsVolumeMultiplier = 1.0f;
-        a_serializationData.m_optionsData.m_fMenuButtonVolumeMultiplier = 1.0f;
-
-        // Other misc options.
-        a_serializationData.m_optionsData.m_bForceHideCursor = false;
-    }
-
-    /// <summary>
-    /// Options data being loaded.
-    /// </summary>
-    /// <param name="a_serializationData"></param>
-    private void LoadOptionsData(SerializationData a_serializationData)
-    {
-        //// Audio volume multipliers.
-        //a_serializationData.m_optionsData.m_fMasterVolumeMultiplier;
-        //a_serializationData.m_optionsData.m_fMusicVolumeMultiplier;
-        //a_serializationData.m_optionsData.m_fBulletVolumeMultiplier;
-        //a_serializationData.m_optionsData.m_fEffectsVolumeMultiplier
-        //a_serializationData.m_optionsData.m_fMenuButtonVolumeMultiplier;
-        //
-        //// Other misc options.
-        //a_serializationData.m_optionsData.m_bForceHideCursor;
     }
 }

@@ -15,6 +15,10 @@ public class MainMenuManager : MonoBehaviour
     private bool m_bFadeOutComplete = false;
     private bool m_bInputRecieved = false;
 
+    private GameObject m_optionsMainPanel;
+    private GameObject m_optionsAudioPanel;
+    private GameObject m_optionsGeneralPanel;
+
     private AudioSource m_audioSource;
 
     private Image m_fadeImage;
@@ -26,6 +30,9 @@ public class MainMenuManager : MonoBehaviour
 
     private List<BaseButton> m_lMainPanelButtons = new List<BaseButton>();
     private List<BaseButton> m_lOptionsPanelButtons = new List<BaseButton>();
+    private List<BaseButton> m_lOptionsMainPanelButtons = new List<BaseButton>();
+    private List<BaseButton> m_lOptionsAudioPanelButtons = new List<BaseButton>();
+    private List<BaseButton> m_lOptionsGeneralPanelButtons = new List<BaseButton>();
     private List<BaseButton> m_lQuitToDesktopPanelButtons = new List<BaseButton>();
     private List<BaseButton> m_lActivePanelButtons = new List<BaseButton>();
 
@@ -33,11 +40,21 @@ public class MainMenuManager : MonoBehaviour
 
     public bool FadeIn { get { return m_bFadeIn; } set { m_bFadeIn = value; } }
 
+    public GameObject OptionsMainPanel { get { return m_optionsMainPanel; } }
+    public GameObject OptionsAudioPanel { get { return m_optionsAudioPanel; } }
+    public GameObject OptionsGeneralPanel { get { return m_optionsGeneralPanel; } }
+
     public AudioSource MainMenuAudioSource { get { return m_audioSource; } }
 
+    // Main panel buttons.
     public List<BaseButton> MainPanelButtons { get { return m_lMainPanelButtons; } }
-    public List<BaseButton> OptionsPanelButtons { get { return m_lOptionsPanelButtons; } set { m_lOptionsPanelButtons = value; } }
+    // Options panel buttons.
+    public List<BaseButton> OptionsMainPanelButtons { get { return m_lOptionsMainPanelButtons; } }
+    public List<BaseButton> OptionsAudioPanelButtons { get { return m_lOptionsAudioPanelButtons; } }
+    public List<BaseButton> OptionsGeneralPanelButtons { get { return m_lOptionsGeneralPanelButtons; } }
+    // Quit panel buttons.
     public List<BaseButton> QuitToDesktopPanelButtons { get { return m_lQuitToDesktopPanelButtons; } }
+    // Active panel buttons.
     public List<BaseButton> ActivePanelButtons { get { return m_lActivePanelButtons; } set { m_lActivePanelButtons = value; } }
 
     [Header("Pause Menu Panels")]
@@ -57,6 +74,10 @@ public class MainMenuManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        m_optionsMainPanel = m_optionsPanel.transform.Find("Main_Options_Panel").gameObject;
+        m_optionsAudioPanel = m_optionsPanel.transform.Find("Audio_Options_Panel").gameObject;
+        m_optionsGeneralPanel = m_optionsPanel.transform.Find("General_Options_Panel").gameObject;
 
         m_audioSource = GetComponent<AudioSource>();
 
@@ -79,11 +100,11 @@ public class MainMenuManager : MonoBehaviour
     {
         if (GameManager.m_gameManager.ShowCursor)
         {
-            m_optionsPanel.transform.Find("Show_Hide_Cursor_Button").GetComponentInChildren<Text>().text = "Hide Cursor";
+            m_optionsGeneralPanel.transform.Find("Show_Hide_Cursor_Button").GetComponentInChildren<Text>().text = "Hide Cursor";
         }
         else
         {
-            m_optionsPanel.transform.Find("Show_Hide_Cursor_Button").GetComponentInChildren<Text>().text = "Show Cursor";
+            m_optionsGeneralPanel.transform.Find("Show_Hide_Cursor_Button").GetComponentInChildren<Text>().text = "Show Cursor";
         }
     }
 
@@ -170,6 +191,41 @@ public class MainMenuManager : MonoBehaviour
             }
         }
         iParentListIndex = 0;
+
+        // Options panel buttons start.
+        foreach (Transform button in m_optionsMainPanel.transform)
+        {
+            if (button.CompareTag("Button"))
+            {
+                m_lOptionsMainPanelButtons.Add(button.GetComponent<BaseButton>());
+                m_lOptionsMainPanelButtons[iParentListIndex].ParentListIndex = iParentListIndex;
+                ++iParentListIndex;
+            }
+        }
+        iParentListIndex = 0;
+
+        foreach (Transform button in m_optionsAudioPanel.transform)
+        {
+            if (button.CompareTag("Button"))
+            {
+                m_lOptionsAudioPanelButtons.Add(button.GetComponent<BaseButton>());
+                m_lOptionsAudioPanelButtons[iParentListIndex].ParentListIndex = iParentListIndex;
+                ++iParentListIndex;
+            }
+        }
+        iParentListIndex = 0;
+
+        foreach (Transform button in m_optionsGeneralPanel.transform)
+        {
+            if (button.CompareTag("Button"))
+            {
+                m_lOptionsGeneralPanelButtons.Add(button.GetComponent<BaseButton>());
+                m_lOptionsGeneralPanelButtons[iParentListIndex].ParentListIndex = iParentListIndex;
+                ++iParentListIndex;
+            }
+        }
+        iParentListIndex = 0;
+        // Options panel button end.
 
         foreach (Transform button in m_quitToDesktopPanel.transform)
         {

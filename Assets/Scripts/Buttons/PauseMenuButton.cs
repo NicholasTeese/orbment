@@ -143,6 +143,7 @@ public class PauseMenuButton : BaseButton
             // Options audio panel start.
             case "Options_Audio_Panel_Back":
                 {
+                    SerializationManager.m_serializationManager.Save();
                     PauseMenuManager.m_pauseMenuManager.ActivePanelButtons = PauseMenuManager.m_pauseMenuManager.OptionsMainPanelButtons;
                     PauseMenuManager.m_pauseMenuManager.SelectedButton.IsMousedOver = false;
                     PauseMenuManager.m_pauseMenuManager.SelectedButton = PauseMenuManager.m_pauseMenuManager.ActivePanelButtons[0];

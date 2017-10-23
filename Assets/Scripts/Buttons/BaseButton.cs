@@ -51,6 +51,42 @@ public class BaseButton : MonoBehaviour
         }
     }
 
+    protected void OnEnable()
+    {
+        switch (m_strOnClickParameter)
+        {
+            case "Master_Volume":
+                {
+                    m_slider.value = AudioManager.m_audioManager.MasterVolume;
+                    break;
+                }
+
+            case "Music_Volume":
+                {
+                    m_slider.value = AudioManager.m_audioManager.MusicVolume;
+                    break;
+                }
+
+            case "Bullet_Volume":
+                {
+                    m_slider.value = AudioManager.m_audioManager.BulletVolume;
+                    break;
+                }
+
+            case "Effects_Volume":
+                {
+                    m_slider.value = AudioManager.m_audioManager.EffectsVolume;
+                    break;
+                }
+
+            case "Menu_Volume":
+                {
+                    m_slider.value = AudioManager.m_audioManager.MenuVolume;
+                    break;
+                }
+        }
+    }
+
     protected virtual void Update()
     {
         if (m_bIsMousedOver)

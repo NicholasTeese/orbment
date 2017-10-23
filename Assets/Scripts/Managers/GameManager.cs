@@ -91,6 +91,7 @@ public class GameManager : MonoBehaviour
             {
                 if (!m_bGameIsPaused)
                 {
+                    SerializationManager.m_serializationManager.Load();
                     m_bGameIsPaused = true;
                     Time.timeScale = 0.0f;
                     PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(true);

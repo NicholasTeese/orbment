@@ -33,7 +33,7 @@ public class MainMenuButton : BaseButton
 
             case "MainPanelOptions":
                 {
-                    MainMenuManager.m_mainMenuManager.ActivePanelButtons = MainMenuManager.m_mainMenuManager.OptionsPanelButtons;
+                    MainMenuManager.m_mainMenuManager.ActivePanelButtons = MainMenuManager.m_mainMenuManager.OptionsMainPanelButtons;
                     MainMenuManager.m_mainMenuManager.SelectedButton.IsMousedOver = false;
                     MainMenuManager.m_mainMenuManager.SelectedButton = MainMenuManager.m_mainMenuManager.ActivePanelButtons[0];
                     MainMenuManager.m_mainMenuManager.SelectedButton.IsMousedOver = true;
@@ -70,6 +70,47 @@ public class MainMenuButton : BaseButton
                     break;
                 }
 
+            // Options start.
+            // Options main panel start.
+            case "Options_Main_Panel_Audio":
+                {
+                    MainMenuManager.m_mainMenuManager.ActivePanelButtons = MainMenuManager.m_mainMenuManager.OptionsAudioPanelButtons;
+                    MainMenuManager.m_mainMenuManager.SelectedButton.IsMousedOver = false;
+                    MainMenuManager.m_mainMenuManager.SelectedButton = MainMenuManager.m_mainMenuManager.ActivePanelButtons[0];
+                    MainMenuManager.m_mainMenuManager.SelectedButton.IsMousedOver = true;
+                    MainMenuManager.m_mainMenuManager.OptionsMainPanel.SetActive(false);
+                    MainMenuManager.m_mainMenuManager.OptionsAudioPanel.SetActive(true);
+                    MainMenuManager.m_mainMenuManager.OptionsGeneralPanel.SetActive(false);
+                    MainMenuManager.m_mainMenuManager.ResetSelectedButtonIndex();
+                    break;
+                }
+
+            case "Options_Main_Panel_General":
+                {
+                    MainMenuManager.m_mainMenuManager.ActivePanelButtons = MainMenuManager.m_mainMenuManager.OptionsGeneralPanelButtons;
+                    MainMenuManager.m_mainMenuManager.SelectedButton.IsMousedOver = false;
+                    MainMenuManager.m_mainMenuManager.SelectedButton = MainMenuManager.m_mainMenuManager.ActivePanelButtons[0];
+                    MainMenuManager.m_mainMenuManager.SelectedButton.IsMousedOver = true;
+                    MainMenuManager.m_mainMenuManager.OptionsMainPanel.SetActive(false);
+                    MainMenuManager.m_mainMenuManager.OptionsAudioPanel.SetActive(false);
+                    MainMenuManager.m_mainMenuManager.OptionsGeneralPanel.SetActive(true);
+                    MainMenuManager.m_mainMenuManager.ResetSelectedButtonIndex();
+                    break;
+                }
+
+            case "Options_Main_Panel_Back":
+                {
+                    MainMenuManager.m_mainMenuManager.ActivePanelButtons = MainMenuManager.m_mainMenuManager.MainPanelButtons;
+                    MainMenuManager.m_mainMenuManager.SelectedButton.IsMousedOver = false;
+                    MainMenuManager.m_mainMenuManager.SelectedButton = MainMenuManager.m_mainMenuManager.ActivePanelButtons[0];
+                    MainMenuManager.m_mainMenuManager.SelectedButton.IsMousedOver = true;
+                    MainMenuManager.m_mainMenuManager.m_mainPanel.SetActive(true);
+                    MainMenuManager.m_mainMenuManager.m_optionsPanel.SetActive(false);
+                    MainMenuManager.m_mainMenuManager.m_quitToDesktopPanel.SetActive(false);
+                    MainMenuManager.m_mainMenuManager.ResetSelectedButtonIndex();
+                    break;
+                }
+
             case "OptionsPanelBack":
                 {
                     MainMenuManager.m_mainMenuManager.ActivePanelButtons = MainMenuManager.m_mainMenuManager.MainPanelButtons;
@@ -81,7 +122,8 @@ public class MainMenuButton : BaseButton
                     MainMenuManager.m_mainMenuManager.ResetSelectedButtonIndex();
                     break;
                 }
-
+            // Options main panel end.
+            // Options end.
             case "QuitToDesktopPanelYes":
                 {
                     GameManager.m_gameManager.QuitToDesktop();
@@ -97,6 +139,50 @@ public class MainMenuButton : BaseButton
                     MainMenuManager.m_mainMenuManager.m_mainPanel.SetActive(true);
                     MainMenuManager.m_mainMenuManager.m_quitToDesktopPanel.SetActive(false);
                     MainMenuManager.m_mainMenuManager.ResetSelectedButtonIndex();
+                    break;
+                }
+
+            default:
+                {
+                    Debug.Log("Case for " + a_strParameter + "could not be found.");
+                    break;
+                }
+        }
+    }
+
+    public override void OnValueChanged(string a_strParameter)
+    {
+        //base.OnValueChanged(a_strParameter);
+
+        switch (a_strParameter)
+        {
+            case "Master_Volume":
+                {
+                    AudioManager.m_audioManager.AdjustMasterVolume(m_slider.value);
+                    break;
+                }
+
+            case "Music_Volume":
+                {
+                    AudioManager.m_audioManager.AdjustMusicVolume(m_slider.value);
+                    break;
+                }
+
+            case "Bullet_Volume":
+                {
+                    AudioManager.m_audioManager.AdjustBulletVolume(m_slider.value);
+                    break;
+                }
+
+            case "Effects_Volume":
+                {
+                    AudioManager.m_audioManager.AdjustEffectsVolume(m_slider.value);
+                    break;
+                }
+
+            case "Menu_Volume":
+                {
+                    AudioManager.m_audioManager.AdjustMenuVolume(m_slider.value);
                     break;
                 }
 
