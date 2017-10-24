@@ -53,6 +53,8 @@ public class BaseEnemy : MonoBehaviour
 
     protected NavMeshAgent m_navMeshAgent;
 
+    //protected DamageNumberManager m_damageNumbersManager;
+
     public Animator m_animator;
 
     public Texture m_fullHealthBarTexture;
@@ -66,6 +68,8 @@ public class BaseEnemy : MonoBehaviour
         m_navMeshAgent = GetComponent<NavMeshAgent>();
 
         m_fOriginalMoveSpeed = m_navMeshAgent.speed;
+
+        //m_damageNumbersManager = GetComponent<DamageNumberManager>();
 
         CheckLevel();
     }

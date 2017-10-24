@@ -62,7 +62,7 @@ public class Entity : MonoBehaviour
 
 
     protected ExpManager m_expManager;
-    protected DamageNumberManager m_damageNumbersManager;
+    //protected DamageNumberManager m_damageNumbersManager;
     protected StatusEffectManager m_statusEffectManager;
     protected ExplosionManager m_explosionManager;
     protected KillStreakManager m_killStreakManager;
@@ -104,7 +104,7 @@ public class Entity : MonoBehaviour
             m_originalMoveSpeed = m_agent.speed;
         }
         m_expManager = GameObject.FindObjectOfType<ExpManager>();
-        m_damageNumbersManager = DamageNumberManager.m_damageNumbersManager;
+        //m_damageNumbersManager = GetComponent<DamageNumberManager>();
         m_statusEffectManager = GameObject.FindObjectOfType<StatusEffectManager>();
         m_explosionManager = GameObject.FindObjectOfType<ExplosionManager>();
         m_killStreakManager = GameObject.FindObjectOfType<KillStreakManager>();
@@ -174,7 +174,7 @@ public class Entity : MonoBehaviour
             {
                 textColor = Color.green;
             }
-            m_damageNumbersManager.CreateDamageNumber(Mathf.Abs(m_oldHealth - m_currHealth).ToString(), this.transform, textColor);
+            DamageNumberManager.m_damageNumbersManager.CreateDamageNumber(Mathf.Abs(m_oldHealth - m_currHealth).ToString(), this.transform, textColor);
         }
 
         //cant go above max
