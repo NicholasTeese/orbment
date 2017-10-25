@@ -20,10 +20,12 @@ public class DropCollectable : MonoBehaviour
     private int m_blueOrbsMax = 1;
 
     private EnemyLootManager m_lootManager;
+    private Collectable m_Collectable;
+
     private void Start()
     {
         m_lootManager = GameObject.FindObjectOfType<EnemyLootManager>();
-
+        m_Collectable = GameObject.FindObjectOfType<Collectable>();
     }
 
     private void OnDisable()
@@ -31,6 +33,24 @@ public class DropCollectable : MonoBehaviour
         if (m_lootManager != null)
         {
             m_lootManager.RequestLootsplosion(this.transform.position, m_yellowOrbsMin, m_yellowOrbsMax, Collectable.CollectableType.YellowOrb);
+
+            if(m_Collectable.m_healthCap)
+            {
+                m_healDropChance = 0;
+            }
+            else
+            {
+                m_healDropChance = 50;
+            }
+            
+            if(m_Collectable.m_manaCap)
+            {
+                m_manaDropChance = 0;
+            }
+            else
+            {
+                m_manaDropChance = 50;
+            }
 
             if (Random.Range(0, 100) <= m_healDropChance)
             {

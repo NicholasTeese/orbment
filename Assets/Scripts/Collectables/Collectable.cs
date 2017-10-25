@@ -79,8 +79,6 @@ public class Collectable : MonoBehaviour
     {
         if (collision.collider.CompareTag("Player"))
         {
-            Player.m_Player.OrbPickedUp();
-
             switch (m_type)
             {
                 case CollectableType.YellowOrb:
@@ -88,6 +86,8 @@ public class Collectable : MonoBehaviour
                         if(Player.m_Player)
                         {
                             Player.m_Player.m_orbsCollected++;
+                            Player.m_Player.OrbPickedUp();
+
                             this.gameObject.SetActive(false);
                         }
                         break;
@@ -104,6 +104,8 @@ public class Collectable : MonoBehaviour
                             else
                             {
                                 Player.m_Player.m_currHealth += m_healAmount;
+                                Player.m_Player.OrbPickedUp();
+
                                 this.gameObject.SetActive(false);
                             }
                         }
@@ -119,6 +121,8 @@ public class Collectable : MonoBehaviour
                         else
                         {
                             m_playerMana.m_currentMana += m_manaAmount;
+                            Player.m_Player.OrbPickedUp();
+
                             this.gameObject.SetActive(false);
                         }
                         break;

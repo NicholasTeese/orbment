@@ -136,7 +136,7 @@ public class PerkButton : MonoBehaviour
         // If there are no available perks, exit the function.
         if (PerkTreeManager.m_perkTreeManager.AvailiablePerks == 0)
         {
-            Debug.Log("No available perks to spend.");
+            //Debug.Log("No available perks to spend.");
             return;
         }
 
@@ -375,7 +375,7 @@ public class PerkButton : MonoBehaviour
 
             default:
                 {
-                    Debug.Log("Perk could not be found in ice tree to be applied.");
+                    //Debug.Log("Perk could not be found in ice tree to be applied.");
                     break;
                 }
         }
@@ -468,7 +468,7 @@ public class PerkButton : MonoBehaviour
 
             default:
                 {
-                    Debug.Log("Perk could not be found in lightning tree to be applied.");
+                    //Debug.Log("Perk could not be found in lightning tree to be applied.");
                     break;
                 }
         }

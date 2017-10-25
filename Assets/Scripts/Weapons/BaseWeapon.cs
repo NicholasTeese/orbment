@@ -72,6 +72,7 @@ public class BaseWeapon : MonoBehaviour
                     {
                         case Bullet.ProjectileType.Normal:
                             {
+                                // Set active staff model to Normal staff
                                 m_SBasic.SetActive(true);
                                 m_SLighting.SetActive(false);
                                 m_SFire.SetActive(false);
@@ -81,6 +82,7 @@ public class BaseWeapon : MonoBehaviour
                             }
                         case Bullet.ProjectileType.Lightning:
                             {
+                                // Set active staff model to Lightning staff
                                 m_SBasic.SetActive(false);
                                 m_SLighting.SetActive(true);
                                 m_SFire.SetActive(false);
@@ -90,6 +92,7 @@ public class BaseWeapon : MonoBehaviour
                             }
                         case Bullet.ProjectileType.FireBall:
                             {
+                                // Set active staff model to Fire staff
                                 m_SBasic.SetActive(false);
                                 m_SLighting.SetActive(false);
                                 m_SFire.SetActive(true);
@@ -99,6 +102,7 @@ public class BaseWeapon : MonoBehaviour
                             }
                         case Bullet.ProjectileType.IceShard:
                             {
+                                // Set active staff model to Ice staff
                                 m_SBasic.SetActive(false);
                                 m_SLighting.SetActive(false);
                                 m_SFire.SetActive(false);
@@ -108,6 +112,7 @@ public class BaseWeapon : MonoBehaviour
                             }
                         default:
                             {
+                                // Output error code
                                 Debug.Log("Projectile type could not be found. " + m_projectileScripts[0].m_type);
                                 break;
                             }
@@ -162,9 +167,6 @@ public class BaseWeapon : MonoBehaviour
 
     public void SetProjectile(GameObject a_projectile)
     {
-//        Debug.Log("m = " + m_projectile);
-//        Debug.Log("a = " + a_projectile);
-
         //clear pool
         m_projectilePool.Clear();
         m_projectileScripts.Clear();
@@ -173,5 +175,5 @@ public class BaseWeapon : MonoBehaviour
         m_projectile = a_projectile;
 
         Start();
-        }
     }
+}
