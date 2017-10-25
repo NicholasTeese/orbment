@@ -24,6 +24,7 @@ public class AudioManager : MonoBehaviour
     AudioSource m_musicAudioSource;
     AudioSource m_bulletAudioSource;
     AudioSource m_effectsAudioSource;
+    AudioSource m_explosionAudioSource;
     AudioSource m_menuAudioSource;
 
     public static AudioManager m_audioManager;
@@ -39,6 +40,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip[] EnemyDeathClips { get { return m_enemyDeathClips; } }
 
     public AudioSource EffectsAudioSource { get { return m_effectsAudioSource; } }
+    public AudioSource ExplosionAudioSource { get { return m_explosionAudioSource; } }
 
     private void Awake()
     {
@@ -56,7 +58,7 @@ public class AudioManager : MonoBehaviour
 
         m_musicAudioSource = GetComponent<AudioSource>();
         m_musicAudioSource.loop = true;
-        m_musicAudioSource.volume = 0.0f;
+        m_explosionAudioSource = transform.Find("Explosion_Audio_Source").GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -187,6 +189,11 @@ public class AudioManager : MonoBehaviour
             m_effectsAudioSource.volume = m_fEffectsVolume;
         }
 
+        if (m_explosionAudioSource != null)
+        {
+            m_explosionAudioSource.volume = m_fEffectsVolume;
+        }
+
         if (m_menuAudioSource != null)
         {
             m_menuAudioSource.volume = m_fEffectsVolume;
@@ -226,6 +233,11 @@ public class AudioManager : MonoBehaviour
         if (m_effectsAudioSource != null)
         {
             m_effectsAudioSource.volume = m_fEffectsVolume;
+        }
+
+        if (m_explosionAudioSource != null)
+        {
+            m_explosionAudioSource.volume = m_fEffectsVolume;
         }
     }
 
