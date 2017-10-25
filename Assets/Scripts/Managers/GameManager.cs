@@ -141,6 +141,7 @@ public class GameManager : MonoBehaviour
 
 	public void LoadMainMenu()
     {
+        LevelManager.m_levelManager.DestroyAllDontDestroyOnLoad();
         SceneManager.LoadScene(LevelManager.m_strMainMenuSceneName);
     }
 
