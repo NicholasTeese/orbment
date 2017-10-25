@@ -35,7 +35,7 @@ public class IsoCam : MonoBehaviour
 
     public static IsoCam m_playerCamera = null;
 
-    public Camera MainPlaterCamera { get { return m_camera; } }
+    public Camera MainPlayerCamera { get { return m_camera; } }
 
     public Plane[] FrustrumPlanes { get { m_frustrumPlanes = GeometryUtility.CalculateFrustumPlanes(m_camera); return m_frustrumPlanes; } }
 

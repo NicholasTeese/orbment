@@ -83,6 +83,8 @@ public class LevelManager : MonoBehaviour
             IsoCam.m_playerCamera.gameObject.SetActive(false);
         }
 
+        SerializationManager.m_serializationManager.Load();
+
         switch (a_scene.name)
         {
             case m_strMainMenuSceneName:
