@@ -128,14 +128,20 @@ public class Enemy : Entity
         }
         else if (m_currHealth != m_maxHealth)
         {
-            Vector2 screenPoint = Camera.main.WorldToScreenPoint(this.transform.position);
-            GUI.DrawTexture(new Rect(screenPoint.x - 0.5f * m_healthBarWidth, Screen.height - screenPoint.y - 40, m_healthBarWidth, 10), m_emptyBarTexture);
-            GUI.DrawTexture(new Rect(screenPoint.x - 0.5f * m_healthBarWidth, Screen.height - screenPoint.y - 40, m_healthBarWidth * ((float)m_currHealth / (float)m_maxHealth), 10), m_healthBarTexture);
+            if (IsoCam.m_playerCamera != null)
+            {
+                Vector2 screenPoint = IsoCam.m_playerCamera.MainPlayerCamera.WorldToScreenPoint(this.transform.position);
+                GUI.DrawTexture(new Rect(screenPoint.x - 0.5f * m_healthBarWidth, Screen.height - screenPoint.y - 40, m_healthBarWidth, 10), m_emptyBarTexture);
+                GUI.DrawTexture(new Rect(screenPoint.x - 0.5f * m_healthBarWidth, Screen.height - screenPoint.y - 40, m_healthBarWidth * ((float)m_currHealth / (float)m_maxHealth), 10), m_healthBarTexture);
+            }
         }
         else
         {
-            Vector2 screenPoint = Camera.main.WorldToScreenPoint(this.transform.position);
-            GUI.Label(new Rect(screenPoint.x - 0.5f * m_healthBarWidth, Screen.height - screenPoint.y - 60, m_healthBarWidth, 50), "Lvl " + m_currLevel);
+            if (IsoCam.m_playerCamera != null)
+            {
+                Vector2 screenPoint = IsoCam.m_playerCamera.MainPlayerCamera.WorldToScreenPoint(this.transform.position);
+                GUI.Label(new Rect(screenPoint.x - 0.5f * m_healthBarWidth, Screen.height - screenPoint.y - 60, m_healthBarWidth, 50), "Lvl " + m_currLevel);
+            }
         }
     }
 
