@@ -87,12 +87,14 @@ public class LevelManager : MonoBehaviour
         {
             case m_strMainMenuSceneName:
                 {
-                    //m_strCurrentSceneName = m_strMainMenuSceneName;
+                    Time.timeScale = 1.0f;
 
-                    //DontDestroyOnLoad(gameObject);
-                    //DontDestroyOnLoad(AudioManager.m_audioManager.gameObject);
+                    m_strCurrentSceneName = m_strMainMenuSceneName;
 
-                    //AudioManager.m_audioManager.PlaySceneMusic(m_strCurrentSceneName);
+                    DontDestroyOnLoad(gameObject);
+                    DontDestroyOnLoad(AudioManager.m_audioManager.gameObject);
+
+                    AudioManager.m_audioManager.PlaySceneMusic(m_strCurrentSceneName);
                     break;
                 }
 
