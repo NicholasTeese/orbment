@@ -5,14 +5,14 @@ using UnityEngine.UI;
 
 public class OrbCountDisplay : MonoBehaviour
 {
-    private Player m_playerRef;
+    //private Player m_playerRef;
     private Text m_textDisplay;
     private int m_iIndex;
     public List<OrbGate> GateList = new List<OrbGate>();
 
     void Start()
     {
-        m_playerRef = GameObject.FindObjectOfType<Player>();
+        //Player.m_Player = GameObject.FindObjectOfType<Player>();
         m_iIndex = 0;
         m_textDisplay = GetComponent<Text>();
     }
@@ -28,9 +28,9 @@ public class OrbCountDisplay : MonoBehaviour
         }
         else
         {
-            if (m_playerRef != null && m_textDisplay != null)
+            if (Player.m_Player != null && m_textDisplay != null)
             {
-                m_textDisplay.text = m_playerRef.m_orbsCollected.ToString() + "/" + GateList[m_iIndex].NumberOfOrbsToOpen;
+                m_textDisplay.text = Player.m_Player.m_orbsCollected.ToString() + "/" + GateList[m_iIndex].NumberOfOrbsToOpen;
             }
         }
     }
