@@ -16,6 +16,11 @@ public class KillStreakManager : MonoBehaviour
     public float m_timeAllowedBetweenKills = 1.0f;
     private float m_timeOfLastKill = 0.0f;
 
+    protected float m_fGrowShrinkSpeed = 0.1f;
+    protected float m_fGrowMultiplier = 1.5f;
+    protected float m_fShrinkMultiplier = 1.0f;
+    protected float m_fShakeRange = 0.2f;
+
     private bool m_bLifesteal = false;
     public bool Lifesteal { get; set; }
 
@@ -146,5 +151,33 @@ public class KillStreakManager : MonoBehaviour
     public bool CheckKill()
     {
         return (m_timeOfLastKill == 0.0f || Time.time - m_timeOfLastKill <= m_timeAllowedBetweenKills);
+    }
+
+    public void StreakSizing()
+    {
+        // Grow
+        if (transform.localScale.x < m_fGrowMultiplier)
+        {
+            transform.localScale += new Vector3(m_fGrowShrinkSpeed, m_fGrowShrinkSpeed, 0.0f);
+        }
+        // Shrink
+        if (transform.localScale.x > m_fShrinkMultiplier)
+        {
+            transform.localScale -= new Vector3(m_fGrowShrinkSpeed, m_fGrowShrinkSpeed, 0.0f);
+        }
+    }
+
+    public void StreakShake()
+    {
+        // Move up
+        if (transform.position.y < m_fShakeRange)
+        {
+            transform.position += new Vector3(0.0f, m_fGrowShrinkSpeed, 0.0f);
+        }
+        // Move down
+        if (transform.position.y > m_fShakeRange)
+        {
+            transform.position -= new Vector3(0.0f, m_fGrowShrinkSpeed, 0.0f);
+        }
     }
 }
