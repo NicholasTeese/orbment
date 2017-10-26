@@ -256,11 +256,14 @@ public class Player : Entity
             m_dashing = true;
         }
 
-        //get movement input
-        m_movement = Vector3.forward * InputManager.PrimaryVertical() + Vector3.right * InputManager.PrimaryHorizontal();
+        if (!GameManager.m_gameManager.GameIsPaused)
+        {
+            //get movement input
+            m_movement = Vector3.forward * InputManager.PrimaryVertical() + Vector3.right * InputManager.PrimaryHorizontal();
 
-        m_animatior.SetFloat("fXAxis", m_movement.x);
-        m_animatior.SetFloat("fYAxis", m_movement.z);
+            m_animatior.SetFloat("fXAxis", m_movement.x);
+            m_animatior.SetFloat("fYAxis", m_movement.z);
+        }
     }
 
 

@@ -240,7 +240,31 @@ public class MainMenuManager : MonoBehaviour
 
     private void NavigateButtons(Vector3 a_v3PrimaryInputDirection, List<BaseButton> a_lButtons)
     {
-        if (a_v3PrimaryInputDirection.z >= m_fInputBuffer)
+        if (a_v3PrimaryInputDirection.x >= m_fInputBuffer)
+        {
+            if (!m_bInputRecieved)
+            {
+                m_bInputRecieved = true;
+
+                if (m_selectedButton.VolumeSlider != null)
+                {
+                    m_selectedButton.VolumeSlider.value += 0.1f;
+                }
+            }
+        }
+        else if (a_v3PrimaryInputDirection.x <= -m_fInputBuffer)
+        {
+            if (!m_bInputRecieved)
+            {
+                m_bInputRecieved = true;
+
+                if (m_selectedButton.VolumeSlider != null)
+                {
+                    m_selectedButton.VolumeSlider.value -= 0.1f;
+                }
+            }
+        }
+        else if (a_v3PrimaryInputDirection.z >= m_fInputBuffer)
         {
             if (!m_bInputRecieved)
             {
