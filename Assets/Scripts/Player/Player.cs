@@ -188,7 +188,7 @@ public class Player : Entity
 
         base.Update();
 
-        m_currLevel = m_expManager.m_playerLevel;
+        m_currLevel = ExpManager.m_experiencePointsManager.m_playerLevel;
 
 
         m_damage = m_currDamage + Random.Range(-m_damageDeviation, m_damageDeviation);

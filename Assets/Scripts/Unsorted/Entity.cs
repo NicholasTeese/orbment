@@ -61,7 +61,7 @@ public class Entity : MonoBehaviour
     protected float m_oldHealth = 0.0f;
 
 
-    protected ExpManager m_expManager;
+    //protected ExpManager m_expManager;
     //protected DamageNumberManager m_damageNumbersManager;
     protected StatusEffectManager m_statusEffectManager;
     protected ExplosionManager m_explosionManager;
@@ -103,7 +103,7 @@ public class Entity : MonoBehaviour
         {
             m_originalMoveSpeed = m_agent.speed;
         }
-        m_expManager = GameObject.FindObjectOfType<ExpManager>();
+        //m_expManager = GameObject.FindObjectOfType<ExpManager>();
         //m_damageNumbersManager = GetComponent<DamageNumberManager>();
         m_statusEffectManager = GameObject.FindObjectOfType<StatusEffectManager>();
         m_explosionManager = GameObject.FindObjectOfType<ExplosionManager>();
@@ -121,7 +121,7 @@ public class Entity : MonoBehaviour
 
     void LevelUpdate()
     {
-        if (m_expManager != null)
+        if (ExpManager.m_experiencePointsManager != null)
         {
             //health scaling
             //m_currLevel = Random.Range(m_expManager.m_playerLevel, m_expManager.m_playerLevel + 2);

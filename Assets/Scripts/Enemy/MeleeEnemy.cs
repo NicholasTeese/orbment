@@ -63,7 +63,7 @@ public class MeleeEnemy : Enemy
 
         if (m_currHealth <= 0)
         {
-            m_expManager.m_playerExperience += m_experienceValue;
+            ExpManager.m_experiencePointsManager.m_playerExperience += m_experienceValue;
             if (m_killStreakManager != null)
             {
                 m_killStreakManager.AddKill();
