@@ -47,7 +47,7 @@ public class PerkTreeButton : MonoBehaviour
 
     public void OnClick()
     {
-        PerkTreeManager.m_perkTreeManager.PerkTreeAudioSource.PlayOneShot(m_menuClick);
+        AudioManager.m_audioManager.PerkTreeAudioSource.PlayOneShot(m_menuClick);
 
         if (m_firePerkTreeButton != null)
         {
