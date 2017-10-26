@@ -50,7 +50,7 @@ public class FireBall : Bullet
         //set on fire
         if (m_target != null)
         {
-            if(!m_hasStunPerk && Player.m_Player != null && Player.m_Player.m_perks.Contains(PerkID.StunChance))
+            if(!m_hasStunPerk && Player.m_player != null && Player.m_player.m_perks.Contains(PerkID.StunChance))
             {
                 //do once
                 m_hasStunPerk = true;
@@ -64,13 +64,13 @@ public class FireBall : Bullet
 
             m_target.m_setOnFire = true;
 
-            Player.m_Player.m_currSpeedMult += 1;
+            Player.m_player.m_currSpeedMult += 1;
         }
 
 
         //if AOE toggled on 
 
-        if(!m_hasSplashDamagePerk && Player.m_Player != null && Player.m_Player.m_perks.Contains(PerkID.SplashDamage))
+        if(!m_hasSplashDamagePerk && Player.m_player != null && Player.m_player.m_perks.Contains(PerkID.SplashDamage))
         {
             //do once
             m_hasSplashDamagePerk = true;

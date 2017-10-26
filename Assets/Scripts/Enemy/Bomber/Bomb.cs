@@ -40,7 +40,7 @@ public class Bomb : MonoBehaviour
 
     private void Start()
     {
-        m_v3RollPosition = Player.m_Player.transform.position;
+        m_v3RollPosition = Player.m_player.transform.position;
     }
 
     private void Update()
@@ -75,9 +75,9 @@ public class Bomb : MonoBehaviour
             m_bHasExploded = true;
             gameObject.SetActive(false);
 
-            if (Vector3.Distance(transform.position, Player.m_Player.transform.position) <= 3.0f)
+            if (Vector3.Distance(transform.position, Player.m_player.transform.position) <= 3.0f)
             {
-                Player.m_Player.m_currHealth -= 200.0f;
+                Player.m_player.m_currHealth -= 200.0f;
             }
 
             Destroy(explosion, 1.0f);

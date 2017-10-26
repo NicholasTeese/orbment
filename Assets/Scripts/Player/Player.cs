@@ -105,7 +105,7 @@ public class Player : Entity
 
     private Vector3 m_v3LastMousePosition = Vector3.zero;
 
-    public static Player m_Player;
+    public static Player m_player;
 
     // Variable getters and setters.
     public int EnemiesOnFire { get { return m_iEnemiesOnFire; } set { m_iEnemiesOnFire = value; } }
@@ -120,11 +120,11 @@ public class Player : Entity
 
     void Awake()
     {
-        if (m_Player == null)
+        if (m_player == null)
         {
-            m_Player = this;
+            m_player = this;
         }
-        else if (m_Player != this)
+        else if (m_player != this)
         {
             Destroy(gameObject);
         }

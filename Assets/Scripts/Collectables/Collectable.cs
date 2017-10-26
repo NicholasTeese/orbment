@@ -29,9 +29,9 @@ public class Collectable : MonoBehaviour
         m_healthCap = true;
         m_manaCap = true;
         m_playerRef = GameObject.FindObjectOfType<Player>();
-        if(Player.m_Player != null)
+        if(Player.m_player != null)
         {
-            m_playerMana = Player.m_Player.GetComponent<Mana>();
+            m_playerMana = Player.m_player.GetComponent<Mana>();
         }
         m_rigidBody = this.GetComponent<Rigidbody>();
 
@@ -41,7 +41,7 @@ public class Collectable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((Player.m_Player.m_currHealth + m_healAmount) > Player.m_Player.m_maxHealth)
+        if ((Player.m_player.m_currHealth + m_healAmount) > Player.m_player.m_maxHealth)
         {
             m_healthCap = true;
         }
@@ -58,20 +58,20 @@ public class Collectable : MonoBehaviour
             m_manaCap = false;
         }
 
-        if (m_type == CollectableType.GreenOrb && Player.m_Player != null)
+        if (m_type == CollectableType.GreenOrb && Player.m_player != null)
         {
             if(m_healthCap)
-                Physics.IgnoreCollision(GetComponent<Collider>(), Player.m_Player.GetComponent<Collider>(), true);
+                Physics.IgnoreCollision(GetComponent<Collider>(), Player.m_player.GetComponent<Collider>(), true);
             else
-                Physics.IgnoreCollision(GetComponent<Collider>(), Player.m_Player.GetComponent<Collider>(), false);
+                Physics.IgnoreCollision(GetComponent<Collider>(), Player.m_player.GetComponent<Collider>(), false);
         }
 
-        if (m_type == CollectableType.BlueOrb && Player.m_Player != null)
+        if (m_type == CollectableType.BlueOrb && Player.m_player != null)
         {
             if(m_manaCap)
-                Physics.IgnoreCollision(GetComponent<Collider>(), Player.m_Player.GetComponent<Collider>(), true);
+                Physics.IgnoreCollision(GetComponent<Collider>(), Player.m_player.GetComponent<Collider>(), true);
             else
-                Physics.IgnoreCollision(GetComponent<Collider>(), Player.m_Player.GetComponent<Collider>(), false);
+                Physics.IgnoreCollision(GetComponent<Collider>(), Player.m_player.GetComponent<Collider>(), false);
         }
     }
 
@@ -83,10 +83,10 @@ public class Collectable : MonoBehaviour
             {
                 case CollectableType.YellowOrb:
                     {
-                        if(Player.m_Player)
+                        if(Player.m_player)
                         {
-                            Player.m_Player.m_orbsCollected++;
-                            Player.m_Player.OrbPickedUp();
+                            Player.m_player.m_orbsCollected++;
+                            Player.m_player.OrbPickedUp();
 
                             this.gameObject.SetActive(false);
                         }
@@ -95,7 +95,7 @@ public class Collectable : MonoBehaviour
 
                 case CollectableType.GreenOrb:
                     {
-                        if (Player.m_Player)
+                        if (Player.m_player)
                         {
                             if (m_healthCap)
                             {
@@ -103,8 +103,8 @@ public class Collectable : MonoBehaviour
                             }
                             else
                             {
-                                Player.m_Player.m_currHealth += m_healAmount;
-                                Player.m_Player.OrbPickedUp();
+                                Player.m_player.m_currHealth += m_healAmount;
+                                Player.m_player.OrbPickedUp();
 
                                 this.gameObject.SetActive(false);
                             }
@@ -121,7 +121,7 @@ public class Collectable : MonoBehaviour
                         else
                         {
                             m_playerMana.m_currentMana += m_manaAmount;
-                            Player.m_Player.OrbPickedUp();
+                            Player.m_player.OrbPickedUp();
 
                             this.gameObject.SetActive(false);
                         }

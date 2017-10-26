@@ -28,9 +28,9 @@ public class OrbCountDisplay : MonoBehaviour
         }
         else
         {
-            if (Player.m_Player != null && m_textDisplay != null)
+            if (Player.m_player != null && m_textDisplay != null)
             {
-                m_textDisplay.text = Player.m_Player.m_orbsCollected.ToString() + "/" + GateList[m_iIndex].NumberOfOrbsToOpen;
+                m_textDisplay.text = Player.m_player.m_orbsCollected.ToString() + "/" + GateList[m_iIndex].NumberOfOrbsToOpen;
             }
         }
     }

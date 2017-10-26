@@ -92,7 +92,7 @@ public class Enemy : Entity
 
             if (m_bulletScript != null && m_bulletScript.m_id == "Player")
             {
-                if (Player.m_Player.FreezeUnlocked != true)
+                if (Player.m_player.FreezeUnlocked != true)
                 {
                     if (m_type != EnemyType.BOMBER)
                     {

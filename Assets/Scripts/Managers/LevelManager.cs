@@ -117,7 +117,7 @@ public class LevelManager : MonoBehaviour
                     AudioManager.m_audioManager.FadeIn = true;
 
                     // Set player's new position.
-                    Player.m_Player.transform.position = m_v3PlayerTutorialStartPosition;
+                    Player.m_player.transform.position = m_v3PlayerTutorialStartPosition;
                     // Set player camera's new position.
                     IsoCam.m_playerCamera.transform.position = m_v3PlayerCameraTutorialStartPosition;
 
@@ -146,7 +146,7 @@ public class LevelManager : MonoBehaviour
                     AudioManager.m_audioManager.FadeIn = true;
 
                     // Set player's new position.
-                    Player.m_Player.transform.position = m_v3PlayerLevelOneStartPosition;
+                    Player.m_player.transform.position = m_v3PlayerLevelOneStartPosition;
                     // Set player camera's new position.
                     IsoCam.m_playerCamera.transform.position = m_v3PlayerCameraLevelOneStartPosition;
 
@@ -175,7 +175,7 @@ public class LevelManager : MonoBehaviour
                     AudioManager.m_audioManager.FadeIn = true;
 
                     // Set player's new position.
-                    Player.m_Player.transform.position = m_v3PlayerLevelTwoStartPosition;
+                    Player.m_player.transform.position = m_v3PlayerLevelTwoStartPosition;
                     // Set player camera's new position.
                     IsoCam.m_playerCamera.transform.position = m_v3PlayerCameraLevelTwoStartPosition;
 
@@ -231,7 +231,7 @@ public class LevelManager : MonoBehaviour
         DontDestroyOnLoad(AudioManager.m_audioManager.gameObject);
 
         // Actors.
-        DontDestroyOnLoad(Player.m_Player.gameObject);
+        //DontDestroyOnLoad(Player.m_player.gameObject);
 
         // Canvasses.
         DontDestroyOnLoad(PlayerHUDManager.m_playerHUDManager.transform.parent);
@@ -260,9 +260,9 @@ public class LevelManager : MonoBehaviour
             Destroy(AudioManager.m_audioManager.gameObject);
         }
 
-        if (Player.m_Player != null)
+        if (Player.m_player != null)
         {
-            Destroy(Player.m_Player.gameObject);
+            Destroy(Player.m_player.gameObject);
         }
 
         if (PlayerHUDManager.m_playerHUDManager != null)

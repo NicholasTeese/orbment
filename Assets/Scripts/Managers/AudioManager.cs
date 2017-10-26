@@ -63,9 +63,9 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        if (Player.m_Player != null)
+        if (Player.m_player != null)
         {
-            m_bulletAudioSource = Player.m_Player.m_currWeapon.BulletAudioSource;
+            m_bulletAudioSource = Player.m_player.m_currWeapon.BulletAudioSource;
         }
 
         if (IsoCam.m_playerCamera != null)

@@ -10,11 +10,6 @@ public class BaseWeapon : MonoBehaviour
     public uint m_maxBulletsOnScreen = 50;
 
     public Player m_playerRef = null;
-    //[Header("Perk Effects")]
-    //public bool m_hasFireSplash = false;
-    //public bool m_hasIceSplit = false;
-    //public bool m_hasStunPerk = false;
-    //public bool m_hasGodLightning = false;
 
     protected List<GameObject> m_projectilePool = new List<GameObject>();
     protected List<Bullet> m_projectileScripts = new List<Bullet>();
@@ -41,14 +36,6 @@ public class BaseWeapon : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        //m_SBasic = GameObject.Find("Basic_Staff");
-        //m_SLighting = GameObject.Find("Lightning_Staff");
-        //m_SFire = GameObject.Find("Fire_Staff");
-        //m_SIce = GameObject.Find("Ice_Staff");
-
-        //if (m_SBasic != null)
-        //    m_SBasic.SetActive(true);
-
         //object pooling
         if (m_projectile != null)
         {

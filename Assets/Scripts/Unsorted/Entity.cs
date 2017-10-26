@@ -205,13 +205,13 @@ public class Entity : MonoBehaviour
             m_statusEffectManager.RequestEffect(this.transform, StatusEffect.Status.OnFire);
             m_setOnFire = false;
             
-            if (!gameObject.CompareTag("Player") && Player.m_Player.BurningSpeedBoost)
+            if (!gameObject.CompareTag("Player") && Player.m_player.BurningSpeedBoost)
             {
-                if (Player.m_Player.AdditionalBurningSpeedBoost)
+                if (Player.m_player.AdditionalBurningSpeedBoost)
                 {
-                    ++Player.m_Player.EnemiesOnFire;
+                    ++Player.m_player.EnemiesOnFire;
                 }
-                ++Player.m_Player.EnemiesOnFire;
+                ++Player.m_player.EnemiesOnFire;
             }
         }
 
