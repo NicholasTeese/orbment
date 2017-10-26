@@ -26,6 +26,7 @@ public class AudioManager : MonoBehaviour
     AudioSource m_effectsAudioSource;
     AudioSource m_explosionAudioSource;
     AudioSource m_menuAudioSource;
+    AudioSource m_perkTreeAudioSource;
 
     public static AudioManager m_audioManager;
 
@@ -41,6 +42,7 @@ public class AudioManager : MonoBehaviour
 
     public AudioSource EffectsAudioSource { get { return m_effectsAudioSource; } }
     public AudioSource ExplosionAudioSource { get { return m_explosionAudioSource; } }
+    public AudioSource PerkTreeAudioSource { get { return m_perkTreeAudioSource; } }
 
     private void Awake()
     {
@@ -59,6 +61,7 @@ public class AudioManager : MonoBehaviour
         m_musicAudioSource = GetComponent<AudioSource>();
         m_musicAudioSource.loop = true;
         m_explosionAudioSource = transform.Find("Explosion_Audio_Source").GetComponent<AudioSource>();
+        m_perkTreeAudioSource = transform.Find("Perk_Tree_Audio_Source").GetComponent<AudioSource>();
     }
 
     private void Start()

@@ -146,7 +146,7 @@ public class PerkButton : MonoBehaviour
             if (!m_parentPerk.GetComponent<PerkButton>().m_bIsPurchased || m_parentPerk.GetComponent<PerkButton>().m_bChildPathChosen)
             {
                 Debug.Log("Parent Perk not purchased or Child Perk path already chosen.");
-                PerkTreeManager.m_perkTreeManager.PerkTreeAudioSource.PlayOneShot(m_perkUnavailableAudioClip);
+                AudioManager.m_audioManager.PerkTreeAudioSource.PlayOneShot(m_perkUnavailableAudioClip);
                 return;
             }
 
@@ -155,7 +155,7 @@ public class PerkButton : MonoBehaviour
         }
 
         // Purchase this perk.
-        PerkTreeManager.m_perkTreeManager.PerkTreeAudioSource.PlayOneShot(m_perkSelectedAudioClip);
+        AudioManager.m_audioManager.PerkTreeAudioSource.PlayOneShot(m_perkSelectedAudioClip);
         m_perkUpgradeConfirmation.SetActive(true);
     }
 

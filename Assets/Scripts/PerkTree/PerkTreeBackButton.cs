@@ -36,7 +36,7 @@ public class PerkTreeBackButton : MonoBehaviour
 
     public void OnClick()
     {
-        PerkTreeManager.m_perkTreeManager.PerkTreeAudioSource.PlayOneShot(m_menuClick);
+        AudioManager.m_audioManager.PerkTreeAudioSource.PlayOneShot(m_menuClick);
         m_perkTreePanel.SetActive(false);
 
         foreach (GameObject perkTreeIcon in m_perkTreeIcons)

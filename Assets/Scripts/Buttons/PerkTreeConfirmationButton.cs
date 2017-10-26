@@ -31,7 +31,7 @@ public class PerkTreeConfirmationButton : BaseButton
         {
             case "MainPanelYes":
                 {
-                    PerkTreeManager.m_perkTreeManager.PerkTreeAudioSource.PlayOneShot(m_perkAppliedAudioClip);
+                    AudioManager.m_audioManager.PerkTreeAudioSource.PlayOneShot(m_perkAppliedAudioClip);
                     PerkTreeManager.m_perkTreeManager.m_selectedPerkButton.PurchasePerk();
                     PerkTreeConfirmationManager.m_perkTreeConfirmationManager.gameObject.SetActive(false);
                     break;
@@ -39,7 +39,7 @@ public class PerkTreeConfirmationButton : BaseButton
 
             case "MainPanelNo":
                 {
-                    PerkTreeManager.m_perkTreeManager.PerkTreeAudioSource.PlayOneShot(m_menuClickAudioClip);
+                    AudioManager.m_audioManager.PerkTreeAudioSource.PlayOneShot(m_menuClickAudioClip);
                     PerkTreeConfirmationManager.m_perkTreeConfirmationManager.gameObject.SetActive(false);
                     break;
                 }
