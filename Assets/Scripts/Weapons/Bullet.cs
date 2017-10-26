@@ -168,16 +168,16 @@ public class Bullet : MonoBehaviour
             //do base damage
             if (m_target != null)
             {
-                if (!a_collision.collider.CompareTag("Player") || !Player.m_Player.GodModeIsActive)
+                if (!a_collision.collider.CompareTag("Player") || !Player.m_player.GodModeIsActive)
                 {
-                    if (Player.m_Player.IceShield == true)
+                    if (Player.m_player.IceShield == true)
                     {
                         float adjustedDamage = m_damage * 0.25f;
                         m_target.m_beenCrit = m_isCrit;
                         m_target.m_currHealth -= (int)adjustedDamage;
                         m_target.m_recentDamageTaken = (int)adjustedDamage;
                     }
-                    else if (Player.m_Player.IceShield == true)
+                    else if (Player.m_player.IceShield == true)
                     {
                         float adjustedDamage = m_damage * 0.5f;
                         m_target.m_beenCrit = m_isCrit;

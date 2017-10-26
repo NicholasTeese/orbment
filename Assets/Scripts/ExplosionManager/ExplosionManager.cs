@@ -21,8 +21,8 @@ public class ExplosionManager : MonoBehaviour
     public GameObject[] m_explosionPrefabs;
 
 
-    private Player m_player;
-    private IsoCam m_camera;
+    //private Player m_player;
+    //private IsoCam m_camera;
 
 
     private List<List<ExplosionItem>> m_explosionPool = new List<List<ExplosionItem>>();
@@ -47,8 +47,8 @@ public class ExplosionManager : MonoBehaviour
     void Start()
     {
         //object pooling
-        m_player = GameObject.FindObjectOfType<Player>();
-        m_camera = GameObject.FindObjectOfType<IsoCam>();
+       //Player.m_player = GameObject.FindObjectOfType<Player>();
+       //m_camera = GameObject.FindObjectOfType<IsoCam>();
 
         for (int numType = 0; numType < m_explosionPrefabs.Length; ++numType)
         {
@@ -100,14 +100,14 @@ public class ExplosionManager : MonoBehaviour
 
             explosion.SetActive(true);
 
-            if (m_camera != null)
+            if (IsoCam.m_playerCamera != null)
             {
-                float shockWave = explosionScript.m_shockWaveStrength / Vector3.Distance(explosion.transform.position, m_player.transform.position);
-                if (explosion.transform.position == m_player.transform.position)
+                float shockWave = explosionScript.m_shockWaveStrength / Vector3.Distance(explosion.transform.position, Player.m_player.transform.position);
+                if (explosion.transform.position == Player.m_player.transform.position)
                 {
                     shockWave = explosionScript.m_shockWaveStrength/ 2.0f;
                 }
-                m_camera.Shake(shockWave, 0.2f);
+                IsoCam.m_playerCamera.Shake(shockWave, 0.2f);
             }
 
         }

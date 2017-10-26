@@ -131,14 +131,14 @@ public class KillStreakManager : MonoBehaviour
 
             if (m_killStreak >= 5)
             {
-                Player.m_Player.m_currHealth += (Player.m_Player.m_maxHealth * 0.10f);
+                Player.m_player.m_currHealth += (Player.m_player.m_maxHealth * 0.10f);
                 //                Debug.Log(Player.m_Player.m_currHealth);
             }
 
             if (m_killStreak >= 10)
             {
-                Player.m_Player.m_bGodModeIsActive = true;
-                Player.m_Player.GodModeTimer = 5.0f;
+                Player.m_player.m_bGodModeIsActive = true;
+                Player.m_player.GodModeTimer = 5.0f;
             }
         }
     }
