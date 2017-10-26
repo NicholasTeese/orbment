@@ -231,7 +231,7 @@ public class LevelManager : MonoBehaviour
         DontDestroyOnLoad(AudioManager.m_audioManager.gameObject);
 
         // Actors.
-        DontDestroyOnLoad(Player.m_player.gameObject);
+        //DontDestroyOnLoad(Player.m_player.gameObject);
 
         // Canvasses.
         DontDestroyOnLoad(PlayerHUDManager.m_playerHUDManager.transform.parent);
