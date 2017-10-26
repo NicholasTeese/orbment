@@ -30,13 +30,22 @@ public class MeleeEnemy : Enemy
 
     private FindObjectsInRadius m_foir;
 
+    private Renderer m_OrcRenderer;
+
+    private Color m_ChargeColour;
+    private Color m_IdleColour;
+
     private new void Awake()
     {
         base.Awake();
         m_foir = this.GetComponent<FindObjectsInRadius>();
         m_navMeshAgent = GetComponent<NavMeshAgent>();
+        m_OrcRenderer = transform.Find("Melee_Mesh_Low").GetComponent<Renderer>();
+        m_ChargeColour = new Color(150, 13, 13);
+        m_IdleColour = new Color(50, 13, 13);
         m_navMeshAgent.destination = GetWanderPosition(transform.position);
         m_navMeshAgent.speed = m_fMoveSpeed;
+        //Debug.Log(m_OrcRenderer.material.color);
     }
 
     new private void Start()
@@ -176,7 +185,12 @@ public class MeleeEnemy : Enemy
                     {
                         timer += Time.time;// * 1.5f;
                         m_v3ChargeTarget = V_targetOffset;
+                        if (timer <= 1)
+                        {
+                            //m_OrcRenderer.material.color = m_ChargeColour;
+                        }
                     }
+                    
                     
                     this.transform.LookAt(V_targetOffset);
                     transform.position = Vector3.MoveTowards(transform.position, m_v3ChargeTarget, (m_fChargeSpeed * Time.deltaTime));
@@ -206,6 +220,8 @@ public class MeleeEnemy : Enemy
                     m_Animator.SetBool("Charge2Walking", false);
                     m_Animator.SetBool("Recovery2Charge", false);
                     m_Animator.SetBool("Recovery2Walking", false);
+
+                    //m_OrcRenderer.material.color = m_IdleColour;
 
                     if (m_fRecoverTime <= 0.0f)
                     {
