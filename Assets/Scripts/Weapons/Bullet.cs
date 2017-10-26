@@ -170,29 +170,37 @@ public class Bullet : MonoBehaviour
             {
                 if (!a_collision.collider.CompareTag("Player") || !Player.m_player.GodModeIsActive)
                 {
-                    if (Player.m_player.IceShield == true)
+                    if(Player.m_player.m_dashing)
                     {
-                        float adjustedDamage = m_damage * 0.25f;
-                        m_target.m_beenCrit = m_isCrit;
-                        m_target.m_currHealth -= (int)adjustedDamage;
-                        m_target.m_recentDamageTaken = (int)adjustedDamage;
-                    }
-                    else if (Player.m_player.IceShield == true)
-                    {
-                        float adjustedDamage = m_damage * 0.5f;
-                        m_target.m_beenCrit = m_isCrit;
-                        m_target.m_currHealth -= (int)adjustedDamage;
-                        m_target.m_recentDamageTaken = (int)adjustedDamage;
+                        // take no damage
                     }
                     else
                     {
-                        m_target.m_beenCrit = m_isCrit;
-                        m_target.m_currHealth -= m_damage;
-                        m_target.m_recentDamageTaken = m_damage;
+                        if (Player.m_player.IceShield == true)
+                        {
+                            float adjustedDamage = m_damage * 0.25f;
+                            m_target.m_beenCrit = m_isCrit;
+                            m_target.m_currHealth -= (int)adjustedDamage;
+                            m_target.m_recentDamageTaken = (int)adjustedDamage;
+                            ExplosionManager.m_explosionManager.RequestExplosion(transform.position, -m_direction, Explosion.ExplosionType.SmallBlood, 0.0f);
+                        }
+                        else if (Player.m_player.IceShield == true)
+                        {
+                            float adjustedDamage = m_damage * 0.5f;
+                            m_target.m_beenCrit = m_isCrit;
+                            m_target.m_currHealth -= (int)adjustedDamage;
+                            m_target.m_recentDamageTaken = (int)adjustedDamage;
+                            ExplosionManager.m_explosionManager.RequestExplosion(transform.position, -m_direction, Explosion.ExplosionType.SmallBlood, 0.0f);
+                        }
+                        else
+                        {
+                            m_target.m_beenCrit = m_isCrit;
+                            m_target.m_currHealth -= m_damage;
+                            m_target.m_recentDamageTaken = m_damage;
+                            ExplosionManager.m_explosionManager.RequestExplosion(transform.position, -m_direction, Explosion.ExplosionType.SmallBlood, 0.0f);
+                        }
                     }
                 }
-
-                ExplosionManager.m_explosionManager.RequestExplosion(transform.position, -m_direction, Explosion.ExplosionType.SmallBlood, 0.0f);
             }
             Disable();
         }           

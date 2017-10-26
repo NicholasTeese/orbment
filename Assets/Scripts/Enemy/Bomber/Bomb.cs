@@ -75,7 +75,7 @@ public class Bomb : MonoBehaviour
             m_bHasExploded = true;
             gameObject.SetActive(false);
 
-            if (Vector3.Distance(transform.position, Player.m_player.transform.position) <= 3.0f)
+            if (Vector3.Distance(transform.position, Player.m_player.transform.position) <= 3.0f && !Player.m_player.m_dashing)
             {
                 Player.m_player.m_currHealth -= 200.0f;
             }

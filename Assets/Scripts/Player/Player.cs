@@ -298,6 +298,7 @@ public class Player : Entity
         if (m_dashing)
         {
             Dash(m_dashDirection);
+
         }
         else
         {
