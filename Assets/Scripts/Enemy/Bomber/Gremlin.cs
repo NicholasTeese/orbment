@@ -135,7 +135,8 @@ public class Gremlin : Enemy
                     m_animator.SetBool("bRunning", false);
                     m_animator.SetBool("bHiding", false);
 
-                    if (Vector3.Distance(transform.position, m_navMeshAgent.destination) <= 1.0f)
+                    //Debug.Log("Distance: " + Vector3.Distance(transform.position, m_navMeshAgent.destination));
+                    if (Vector3.Distance(transform.position, m_navMeshAgent.destination) <= 1.5f)
                     {
                         m_navMeshAgent.destination = GetWanderPosition(transform.position);
                     }
