@@ -222,6 +222,9 @@ public class LevelManager : MonoBehaviour
 
     public void InitialiseDontDestroyOnLoad()
     {
+        Player.m_player.transform.position = m_v3PlayerLevelTwoStartPosition;
+        IsoCam.m_playerCamera.transform.position = m_v3PlayerCameraLevelTwoStartPosition;
+
         // Debuggers.
         DontDestroyOnLoad(DebugLevelSwitcher.m_debugLevelSwitcher.transform.parent);
 
@@ -231,7 +234,7 @@ public class LevelManager : MonoBehaviour
         DontDestroyOnLoad(AudioManager.m_audioManager.gameObject);
 
         // Actors.
-        //DontDestroyOnLoad(Player.m_player.gameObject);
+        DontDestroyOnLoad(Player.m_player.gameObject);
 
         // Canvasses.
         DontDestroyOnLoad(PlayerHUDManager.m_playerHUDManager.transform.parent);
