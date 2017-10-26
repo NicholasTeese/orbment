@@ -25,6 +25,8 @@ public class ExpManager : MonoBehaviour
     public int m_playerLevel = 1;
     public float m_percentageAddedXPPerLvl = 0.25f;
 
+    public GameObject UpgradeAvailableText { get { return m_upgradeAvailableText; } }
+
     public static ExpManager m_experiencePointsManager;
 
     private void Awake()
@@ -90,14 +92,20 @@ public class ExpManager : MonoBehaviour
             }
             else
             {
+                if (GameManager.m_gameManager.ShowCursor)
+                {
+                    m_upgradeAvailableText.GetComponent<Text>().text = "Upgrade Available: Press TAB";
+                }
+                else
+                {
+                    m_upgradeAvailableText.GetComponent<Text>().text = "Upgrade Available: Press BACK";
+                }
                 m_upgradeAvailableText.SetActive(true);
-                //m_upgradeUnavailableText.SetActive(false);
             }
         }
         else
         {
             m_upgradeAvailableText.SetActive(false);
-            //m_upgradeUnavailableText.SetActive(false);
         }
 
         if (Input.GetKeyDown(KeyCode.Tab) || InputManager.BackButton())

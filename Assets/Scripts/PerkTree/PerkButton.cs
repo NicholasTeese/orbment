@@ -134,7 +134,7 @@ public class PerkButton : MonoBehaviour
     public void OnClick()
     {
         // If there are no available perks, exit the function.
-        if (PerkTreeManager.m_perkTreeManager.AvailiablePerks == 0)
+        if (PerkTreeManager.m_perkTreeManager.AvailiablePerks == 0 || !ExpManager.m_experiencePointsManager.UpgradeTreeInRange)
         {
             //Debug.Log("No available perks to spend.");
             return;
