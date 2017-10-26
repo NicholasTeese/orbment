@@ -58,16 +58,16 @@ public class IsoCam : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        offset = this.transform.position - Player.m_Player.transform.position;
+        offset = this.transform.position - Player.m_player.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Player.m_Player != null)
+        if (Player.m_player != null)
         {
-           this.transform.position = Vector3.MoveTowards(this.transform.position, Player.m_Player.transform.position + offset, m_camMoveSpeed);
-           this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, Quaternion.LookRotation(Player.m_Player.transform.position - this.transform.position), m_camRotSpeed);
+           this.transform.position = Vector3.MoveTowards(this.transform.position, Player.m_player.transform.position + offset, m_camMoveSpeed);
+           this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, Quaternion.LookRotation(Player.m_player.transform.position - this.transform.position), m_camRotSpeed);
         }
 
         if(m_shake)

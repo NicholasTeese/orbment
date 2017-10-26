@@ -205,21 +205,21 @@ public class PerkButton : MonoBehaviour
             // Increase player movement speed by 50% (2A).
             case "FirePerk_2A":
                 {
-                    Player.m_Player.m_currSpeed += (Player.m_Player.m_currSpeed * 0.5f);
+                    Player.m_player.m_currSpeed += (Player.m_player.m_currSpeed * 0.5f);
                     break;
                 }
 
             // Increase player max health by 20% (2B).
             case "FirePerk_2B":
                 {
-                    Player.m_Player.m_maxHealth += (Player.m_Player.m_maxHealth * 0.2f);
+                    Player.m_player.m_maxHealth += (Player.m_player.m_maxHealth * 0.2f);
                     break;
                 }
 
             // Give player speed boost based on how many enemies are burning (3A).
             case "FirePerk_3A":
                 {
-                    Player.m_Player.BurningSpeedBoost = true;
+                    Player.m_player.BurningSpeedBoost = true;
                     break;
                 }
 
@@ -236,7 +236,7 @@ public class PerkButton : MonoBehaviour
             // Spawn ring of fire when player health is below 25% (3C).
             case "FirePerk_3C":
                 {
-                    Player.m_Player.m_hasRingOfFire = true;
+                    Player.m_player.m_hasRingOfFire = true;
                     break;
                 }
 
@@ -250,7 +250,7 @@ public class PerkButton : MonoBehaviour
             // Increase player speed boost based on how many enemies are burning (4A).
             case "FirePerk_4A":
                 {
-                    Player.m_Player.AdditionalBurningSpeedBoost = true;
+                    Player.m_player.AdditionalBurningSpeedBoost = true;
                     break;
                 }
 
@@ -267,14 +267,14 @@ public class PerkButton : MonoBehaviour
             // Ring of fire damage increased (4C).
             case "FirePerk_4C":
                 {
-                    Player.m_Player.AdditionalBurnDPS += 5;
+                    Player.m_player.AdditionalBurnDPS += 5;
                     break;
                 }
 
             // God mode enabled for 5 seconds when player reaches highest kill streak (4D).
             case "FirePerk_4D":
                 {
-                    Player.m_Player.GodModeIsAvailable = true;
+                    Player.m_player.GodModeIsAvailable = true;
                     break;
                 }
 
@@ -305,35 +305,35 @@ public class PerkButton : MonoBehaviour
             // Increase player max mana by 20% (2A).
             case "IcePerk_2A":
                 {
-                    Player.m_Player.gameObject.GetComponent<Mana>().m_maxMana += (Player.m_Player.gameObject.GetComponent<Mana>().m_maxMana * 0.2f);
+                    Player.m_player.gameObject.GetComponent<Mana>().m_maxMana += (Player.m_player.gameObject.GetComponent<Mana>().m_maxMana * 0.2f);
                     break;
                 }
 
             // Increase player max health by 20% (2B).
             case "IcePerk_2B":
                 {
-                    Player.m_Player.m_maxHealth += (Player.m_Player.m_maxHealth * 0.2f);
+                    Player.m_player.m_maxHealth += (Player.m_player.m_maxHealth * 0.2f);
                     break;
                 }
 
             // Freeze (stun) enemies for 2 seconds (3A.)
             case "IcePerk_3A":
                 {
-                    Player.m_Player.FreezeUnlocked = true;
+                    Player.m_player.FreezeUnlocked = true;
                     break;
                 }
 
             // Ice bullets splatter (3B).
             case "IcePerk_3B":
                 {
-                    Player.m_Player.IceSplatterUnlocked = true;
+                    Player.m_player.IceSplatterUnlocked = true;
                     break;
                 }
 
             // Gain 25% armor (3C).
             case "IcePerk_3C":
                 {
-                    Player.m_Player.IceShield = true;
+                    Player.m_player.IceShield = true;
                     break;
                 }
 
@@ -361,8 +361,8 @@ public class PerkButton : MonoBehaviour
             // Gain 50% armour (4C).
             case "IcePerk_4C":
                 {
-                    Player.m_Player.IceArmor = true;
-                    Player.m_Player.IceShield = false;
+                    Player.m_player.IceArmor = true;
+                    Player.m_player.IceShield = false;
                     break;
                 }
 
@@ -399,14 +399,14 @@ public class PerkButton : MonoBehaviour
             // Increase player max mana by 20% (2A).
             case "LightningPerk_2A":
                 {
-                    Player.m_Player.gameObject.GetComponent<Mana>().m_maxMana += (Player.m_Player.gameObject.GetComponent<Mana>().m_maxMana * 0.2f);
+                    Player.m_player.gameObject.GetComponent<Mana>().m_maxMana += (Player.m_player.gameObject.GetComponent<Mana>().m_maxMana * 0.2f);
                     break;
                 }
 
             // Increase player speed by 50% (2B).
             case "LightningPerk_2B":
                 {
-                    Player.m_Player.m_currSpeed += (Player.m_Player.m_currSpeed * 0.5f);
+                    Player.m_player.m_currSpeed += (Player.m_player.m_currSpeed * 0.5f);
                     break;
                 }
 
@@ -420,7 +420,7 @@ public class PerkButton : MonoBehaviour
             // Dash consumes 50% less mana (3B).
             case "LightningPerk_3B":
                 {
-                    Player.m_Player.m_dashManaCost -= (Player.m_Player.m_dashManaCost * 0.5f);
+                    Player.m_player.m_dashManaCost -= (Player.m_player.m_dashManaCost * 0.5f);
                     break;
                 }
 
@@ -448,7 +448,7 @@ public class PerkButton : MonoBehaviour
             // Dash consumes no mana (4B).
             case "LightningPerk_4B":
                 {
-                    Player.m_Player.m_dashManaCost = 0;
+                    Player.m_player.m_dashManaCost = 0;
                     break;
                 }
 

@@ -10,7 +10,7 @@ public class IceShard : Bullet
     {
         base.OnEnable();
 
-        if (!Player.m_Player.IceSplatterUnlocked)
+        if (!Player.m_player.IceSplatterUnlocked)
         {
             return;
         }

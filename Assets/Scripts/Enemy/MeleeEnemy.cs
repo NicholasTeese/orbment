@@ -72,7 +72,7 @@ public class MeleeEnemy : Enemy
 
         base.Update();
 
-        Vector3 V_targetOffset = new Vector3(Player.m_Player.transform.position.x, transform.position.y, Player.m_Player.transform.position.z);
+        Vector3 V_targetOffset = new Vector3(Player.m_player.transform.position.x, transform.position.y, Player.m_player.transform.position.z);
 
         if (Frozen)
         {
@@ -99,7 +99,7 @@ public class MeleeEnemy : Enemy
                     // If enemy detects player
                     if (m_foir.m_target != null)
                     {
-                        if (Vector3.Distance(transform.position, Player.m_Player.transform.position) <= 17.0f)
+                        if (Vector3.Distance(transform.position, Player.m_player.transform.position) <= 17.0f)
                         {
                             // set behaviour to prepare charge
                             m_Animator.SetBool("Walking2Recovery", true);
@@ -124,7 +124,7 @@ public class MeleeEnemy : Enemy
                     // cease wander
                     //m_navMeshAgent.destination = transform.position;
                     // If player retreats far enough away before enemy charges, return to wander
-                    if (Vector3.Distance(transform.position, Player.m_Player.transform.position) > 17.0f)
+                    if (Vector3.Distance(transform.position, Player.m_player.transform.position) > 17.0f)
                     {
                         m_fPrepareChargeTime = 2.0f;
                         m_Animator.SetBool("Walking2Recovery", false);
@@ -183,7 +183,7 @@ public class MeleeEnemy : Enemy
 
                     if (DamageCheck())
                     {
-                        Player.m_Player.m_bImpacted = true;
+                        Player.m_player.m_bImpacted = true;
                     }
 
                     if (Vector3.Distance(transform.position, m_v3ChargeTarget) <= 1.5f)
@@ -209,11 +209,11 @@ public class MeleeEnemy : Enemy
 
                     if (m_fRecoverTime <= 0.0f)
                     {
-                        if (Vector3.Distance(transform.position, Player.m_Player.transform.position) >= 4.0f)
+                        if (Vector3.Distance(transform.position, Player.m_player.transform.position) >= 4.0f)
                         {
                             if (m_foir.m_target != null)
                             {
-                                if (Vector3.Distance(transform.position, Player.m_Player.transform.position) <= 17.0f)
+                                if (Vector3.Distance(transform.position, Player.m_player.transform.position) <= 17.0f)
                                 {
                                     m_navMeshAgent.enabled = true;
                                     m_navMeshAgent.speed = m_fMoveSpeed;
@@ -233,7 +233,7 @@ public class MeleeEnemy : Enemy
                             break;
                         }
 
-                        Vector3 v3RetreatDirection = transform.position - Player.m_Player.transform.position;
+                        Vector3 v3RetreatDirection = transform.position - Player.m_player.transform.position;
                         v3RetreatDirection = new Vector3(v3RetreatDirection.x, 0.0f, v3RetreatDirection.z).normalized;
                         transform.position += v3RetreatDirection * m_fMoveSpeed * Time.deltaTime;
                         break;
@@ -264,20 +264,20 @@ public class MeleeEnemy : Enemy
 
     void FixedUpdate()
     {
-        float DamagePercent = Player.m_Player.m_maxHealth * 0.25f;
+        float DamagePercent = Player.m_player.m_maxHealth * 0.25f;
 
-        if (Player.m_Player.m_bImpacted)
+        if (Player.m_player.m_bImpacted)
         {
-            if (Player.m_Player.m_iImpactTimer == 0)
+            if (Player.m_player.m_iImpactTimer == 0)
             {
-                Player.m_Player.m_currHealth -= (int)DamagePercent;
+                Player.m_player.m_currHealth -= (int)DamagePercent;
                 //m_explosionManager.RequestExplosion(transform.position, m_v3ChargeTarget, Explosion.ExplosionType.SmallBlood, 0.0f);
             }
-            Player.m_Player.m_iImpactTimer += (Time.deltaTime * 2);
-            if (Player.m_Player.m_iImpactTimer > 2)
+            Player.m_player.m_iImpactTimer += (Time.deltaTime * 2);
+            if (Player.m_player.m_iImpactTimer > 2)
             {
-                Player.m_Player.m_bImpacted = false;
-                Player.m_Player.m_iImpactTimer = 0;
+                Player.m_player.m_bImpacted = false;
+                Player.m_player.m_iImpactTimer = 0;
             }
         }
     }
@@ -313,7 +313,7 @@ public class MeleeEnemy : Enemy
 
     private bool DamageCheck()
     {
-        if (Vector3.Distance(transform.position, Player.m_Player.transform.position) <= 3.0f && !Player.m_Player.m_dashing)
+        if (Vector3.Distance(transform.position, Player.m_player.transform.position) <= 3.0f && !Player.m_player.m_dashing)
         {
             return true;
         }

@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        if (!Player.m_Player.IsAlive && !DeathMenuManager.m_deathMenuManager.gameObject.activeInHierarchy)
+        if (!Player.m_player.IsAlive && !DeathMenuManager.m_deathMenuManager.gameObject.activeInHierarchy)
         {
             Time.timeScale = 0.0f;
             DeathMenuManager.m_deathMenuManager.gameObject.SetActive(true);

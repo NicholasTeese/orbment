@@ -182,14 +182,14 @@ public class BaseEnemy : MonoBehaviour
             StatusEffectManager.m_statusEffectManager.RequestEffect(transform, StatusEffect.Status.OnFire);
             m_bBurn = false;
 
-            if (Player.m_Player.BurningSpeedBoost)
+            if (Player.m_player.BurningSpeedBoost)
             {
-                if (Player.m_Player.AdditionalBurningSpeedBoost)
+                if (Player.m_player.AdditionalBurningSpeedBoost)
                 {
-                    ++Player.m_Player.EnemiesOnFire;
+                    ++Player.m_player.EnemiesOnFire;
                 }
 
-                ++Player.m_Player.EnemiesOnFire;
+                ++Player.m_player.EnemiesOnFire;
             }
         }
 
