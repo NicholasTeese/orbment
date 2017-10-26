@@ -21,9 +21,6 @@ public class PerkTreeManager : MonoBehaviour
     public int m_iMinimumIndex;
     public int m_iMaximumIndex;
 
-    [Header("Perk Trees")]
-    public List<PerkTreeButton> m_perkTrees = new List<PerkTreeButton>();
-
     [Header("Selected Perk Tree")]
     public PerkTreeButton m_selectedPerkTreeButton;
 
@@ -37,7 +34,6 @@ public class PerkTreeManager : MonoBehaviour
 
     private void Awake()
     {
-        m_selectedPerkTreeButton.IsHighlighted = true;
         m_selectedPerkButton.IsHighlighted = true;
 
         m_backgroundImage = transform.Find("Background_Panel").GetComponent<Image>();
@@ -61,74 +57,22 @@ public class PerkTreeManager : MonoBehaviour
     {
         if (InputManager.AButton())
         {
-            if (!m_bPerkTreeIsSelected)
+            if (m_selectedPerkButton.IsHighlighted)
             {
-                m_bPerkTreeIsSelected = true;
-                m_selectedPerkButton.IsHighlighted = true;
-                m_selectedPerkTreeButton.OnClick();
+                m_selectedPerkButton.OnClick();
             }
             else
             {
-                if (m_selectedPerkButton.IsHighlighted)
-                {
-                    m_selectedPerkButton.OnClick();
-                }
-                else
-                {
-                    m_bPerkTreeIsSelected = false;
-                    m_selectedPerkButton.m_backButton.GetComponent<PerkTreeBackButton>().IsHightlighted = false;
-                    m_selectedPerkButton.m_backButton.GetComponent<PerkTreeBackButton>().OnClick();
-                }
+                m_bPerkTreeIsSelected = false;
+                m_selectedPerkButton.m_backButton.GetComponent<PerkTreeBackButton>().IsHightlighted = false;
+                m_selectedPerkButton.m_backButton.GetComponent<PerkTreeBackButton>().OnClick();
             }
         }
 
-        if (!m_bPerkTreeIsSelected)
-        {
-            NaviagatePerkTrees();
-        }
-        else
-        {
-            NavigateSelectedPerkTree();
-        }
+        NavigatePerkTree();
     }
 
-    private void NaviagatePerkTrees()
-    {
-        Vector3 v3PrimaryInputDirection = InputManager.PrimaryInput();
-
-        // Right.
-        if (v3PrimaryInputDirection.x >= m_fInputBuffer)
-        {
-            if (!m_bInputRecieved)
-            {
-                m_bInputRecieved = true;
-                ++m_iPerkTreeIndex;
-                m_iPerkTreeIndex = Mathf.Clamp(m_iPerkTreeIndex, m_iMinimumIndex, m_iMaximumIndex);
-                m_selectedPerkTreeButton.IsHighlighted = false;
-                m_selectedPerkTreeButton = m_perkTrees[m_iPerkTreeIndex];
-                m_selectedPerkTreeButton.IsHighlighted = true;
-            }
-        }
-        // Left.
-        else if (v3PrimaryInputDirection.x <= -m_fInputBuffer)
-        {
-            if (!m_bInputRecieved)
-            {
-                m_bInputRecieved = true;
-                --m_iPerkTreeIndex;
-                m_iPerkTreeIndex = Mathf.Clamp(m_iPerkTreeIndex, m_iMinimumIndex, m_iMaximumIndex);
-                m_selectedPerkTreeButton.IsHighlighted = false;
-                m_selectedPerkTreeButton = m_perkTrees[m_iPerkTreeIndex];
-                m_selectedPerkTreeButton.IsHighlighted = true;
-            }
-        }
-        else
-        {
-            m_bInputRecieved = false;
-        }
-    }
-
-    private void NavigateSelectedPerkTree()
+    private void NavigatePerkTree()
     {
         Vector3 v3PrimaryInputDirection = InputManager.PrimaryInput();
 
