@@ -36,8 +36,8 @@ public class PerkButton : MonoBehaviour
     [Header("Perk Images")]
     public Image m_branchImage;
 
-    [Header("Perk Description Text")]
-    public Text m_perkCanvasDescription;
+    [Header("Perk Description")]
+    public string m_strPerkCanvasDescription;
 
     [Header("Perk Wings Script")]
     public PerkWings m_perkWings;
@@ -116,7 +116,7 @@ public class PerkButton : MonoBehaviour
             }
         }
 
-        m_perkCanvasDescription.text = a_strPerkDescription;
+        PerkTreeManager.m_perkTreeManager.m_perkTreeDecriptionText.text = a_strPerkDescription;
     }
 
     /// <summary>
