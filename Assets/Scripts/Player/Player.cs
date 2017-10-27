@@ -176,6 +176,11 @@ public class Player : Entity
         {
             m_bIsAlive = false;
 		}
+        // Debug shortcut for Heal
+        if (Input.GetKey(KeyCode.H) && Input.GetKey(KeyCode.KeypadPlus))
+        {
+            m_currHealth = m_maxHealth;
+        }
 
         PlayerHUDManager.m_playerHUDManager.HealthBar.GetComponent<Image>().fillAmount = m_currHealth / m_maxHealth;
         if (m_camera != null && m_currHealth < m_oldHealth)

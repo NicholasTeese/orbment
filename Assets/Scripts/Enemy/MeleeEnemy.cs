@@ -45,9 +45,6 @@ public class MeleeEnemy : Enemy
         m_IdleColour   = m_OrcRenderer.material.color;
         m_navMeshAgent.destination = GetWanderPosition(transform.position);
         m_navMeshAgent.speed = m_fMoveSpeed;
-        Debug.Log(m_ChargeColour);
-        Debug.Log(m_IdleColour);
-
     }
 
     new private void Start()
@@ -57,11 +54,12 @@ public class MeleeEnemy : Enemy
 
     new private void Update()
     {
-        // kill code for debugging
+        // Debug shortcut for instakill
         if (Input.GetKey(KeyCode.E) && Input.GetKey(KeyCode.Equals) && Input.GetKey(KeyCode.Alpha0))
         {
             this.m_currHealth = 0;
         }
+        // Debug shortcut for Freeze debuff
         if (Input.GetKey(KeyCode.E) && Input.GetKey(KeyCode.Equals) && Input.GetKey(KeyCode.F))
         {
             Frozen = true;

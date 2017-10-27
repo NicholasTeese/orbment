@@ -128,7 +128,9 @@ public class ExpManager : MonoBehaviour
         {
             DisablePerkTree();
         }
-        if (Input.GetKeyDown(KeyCode.L))
+
+        // Debug shortcut for Level up
+        if (Input.GetKey(KeyCode.L) && Input.GetKey(KeyCode.KeypadPlus))
         {
             m_playerExperience += 700;
         }

@@ -64,16 +64,6 @@ public class KillStreakManager : MonoBehaviour
 
     private void DisplayKillStreak(int a_iKillStreak)
     {
-        //m_currentKillStreakSprite.gameObject.SetActive(true);
-        //
-        //if(Input.GetKeyDown(KeyCode.PageUp))
-        //{
-        //    StreakGrow(m_currentKillStreakSprite.gameObject);
-        //}
-        //if (Input.GetKeyDown(KeyCode.PageDown))
-        //{
-        //    StreakRecede(m_currentKillStreakSprite.gameObject);
-        //}
         switch (a_iKillStreak)
         {
             case 0:

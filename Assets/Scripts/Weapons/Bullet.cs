@@ -39,6 +39,7 @@ public class Bullet : MonoBehaviour
 
     public bool m_isCrit = false;
 
+    protected Vector3 m_v3PreviousExplosionPos;
 
     public enum ProjectileType
     {
@@ -52,6 +53,7 @@ public class Bullet : MonoBehaviour
 
     protected virtual void Awake()
     {
+        m_v3PreviousExplosionPos = Vector3.zero;
         L_Ground = LayerMask.NameToLayer("Ground");
         L_Bullet = LayerMask.NameToLayer("Bullet");
     }
@@ -162,15 +164,13 @@ public class Bullet : MonoBehaviour
 
         if (!a_collision.collider.CompareTag(m_id))
         {
-            ExplosionManager.m_explosionManager.RequestExplosion(transform.position, -m_direction, Explosion.ExplosionType.BulletImpact, 0.0f);
-
             m_target = a_collision.collider.GetComponent<Entity>();
             //do base damage
-            if (m_target != null)
+            if (m_target != null)// || m_target.name != m_id)
             {
                 if (!a_collision.collider.CompareTag("Player") || !Player.m_player.GodModeIsActive)
                 {
-                    if(Player.m_player.m_dashing && m_target.CompareTag("Player"))
+                    if (Player.m_player.m_dashing && m_target.CompareTag("Player"))
                     {
                         // take no damage
                     }
@@ -182,14 +182,18 @@ public class Bullet : MonoBehaviour
                             m_target.m_beenCrit = m_isCrit;
                             m_target.m_currHealth -= (int)adjustedDamage;
                             m_target.m_recentDamageTaken = (int)adjustedDamage;
+
+                            ExplosionManager.m_explosionManager.RequestExplosion(transform.position, -m_direction, Explosion.ExplosionType.BulletImpact, 0.0f);
                             ExplosionManager.m_explosionManager.RequestExplosion(transform.position, -m_direction, Explosion.ExplosionType.SmallBlood, 0.0f);
                         }
-                        else if (Player.m_player.IceShield == true)
+                        else if (Player.m_player.IceArmor == true)
                         {
                             float adjustedDamage = m_damage * 0.5f;
                             m_target.m_beenCrit = m_isCrit;
                             m_target.m_currHealth -= (int)adjustedDamage;
                             m_target.m_recentDamageTaken = (int)adjustedDamage;
+
+                            ExplosionManager.m_explosionManager.RequestExplosion(transform.position, -m_direction, Explosion.ExplosionType.BulletImpact, 0.0f);
                             ExplosionManager.m_explosionManager.RequestExplosion(transform.position, -m_direction, Explosion.ExplosionType.SmallBlood, 0.0f);
                         }
                         else
@@ -197,7 +201,11 @@ public class Bullet : MonoBehaviour
                             m_target.m_beenCrit = m_isCrit;
                             m_target.m_currHealth -= m_damage;
                             m_target.m_recentDamageTaken = m_damage;
+
+                            ExplosionManager.m_explosionManager.RequestExplosion(transform.position, -m_direction, Explosion.ExplosionType.BulletImpact, 0.0f);
                             ExplosionManager.m_explosionManager.RequestExplosion(transform.position, -m_direction, Explosion.ExplosionType.SmallBlood, 0.0f);
+                            //Debug.Log(Vector3.Distance(m_v3PreviousExplosionPos, transform.position));
+                            m_v3PreviousExplosionPos = transform.position;
                         }
                     }
                 }

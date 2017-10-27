@@ -199,6 +199,7 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
+        // Debug shortcut for Level pass
         if (Input.GetKeyDown(KeyCode.P))
         {
             m_loadNextLevelAsyncOperation.allowSceneActivation = true;

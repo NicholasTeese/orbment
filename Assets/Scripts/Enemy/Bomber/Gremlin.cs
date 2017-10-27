@@ -59,11 +59,12 @@ public class Gremlin : Enemy
 
     private new void Update()
     {
-        // kill code for debugging
+        // Debug shortcut for instakill
         if (Input.GetKey(KeyCode.E) && Input.GetKey(KeyCode.Equals) && Input.GetKey(KeyCode.Alpha0))
         {
             this.m_currHealth = 0;
         }
+        // Debug shortcut for Freeze debuff
         if (Input.GetKey(KeyCode.E) && Input.GetKey(KeyCode.Equals) && Input.GetKey(KeyCode.F))
         {
             Frozen = true;
