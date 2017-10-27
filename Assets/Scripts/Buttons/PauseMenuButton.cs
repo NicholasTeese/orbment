@@ -161,15 +161,15 @@ public class PauseMenuButton : BaseButton
                     if (GameManager.m_gameManager.ForceHideCursor)
                     {
                         GameManager.m_gameManager.ForceHideCursor = false;
-                        gameObject.SetActive(false);
-                        transform.parent.Find("Hide_Cursor_Button").gameObject.SetActive(true);
+                        m_button.GetComponent<Image>().sprite = PauseMenuManager.m_pauseMenuManager.m_hideCursorSprite;
+                        m_button.spriteState = PauseMenuManager.m_pauseMenuManager.m_hideCursorSpriteState;
                         
                     }
                     else
                     {
                         GameManager.m_gameManager.ForceHideCursor = true;
-                        gameObject.SetActive(false);
-                        transform.parent.Find("Show_Cursor_Button").gameObject.SetActive(true);
+                        m_button.GetComponent<Image>().sprite = PauseMenuManager.m_pauseMenuManager.m_showCursorSprite;
+                        m_button.spriteState = PauseMenuManager.m_pauseMenuManager.m_showCursorSpriteState;
                     }
                     break;
                 }
