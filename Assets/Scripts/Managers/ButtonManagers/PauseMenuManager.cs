@@ -60,6 +60,13 @@ public class PauseMenuManager : MonoBehaviour
     public GameObject m_quitToMainMenuPanel;
     public GameObject m_quitToDesktopPanel;
 
+    [Header("Options Hide Cursor Button Sprites.")]
+    public SpriteState m_hideCursorSpriteState;
+    public Sprite m_hideCursorSprite;
+    [Header("Options Hide Cursor Button Sprites.")]
+    public SpriteState m_showCursorSpriteState;
+    public Sprite m_showCursorSprite;
+
     public static PauseMenuManager m_pauseMenuManager;
 
     private void Awake()
