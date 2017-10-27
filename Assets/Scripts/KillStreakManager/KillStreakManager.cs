@@ -17,12 +17,15 @@ public class KillStreakManager : MonoBehaviour
     private float m_timeOfLastKill = 0.0f;
 
     protected float m_fGrowShrinkSpeed = 0.1f;
-    protected float m_fGrowMultiplier = 1.5f;
+    protected float m_fGrowMultiplier = 1.3f;
     protected float m_fShrinkMultiplier = 1.0f;
+    
     protected float m_fShakeRange = 0.2f;
 
     private bool m_bLifesteal = false;
     public bool Lifesteal { get; set; }
+
+    Vector3 v3KillstreakImagePosition = Vector3.zero;
 
     public static KillStreakManager m_killStreakManager;
 
@@ -36,13 +39,12 @@ public class KillStreakManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        //m_killStreakSprite = InitialiseKillStreakSprites();
     }
 
     private void Start()
     {
         m_currentKillStreakSprite = PlayerHUDManager.m_playerHUDManager.transform.Find("Kill_Streak_Image").GetComponent<Image>();
+        v3KillstreakImagePosition = m_currentKillStreakSprite.transform.position;
     }
 
     private void Update()
@@ -53,22 +55,25 @@ public class KillStreakManager : MonoBehaviour
         {
             ResetKillStreak();
         }
-    }
 
-    //x private List<Sprite> InitialiseKillStreakSprites()
-    //x {
-    //x     List<Sprite> killStreakImages = new List<Sprite>();
-    //x     killStreakImages.Add(Resources.Load("Textures/UI/KillStreak/2") as Sprite);
-    //x     killStreakImages.Add(Resources.Load("Textures/UI/KillStreak/3") as Sprite);
-    //x     killStreakImages.Add(Resources.Load("Textures/UI/KillStreak/4") as Sprite);
-    //x     killStreakImages.Add(Resources.Load("Textures/UI/KillStreak/5") as Sprite);
-    //x     killStreakImages.Add(Resources.Load("Textures/UI/KillStreak/6") as Sprite);
-    //x     killStreakImages.Add(Resources.Load("Textures/UI/KillStreak/10") as Sprite);
-    //x     return killStreakImages;
-    //x }
+        if(m_currentKillStreakSprite.gameObject.activeInHierarchy)
+        {
+            StreakShake(m_currentKillStreakSprite.gameObject);
+        }
+    }
 
     private void DisplayKillStreak(int a_iKillStreak)
     {
+        //m_currentKillStreakSprite.gameObject.SetActive(true);
+        //
+        //if(Input.GetKeyDown(KeyCode.PageUp))
+        //{
+        //    StreakGrow(m_currentKillStreakSprite.gameObject);
+        //}
+        //if (Input.GetKeyDown(KeyCode.PageDown))
+        //{
+        //    StreakRecede(m_currentKillStreakSprite.gameObject);
+        //}
         switch (a_iKillStreak)
         {
             case 0:
@@ -153,31 +158,36 @@ public class KillStreakManager : MonoBehaviour
         return (m_timeOfLastKill == 0.0f || Time.time - m_timeOfLastKill <= m_timeAllowedBetweenKills);
     }
 
-    public void StreakSizing()
+    public void StreakGrow(GameObject currentStreak)
     {
-        // Grow
-        if (transform.localScale.x < m_fGrowMultiplier)
+        if (currentStreak.transform.localScale.x < m_fGrowMultiplier)
         {
-            transform.localScale += new Vector3(m_fGrowShrinkSpeed, m_fGrowShrinkSpeed, 0.0f);
-        }
-        // Shrink
-        if (transform.localScale.x > m_fShrinkMultiplier)
-        {
-            transform.localScale -= new Vector3(m_fGrowShrinkSpeed, m_fGrowShrinkSpeed, 0.0f);
+            currentStreak.transform.localScale += new Vector3(m_fGrowShrinkSpeed, m_fGrowShrinkSpeed, 0.0f);
         }
     }
 
-    public void StreakShake()
+    public void StreakRecede(GameObject currentStreak)
     {
-        // Move up
-        if (transform.position.y < m_fShakeRange)
+        if (currentStreak.transform.localScale.x > m_fShrinkMultiplier)
         {
-            transform.position += new Vector3(0.0f, m_fGrowShrinkSpeed, 0.0f);
+            currentStreak.transform.localScale -= new Vector3(m_fGrowShrinkSpeed, m_fGrowShrinkSpeed, 0.0f);
         }
-        // Move down
-        if (transform.position.y > m_fShakeRange)
-        {
-            transform.position -= new Vector3(0.0f, m_fGrowShrinkSpeed, 0.0f);
-        }
+    }
+
+    public void StreakShake(GameObject currentStreak)
+    {
+        //// Move up
+        //if (currentStreak.transform.position.y < m_fShakeRange)
+        //{
+        //    currentStreak.transform.position += new Vector3(0.0f, m_fGrowShrinkSpeed, 0.0f);
+        //}
+        //// Move down
+        //if (currentStreak.transform.position.y > m_fShakeRange)
+        //{
+        //    currentStreak.transform.position -= new Vector3(0.0f, m_fGrowShrinkSpeed, 0.0f);
+        //}
+        //Debug.Log(currentStreak.transform.position);
+        //Vector3 v3Pos = currentStreak.transform.position;
+        //currentStreak.transform.position = new Vector3(Mathf.Clamp((v3Pos.x + Random.Range(0.0f, 0.05f)), v3KillstreakImagePosition.x - 0.5f, v3KillstreakImagePosition.x + 0.5f), Mathf.Clamp((v3Pos.y + Random.Range(0.0f, 0.05f)), v3KillstreakImagePosition.y - 0.5f, v3KillstreakImagePosition.y + 0.5f), v3Pos.z);
     }
 }

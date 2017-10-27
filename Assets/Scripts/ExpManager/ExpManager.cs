@@ -25,6 +25,8 @@ public class ExpManager : MonoBehaviour
     public int m_playerLevel = 1;
     public float m_percentageAddedXPPerLvl = 0.25f;
 
+    public GameObject UpgradeAvailableText { get { return m_upgradeAvailableText; } }
+
     public static ExpManager m_experiencePointsManager;
 
     private void Awake()
@@ -44,9 +46,9 @@ public class ExpManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name == LevelManager.m_strLevelOneSceneName)
         {
             // Initialise perk.
-            PerkTreeManager.m_perkTreeManager.m_selectedPerkTreeButton.m_childPerkTree.SetActive(true);
-            PerkTreeManager.m_perkTreeManager.m_selectedPerkButton.PurchasePerk();
-            PerkTreeManager.m_perkTreeManager.m_selectedPerkTreeButton.m_childPerkTree.SetActive(false);
+            //PerkTreeManager.m_perkTreeManager.m_selectedPerkTreeButton.m_childPerkTree.SetActive(true);
+            //PerkTreeManager.m_perkTreeManager.m_selectedPerkButton.PurchasePerk();
+            //PerkTreeManager.m_perkTreeManager.m_selectedPerkTreeButton.m_childPerkTree.SetActive(false);
         }
 
         PerkTreeManager.m_perkTreeManager.gameObject.SetActive(false);
@@ -90,14 +92,20 @@ public class ExpManager : MonoBehaviour
             }
             else
             {
+                if (GameManager.m_gameManager.ShowCursor)
+                {
+                    m_upgradeAvailableText.GetComponent<Text>().text = "Upgrade Available: Press TAB";
+                }
+                else
+                {
+                    m_upgradeAvailableText.GetComponent<Text>().text = "Upgrade Available: Press BACK";
+                }
                 m_upgradeAvailableText.SetActive(true);
-                //m_upgradeUnavailableText.SetActive(false);
             }
         }
         else
         {
             m_upgradeAvailableText.SetActive(false);
-            //m_upgradeUnavailableText.SetActive(false);
         }
 
         if (Input.GetKeyDown(KeyCode.Tab) || InputManager.BackButton())
@@ -118,6 +126,10 @@ public class ExpManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Escape) && m_bPerkTreeOpen)
         {
             DisablePerkTree();
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            m_playerExperience += 700;
         }
     }
 

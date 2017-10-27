@@ -274,7 +274,7 @@ public class Player : Entity
         {
             RaycastHit hit;
             float rayLength = 1000;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray ray = IsoCam.m_playerCamera.MainPlayerCamera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit, rayLength, m_shootPlane))
             {
                 Vector3 hitPoint = hit.point;
@@ -301,7 +301,6 @@ public class Player : Entity
         if (m_dashing)
         {
             Dash(m_dashDirection);
-
         }
         else
         {

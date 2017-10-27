@@ -307,7 +307,7 @@ public class MeleeEnemy : Enemy
             if (m_bulletScript != null && m_bulletScript.m_id == "Player")
             {
                 //m_navMeshAgent.SetDestination(collision.collider.transform.position - m_bulletScript.m_direction);
-                //m_navMeshAgent.transform.LookAt(collision.collider.transform.position - m_bulletScript.m_direction);
+                m_navMeshAgent.transform.LookAt(collision.collider.transform.position - m_bulletScript.m_direction);
             }
         }
     }
