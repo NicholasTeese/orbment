@@ -63,7 +63,7 @@ public class PauseMenuManager : MonoBehaviour
     [Header("Options Hide Cursor Button Sprites.")]
     public SpriteState m_hideCursorSpriteState;
     public Sprite m_hideCursorSprite;
-    [Header("Options Hide Cursor Button Sprites.")]
+    [Header("Options Show Cursor Button Sprites.")]
     public SpriteState m_showCursorSpriteState;
     public Sprite m_showCursorSprite;
 

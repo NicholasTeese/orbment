@@ -27,6 +27,9 @@ public class PerkTreeManager : MonoBehaviour
     [Header("Selected Perk Button")]
     public PerkButton m_selectedPerkButton;
 
+    [Header("Perk Tree Description Text")]
+    public Text m_perkTreeDecriptionText;
+
     [HideInInspector]
     public Player m_player;
 
@@ -70,6 +73,8 @@ public class PerkTreeManager : MonoBehaviour
         }
 
         NavigatePerkTree();
+
+        m_perkTreeDecriptionText.text = m_selectedPerkButton.m_strPerkCanvasDescription;
     }
 
     private void NavigatePerkTree()
