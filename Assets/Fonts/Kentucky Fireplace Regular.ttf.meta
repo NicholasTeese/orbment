@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: e8df0e6d17ae7a0488836718e7de6369
+timeCreated: 1509061311
+licenseType: Pro
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Kentucky Fireplace
+  fontNames:
+  - Kentucky Fireplace
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
