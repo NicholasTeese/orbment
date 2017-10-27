@@ -119,6 +119,10 @@ public class ExpManager : MonoBehaviour
         {
             DisablePerkTree();
         }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            m_playerExperience += 700;
+        }
     }
 
     void LevelUp()
