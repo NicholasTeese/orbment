@@ -43,7 +43,7 @@ public class Player : Entity
     [Header("Dash")]
     public float m_dashSpeed = 10.0f;
     public float m_dashTime = 0.2f;
-    public float m_dashManaCost = 25.0f;
+    public float m_dashManaCost = 75.0f;
 
     [Header("Current Weapon")]
     public BaseWeapon m_currWeapon;
