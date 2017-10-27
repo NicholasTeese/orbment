@@ -91,6 +91,11 @@ public class GameManager : MonoBehaviour
             {
                 if (!m_bGameIsPaused)
                 {
+                    if (TutorialCanvas.m_tutorialCanvas != null)
+                    {
+                        TutorialCanvas.m_tutorialCanvas.gameObject.SetActive(false);
+                    }
+
                     SerializationManager.m_serializationManager.Load();
                     m_bGameIsPaused = true;
                     Time.timeScale = 0.0f;
@@ -100,6 +105,11 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
+                    if (TutorialCanvas.m_tutorialCanvas != null)
+                    {
+                        TutorialCanvas.m_tutorialCanvas.gameObject.SetActive(true);
+                    }
+
                     m_bGameIsPaused = false;
                     Time.timeScale = 1;
                     PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(false);

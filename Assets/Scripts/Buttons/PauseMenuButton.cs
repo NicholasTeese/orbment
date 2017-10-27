@@ -161,12 +161,15 @@ public class PauseMenuButton : BaseButton
                     if (GameManager.m_gameManager.ForceHideCursor)
                     {
                         GameManager.m_gameManager.ForceHideCursor = false;
-                        m_button.GetComponentInChildren<Text>().text = "Force Hide Cursor";
+                        gameObject.SetActive(false);
+                        transform.parent.Find("Hide_Cursor_Button").gameObject.SetActive(true);
+                        
                     }
                     else
                     {
                         GameManager.m_gameManager.ForceHideCursor = true;
-                        m_button.GetComponentInChildren<Text>().text = "Force Show Cursor";
+                        gameObject.SetActive(false);
+                        transform.parent.Find("Show_Cursor_Button").gameObject.SetActive(true);
                     }
                     break;
                 }

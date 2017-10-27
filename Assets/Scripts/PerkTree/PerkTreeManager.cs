@@ -22,7 +22,7 @@ public class PerkTreeManager : MonoBehaviour
     public int m_iMaximumIndex;
 
     [Header("Selected Perk Tree")]
-    public PerkTreeButton m_selectedPerkTreeButton;
+    public GameObject m_selectedPerkTree;
 
     [Header("Selected Perk Button")]
     public PerkButton m_selectedPerkButton;

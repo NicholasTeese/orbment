@@ -43,12 +43,13 @@ public class ExpManager : MonoBehaviour
 
     private void Start()
     {
-        if (SceneManager.GetActiveScene().name == LevelManager.m_strLevelOneSceneName)
+        if (SceneManager.GetActiveScene().name == LevelManager.m_strLevelOneSceneName ||
+            SceneManager.GetActiveScene().name == LevelManager.m_strLevelTwoSceneName)
         {
             // Initialise perk.
-            //PerkTreeManager.m_perkTreeManager.m_selectedPerkTreeButton.m_childPerkTree.SetActive(true);
-            //PerkTreeManager.m_perkTreeManager.m_selectedPerkButton.PurchasePerk();
-            //PerkTreeManager.m_perkTreeManager.m_selectedPerkTreeButton.m_childPerkTree.SetActive(false);
+            PerkTreeManager.m_perkTreeManager.m_selectedPerkTree.SetActive(true);
+            PerkTreeManager.m_perkTreeManager.m_selectedPerkButton.PurchasePerk();
+            //PerkTreeManager.m_perkTreeManager.m_selectedPerkTree.SetActive(false);
         }
 
         PerkTreeManager.m_perkTreeManager.gameObject.SetActive(false);
