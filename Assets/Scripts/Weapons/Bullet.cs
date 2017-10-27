@@ -170,7 +170,7 @@ public class Bullet : MonoBehaviour
             {
                 if (!a_collision.collider.CompareTag("Player") || !Player.m_player.GodModeIsActive)
                 {
-                    if(Player.m_player.m_dashing)
+                    if(Player.m_player.m_dashing && m_target.CompareTag("Player"))
                     {
                         // take no damage
                     }
