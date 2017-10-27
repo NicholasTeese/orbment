@@ -37,12 +37,16 @@ public class PerkTreeBackButton : MonoBehaviour
     public void OnClick()
     {
         AudioManager.m_audioManager.PerkTreeAudioSource.PlayOneShot(m_menuClick);
-        m_perkTreePanel.SetActive(false);
-
-        foreach (GameObject perkTreeIcon in m_perkTreeIcons)
-        {
-            perkTreeIcon.SetActive(true);
-        }
+        PerkTreeManager.m_perkTreeManager.gameObject.SetActive(false);
+        PerkTreeCamera.m_perkTreeCamera.gameObject.SetActive(false);
+        IsoCam.m_playerCamera.gameObject.SetActive(true);
+        Time.timeScale = 1.0f;
+        //m_perkTreePanel.SetActive(false);
+        //
+        //foreach (GameObject perkTreeIcon in m_perkTreeIcons)
+        //{
+        //    perkTreeIcon.SetActive(true);
+        //}
     }
 
     private void Update()
