@@ -40,12 +40,14 @@ public class MeleeEnemy : Enemy
         base.Awake();
         m_foir = this.GetComponent<FindObjectsInRadius>();
         m_navMeshAgent = GetComponent<NavMeshAgent>();
-        m_OrcRenderer = transform.Find("Melee_Mesh_Low").GetComponent<Renderer>();
-        m_ChargeColour = new Color(150, 13, 13);
-        m_IdleColour = new Color(50, 13, 13);
+        m_OrcRenderer  = transform.Find("Melee_Mesh_Low").GetComponent<Renderer>();
+        m_ChargeColour = new Color(0.588f, 0.049f, 0.049f, 1.0f);
+        m_IdleColour   = m_OrcRenderer.material.color;
         m_navMeshAgent.destination = GetWanderPosition(transform.position);
         m_navMeshAgent.speed = m_fMoveSpeed;
-        //Debug.Log(m_OrcRenderer.material.color);
+        Debug.Log(m_ChargeColour);
+        Debug.Log(m_IdleColour);
+
     }
 
     new private void Start()
@@ -145,29 +147,32 @@ public class MeleeEnemy : Enemy
                     m_fPrepareChargeTime -= Time.deltaTime;
 
                     this.transform.LookAt(V_targetOffset);
-                    if (m_fPrepareChargeTime <= 0.0f)
+                    if (m_fPrepareChargeTime <= 0.3f)
                     {
-                        if (m_foir.m_target != null)
+                        m_OrcRenderer.material.color = m_ChargeColour;
+                        if (m_fPrepareChargeTime <= 0.0f)
                         {
-                          m_v3ChargeTarget = V_targetOffset;
-                          m_navMeshAgent.enabled = false;
-                          m_fPrepareChargeTime = 2.0f;
-                          m_Animator.SetBool("Walking2Recovery", false);
-                          m_Animator.SetBool("Recovery2Charge", true);
-                          m_eBehaviour = Behaviour.CHARGING;
-                          m_eTempBehaviour = m_eBehaviour;
-                          break;
-                        }
-                        else
-                        {
-                            m_fPrepareChargeTime = 2.0f;
-                            m_Animator.SetBool("Walking2Recovery", false);
-                            m_Animator.SetBool("Recovery2Walking", true);
-                            m_eBehaviour = Behaviour.WANDERING;
-                            m_eTempBehaviour = m_eBehaviour;
+                            if (m_foir.m_target != null)
+                            {
+                                m_v3ChargeTarget = V_targetOffset;
+                                m_navMeshAgent.enabled = false;
+                                m_fPrepareChargeTime = 2.0f;
+                                m_Animator.SetBool("Walking2Recovery", false);
+                                m_Animator.SetBool("Recovery2Charge", true);
+                                m_eBehaviour = Behaviour.CHARGING;
+                                m_eTempBehaviour = m_eBehaviour;
+                                break;
+                            }
+                            else
+                            {
+                                m_fPrepareChargeTime = 2.0f;
+                                m_Animator.SetBool("Walking2Recovery", false);
+                                m_Animator.SetBool("Recovery2Walking", true);
+                                m_eBehaviour = Behaviour.WANDERING;
+                                m_eTempBehaviour = m_eBehaviour;
+                            }
                         }
                     }
-
                     break;
                 }
             #endregion
@@ -185,10 +190,6 @@ public class MeleeEnemy : Enemy
                     {
                         timer += Time.time;// * 1.5f;
                         m_v3ChargeTarget = V_targetOffset;
-                        if (timer <= 1)
-                        {
-                            //m_OrcRenderer.material.color = m_ChargeColour;
-                        }
                     }
                     
                     
@@ -221,7 +222,7 @@ public class MeleeEnemy : Enemy
                     m_Animator.SetBool("Recovery2Charge", false);
                     m_Animator.SetBool("Recovery2Walking", false);
 
-                    //m_OrcRenderer.material.color = m_IdleColour;
+                    m_OrcRenderer.material.color = m_IdleColour;
 
                     if (m_fRecoverTime <= 0.0f)
                     {
