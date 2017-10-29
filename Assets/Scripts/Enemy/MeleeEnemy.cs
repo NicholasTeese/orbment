@@ -100,6 +100,9 @@ public class MeleeEnemy : Enemy
                     m_Animator.SetBool("Charge2Walking", false);
                     m_Animator.SetBool("Recovery2Charge", false);
                     m_Animator.SetBool("Recovery2Walking", false);
+
+                    m_OrcRenderer.material.color = m_IdleColour;
+
                     // Choose point to wander to
                     if (Vector3.Distance(transform.position, m_navMeshAgent.destination) <= 1.0f)
                     {
@@ -129,6 +132,8 @@ public class MeleeEnemy : Enemy
                     m_Animator.SetBool("Charge2Walking", false);
                     m_Animator.SetBool("Recovery2Charge", false);
                     m_Animator.SetBool("Recovery2Walking", false);
+
+                    m_OrcRenderer.material.color = m_IdleColour;
 
                     // cease wander
                     //m_navMeshAgent.destination = transform.position;
