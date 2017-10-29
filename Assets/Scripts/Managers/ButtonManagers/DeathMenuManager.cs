@@ -5,7 +5,7 @@ using UnityEngine;
 public class DeathMenuManager : MonoBehaviour
 {
     private int m_iSelectedButtonIndex = 0;
-    public int SelectedButtonIndex { get { return m_iSelectedButtonIndex; } set { m_iSelectedButtonIndex = value; } }
+    private int m_iLastSelectedButtonIndex = 0;
 
     private float m_fInputBuffer = 0.2f;
 
@@ -24,6 +24,9 @@ public class DeathMenuManager : MonoBehaviour
     private List<BaseButton> m_lQuitToMainMenuPanelButtons = new List<BaseButton>();
     private List<BaseButton> m_lQuitToDesktopPanelButtons = new List<BaseButton>();
     private List<BaseButton> m_lActivePanelButtons = new List<BaseButton>();
+
+    public int SelectedButtonIndex { get { return m_iSelectedButtonIndex; } set { m_iSelectedButtonIndex = value; } }
+    public int LastSelectedButtonIndex { get { return m_iLastSelectedButtonIndex; } set { m_iLastSelectedButtonIndex = value; } }
 
     // Variable getters and setters.
     public GameObject MainPanel { get { return m_mainPanel; } set { m_mainPanel = value; } }

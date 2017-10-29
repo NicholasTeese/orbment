@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PauseMenuManager : MonoBehaviour
 {
     private int m_iSelectedButtonIndex = 0;
+    private int m_iLastSelectedButtonIndex = 0;
 
     private float m_fInputBuffer = 0.2f;
 
@@ -33,6 +34,7 @@ public class PauseMenuManager : MonoBehaviour
 
     // Variable getters and setters.
     public int SelectedButtonIndex { get { return m_iSelectedButtonIndex; } set { m_iSelectedButtonIndex = value; } }
+    public int LastSelectedButtonIndex { get { return m_iLastSelectedButtonIndex; } set { m_iLastSelectedButtonIndex = value; } }
 
     public GameObject OptionsMainPanel { get { return m_optionsMainPanel; } }
     public GameObject OptionsAudioPanel { get { return m_optionsAudioPanel; } }

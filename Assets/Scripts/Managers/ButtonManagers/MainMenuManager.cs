@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class MainMenuManager : MonoBehaviour
 {
     private int m_iSelectedButtonIndex = 0;
+    private int m_iLastSelectedButtonIndex = 0;
 
     private float m_fInputBuffer = 0.2f;
     private float m_fFadeSpeed = 0.005f;
@@ -37,6 +38,7 @@ public class MainMenuManager : MonoBehaviour
     private List<BaseButton> m_lActivePanelButtons = new List<BaseButton>();
 
     public int SelectedButtonIndex { get { return m_iSelectedButtonIndex; } set { m_iSelectedButtonIndex = value; } }
+    public int LastSelectedButtonIndex { get { return m_iLastSelectedButtonIndex; } set { m_iLastSelectedButtonIndex = value; } }
 
     public bool FadeIn { get { return m_bFadeIn; } set { m_bFadeIn = value; } }
 
@@ -62,6 +64,13 @@ public class MainMenuManager : MonoBehaviour
     public GameObject m_optionsPanel;
     public GameObject m_quitToDesktopPanel;
     public GameObject m_backgroundImage;
+
+    [Header("Options Hide Cursor Button Sprites.")]
+    public SpriteState m_hideCursorSpriteState;
+    public Sprite m_hideCursorSprite;
+    [Header("Options Show Cursor Button Sprites.")]
+    public SpriteState m_showCursorSpriteState;
+    public Sprite m_showCursorSprite;
 
     public static MainMenuManager m_mainMenuManager;
 

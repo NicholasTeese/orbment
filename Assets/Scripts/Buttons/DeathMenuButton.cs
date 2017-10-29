@@ -18,6 +18,7 @@ public class DeathMenuButton : BaseButton
         base.OnClick(a_strParameter);
 
         DeathMenuManager.m_deathMenuManager.DeathMenuAudioSource.PlayOneShot(m_menuClickAudioClip);
+        DeathMenuManager.m_deathMenuManager.LastSelectedButtonIndex = DeathMenuManager.m_deathMenuManager.SelectedButtonIndex;
 
         switch (a_strParameter)
         {

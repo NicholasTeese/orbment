@@ -20,6 +20,7 @@ public class MainMenuButton : BaseButton
         base.OnClick(a_strParameter);
 
         MainMenuManager.m_mainMenuManager.MainMenuAudioSource.PlayOneShot(m_menuClickAudioClip);
+        MainMenuManager.m_mainMenuManager.LastSelectedButtonIndex = MainMenuManager.m_mainMenuManager.SelectedButtonIndex;
 
         switch (a_strParameter)
         {
@@ -132,12 +133,14 @@ public class MainMenuButton : BaseButton
                     if (GameManager.m_gameManager.ForceHideCursor)
                     {
                         GameManager.m_gameManager.ForceHideCursor = false;
-                        m_button.GetComponentInChildren<Text>().text = "Force Hide Cursor";
+                        m_button.GetComponent<Image>().sprite = MainMenuManager.m_mainMenuManager.m_hideCursorSprite;
+                        m_button.spriteState = MainMenuManager.m_mainMenuManager.m_hideCursorSpriteState;
                     }
                     else
                     {
                         GameManager.m_gameManager.ForceHideCursor = true;
-                        m_button.GetComponentInChildren<Text>().text = "Force Show Cursor";
+                        m_button.GetComponent<Image>().sprite = MainMenuManager.m_mainMenuManager.m_showCursorSprite;
+                        m_button.spriteState = MainMenuManager.m_mainMenuManager.m_showCursorSpriteState;
                     }
                     break;
                 }

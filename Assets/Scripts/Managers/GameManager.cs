@@ -80,6 +80,7 @@ public class GameManager : MonoBehaviour
         if (!Player.m_player.IsAlive && !DeathMenuManager.m_deathMenuManager.gameObject.activeInHierarchy)
         {
             Time.timeScale = 0.0f;
+            m_bGameIsPaused = true;
             DeathMenuManager.m_deathMenuManager.gameObject.SetActive(true);
             PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(false);
             Cursor.visible = true;
@@ -87,7 +88,8 @@ public class GameManager : MonoBehaviour
 
         if(!ExpManager.m_experiencePointsManager.PerkTreeOpen)
         {
-            if (Input.GetKeyDown(KeyCode.Escape) || InputManager.StartButton())
+            if (Input.GetKeyDown(KeyCode.Escape) || InputManager.StartButton()
+                && !PauseMenuManager.m_pauseMenuManager.gameObject.activeInHierarchy && Player.m_player.IsAlive)
             {
                 if (!m_bGameIsPaused)
                 {
@@ -102,20 +104,6 @@ public class GameManager : MonoBehaviour
                     PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(true);
                     PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(false);
                     Cursor.visible = true;
-                }
-                else
-                {
-                    if (TutorialCanvas.m_tutorialCanvas != null)
-                    {
-                        TutorialCanvas.m_tutorialCanvas.gameObject.SetActive(true);
-                    }
-
-                    m_bGameIsPaused = false;
-                    Time.timeScale = 1;
-                    PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(false);
-                    DeathMenuManager.m_deathMenuManager.gameObject.SetActive(false);
-                    PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(true);
-                    Cursor.visible = false;
                 }
             }
         }
@@ -142,11 +130,17 @@ public class GameManager : MonoBehaviour
 
     public void Continue()
     {
+        if (TutorialCanvas.m_tutorialCanvas != null)
+        {
+            TutorialCanvas.m_tutorialCanvas.gameObject.SetActive(true);
+        }
+
         m_bGameIsPaused = false;
         Time.timeScale = 1;
         PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(false);
         DeathMenuManager.m_deathMenuManager.gameObject.SetActive(false);
         PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(true);
+        Cursor.visible = false;
     }
 
 	public void LoadMainMenu()
