@@ -57,7 +57,7 @@ public class DamageNumberManager : MonoBehaviour
 
     public void CreateDamageNumber(string number, Transform location, Color a_color)
     {
-        Vector2 screenPos = IsoCam.m_playerCamera.MainPlayerCamera.WorldToScreenPoint(location.position);
+        Vector2 screenPos = IsoCam.m_playerCamera.IsometricCamera.WorldToScreenPoint(location.position);
         for (int i = 0; i < m_poolAmount; ++i)
         {
             if (m_dmgNums.Count != 0)

@@ -22,11 +22,15 @@ public class AudioManager : MonoBehaviour
     private AudioClip[] m_enemyDeathClips;
 
     AudioSource m_musicAudioSource;
-    AudioSource m_bulletAudioSource;
     AudioSource m_effectsAudioSource;
-    AudioSource m_explosionAudioSource;
     AudioSource m_menuAudioSource;
-    AudioSource m_perkTreeAudioSource;
+
+    public AudioClip[] m_playerNormalBullets;
+    public AudioClip[] m_playerFireBullets;
+
+    public AudioSource m_explosionAudioSource;
+    public AudioSource m_perkTreeAudioSource;
+    public AudioSource m_playerbulletAudioSource;
 
     public static AudioManager m_audioManager;
 
@@ -60,17 +64,10 @@ public class AudioManager : MonoBehaviour
 
         m_musicAudioSource = GetComponent<AudioSource>();
         m_musicAudioSource.loop = true;
-        m_explosionAudioSource = transform.Find("Explosion_Audio_Source").GetComponent<AudioSource>();
-        m_perkTreeAudioSource = transform.Find("Perk_Tree_Audio_Source").GetComponent<AudioSource>();
     }
 
     private void Start()
     {
-        if (Player.m_player != null)
-        {
-            m_bulletAudioSource = Player.m_player.m_currWeapon.BulletAudioSource;
-        }
-
         if (IsoCam.m_playerCamera != null)
         {
             m_effectsAudioSource = IsoCam.m_playerCamera.GetComponent<AudioSource>();
@@ -182,9 +179,9 @@ public class AudioManager : MonoBehaviour
             m_musicAudioSource.volume = m_fMusicVolume;
         }
 
-        if (m_bulletAudioSource != null)
+        if (m_playerbulletAudioSource != null)
         {
-            m_bulletAudioSource.volume = m_fBulletVolume;
+            m_playerbulletAudioSource.volume = m_fBulletVolume;
         }
 
         if (m_effectsAudioSource != null)
@@ -223,9 +220,9 @@ public class AudioManager : MonoBehaviour
     {
         m_fBulletVolume = a_fBulletVolume;
 
-        if (m_bulletAudioSource != null)
+        if (m_playerbulletAudioSource != null)
         {
-            m_bulletAudioSource.volume = m_fBulletVolume;
+            m_playerbulletAudioSource.volume = m_fBulletVolume;
         }
     }
 
@@ -252,5 +249,15 @@ public class AudioManager : MonoBehaviour
         {
             m_menuAudioSource.volume = m_fMenuVolume;
         }
+    }
+
+    public void PlayOneShotPlayerNormalBullet()
+    {
+        m_playerbulletAudioSource.PlayOneShot(m_playerNormalBullets[Random.Range(0, m_playerNormalBullets.Length)]);
+    }
+
+    public void PlayOneShotPlayerFireBullet()
+    {
+        m_playerbulletAudioSource.PlayOneShot(m_playerFireBullets[Random.Range(0, m_playerNormalBullets.Length)]);
     }
 }

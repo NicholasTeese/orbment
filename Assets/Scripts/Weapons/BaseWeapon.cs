@@ -22,16 +22,6 @@ public class BaseWeapon : MonoBehaviour
 
     protected List<Bullet> m_activePool = new List<Bullet>();
 
-    protected AudioSource m_audioSource;
-
-    public AudioSource BulletAudioSource { get { return m_audioSource; } }
-
-    private void Awake()
-    {
-        m_audioSource = GetComponent<AudioSource>();
-    }
-
-
     private int projectileCount = 0;
     // Use this for initialization
     void Start()

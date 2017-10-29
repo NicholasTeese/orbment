@@ -95,7 +95,7 @@ public class BaseEnemy : MonoBehaviour
             return;
         }
 
-        Vector2 v2ScreenPoint = IsoCam.m_playerCamera.MainPlayerCamera.WorldToScreenPoint(transform.position);
+        Vector2 v2ScreenPoint = IsoCam.m_playerCamera.IsometricCamera.WorldToScreenPoint(transform.position);
 
         if (m_fCurrentHealth != m_fMaxHealth)
         {

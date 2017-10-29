@@ -279,7 +279,7 @@ public class Player : Entity
         {
             RaycastHit hit;
             float rayLength = 1000;
-            Ray ray = IsoCam.m_playerCamera.MainPlayerCamera.ScreenPointToRay(Input.mousePosition);
+            Ray ray = IsoCam.m_playerCamera.IsometricCamera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit, rayLength, m_shootPlane))
             {
                 Vector3 hitPoint = hit.point;

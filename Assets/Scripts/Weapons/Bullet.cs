@@ -135,7 +135,7 @@ public class Bullet : MonoBehaviour
     protected void CameraCheck()
     {
         //disable when object leaves camera view
-        Vector2 screenPosition = IsoCam.m_playerCamera.MainPlayerCamera.WorldToScreenPoint(this.transform.position);
+        Vector2 screenPosition = IsoCam.m_playerCamera.IsometricCamera.WorldToScreenPoint(this.transform.position);
         if (screenPosition.x < -m_cullOffset || screenPosition.x > Screen.width + m_cullOffset || screenPosition.y < -m_cullOffset || screenPosition.y > Screen.height + m_cullOffset)
         {
             Disable();

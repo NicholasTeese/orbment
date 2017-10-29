@@ -1,11 +1,16 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class KillStreakManager : MonoBehaviour
 {
-    private Image m_currentKillStreakSprite = null;
+    [Range(0.0f, 10.0f)]
+    public float m_fKillStreakImageShakeAmount = 5.0f;
+
+    private Vector3 m_v3CurrentKillStreakImageOriginalPosition = Vector3.zero;
+
+    private Image m_currentKillStreakImage;
 
     public List<Sprite> m_killStreakSprite = new List<Sprite>();
 
@@ -25,8 +30,6 @@ public class KillStreakManager : MonoBehaviour
     private bool m_bLifesteal = false;
     public bool Lifesteal { get; set; }
 
-    Vector3 v3KillstreakImagePosition = Vector3.zero;
-
     public static KillStreakManager m_killStreakManager;
 
     private void Awake()
@@ -43,8 +46,10 @@ public class KillStreakManager : MonoBehaviour
 
     private void Start()
     {
-        m_currentKillStreakSprite = PlayerHUDManager.m_playerHUDManager.transform.Find("Kill_Streak_Image").GetComponent<Image>();
-        v3KillstreakImagePosition = m_currentKillStreakSprite.transform.position;
+        m_currentKillStreakImage = PlayerHUDManager.m_playerHUDManager.m_currentKillStreakImage;
+
+        m_v3CurrentKillStreakImageOriginalPosition = IsoCam.m_playerCamera.m_uiCamera.WorldToScreenPoint(m_currentKillStreakImage.transform.position) +
+                                                     new Vector3(-m_currentKillStreakImage.rectTransform.rect.width, -m_currentKillStreakImage.rectTransform.rect.height, 0.0f);
     }
 
     private void Update()
@@ -56,9 +61,9 @@ public class KillStreakManager : MonoBehaviour
             ResetKillStreak();
         }
 
-        if(m_currentKillStreakSprite.gameObject.activeInHierarchy)
+        if (m_currentKillStreakImage.gameObject.activeInHierarchy)
         {
-            StreakShake(m_currentKillStreakSprite.gameObject);
+            m_currentKillStreakImage.transform.localPosition = NewStreakShakePosition(m_v3CurrentKillStreakImageOriginalPosition, m_fKillStreakImageShakeAmount);
         }
     }
 
@@ -68,49 +73,49 @@ public class KillStreakManager : MonoBehaviour
         {
             case 0:
                 {
-                    m_currentKillStreakSprite.gameObject.SetActive(false);
+                    m_currentKillStreakImage.gameObject.SetActive(false);
                     break;
                 }
 
             case 2:
                 {
-                    m_currentKillStreakSprite.gameObject.SetActive(true);
-                    m_currentKillStreakSprite.sprite = m_killStreakSprite[0];
+                    m_currentKillStreakImage.gameObject.SetActive(true);
+                    m_currentKillStreakImage.sprite = m_killStreakSprite[0];
                     break;
                 }
 
             case 3:
                 {
-                    m_currentKillStreakSprite.gameObject.SetActive(true);
-                    m_currentKillStreakSprite.sprite = m_killStreakSprite[1];
+                    m_currentKillStreakImage.gameObject.SetActive(true);
+                    m_currentKillStreakImage.sprite = m_killStreakSprite[1];
                     break;
                 }
 
             case 4:
                 {
-                    m_currentKillStreakSprite.gameObject.SetActive(true);
-                    m_currentKillStreakSprite.sprite = m_killStreakSprite[2];
+                    m_currentKillStreakImage.gameObject.SetActive(true);
+                    m_currentKillStreakImage.sprite = m_killStreakSprite[2];
                     break;
                 }
 
             case 5:
                 {
-                    m_currentKillStreakSprite.gameObject.SetActive(true);
-                    m_currentKillStreakSprite.sprite = m_killStreakSprite[3];
+                    m_currentKillStreakImage.gameObject.SetActive(true);
+                    m_currentKillStreakImage.sprite = m_killStreakSprite[3];
                     break;
                 }
 
             case 6:
                 {
-                    m_currentKillStreakSprite.gameObject.SetActive(true);
-                    m_currentKillStreakSprite.sprite = m_killStreakSprite[4];
+                    m_currentKillStreakImage.gameObject.SetActive(true);
+                    m_currentKillStreakImage.sprite = m_killStreakSprite[4];
                     break;
                 }
 
             case 10:
                 {
-                    m_currentKillStreakSprite.gameObject.SetActive(true);
-                    m_currentKillStreakSprite.sprite = m_killStreakSprite[5];
+                    m_currentKillStreakImage.gameObject.SetActive(true);
+                    m_currentKillStreakImage.sprite = m_killStreakSprite[5];
                     break;
                 }
         }
@@ -164,20 +169,8 @@ public class KillStreakManager : MonoBehaviour
         }
     }
 
-    public void StreakShake(GameObject currentStreak)
+    public Vector3 NewStreakShakePosition(Vector3 a_v3CurrentImagePosition, float a_fMaxScreenShakeAmount)
     {
-        //// Move up
-        //if (currentStreak.transform.position.y < m_fShakeRange)
-        //{
-        //    currentStreak.transform.position += new Vector3(0.0f, m_fGrowShrinkSpeed, 0.0f);
-        //}
-        //// Move down
-        //if (currentStreak.transform.position.y > m_fShakeRange)
-        //{
-        //    currentStreak.transform.position -= new Vector3(0.0f, m_fGrowShrinkSpeed, 0.0f);
-        //}
-        //Debug.Log(currentStreak.transform.position);
-        //Vector3 v3Pos = currentStreak.transform.position;
-        //currentStreak.transform.position = new Vector3(Mathf.Clamp((v3Pos.x + Random.Range(0.0f, 0.05f)), v3KillstreakImagePosition.x - 0.5f, v3KillstreakImagePosition.x + 0.5f), Mathf.Clamp((v3Pos.y + Random.Range(0.0f, 0.05f)), v3KillstreakImagePosition.y - 0.5f, v3KillstreakImagePosition.y + 0.5f), v3Pos.z);
+        return new Vector3((a_v3CurrentImagePosition.x + Random.Range(0.0f, a_fMaxScreenShakeAmount)), (a_v3CurrentImagePosition.y + Random.Range(0.0f, a_fMaxScreenShakeAmount)), 0.0f);
     }
 }

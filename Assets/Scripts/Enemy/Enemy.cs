@@ -131,7 +131,7 @@ public class Enemy : Entity
         {
             if (IsoCam.m_playerCamera != null)
             {
-                Vector2 screenPoint = IsoCam.m_playerCamera.MainPlayerCamera.WorldToScreenPoint(this.transform.position);
+                Vector2 screenPoint = IsoCam.m_playerCamera.IsometricCamera.WorldToScreenPoint(this.transform.position);
                 GUI.DrawTexture(new Rect(screenPoint.x - 0.5f * m_healthBarWidth, Screen.height - screenPoint.y - 40, m_healthBarWidth, 10), m_emptyBarTexture);
                 GUI.DrawTexture(new Rect(screenPoint.x - 0.5f * m_healthBarWidth, Screen.height - screenPoint.y - 40, m_healthBarWidth * ((float)m_currHealth / (float)m_maxHealth), 10), m_healthBarTexture);
             }
@@ -140,7 +140,7 @@ public class Enemy : Entity
         {
             if (IsoCam.m_playerCamera != null)
             {
-                Vector2 screenPoint = IsoCam.m_playerCamera.MainPlayerCamera.WorldToScreenPoint(this.transform.position);
+                Vector2 screenPoint = IsoCam.m_playerCamera.IsometricCamera.WorldToScreenPoint(this.transform.position);
                 GUI.Label(new Rect(screenPoint.x - 0.5f * m_healthBarWidth, Screen.height - screenPoint.y - 60, m_healthBarWidth, 50), "Lvl " + m_currLevel);
             }
         }

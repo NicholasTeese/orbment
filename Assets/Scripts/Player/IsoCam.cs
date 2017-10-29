@@ -31,13 +31,15 @@ public class IsoCam : MonoBehaviour
 
     private Plane[] m_frustrumPlanes = null;
 
-    private Camera m_camera;
+    private Camera m_isometricCamera;
+
+    public Camera m_uiCamera;
 
     public static IsoCam m_playerCamera = null;
 
-    public Camera MainPlayerCamera { get { return m_camera; } }
+    public Camera IsometricCamera { get { return m_isometricCamera; } }
 
-    public Plane[] FrustrumPlanes { get { m_frustrumPlanes = GeometryUtility.CalculateFrustumPlanes(m_camera); return m_frustrumPlanes; } }
+    public Plane[] FrustrumPlanes { get { m_frustrumPlanes = GeometryUtility.CalculateFrustumPlanes(m_isometricCamera); return m_frustrumPlanes; } }
 
     private void Awake()
     {
@@ -52,7 +54,7 @@ public class IsoCam : MonoBehaviour
 
         m_flashRed = Resources.Load("Materials/FlashRed") as Material;
 
-        m_camera = GetComponent<Camera>();
+        m_isometricCamera = GetComponent<Camera>();
     }
 
     // Use this for initialization

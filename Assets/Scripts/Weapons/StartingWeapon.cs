@@ -4,17 +4,6 @@ using UnityEngine;
 
 public class StartingWeapon : BaseWeapon
 {
-    private AudioClip[] m_normalBullets;
-    private AudioClip[] m_fireBullets;
-
-    private void Awake()
-    {
-        m_normalBullets = Resources.LoadAll<AudioClip>("Audio/Beta/Normal_Bullet");
-        m_fireBullets = Resources.LoadAll<AudioClip>("Audio/Beta/Fire_Bullet");
-
-        m_audioSource = GetComponent<AudioSource>();
-    }
-
     public override void Fire(Vector3 a_direction, int damagePerProjectile, bool a_hasCrit, float a_critMult)
     {
         base.PoolToActive(a_direction, damagePerProjectile, 1);
@@ -23,19 +12,13 @@ public class StartingWeapon : BaseWeapon
         {
             case "PlayerBullet":
                 {
-                    m_audioSource.PlayOneShot(m_normalBullets[Random.Range(0, 4)]);
+                    AudioManager.m_audioManager.PlayOneShotPlayerNormalBullet();
                     break;
                 }
 
             case "FireBall":
                 {
-                    m_audioSource.PlayOneShot(m_fireBullets[Random.Range(0, 4)]);
-                    break;
-                }
-
-            case "EnemyBullet":
-                {
-                    //m_audioSource.PlayOneShot(m_normalBullets[Random.Range(0, 4)]);
+                    AudioManager.m_audioManager.PlayOneShotPlayerFireBullet();
                     break;
                 }
 

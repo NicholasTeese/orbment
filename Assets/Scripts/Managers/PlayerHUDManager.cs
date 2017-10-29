@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHUDManager : MonoBehaviour
 {
-    private GameObject m_healthBar = null;
+    private GameObject m_healthBar;
 
-    public static PlayerHUDManager m_playerHUDManager = null;
+    public Image m_currentKillStreakImage;
+
+    public static PlayerHUDManager m_playerHUDManager;
 
     public GameObject HealthBar { get { return m_healthBar; } set { m_healthBar = value; } }
 

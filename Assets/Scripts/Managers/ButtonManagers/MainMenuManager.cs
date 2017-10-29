@@ -61,6 +61,7 @@ public class MainMenuManager : MonoBehaviour
     public GameObject m_mainPanel;
     public GameObject m_optionsPanel;
     public GameObject m_quitToDesktopPanel;
+    public GameObject m_backgroundImage;
 
     public static MainMenuManager m_mainMenuManager;
 
