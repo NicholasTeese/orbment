@@ -75,6 +75,7 @@ public class ExplosionManager : MonoBehaviour
         }
     }
 
+    // Test change.
     public GameObject RequestExplosion(Vector3 a_position, Vector3 a_forward, Explosion.ExplosionType a_type, float a_damage)
     {
         GameObject explosion = null;
