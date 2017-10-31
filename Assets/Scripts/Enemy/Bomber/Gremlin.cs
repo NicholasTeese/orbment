@@ -59,7 +59,7 @@ public class Gremlin : Enemy
 
     private new void Update()
     {
-        // Debug shortcut for instakill
+        // Debug shortcut for insta-kill
         if (Input.GetKey(KeyCode.E) && Input.GetKey(KeyCode.Equals) && Input.GetKey(KeyCode.Alpha0))
         {
             this.m_currHealth = 0;
@@ -96,6 +96,27 @@ public class Gremlin : Enemy
         PerformBehavior();
     }
 
+    protected sealed override void OnCollisionEnter(Collision a_collision)
+    {
+        base.OnCollisionEnter(a_collision);
+
+        if (a_collision.collider.CompareTag("Bullet"))
+        {
+            Bullet bullet = a_collision.collider.GetComponent<Bullet>();
+
+            if (bullet == null)
+            {
+                Debug.Log("Bullet does not have bullet script.");
+                return;
+            }
+
+            if (bullet.m_id == "Player" && m_eBehaviour == Behaviour.HIDING)
+            {
+                GetRetreatPosition();
+            }
+        }
+    }
+
     private void CheckBehaviour()
     {
         if (m_currHealth <= 0.0f && m_eBehaviour != Behaviour.DEAD)
@@ -109,13 +130,7 @@ public class Gremlin : Enemy
 
         if (m_findOBjectsInRadius.inSight && m_eBehaviour != Behaviour.RETREATING)
         {
-            int iHidingSpotIndex = Random.Range(0, m_hidingSpots.Count);
-
-            m_v3RetreatPosition = m_hidingSpots[iHidingSpotIndex].transform.position;
-
-            m_navMeshAgent.speed = m_fRetreatSpeed;
-            m_eBehaviour = Behaviour.RETREATING;
-            m_eTempBehaviour = m_eBehaviour;
+            GetRetreatPosition();
         }
 
         if (Vector3.Distance(transform.position, m_v3RetreatPosition) <= 3.0f && m_eBehaviour == Behaviour.RETREATING)
@@ -197,5 +212,16 @@ public class Gremlin : Enemy
         float fZOffset = Random.Range(-5, 5);
 
         return new Vector3(a_v3CurrentPosition.x + fXOffset, a_v3CurrentPosition.y, a_v3CurrentPosition.z + fZOffset);
+    }
+
+    private void GetRetreatPosition()
+    {
+        int iHidingSpotIndex = Random.Range(0, m_hidingSpots.Count);
+
+        m_v3RetreatPosition = m_hidingSpots[iHidingSpotIndex].transform.position;
+
+        m_navMeshAgent.speed = m_fRetreatSpeed;
+        m_eBehaviour = Behaviour.RETREATING;
+        m_eTempBehaviour = m_eBehaviour;
     }
 }

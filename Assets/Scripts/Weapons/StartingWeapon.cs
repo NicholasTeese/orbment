@@ -24,7 +24,7 @@ public class StartingWeapon : BaseWeapon
 
             default:
                 {
-                    Debug.Log(m_projectile.name + " not recognised.");
+                    //Debug.Log(m_projectile.name + " not recognised.");
                     break;
                 }
         }
