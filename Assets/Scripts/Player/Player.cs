@@ -181,8 +181,14 @@ public class Player : Entity
         {
             m_currHealth = m_maxHealth;
         }
+        // Debug shortcut for Keys
+        if (Input.GetKey(KeyCode.K) && Input.GetKey(KeyCode.KeypadPlus))
+        {
+            m_orbsCollected = 20;
+        }
 
-        PlayerHUDManager.m_playerHUDManager.HealthBar.GetComponent<Image>().fillAmount = m_currHealth / m_maxHealth;
+
+            PlayerHUDManager.m_playerHUDManager.HealthBar.GetComponent<Image>().fillAmount = m_currHealth / m_maxHealth;
         if (m_camera != null && m_currHealth < m_oldHealth)
         {
             //shake cam if player hurt
