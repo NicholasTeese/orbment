@@ -265,9 +265,15 @@ public class Player : Entity
         {
             //get movement input
             m_movement = Vector3.forward * InputManager.PrimaryVertical() + Vector3.right * InputManager.PrimaryHorizontal();
+            Vector3 v3AnimationMovement = Vector3.zero;
+            if (InputManager.PrimaryInput() != Vector3.zero)
+            {
+                v3AnimationMovement = (InputManager.PrimaryInput() - transform.forward).normalized;
+            }
+            Debug.Log(v3AnimationMovement);
 
-            m_animatior.SetFloat("fXAxis", m_movement.x);
-            m_animatior.SetFloat("fYAxis", m_movement.z);
+            m_animatior.SetFloat("fXAxis", v3AnimationMovement.x);
+            m_animatior.SetFloat("fYAxis", v3AnimationMovement.z);
         }
     }
 
