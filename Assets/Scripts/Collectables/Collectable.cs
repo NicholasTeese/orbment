@@ -81,14 +81,6 @@ public class Collectable : MonoBehaviour
                 Physics.IgnoreCollision(GetComponent<Collider>(), Player.m_player.GetComponent<Collider>(), false);
             }
         }
-
-        if (m_type == CollectableType.YellowOrb && Player.m_player != null)
-        {
-            if (this.CompareTag("spentOrb"))
-            {
-                Physics.IgnoreCollision(GetComponent<Collider>(), Player.m_player.GetComponent<Collider>(), true);
-            }
-        }
     }
 
     private void OnCollisionEnter(Collision collision)

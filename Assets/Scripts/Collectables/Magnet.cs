@@ -14,6 +14,11 @@ public class Magnet : MonoBehaviour
     {
         m_collectableRef = GetComponent<Collectable>();
         m_rigidBody = this.GetComponent<Rigidbody>();
+
+        //if(this.CompareTag("spentOrb"))
+        //{
+        //    Physics.IgnoreCollision(GetComponent<Collider>(), Player.m_player.GetComponent<Collider>(), true);
+        //}
     }
 
     // Update is called once per frame
