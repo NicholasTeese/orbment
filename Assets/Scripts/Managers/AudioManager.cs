@@ -27,6 +27,7 @@ public class AudioManager : MonoBehaviour
 
     public AudioClip[] m_playerNormalBullets;
     public AudioClip[] m_playerFireBullets;
+    public AudioClip[] m_fireExplosions;
 
     public AudioSource m_explosionAudioSource;
     public AudioSource m_perkTreeAudioSource;
@@ -259,5 +260,10 @@ public class AudioManager : MonoBehaviour
     public void PlayOneShotPlayerFireBullet()
     {
         m_playerbulletAudioSource.PlayOneShot(m_playerFireBullets[Random.Range(0, m_playerNormalBullets.Length)]);
+    }
+
+    public void PlayOneShotFireExplosion()
+    {
+        m_explosionAudioSource.PlayOneShot(m_fireExplosions[Random.Range(0, m_fireExplosions.Length)]);
     }
 }

@@ -27,7 +27,7 @@ public class Gremlin : Enemy
 
     private NavMeshAgent m_navMeshAgent;
 
-    private Animator m_animator;
+    public Animator m_animator;
 
     private FindObjectsInRadius m_findOBjectsInRadius;
 
@@ -41,8 +41,6 @@ public class Gremlin : Enemy
         m_navMeshAgent = GetComponent<NavMeshAgent>();
         m_navMeshAgent.destination = GetWanderPosition(transform.position);
         m_navMeshAgent.speed = m_fWanderSpeed;
-
-        m_animator = GetComponentInChildren<Animator>();
 
         m_findOBjectsInRadius = GetComponent<FindObjectsInRadius>();
     }
@@ -112,6 +110,10 @@ public class Gremlin : Enemy
 
             if (bullet.m_id == "Player" && m_eBehaviour == Behaviour.HIDING)
             {
+                m_eBehaviour = Behaviour.RETREATING;
+                m_animator.SetBool("bRun", true);
+                m_animator.SetBool("bAlive", true);
+                m_animator.SetBool("bHide", false);
                 GetRetreatPosition();
             }
         }
@@ -122,7 +124,10 @@ public class Gremlin : Enemy
         if (m_currHealth <= 0.0f && m_eBehaviour != Behaviour.DEAD)
         {
             m_eBehaviour = Behaviour.DEAD;
-            GameObject bomb = Instantiate(Resources.Load("Prefabs/Enemies/Bomber/Bomb_Beta") as GameObject);
+            m_animator.SetBool("bRun", false);
+            m_animator.SetBool("bAlive", false);
+            m_animator.SetBool("bHide", false);
+            GameObject bomb = Instantiate(Resources.Load("Prefabs/Enemies/Bomber/Gremlin_Shell") as GameObject);
             bomb.transform.position = transform.position;
             bomb.transform.SetParent(BombManager.m_bombManager.transform);
             return;
@@ -130,6 +135,10 @@ public class Gremlin : Enemy
 
         if (m_findOBjectsInRadius.inSight && m_eBehaviour != Behaviour.RETREATING)
         {
+            m_animator.SetTrigger("Detect");
+            m_animator.SetBool("bRun", true);
+            m_animator.SetBool("bAlive", true);
+            m_animator.SetBool("bHide", false);
             GetRetreatPosition();
         }
 
@@ -137,44 +146,39 @@ public class Gremlin : Enemy
         {
             m_navMeshAgent.speed = m_fWanderSpeed;
             m_eBehaviour = Behaviour.HIDING;
+            m_animator.SetBool("bRun", false);
+            m_animator.SetBool("bAlive", true);
+            m_animator.SetBool("bHide", true);
             m_eTempBehaviour = m_eBehaviour;
         }
     }
 
     private void PerformBehavior()
     {
+        Debug.Log(m_eBehaviour);
+
         switch (m_eBehaviour)
         {
             case Behaviour.WANDERING:
                 {
-                    m_animator.SetBool("bWalking", true);
-                    m_animator.SetBool("bRunning", false);
-                    m_animator.SetBool("bHiding", false);
-
-                    //Debug.Log("Distance: " + Vector3.Distance(transform.position, m_navMeshAgent.destination));
                     if (Vector3.Distance(transform.position, m_navMeshAgent.destination) <= 1.5f)
                     {
                         m_navMeshAgent.destination = GetWanderPosition(transform.position);
+                        m_animator.SetBool("bRun", true);
+                        m_animator.SetBool("bAlive", true);
+                        m_animator.SetBool("bHide", false);
                     }
                     break;
                 }
 
             case Behaviour.RETREATING:
                 {
-                    m_animator.SetBool("bWalking", false);
-                    m_animator.SetBool("bRunning", true);
-                    m_animator.SetBool("bHiding", false);
-
                     m_navMeshAgent.SetDestination(m_v3RetreatPosition);
                     break;
                 }
 
             case Behaviour.HIDING:
                 {
-                    m_animator.SetBool("bWalking", false);
-                    m_animator.SetBool("bRunning", false);
-                    m_animator.SetBool("bHiding", true);
-
                     m_fHideTime -= Time.deltaTime;
 
                     if (m_fHideTime <= 0.0f)
@@ -187,6 +191,7 @@ public class Gremlin : Enemy
 
             case Behaviour.DEAD:
                 {
+
                     break;
                 }
 

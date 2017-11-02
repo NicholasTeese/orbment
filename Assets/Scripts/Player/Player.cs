@@ -336,11 +336,6 @@ public class Player : Entity
         m_charCont.Move(dir * m_dashSpeed);
 
         m_dashTimer += Time.deltaTime;
-
-        if (m_explosionManager != null)
-        {
-            m_explosionManager.RequestExplosion(this.transform.position, this.transform.forward, Explosion.ExplosionType.AfterImage, 0.0f);
-        }
         
         if (m_dashTimer >= m_dashTime)
         {
