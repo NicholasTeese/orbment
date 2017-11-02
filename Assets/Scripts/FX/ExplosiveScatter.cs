@@ -34,6 +34,7 @@ public class ExplosiveScatter : MonoBehaviour
         if (m_script != null && m_rb != null && m_explsionPosition != null)
         {
             m_rb.AddExplosionForce(m_explosiveForce, m_explsionPosition.position, m_explosiveRadius, m_explosiveUpMod);
+            Physics.IgnoreCollision(GetComponent<Collider>(), Player.m_player.GetComponent<Collider>(), true);
             StartCoroutine(FadeDelay());
         }
     }
