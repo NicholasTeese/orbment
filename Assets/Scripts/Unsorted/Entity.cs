@@ -191,7 +191,7 @@ public class Entity : MonoBehaviour
                 {
                     Time.timeScale = 0.5f;
                 }
-
+                
                 m_bIsAlive = false;
                 m_explosionManager.RequestExplosion(this.transform.position, this.transform.forward, Explosion.ExplosionType.BigBlood, 0.0f);
                 m_explosionManager.RequestExplosion(this.transform.position, this.transform.forward, Explosion.ExplosionType.Gibs, 0.0f);
