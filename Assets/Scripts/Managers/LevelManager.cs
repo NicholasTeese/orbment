@@ -6,10 +6,10 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
     // Scene names.
-    public const string m_strMainMenuSceneName = "Beta_Main_Menu";
-    public const string m_strTutorialSceneName = "Beta_Tutorial";
-    public const string m_strLevelOneSceneName = "Beta_Level_1";
-    public const string m_strLevelTwoSceneName = "Beta_Level_2";
+    public const string m_strMainMenuSceneName = "Main_Menu";
+    public const string m_strTutorialSceneName = "Tutorial";
+    public const string m_strLevelOneSceneName = "Level_1";
+    public const string m_strLevelTwoSceneName = "Level_2";
 
     private bool m_bSceneLoadComplete = false;
 

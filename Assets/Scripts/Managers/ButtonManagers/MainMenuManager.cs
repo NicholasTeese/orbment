@@ -106,18 +106,6 @@ public class MainMenuManager : MonoBehaviour
         m_selectedButton.IsMousedOver = true;
     }
 
-    private void Start()
-    {
-        if (GameManager.m_gameManager.ShowCursor)
-        {
-            m_optionsGeneralPanel.transform.Find("Show_Hide_Cursor_Button").GetComponentInChildren<Text>().text = "Hide Cursor";
-        }
-        else
-        {
-            m_optionsGeneralPanel.transform.Find("Show_Hide_Cursor_Button").GetComponentInChildren<Text>().text = "Show Cursor";
-        }
-    }
-
     private void Update()
     {
         if (m_bFadeIn && !m_bFadeInComplete)
