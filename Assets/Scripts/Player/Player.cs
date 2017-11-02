@@ -172,10 +172,13 @@ public class Player : Entity
             }
         }
 
-		if (m_currHealth <= 0.0f)
+		if (m_currHealth <= 0.0f && m_bIsAlive)
         {
             m_bIsAlive = false;
+            m_animatior.SetBool("bAlive", m_bIsAlive);
+            m_animatior.speed = 1.3f;
 		}
+
         // Debug shortcut for Heal
         if (Input.GetKey(KeyCode.H) && Input.GetKey(KeyCode.KeypadPlus))
         {
@@ -267,7 +270,7 @@ public class Player : Entity
             m_dashing = true;
         }
 
-        if (!GameManager.m_gameManager.GameIsPaused)
+        if (!GameManager.m_gameManager.GameIsPaused && m_bIsAlive)
         {
             //get movement input
             m_movement = Vector3.forward * InputManager.PrimaryVertical() + Vector3.right * InputManager.PrimaryHorizontal();
@@ -281,6 +284,11 @@ public class Player : Entity
 
     void FixedUpdate()
     {
+        if (!m_bIsAlive)
+        {
+            return;
+        }
+
         //mouse aiming
         if (InputManager.SecondaryInput() == Vector3.zero && m_v3LastMousePosition != Input.mousePosition)
         {
@@ -314,7 +322,7 @@ public class Player : Entity
         {
             Dash(m_dashDirection);
         }
-        else
+        else if (m_bIsAlive)
         {
             //movement
             m_charCont.Move(m_movement * (m_currSpeed + m_iEnemiesOnFire) * m_currSpeedMult * Time.deltaTime);

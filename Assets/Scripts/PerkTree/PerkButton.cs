@@ -134,7 +134,7 @@ public class PerkButton : MonoBehaviour
     public void OnClick()
     {
         // If there are no available perks, exit the function.
-        if (PerkTreeManager.m_perkTreeManager.AvailiablePerks == 0 || !ExpManager.m_experiencePointsManager.UpgradeTreeInRange)
+        if (PerkTreeManager.m_perkTreeManager.AvailiablePerks == 0)
         {
             //Debug.Log("No available perks to spend.");
             return;
@@ -143,9 +143,9 @@ public class PerkButton : MonoBehaviour
         // If this perk's parent perk's is not purchased or it's one of it's child perks have already been chosen, exit the function.
         if (m_parentPerk != null)
         {
-            if (!m_parentPerk.GetComponent<PerkButton>().m_bIsPurchased || m_parentPerk.GetComponent<PerkButton>().m_bChildPathChosen)
+            if (!m_parentPerk.GetComponent<PerkButton>().m_bIsPurchased)
             {
-                Debug.Log("Parent Perk not purchased or Child Perk path already chosen.");
+                Debug.Log("Parent Perk not purchased.");
                 AudioManager.m_audioManager.PerkTreeAudioSource.PlayOneShot(m_perkUnavailableAudioClip);
                 return;
             }

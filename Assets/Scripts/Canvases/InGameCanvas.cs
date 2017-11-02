@@ -17,9 +17,13 @@ public class InGameCanvas : MonoBehaviour
 
     public static InGameCanvas m_inGameCanvas;
 
+    public float FadeOutSpeed { get { return m_fFadeOutSpeed; } set { m_fFadeOutSpeed = value; } }
+
     public bool FadeIn { get { return m_bFadeIn; } set { m_bFadeIn = value; } }
     public bool FadeInComplete { get { return m_bFadeInComplete; } set { m_bFadeInComplete = value; } }
     public bool FadeOutComplete { get { return m_bFadeOutComplete; } set { m_bFadeOutComplete = value; } }
+
+    public Image FadeImage { get { return m_fadeImage; } }
 
     private void Awake()
     {
@@ -53,12 +57,12 @@ public class InGameCanvas : MonoBehaviour
             if (ImageFadeOut(m_fadeImage, m_fFadeOutSpeed))
             {
                 m_bFadeOutComplete = true;
-                if (SceneManager.GetActiveScene().name != LevelManager.m_strLevelTwoSceneName)
+                if (SceneManager.GetActiveScene().name != LevelManager.m_strLevelTwoSceneName  && Player.m_player.IsAlive)
                 {
                     LevelManager.m_levelManager.InitialiseDontDestroyOnLoad();
                     LevelManager.m_levelManager.LoadNextLevelAsyncOperation.allowSceneActivation = true;
                 }
-                else
+                else if (Player.m_player.IsAlive)
                 {
                     LevelManager.m_levelManager.DestroyAllDontDestroyOnLoad();
                     LevelManager.m_levelManager.LoadNextLevelAsyncOperation.allowSceneActivation = true;
@@ -67,7 +71,7 @@ public class InGameCanvas : MonoBehaviour
         }
     }
 
-    private bool ImageFadeIn(Image a_fadeImage, float a_fFadeSpeed)
+    public bool ImageFadeIn(Image a_fadeImage, float a_fFadeSpeed)
     {
         Color imageColour = a_fadeImage.color;
 
@@ -81,7 +85,7 @@ public class InGameCanvas : MonoBehaviour
         return true;
     }
 
-    private bool ImageFadeOut(Image a_fadeImage, float a_fFadeSpeed)
+    public bool ImageFadeOut(Image a_fadeImage, float a_fFadeSpeed)
     {
         Color imageColour = a_fadeImage.color;
 
