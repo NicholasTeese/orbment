@@ -14,33 +14,50 @@ public class Bomb : MonoBehaviour
 
     private Vector3 m_v3RollPosition = Vector3.zero;
 
-    private Renderer m_renderer;
+    //private AudioClip[] m_explosionClips;
+    //
+    //private AudioSource m_audioSource;
 
-    private AudioClip[] m_explosionClips;
+    private Color m_originalShellColor;
 
-    private AudioSource m_audioSource;
+    public Rigidbody m_rigidBody;
+
+    public Renderer m_renderer;
 
     private void Awake()
     {
         m_fLastColourSwitchTime = m_fFuseTimer;
 
-        m_renderer = GetComponent<Renderer>();
-        m_renderer.material.color = Color.black;
+        //m_renderer = GetComponentInChildren<Renderer>();
+        //m_renderer.material.color = Color.black;
 
-        m_explosionClips = Resources.LoadAll<AudioClip>("Audio/Beta/Actors/Enemies/Gremlin");
-
-        m_audioSource = AudioManager.m_audioManager.ExplosionAudioSource;
+        //m_explosionClips = Resources.LoadAll<AudioClip>("Audio/Beta/Actors/Enemies/Gremlin");
+        //
+        //m_audioSource = AudioManager.m_audioManager.ExplosionAudioSource;
 
         if (m_fBombDamage == 0.0f)
         {
             //if not set in inspector, default to 200
             m_fBombDamage = 200.0f;
         }
+        
+        if (m_rigidBody == null)
+        {
+            m_rigidBody = GetComponent<Rigidbody>();
+        }
+
+        if (m_renderer == null)
+        {
+            m_renderer = GetComponentInChildren<Renderer>();
+        }
+
+        m_originalShellColor = m_renderer.material.color;
     }
 
     private void Start()
     {
-        m_v3RollPosition = Player.m_player.transform.position;
+        m_v3RollPosition = Player.m_player.transform.position + new Vector3(0.0f, 1.1f, 0.0f);
+        m_rigidBody.AddForce(m_v3RollPosition * 10.0f);
     }
 
     private void Update()
@@ -51,23 +68,23 @@ public class Bomb : MonoBehaviour
         {
             m_fLastColourSwitchTime = m_fFuseTimer;
 
-            if (m_renderer.material.color == Color.black)
+            if (m_renderer.material.color == m_originalShellColor)
             {
                 m_renderer.material.color = Color.red;
             }
             else
             {
-                m_renderer.material.color = Color.black;
+                m_renderer.material.color = m_originalShellColor;
             }
         }
 
         if (m_fFuseTimer >= 0.0f)
         {
-            transform.position = Vector3.MoveTowards(transform.position, m_v3RollPosition, (m_fRollSpeed * Time.deltaTime));
+            //transform.position = Vector3.MoveTowards(transform.position, m_v3RollPosition, (m_fRollSpeed * Time.deltaTime));
         }
         else if (m_fFuseTimer <= 0.0f && !m_bHasExploded)
         {
-            m_audioSource.PlayOneShot(m_explosionClips[Random.Range(0, m_explosionClips.Length)]);
+            AudioManager.m_audioManager.PlayOneShotFireExplosion();
 
             GameObject explosion = Instantiate(Resources.Load("Prefabs/Explosions/FireExplosion") as GameObject);
             explosion.transform.position = transform.position + new Vector3(0.0f, 0.5f, 0.0f);

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 37fda47e9d6d46f4a94c9ac1b24be838
-timeCreated: 1509600344
+guid: ccf88a7b0f784094986cf993caec3adf
+timeCreated: 1509603911
 licenseType: Pro
 ModelImporter:
   serializedVersion: 21
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: shell
+    4300000: Plant
   materials:
     importMaterials: 1
     materialName: 0

@@ -155,8 +155,6 @@ public class Gremlin : Enemy
 
     private void PerformBehavior()
     {
-        Debug.Log(m_eBehaviour);
-
         switch (m_eBehaviour)
         {
             case Behaviour.WANDERING:
