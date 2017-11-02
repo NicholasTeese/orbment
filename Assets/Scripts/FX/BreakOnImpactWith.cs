@@ -7,10 +7,6 @@ public class BreakOnImpactWith : MonoBehaviour
     private int wallHealth = 100;
     public int WallHealth { get { return wallHealth; } set { wallHealth = value; } }
 
-    private AudioClip[] m_wallBreaks;
-
-    private AudioSource m_audioSource;
-
     public string m_tag;
     public GameObject m_faceModel;
     public GameObject m_chunkModel;
@@ -19,16 +15,9 @@ public class BreakOnImpactWith : MonoBehaviour
     public Vector3 m_entranceVector;
     public bool m_isBroken = false;
 
-    private void Awake()
-    {
-        m_wallBreaks = Resources.LoadAll<AudioClip>("Audio/Beta/Environment/Wall_Break");
-    }
-
     // Use this for initialization
     void Start()
     {
-        m_audioSource = IsoCam.m_playerCamera.GetComponent<AudioSource>();
-
         if (m_chunkModel != null)
         {
             m_chunkModel.SetActive(false);
@@ -39,7 +28,7 @@ public class BreakOnImpactWith : MonoBehaviour
     {
         if (wallHealth <= 0.0f && !m_isBroken)
         {
-            m_audioSource.PlayOneShot(m_wallBreaks[Random.Range(0, m_wallBreaks.Length)]);
+            AudioManager.m_audioManager.PlayOneShotWallBreak();
         }
 
         if (wallHealth <= 0)

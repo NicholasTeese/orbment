@@ -21,8 +21,6 @@ public class BaseButton : MonoBehaviour
 
     protected Type m_eType;
 
-    protected AudioClip m_menuClickAudioClip;
-
     protected Button m_button;
 
     protected Slider m_slider;
@@ -37,8 +35,6 @@ public class BaseButton : MonoBehaviour
 
     protected virtual void Awake()
     {
-        m_menuClickAudioClip = Resources.Load("Audio/Beta/UI/Menu_Click") as AudioClip;
-
         if (GetComponent<Button>() != null)
         {
             m_eType = Type.BUTTON;
@@ -129,11 +125,7 @@ public class BaseButton : MonoBehaviour
 
     public virtual void OnValueChanged(string a_strParameter)
     {
-        //if (!m_bIsMousedOver)
-        //{
-        //    Debug.Log(gameObject.name + " slider value cannot be changed because 'm_bIsMouseOver' is " + m_bIsMousedOver + '.');
-        //    return;
-        //}
+
     }
 
     protected virtual void Select()

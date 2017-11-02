@@ -15,23 +15,35 @@ public class AudioManager : MonoBehaviour
     private bool m_bFadeIn = true;
     private bool m_bFadeComplete = false;
 
-    // Music.
-    private AudioClip m_mainMenuMusic;
-    private AudioClip m_daytimeMusic;
-
     private AudioClip[] m_enemyDeathClips;
 
-    AudioSource m_musicAudioSource;
-    AudioSource m_effectsAudioSource;
-    AudioSource m_menuAudioSource;
+    [Header("Audio Clips")]
+    public AudioClip m_daytimeMusic;
+    public AudioClip m_mainMenuMusic;
+    public AudioClip m_menuClick;
+    public AudioClip m_perkApplied;
+    public AudioClip m_perkUnavailable;
+    public AudioClip m_perkSelected;
 
     public AudioClip[] m_playerNormalBullets;
     public AudioClip[] m_playerFireBullets;
+    public AudioClip[] m_playerDash;
+    public AudioClip[] m_orbPickup;
     public AudioClip[] m_fireExplosions;
+    public AudioClip[] m_wallBreak;
+    public AudioClip[] m_enemyDeath;
 
-    public AudioSource m_explosionAudioSource;
-    public AudioSource m_perkTreeAudioSource;
+    [Header("Audio Sources")]
+    public AudioSource m_musicAudioSource;
     public AudioSource m_playerbulletAudioSource;
+    public AudioSource m_effectsAudioSource;
+    public AudioSource m_playerDashAudioSource;
+    public AudioSource m_playerOrbPickupAudioSource;
+    public AudioSource m_explosionAudioSource;
+    public AudioSource m_wallBreakAudioSource;
+    public AudioSource m_enemyDeathAudioSource;
+    public AudioSource m_perkTreeAudioSource;
+    public AudioSource m_menuAudioSource;
 
     public static AudioManager m_audioManager;
 
@@ -60,29 +72,11 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        m_mainMenuMusic = Resources.Load("Audio/Beta/Music/Main_Menu_Music") as AudioClip;
-        m_daytimeMusic = Resources.Load("Audio/Beta/Music/Daytime_Music") as AudioClip;
-
-        m_musicAudioSource = GetComponent<AudioSource>();
         m_musicAudioSource.loop = true;
     }
 
     private void Start()
     {
-        if (IsoCam.m_playerCamera != null)
-        {
-            m_effectsAudioSource = IsoCam.m_playerCamera.GetComponent<AudioSource>();
-        }
-
-        if (PauseMenuManager.m_pauseMenuManager != null)
-        {
-            m_menuAudioSource = PauseMenuManager.m_pauseMenuManager.transform.parent.GetComponent<AudioSource>();
-        }
-        else
-        {
-            m_menuAudioSource = MainMenuManager.m_mainMenuManager.GetComponent<AudioSource>();
-        }
-
         PlaySceneMusic(LevelManager.m_levelManager.CurrentSceneName);
     }
 
@@ -265,5 +259,45 @@ public class AudioManager : MonoBehaviour
     public void PlayOneShotFireExplosion()
     {
         m_explosionAudioSource.PlayOneShot(m_fireExplosions[Random.Range(0, m_fireExplosions.Length)]);
+    }
+
+    public void PlayOneShotWallBreak()
+    {
+        m_wallBreakAudioSource.PlayOneShot(m_wallBreak[Random.Range(0, m_wallBreak.Length)]);
+    }
+
+    public void PlayOneShotMenuClick()
+    {
+        m_menuAudioSource.PlayOneShot(m_menuClick);
+    }
+
+    public void PlayOneShotPerkApplied()
+    {
+        m_menuAudioSource.PlayOneShot(m_perkApplied);
+    }
+
+    public void PlayOneShotPerkUnavailable()
+    {
+        m_menuAudioSource.PlayOneShot(m_perkUnavailable);
+    }
+
+    public void PlayOneShotPerkSelected()
+    {
+        m_menuAudioSource.PlayOneShot(m_perkSelected);
+    }
+
+    public void PlayOneShotPlayerDash()
+    {
+        m_playerDashAudioSource.PlayOneShot(m_playerDash[Random.Range(0, m_playerDash.Length)]);
+    }
+
+    public void PlayOneShotOrbPickup()
+    {
+        m_playerOrbPickupAudioSource.PlayOneShot(m_orbPickup[Random.Range(0, m_orbPickup.Length)]);
+    }
+
+    public void PlayOneShotEnemyDeath()
+    {
+        m_enemyDeathAudioSource.PlayOneShot(m_enemyDeath[Random.Range(0, m_enemyDeath.Length)]);
     }
 }

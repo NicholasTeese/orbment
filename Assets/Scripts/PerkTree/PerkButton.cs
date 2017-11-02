@@ -17,9 +17,6 @@ public class PerkButton : MonoBehaviour
 
     private string m_strPerkName;
 
-    private AudioClip m_perkSelectedAudioClip;
-    private AudioClip m_perkUnavailableAudioClip;
-
     private Button m_perkIconButton;
 
     private StartingWeapon m_startingWeapon;
@@ -51,9 +48,6 @@ public class PerkButton : MonoBehaviour
     private void Awake()
     {
         m_strPerkName = transform.parent.name;
-
-        m_perkSelectedAudioClip = Resources.Load("Audio/Beta/UI/Perk_Tree/Perk_Selected") as AudioClip;
-        m_perkUnavailableAudioClip = Resources.Load("Audio/Beta/UI/Perk_Tree/Perk_Unavailable") as AudioClip;
 
         m_perkIconButton = GetComponent<Button>();
 
@@ -146,7 +140,7 @@ public class PerkButton : MonoBehaviour
             if (!m_parentPerk.GetComponent<PerkButton>().m_bIsPurchased)
             {
                 Debug.Log("Parent Perk not purchased.");
-                AudioManager.m_audioManager.PerkTreeAudioSource.PlayOneShot(m_perkUnavailableAudioClip);
+                AudioManager.m_audioManager.PlayOneShotPerkUnavailable();
                 return;
             }
 
@@ -155,7 +149,7 @@ public class PerkButton : MonoBehaviour
         }
 
         // Purchase this perk.
-        AudioManager.m_audioManager.PerkTreeAudioSource.PlayOneShot(m_perkSelectedAudioClip);
+        AudioManager.m_audioManager.PlayOneShotPerkSelected();
         m_perkUpgradeConfirmation.SetActive(true);
     }
 

@@ -27,20 +27,12 @@ public class Enemy : Entity
 
     protected Vector3 m_v3TravelDir = Vector3.zero;
 
-    private AudioClip[] m_enemyDeathClips;
-
-    private AudioSource m_audioSource;
-
     protected void Awake()
     {
         m_Animator = GetComponent<Animator>();
         m_collider = GetComponent<Collider>();
 
         m_v3TravelDir = transform.position;
-
-        m_enemyDeathClips = Resources.LoadAll<AudioClip>("Audio/Beta/Actors/Enemies/Death");
-
-        m_audioSource = GetComponent<AudioSource>();
     }
 
     new void Update()
@@ -58,7 +50,7 @@ public class Enemy : Entity
 
         if (m_currHealth <= 0)
         {
-            m_audioSource.PlayOneShot(m_enemyDeathClips[Random.Range(0, m_enemyDeathClips.Length)]);
+            AudioManager.m_audioManager.PlayOneShotEnemyDeath();
 
             ExpManager.m_experiencePointsManager.m_playerExperience += m_experienceValue;
             if (m_killStreakManager != null)

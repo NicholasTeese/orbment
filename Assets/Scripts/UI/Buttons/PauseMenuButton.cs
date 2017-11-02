@@ -34,7 +34,7 @@ public class PauseMenuButton : BaseButton
     {
         base.OnClick(a_strParameter);
 
-        PauseMenuManager.m_pauseMenuManager.PauseMenuAudioSource.PlayOneShot(m_menuClickAudioClip);
+        AudioManager.m_audioManager.PlayOneShotMenuClick();
         PauseMenuManager.m_pauseMenuManager.LastSelectedButtonIndex = PauseMenuManager.m_pauseMenuManager.SelectedButtonIndex;
 
         switch (a_strParameter)

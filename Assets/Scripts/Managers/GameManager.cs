@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
 
     private Vector3 m_v3LastMousePosition = Vector3.zero;
 
-    private Texture2D m_crosshair;
+    public Texture2D m_crosshair;
 
     public static GameManager m_gameManager;
 
@@ -38,11 +38,9 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        m_crosshair = Resources.Load("Textures/Beta/UI/Cursor_White") as Texture2D;
-
         offset = new Vector2(m_crosshair.width / 2.0f, m_crosshair.height / 2.0f);
 
-        if (SceneManager.GetActiveScene().name == "Beta_Main_Menu")
+        if (SceneManager.GetActiveScene().name == LevelManager.m_strMainMenuSceneName)
         {
             Cursor.visible = true;
         }
@@ -57,7 +55,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        if (SceneManager.GetActiveScene().name != "Beta_Main_Menu")
+        if (SceneManager.GetActiveScene().name != LevelManager.m_strMainMenuSceneName)
         {
             PauseMenuManager.m_pauseMenuManager.gameObject.SetActive(false);
         }

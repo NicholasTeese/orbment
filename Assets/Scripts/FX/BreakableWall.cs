@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BreakableWall : MonoBehaviour
 {
-    private BreakOnImpactWith m_breakableWallHolder = null;
+    private BreakOnImpactWith m_breakableWallHolder;
 
     private void Awake()
     {

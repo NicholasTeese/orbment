@@ -14,7 +14,6 @@ public class IsoCam : MonoBehaviour
 {
     public float m_camMoveSpeed = 10;
     public float m_camRotSpeed = 10;
-    private Material m_flashRed;
 
     private Vector3 offset;
 
@@ -30,6 +29,8 @@ public class IsoCam : MonoBehaviour
     private float m_intensity = 0.0f;
 
     private Plane[] m_frustrumPlanes = null;
+
+    public Material m_flashRed;
 
     private Camera m_isometricCamera;
 
@@ -51,8 +52,6 @@ public class IsoCam : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        m_flashRed = Resources.Load("Materials/FlashRed") as Material;
 
         m_isometricCamera = GetComponent<Camera>();
     }
