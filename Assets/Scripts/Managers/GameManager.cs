@@ -5,9 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-	private bool m_bGameIsPaused = false;
+    private float m_fDeathFadeOutSpeed = 0.008f;
+    private float m_fTimeScaleSlowDownSpeed = 0.008f;
+
+    private bool m_bGameIsPaused = false;
     private bool m_bShowCursor = true;
     private bool m_bForceHideCursor = false;
+    private bool m_bDeathFadeOutStarted = false;
 
     private Vector2 offset = Vector2.zero;
 
@@ -79,11 +83,7 @@ public class GameManager : MonoBehaviour
 
         if (!Player.m_player.IsAlive && !DeathMenuManager.m_deathMenuManager.gameObject.activeInHierarchy)
         {
-            Time.timeScale = 0.0f;
-            m_bGameIsPaused = true;
-            DeathMenuManager.m_deathMenuManager.gameObject.SetActive(true);
-            PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(false);
-            Cursor.visible = true;
+            OnPlayerDeath();
         }
 
         if(!ExpManager.m_experiencePointsManager.PerkTreeOpen)
@@ -125,6 +125,44 @@ public class GameManager : MonoBehaviour
         else if (m_v3LastMousePosition != Input.mousePosition)
         {
             m_bShowCursor = true;
+        }
+    }
+
+    private void OnPlayerDeath()
+    {
+        if (!m_bDeathFadeOutStarted)
+        {
+            InGameCanvas.m_inGameCanvas.FadeOutSpeed = m_fDeathFadeOutSpeed;
+            InGameCanvas.m_inGameCanvas.FadeIn = false;
+            InGameCanvas.m_inGameCanvas.FadeOutComplete = false;
+            m_bDeathFadeOutStarted = true;
+        }
+
+        if (PlayerHUDManager.m_playerHUDManager.gameObject.activeInHierarchy)
+        {
+            PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(false);
+        }
+
+        if (OrbCountDisplay.m_orbCountDisplay.gameObject.activeInHierarchy)
+        {
+            OrbCountDisplay.m_orbCountDisplay.gameObject.SetActive(false);
+        }
+
+        if (Time.timeScale > m_fTimeScaleSlowDownSpeed)
+        {
+            Time.timeScale -= m_fTimeScaleSlowDownSpeed;
+
+            if (Time.timeScale <= m_fTimeScaleSlowDownSpeed)
+            {
+                Time.timeScale = 0;
+            }
+        }
+        else if (InGameCanvas.m_inGameCanvas.FadeImage.color.a >= 0.9f)
+        {
+            Time.timeScale = 0.0f;
+            m_bGameIsPaused = true;
+            Cursor.visible = true;
+            DeathMenuManager.m_deathMenuManager.gameObject.SetActive(true);
         }
     }
 

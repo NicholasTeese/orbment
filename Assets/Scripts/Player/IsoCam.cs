@@ -35,7 +35,7 @@ public class IsoCam : MonoBehaviour
 
     public Camera m_uiCamera;
 
-    public static IsoCam m_playerCamera = null;
+    public static IsoCam m_playerCamera;
 
     public Camera IsometricCamera { get { return m_isometricCamera; } }
 

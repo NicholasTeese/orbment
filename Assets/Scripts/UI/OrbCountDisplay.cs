@@ -10,6 +10,20 @@ public class OrbCountDisplay : MonoBehaviour
     private int m_iIndex;
     public List<OrbGate> GateList = new List<OrbGate>();
 
+    public static OrbCountDisplay m_orbCountDisplay;
+
+    private void Awake()
+    {
+        if (m_orbCountDisplay == null)
+        {
+            m_orbCountDisplay = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
         //Player.m_Player = GameObject.FindObjectOfType<Player>();
