@@ -50,14 +50,14 @@ public class BreakOnImpactWith : MonoBehaviour
             
             m_isBroken = true;
         }
-        else
-        {
-            if (wallHealth <= 50)
-            {
-                Material[] breakWallMaterials = m_faceModel.GetComponent<Renderer>().materials;
-                breakWallMaterials[0].mainTexture = null;
-            }
-        }
+        //else
+        //{
+        //    if (wallHealth <= 50)
+        //    {
+        //        Material[] breakWallMaterials = m_faceModel.GetComponent<Renderer>().materials;
+        //        breakWallMaterials[0].mainTexture = null;
+        //    }
+        //}
     }
 
     void OnTriggerEnter(Collider other)
