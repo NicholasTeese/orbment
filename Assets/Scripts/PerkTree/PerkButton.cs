@@ -21,6 +21,10 @@ public class PerkButton : MonoBehaviour
 
     private StartingWeapon m_startingWeapon;
 
+    [Header("Particles")]
+    public GameObject[] m_onPurchaseParticles;
+    public GameObject[] m_afterPurchaseParticles;
+
     [Header("Parent Perks")]
     public GameObject m_parentPerk = null;
     [Header("Child Perks")]
@@ -80,6 +84,14 @@ public class PerkButton : MonoBehaviour
         if (m_bIsPurchased)
         {
             ActivateChildPerk();
+        }
+    }
+
+    private void OnEnable()
+    {
+        for (int iCount = 0; iCount < m_onPurchaseParticles.Length; ++iCount)
+        {
+            m_onPurchaseParticles[iCount].GetComponent<ParticleSystem>().Pause(); // SetActive(false);
         }
     }
 
@@ -472,6 +484,18 @@ public class PerkButton : MonoBehaviour
         m_perkIconButton.GetComponent<Image>().sprite = m_iconActive;
         m_perkWings.GetComponent<Image>().sprite = m_wingsActive;
         m_perkWings.Rotate = true;
+
+        for (int iCount = 0; iCount < m_onPurchaseParticles.Length; ++iCount)
+        {
+            m_onPurchaseParticles[iCount].SetActive(true);
+            m_onPurchaseParticles[iCount].GetComponent<ParticleSystem>().Simulate(Time.unscaledDeltaTime, true, false);
+        }
+
+        for (int iCount = 0; iCount < m_afterPurchaseParticles.Length; ++iCount)
+        {
+            m_afterPurchaseParticles[iCount].SetActive(true);
+            m_afterPurchaseParticles[iCount].GetComponent<ParticleSystem>().Simulate(Time.unscaledDeltaTime, true, false);
+        }
     }
 
     private void Grow()
