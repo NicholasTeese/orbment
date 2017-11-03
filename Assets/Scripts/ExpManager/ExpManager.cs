@@ -16,18 +16,18 @@ public class ExpManager : MonoBehaviour
 	private GameObject Xpfiller;
 	private GameObject XPSlider;
 
-    private Texture2D m_experienceBarFull;
-    private Texture2D m_experienceBarEmpty;
-
     public int m_expBarWidth = 500;
     public float m_playerExperience = 0.0f;
     public float m_playerMaxXP = 50.0f;
     public int m_playerLevel = 1;
     public float m_percentageAddedXPPerLvl = 0.25f;
 
-    public GameObject UpgradeAvailableText { get { return m_upgradeAvailableText; } }
+    public Texture2D m_experienceBarFull;
+    public Texture2D m_experienceBarEmpty;
 
     public static ExpManager m_experiencePointsManager;
+
+    public GameObject UpgradeAvailableText { get { return m_upgradeAvailableText; } }
 
     private void Awake()
     {
@@ -60,9 +60,6 @@ public class ExpManager : MonoBehaviour
         m_upgradeUnavailableText = GameObject.FindGameObjectWithTag("UpgradeUnavailableText");
         Xpfiller = PlayerHUDManager.m_playerHUDManager.transform.Find("ExperienceBar").Find("ExperienceFiller").gameObject;
         XPSlider = PlayerHUDManager.m_playerHUDManager.transform.Find("ExperienceBar").Find("ExperienceSlider").gameObject;
-
-        m_experienceBarFull = Resources.Load("Textures/Experience_Bar_Full") as Texture2D;
-        m_experienceBarEmpty = Resources.Load("Textures/Experience_Bar_Empty") as Texture2D;
     }
 
     void Update()

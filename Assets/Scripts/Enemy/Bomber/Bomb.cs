@@ -28,13 +28,6 @@ public class Bomb : MonoBehaviour
     {
         m_fLastColourSwitchTime = m_fFuseTimer;
 
-        //m_renderer = GetComponentInChildren<Renderer>();
-        //m_renderer.material.color = Color.black;
-
-        //m_explosionClips = Resources.LoadAll<AudioClip>("Audio/Beta/Actors/Enemies/Gremlin");
-        //
-        //m_audioSource = AudioManager.m_audioManager.ExplosionAudioSource;
-
         if (m_fBombDamage == 0.0f)
         {
             //if not set in inspector, default to 200

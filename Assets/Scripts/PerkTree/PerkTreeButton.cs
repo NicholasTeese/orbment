@@ -12,8 +12,6 @@ public class PerkTreeButton : MonoBehaviour
     private bool m_bIsHightlighted = false;
     public bool IsHighlighted { get { return m_bIsHightlighted; } set { m_bIsHightlighted = value; } }
 
-    private AudioClip m_menuClick;
-
     private Button m_perkTreeButton;
 
     [Header("Child Perk Tree")]
@@ -29,8 +27,6 @@ public class PerkTreeButton : MonoBehaviour
 
     private void Awake()
     {
-        m_menuClick = Resources.Load("Audio/Beta/UI/Menu_Click") as AudioClip;
-
         m_perkTreeButton = GetComponent<Button>();
     }
 
@@ -47,7 +43,7 @@ public class PerkTreeButton : MonoBehaviour
 
     public void OnClick()
     {
-        AudioManager.m_audioManager.PerkTreeAudioSource.PlayOneShot(m_menuClick);
+        AudioManager.m_audioManager.PlayOneShotMenuClick();
 
         if (m_firePerkTreeButton != null)
         {

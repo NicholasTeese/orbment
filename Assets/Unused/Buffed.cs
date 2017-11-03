@@ -22,8 +22,6 @@ public class Buffed : StatusEffect
         base.OnEnable();
         if (m_entity != null)
         {
-            m_entity.m_isBuffed = true;
-
             m_player = m_entity.GetComponent<Player>();
 
             if (m_player != null)
@@ -41,11 +39,6 @@ public class Buffed : StatusEffect
 
     void OnDisable()
     {
-        if(m_entity != null)
-        {
-            m_entity.m_isBuffed = false;
-        }
-        
         if (m_player != null)
         {
             m_player.m_playerFiringInterval = m_origFireRate;
@@ -62,7 +55,6 @@ public class Buffed : StatusEffect
         {
             if(!m_entity.HealthBelowPercentCheck(m_healthPercentThreshold))
             {
-                m_entity.m_isBuffed = false;
                 ReturnToSender();
             }
         }

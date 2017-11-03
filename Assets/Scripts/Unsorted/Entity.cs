@@ -16,16 +16,6 @@ public class Entity : MonoBehaviour
     protected bool m_bIsAlive = true;
     public bool IsAlive { get { return m_bIsAlive; } }
 
-    //TODO: Move perk related variables to the player class as other entities wont have perks.
-    protected float m_fGodModeTimer = 5.0f;
-    public float GodModeTimer { get; set; }
-
-    protected bool m_bGodModeIsAvailable = false;
-    public bool GodModeIsAvailable { get; set; }
-
-    public bool m_bGodModeIsActive = false;
-    public bool GodModeIsActive { get; set; }
-
     [Header("Level")]
     public int m_currLevel = 1;
     public int m_healthPerLevel = 50;
@@ -80,31 +70,23 @@ public class Entity : MonoBehaviour
     //status effects
     [Header("Status Effects")]
     public bool m_onFire = false;
-    public bool m_isSlowed = false;
-    public bool m_isStunned = false;
-    public bool m_isBuffed = false;
     public bool m_ringOfFireActive = false;
-    public bool m_lightningFieldActive = false;
 
 
     [Header("Perks")]
-    public bool m_hasRamboPerk = false;
     public bool m_hasRingOfFire = false;
-    public bool m_hasLightningField = false;
     public List<PerkID> m_perks = new List<PerkID>();
 
     // Use this for initialization
     protected void Start()
     {
-        //gameManager = GameManager.m_gameManager;/
         m_agent = this.GetComponent<NavMeshAgent>();
         
         if (m_agent != null)
         {
             m_originalMoveSpeed = m_agent.speed;
         }
-        //m_expManager = GameObject.FindObjectOfType<ExpManager>();
-        //m_damageNumbersManager = GetComponent<DamageNumberManager>();
+
         m_statusEffectManager = GameObject.FindObjectOfType<StatusEffectManager>();
         m_explosionManager = GameObject.FindObjectOfType<ExplosionManager>();
         m_killStreakManager = GameObject.FindObjectOfType<KillStreakManager>();
@@ -141,20 +123,10 @@ public class Entity : MonoBehaviour
     {
         HealthUpdate();
 
-        if (!m_hasRamboPerk && m_perks.Contains(PerkID.RamboMode))
-        {
-            m_hasRamboPerk = true;
-        }
-
         //Check for ring of fire
         if (!m_hasRingOfFire && m_perks.Contains(PerkID.RingOfFire))
         {
             m_hasRingOfFire = true;
-        }
-
-        if (!m_hasLightningField && m_perks.Contains(PerkID.LightningField))
-        {
-            m_hasLightningField = true;
         }
     }
 
@@ -185,22 +157,10 @@ public class Entity : MonoBehaviour
         
         if (m_currHealth <= 0)
         {
-            if (!m_bGodModeIsActive)
-            {
-                if (gameObject.CompareTag("Player"))
-                {
-                    Time.timeScale = 0.5f;
-                }
-                
-                m_bIsAlive = false;
-                m_explosionManager.RequestExplosion(this.transform.position, this.transform.forward, Explosion.ExplosionType.BigBlood, 0.0f);
-                m_explosionManager.RequestExplosion(this.transform.position, this.transform.forward, Explosion.ExplosionType.Gibs, 0.0f);
-                this.gameObject.SetActive(false);
-            }
-            else
-            {
-                m_currHealth = 1;
-            }
+            m_bIsAlive = false;
+            m_explosionManager.RequestExplosion(this.transform.position, this.transform.forward, Explosion.ExplosionType.BigBlood, 0.0f);
+            m_explosionManager.RequestExplosion(this.transform.position, this.transform.forward, Explosion.ExplosionType.Gibs, 0.0f);
+            this.gameObject.SetActive(false);
         }
 
         ///STATUS EFFECTS
@@ -220,31 +180,9 @@ public class Entity : MonoBehaviour
             }
         }
 
-        if (m_causeSlow && !m_isSlowed)
-        {
-            m_statusEffectManager.RequestEffect(this.transform, StatusEffect.Status.Slowed);
-            m_causeSlow = false;
-        }
-
-        if (m_causeStun && !m_isStunned)
-        {
-            m_statusEffectManager.RequestEffect(this.transform, StatusEffect.Status.Stunned);
-            m_causeStun = false;
-        }
-
-        if (!m_isBuffed && HealthBelowPercentCheck(10) && m_hasRamboPerk)
-        {
-            m_statusEffectManager.RequestEffect(this.transform, StatusEffect.Status.Buffed);
-        }
-
         if (!m_ringOfFireActive && HealthBelowPercentCheck(25) && m_hasRingOfFire)
         {
             m_statusEffectManager.RequestEffect(this.transform, StatusEffect.Status.FireRing);
-        }
-
-        if (!m_lightningFieldActive && HealthBelowPercentCheck(25) && m_hasLightningField)
-        {
-            m_statusEffectManager.RequestEffect(this.transform, StatusEffect.Status.LightningRing);
         }
 
         m_oldHealth = m_currHealth;

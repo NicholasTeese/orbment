@@ -98,11 +98,6 @@ public class Player : Entity
 
     private Animator m_animatior;
 
-    private AudioClip[] m_dash;
-    private AudioClip[] m_orbPickup;
-
-    private AudioSource m_audioSource;
-
     private Vector3 m_v3LastMousePosition = Vector3.zero;
 
     public static Player m_player;
@@ -130,17 +125,12 @@ public class Player : Entity
         }
 
         m_animatior = transform.Find("Vince_Model_Beta").GetComponent<Animator>();
-
-        m_dash = Resources.LoadAll<AudioClip>("Audio/Beta/Actors/Player/Dash");
-        m_orbPickup = Resources.LoadAll<AudioClip>("Audio/Beta/Environment/Orb_Pickups");
     }
 
     new void Start()
     {
         base.Start();
         PoolSpentOrbs();
-
-        m_audioSource = IsoCam.m_playerCamera.GetComponent<AudioSource>();
 
         m_charCont = this.GetComponent<CharacterController>();
         m_manaPool = this.GetComponent<Mana>();
@@ -161,19 +151,9 @@ public class Player : Entity
 
     protected new void Update()
     {
-        if (m_bGodModeIsActive)
-        {
-            m_fGodModeTimer -= Time.deltaTime;
-
-            if (m_fGodModeTimer <= 0.0f)
-            {
-                m_bGodModeIsActive = false;
-                m_fGodModeTimer = 5.0f;
-            }
-        }
-
 		if (m_currHealth <= 0.0f && m_bIsAlive)
         {
+            Time.timeScale = 0.5f;
             m_bIsAlive = false;
             m_animatior.SetBool("bAlive", m_bIsAlive);
             m_animatior.speed = 1.3f;
@@ -262,7 +242,7 @@ public class Player : Entity
         {
             if (m_dashTrail != null)
             {
-                m_audioSource.PlayOneShot(m_dash[Random.Range(0, m_dash.Length)]);
+                AudioManager.m_audioManager.PlayOneShotPlayerDash();
                 m_dashTrail.enabled = true;
             }
             m_dashDirection = m_movement.normalized;
@@ -410,6 +390,6 @@ public class Player : Entity
 
     public void OrbPickedUp()
     {
-        m_audioSource.PlayOneShot(m_orbPickup[Random.Range(0, m_orbPickup.Length)]);
+        AudioManager.m_audioManager.PlayOneShotOrbPickup();
     }
 }

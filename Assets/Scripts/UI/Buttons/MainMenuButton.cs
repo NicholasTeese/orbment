@@ -19,7 +19,7 @@ public class MainMenuButton : BaseButton
     {
         base.OnClick(a_strParameter);
 
-        MainMenuManager.m_mainMenuManager.MainMenuAudioSource.PlayOneShot(m_menuClickAudioClip);
+        AudioManager.m_audioManager.PlayOneShotMenuClick();
         MainMenuManager.m_mainMenuManager.LastSelectedButtonIndex = MainMenuManager.m_mainMenuManager.SelectedButtonIndex;
 
         switch (a_strParameter)
