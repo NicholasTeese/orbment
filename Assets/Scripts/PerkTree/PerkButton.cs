@@ -87,13 +87,13 @@ public class PerkButton : MonoBehaviour
         }
     }
 
-    private void OnEnable()
-    {
-        for (int iCount = 0; iCount < m_onPurchaseParticles.Length; ++iCount)
-        {
-            m_onPurchaseParticles[iCount].GetComponent<ParticleSystem>().Pause(); // SetActive(false);
-        }
-    }
+    //private void OnEnable()
+    //{
+    //    for (int iCount = 0; iCount < m_onPurchaseParticles.Length; ++iCount)
+    //    {
+    //        m_onPurchaseParticles[iCount].GetComponent<ParticleSystem>().Pause(); // SetActive(false);
+    //    }
+    //}
 
     /// <summary>
     /// Is called when the cursor enters the button. Sends the perk's description to be displayed.
