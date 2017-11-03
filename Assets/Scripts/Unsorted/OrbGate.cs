@@ -12,7 +12,10 @@ public class OrbGate : MonoBehaviour
     private float m_lockScale = 1.0f;
 
     private Player m_Player;
-    private Animator m_Animator;
+    //private Animator m_Animator;
+    public Animator m_DoorLeftAnimator;
+    public Animator m_DoorRightAnimator;
+
 
     private int m_numOfOrbsForOpen;
     public int m_currNumOrbsInvested = 0;
@@ -46,11 +49,9 @@ public class OrbGate : MonoBehaviour
         }
 
         m_Player = FindObjectOfType<Player>();
-        m_Animator = GetComponentInChildren<Animator>();
-
+        //m_Animator = GetComponentInChildren<Animator>();
+        
         m_orbSlot = transform.Find("OrbSlot").gameObject;
-
-
     }
 
     public void OnTriggerStay(Collider other)
@@ -88,6 +89,8 @@ public class OrbGate : MonoBehaviour
 
     private void checkIfShouldOpen()
     {
+//        m_DoorLeft.transform.RotateAround(Vector3.zero, Vector3.up, 20 * Time.deltaTime);
+
         if (m_isOpen)
         {
             return;
@@ -103,7 +106,10 @@ public class OrbGate : MonoBehaviour
             }
             else
             {
-                m_Animator.SetTrigger("OpenGate");
+                //m_Animator.SetTrigger("OpenGate");
+                m_DoorLeftAnimator.SetTrigger("Open");
+                m_DoorRightAnimator.SetTrigger("Open");
+
                 if (m_visualLock != null)
                 {
                     m_visualLock.SetActive(false);
@@ -114,7 +120,10 @@ public class OrbGate : MonoBehaviour
         }
         else if (m_numOfOrbsForOpen <= 0)
         {
-            m_Animator.SetTrigger("OpenGate");
+            //m_Animator.SetTrigger("OpenGate");
+            m_DoorLeftAnimator.SetTrigger("Open");
+            m_DoorRightAnimator.SetTrigger("Open");
+
             if (m_visualLock != null)
             {
                 m_visualLock.SetActive(false);
