@@ -151,19 +151,9 @@ public class Player : Entity
 
     protected new void Update()
     {
-        if (m_bGodModeIsActive)
-        {
-            m_fGodModeTimer -= Time.deltaTime;
-
-            if (m_fGodModeTimer <= 0.0f)
-            {
-                m_bGodModeIsActive = false;
-                m_fGodModeTimer = 5.0f;
-            }
-        }
-
 		if (m_currHealth <= 0.0f && m_bIsAlive)
         {
+            Time.timeScale = 0.5f;
             m_bIsAlive = false;
             m_animatior.SetBool("bAlive", m_bIsAlive);
             m_animatior.speed = 1.3f;

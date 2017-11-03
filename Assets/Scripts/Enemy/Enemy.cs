@@ -16,9 +16,6 @@ public class Enemy : Entity
     private bool m_bRunning = false;
     public bool Running { get { return m_bRunning; } }
 
-    private bool m_bFrozen = false;
-    public bool Frozen { get { return m_bFrozen; } set { m_bFrozen = value; } }
-
     protected Collider m_collider;
 
     protected Animator m_Animator;
@@ -41,11 +38,6 @@ public class Enemy : Entity
         if (Input.GetKey(KeyCode.E) && Input.GetKey(KeyCode.Equals) && Input.GetKey(KeyCode.Alpha0))
         {
             this.m_currHealth = 0;
-        }
-        // Debug shortcut for Freeze debuff
-        if (Input.GetKey(KeyCode.E) && Input.GetKey(KeyCode.Equals) && Input.GetKey(KeyCode.F))
-        {
-            Frozen = true;
         }
 
         if (m_currHealth <= 0)
@@ -70,11 +62,6 @@ public class Enemy : Entity
         }
 
         base.Update();
-
-        if(m_type == EnemyType.Protector && Frozen == true)
-        {
-            StartCoroutine(FreezeTime());
-        }
     }
 
     protected virtual void OnCollisionEnter(Collision collision)
@@ -102,11 +89,6 @@ public class Enemy : Entity
                         m_bRunning = true;
                         m_v3TravelDir = m_bulletScript.m_direction;
                         m_agent.SetDestination(collision.collider.transform.position - m_bulletScript.m_direction); // Travel to bullet origin
-                    }
-
-                    if (Random.Range(0, 99) <= 10)
-                    {
-                        Frozen = true;
                     }
                 }
             }
@@ -145,12 +127,5 @@ public class Enemy : Entity
             return true;
         }
         return false;
-    }
-
-    protected IEnumerator FreezeTime()
-    {
-        Debug.Log("Enum-F");
-        yield return new WaitForSeconds(2.0f);
-        Frozen = false;
     }
 }

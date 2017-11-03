@@ -11,7 +11,6 @@ public class Gremlin : Enemy
         RETREATING,
         HIDING,
         DEAD,
-        FROZEN
     }
 
     private float m_fWanderSpeed = 3.5f;
@@ -19,7 +18,6 @@ public class Gremlin : Enemy
     private float m_fHideTime = 10.0f;
 
     private Behaviour m_eBehaviour = Behaviour.WANDERING;
-    private Behaviour m_eTempBehaviour = Behaviour.WANDERING;
 
     private Vector3 m_v3RetreatPosition = Vector3.zero;
 
@@ -62,11 +60,6 @@ public class Gremlin : Enemy
         {
             this.m_currHealth = 0;
         }
-        // Debug shortcut for Freeze debuff
-        if (Input.GetKey(KeyCode.E) && Input.GetKey(KeyCode.Equals) && Input.GetKey(KeyCode.F))
-        {
-            Frozen = true;
-        }
 
         if (m_currHealth <= 0)
         {
@@ -83,12 +76,6 @@ public class Gremlin : Enemy
         }
 
         base.Update();
-
-        if (Frozen)
-        {
-            m_eTempBehaviour = m_eBehaviour;
-            m_eBehaviour = Behaviour.FROZEN;
-        }
 
         CheckBehaviour();
         PerformBehavior();
@@ -149,7 +136,6 @@ public class Gremlin : Enemy
             m_animator.SetBool("bRun", false);
             m_animator.SetBool("bAlive", true);
             m_animator.SetBool("bHide", true);
-            m_eTempBehaviour = m_eBehaviour;
         }
     }
 
@@ -193,14 +179,6 @@ public class Gremlin : Enemy
                     break;
                 }
 
-            case Behaviour.FROZEN:
-                {
-                    m_navMeshAgent.destination = transform.position;
-                    StartCoroutine(FreezeTime());
-                    m_eBehaviour = m_eTempBehaviour;
-                    break;
-                }
-
             default:
                 {
                     Debug.Log("BomberEnemy behaviour not recognised. Name: " + gameObject.name);
@@ -211,10 +189,7 @@ public class Gremlin : Enemy
 
     private Vector3 GetWanderPosition(Vector3 a_v3CurrentPosition)
     {
-        float fXOffset = Random.Range(-5, 5);
-        float fZOffset = Random.Range(-5, 5);
-
-        return new Vector3(a_v3CurrentPosition.x + fXOffset, a_v3CurrentPosition.y, a_v3CurrentPosition.z + fZOffset);
+        return new Vector3(a_v3CurrentPosition.x + Random.Range(-5, 5), a_v3CurrentPosition.y, a_v3CurrentPosition.z + Random.Range(-5, 5));
     }
 
     private void GetRetreatPosition()
@@ -225,6 +200,5 @@ public class Gremlin : Enemy
 
         m_navMeshAgent.speed = m_fRetreatSpeed;
         m_eBehaviour = Behaviour.RETREATING;
-        m_eTempBehaviour = m_eBehaviour;
     }
 }

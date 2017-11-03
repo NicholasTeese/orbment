@@ -19,25 +19,6 @@ public class LightningField : StatusEffect
     }
 
 
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-        if (m_entity != null)
-        {
-            m_entity.m_lightningFieldActive = true;
-        }
-
-
-    }
-
-    void OnDisable()
-    {
-        if (m_entity != null)
-        {
-            m_entity.m_lightningFieldActive = false;
-        }
-    }
-
     private void FixedUpdate()
     {
         //m_line.positionCount = 0;
@@ -69,7 +50,6 @@ public class LightningField : StatusEffect
         {
             if (!m_entity.HealthBelowPercentCheck(m_healthPercentThreshold))
             {
-                m_entity.m_lightningFieldActive = false;
                 ReturnToSender();
             }
 

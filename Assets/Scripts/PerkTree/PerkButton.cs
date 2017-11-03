@@ -268,7 +268,7 @@ public class PerkButton : MonoBehaviour
             // God mode enabled for 5 seconds when player reaches highest kill streak (4D).
             case "FirePerk_4D":
                 {
-                    Player.m_player.GodModeIsAvailable = true;
+                    //Player.m_player.GodModeIsAvailable = true;
                     break;
                 }
 
@@ -277,7 +277,6 @@ public class PerkButton : MonoBehaviour
                     Debug.Log("Perk could not be found in fire tree to be applied.");
                     break;
                 }
-
         }
     }
 

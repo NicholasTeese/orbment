@@ -142,8 +142,7 @@ public class KillStreakManager : MonoBehaviour
 
             if (m_killStreak >= 10)
             {
-                Player.m_player.m_bGodModeIsActive = true;
-                Player.m_player.GodModeTimer = 5.0f;
+
             }
         }
     }
