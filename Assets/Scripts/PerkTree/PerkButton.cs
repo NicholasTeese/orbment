@@ -9,9 +9,8 @@ public class PerkButton : MonoBehaviour
     private float m_fGrowShrinkSpeed = 0.05f;
 
     private bool m_bIsHighlighted = false;
-    public bool IsHighlighted { get { return m_bIsHighlighted; } set { m_bIsHighlighted = value; } }
     private bool m_bIsPurchased = false;
-    public bool IsPurchased { get { return m_bIsPurchased; } }
+    private bool m_bIsActivated = false;
     private bool m_bChildPathChosen = false;
     private bool m_bIsCursorOver = false;
 
@@ -20,6 +19,9 @@ public class PerkButton : MonoBehaviour
     private Button m_perkIconButton;
 
     private StartingWeapon m_startingWeapon;
+
+    public bool IsHighlighted { get { return m_bIsHighlighted; } set { m_bIsHighlighted = value; } }
+    public bool IsPurchased { get { return m_bIsPurchased; } }
 
     [Header("Particles")]
     public GameObject[] m_onPurchaseParticles;
@@ -76,7 +78,7 @@ public class PerkButton : MonoBehaviour
                 m_branchImage.fillAmount += m_fBranchFillSpeed;
                 return;
             }
-
+            
             ActivateChildPerk();
             return;
         }
@@ -87,13 +89,18 @@ public class PerkButton : MonoBehaviour
         }
     }
 
-    //private void OnEnable()
-    //{
-    //    for (int iCount = 0; iCount < m_onPurchaseParticles.Length; ++iCount)
-    //    {
-    //        m_onPurchaseParticles[iCount].GetComponent<ParticleSystem>().Pause(); // SetActive(false);
-    //    }
-    //}
+    private void OnDisable()
+    {
+        if (m_bIsPurchased)
+        {
+            for (int iCount = 0; iCount < m_onPurchaseParticles.Length; ++iCount)
+            {
+                Destroy(m_onPurchaseParticles[iCount]);
+            }
+
+            m_bIsActivated = true;
+        }
+    }
 
     /// <summary>
     /// Is called when the cursor enters the button. Sends the perk's description to be displayed.
@@ -188,8 +195,6 @@ public class PerkButton : MonoBehaviour
 
         // If the perk is successfully applied change the perk images to be active.
         CheckFireTree();
-        CheckIceTree();
-        CheckLightningTree();
     }
 
     /// <summary>
@@ -292,203 +297,19 @@ public class PerkButton : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Checks ice tree perks to apply perk to.
-    /// </summary>
-    /// <param name="a_strPerkName"></param>
-    private void CheckIceTree()
-    {
-        switch (m_strPerkName)
-        {
-            // Ice bullet (1A).
-            case "IcePerk_1A":
-                {
-                    m_startingWeapon.SetProjectile(Resources.Load("Prefabs/Projectiles/IceShard") as GameObject);
-                    break;
-                }
-
-            // Increase player max mana by 20% (2A).
-            case "IcePerk_2A":
-                {
-                    Player.m_player.gameObject.GetComponent<Mana>().m_maxMana += (Player.m_player.gameObject.GetComponent<Mana>().m_maxMana * 0.2f);
-                    break;
-                }
-
-            // Increase player max health by 20% (2B).
-            case "IcePerk_2B":
-                {
-                    Player.m_player.m_maxHealth += (Player.m_player.m_maxHealth * 0.2f);
-                    break;
-                }
-
-            // Freeze (stun) enemies for 2 seconds (3A.)
-            case "IcePerk_3A":
-                {
-                    Player.m_player.FreezeUnlocked = true;
-                    break;
-                }
-
-            // Ice bullets splatter (3B).
-            case "IcePerk_3B":
-                {
-                    Player.m_player.IceSplatterUnlocked = true;
-                    break;
-                }
-
-            // Gain 25% armor (3C).
-            case "IcePerk_3C":
-                {
-                    Player.m_player.IceShield = true;
-                    break;
-                }
-
-            //TODO: Think of.
-            case "IcePerk_3D":
-                {
-                    //TODO: Implement.
-                    break;
-                }
-
-            // Freeze (stun) causes damage over time (4A).
-            case "IcePerk_4A":
-                {
-                    //TODO: Implement.
-                    break;
-                }
-
-            // Ice splatter drags enemies in (4B).
-            case "IcePerk_4B":
-                {
-                    //TODO: Implement.
-                    break;
-                }
-            
-            // Gain 50% armour (4C).
-            case "IcePerk_4C":
-                {
-                    Player.m_player.IceArmor = true;
-                    Player.m_player.IceShield = false;
-                    break;
-                }
-
-            //TODO: Think of.
-            case "IcePerk_4D":
-                {
-                    //TODO: Implement.
-                    break;
-                }
-
-            default:
-                {
-                    //Debug.Log("Perk could not be found in ice tree to be applied.");
-                    break;
-                }
-        }
-    }
-    
-    /// <summary>
-    /// Checks lightning tree perk to apply perk to.
-    /// </summary>
-    /// <param name="a_strPerkName"></param>
-    private void CheckLightningTree()
-    {
-        switch (m_strPerkName)
-        {
-            // Lightning bullet (1A).
-            case "LightningPerk_1A":
-                {
-                    m_startingWeapon.SetProjectile(Resources.Load("Prefabs/Projectiles/LightningBall") as GameObject);
-                    break;
-                }
-
-            // Increase player max mana by 20% (2A).
-            case "LightningPerk_2A":
-                {
-                    Player.m_player.gameObject.GetComponent<Mana>().m_maxMana += (Player.m_player.gameObject.GetComponent<Mana>().m_maxMana * 0.2f);
-                    break;
-                }
-
-            // Increase player speed by 50% (2B).
-            case "LightningPerk_2B":
-                {
-                    Player.m_player.m_currSpeed += (Player.m_player.m_currSpeed * 0.5f);
-                    break;
-                }
-
-            // Small bolt, chance hit, area damage (3A).
-            case "LightningPerk_3A":
-                {
-                    //TODO: Implement.
-                    break;
-                }
-
-            // Dash consumes 50% less mana (3B).
-            case "LightningPerk_3B":
-                {
-                    Player.m_player.m_dashManaCost -= (Player.m_player.m_dashManaCost * 0.5f);
-                    break;
-                }
-
-            // Dash does lightning damage (3C).
-            case "LightningPerk_3C":
-                {
-                    //TODO: Implement.
-                    break;
-                }
-
-            // Recall, go back 3 seconds (3D).
-            case "LightningPerk_3D":
-                {
-                    //TODO: Implement.
-                    break;
-                }
-
-            // God bolt, chance hit, instant kill (4A).
-            case "LightningPerk_4A":
-                {
-                    //TODO: Implement.
-                    break;
-                }
-
-            // Dash consumes no mana (4B).
-            case "LightningPerk_4B":
-                {
-                    Player.m_player.m_dashManaCost = 0;
-                    break;
-                }
-
-            // Increase dash damage (4C).
-            case "LightningPerk_4C":
-                {
-                    //TODO: Implement.
-                    break;
-                }
-
-            // Shorter recall cool down (4D).
-            case "LightningPerk_4D":
-                {
-                    //TODO: Implement.
-                    break;
-                }
-
-            default:
-                {
-                    //Debug.Log("Perk could not be found in lightning tree to be applied.");
-                    break;
-                }
-        }
-    }
-
     private void ActivateChildPerk()
     {
         m_perkIconButton.GetComponent<Image>().sprite = m_iconActive;
         m_perkWings.GetComponent<Image>().sprite = m_wingsActive;
         m_perkWings.Rotate = true;
 
-        for (int iCount = 0; iCount < m_onPurchaseParticles.Length; ++iCount)
+        if (!m_bIsActivated)
         {
-            m_onPurchaseParticles[iCount].SetActive(true);
-            m_onPurchaseParticles[iCount].GetComponent<ParticleSystem>().Simulate(Time.unscaledDeltaTime, true, false);
+            for (int iCount = 0; iCount < m_onPurchaseParticles.Length; ++iCount)
+            {
+                m_onPurchaseParticles[iCount].SetActive(true);
+                m_onPurchaseParticles[iCount].GetComponent<ParticleSystem>().Simulate(Time.unscaledDeltaTime, true, false);
+            }
         }
 
         for (int iCount = 0; iCount < m_afterPurchaseParticles.Length; ++iCount)
@@ -496,6 +317,11 @@ public class PerkButton : MonoBehaviour
             m_afterPurchaseParticles[iCount].SetActive(true);
             m_afterPurchaseParticles[iCount].GetComponent<ParticleSystem>().Simulate(Time.unscaledDeltaTime, true, false);
         }
+    }
+
+    private void UpdateBranchSize()
+    {
+
     }
 
     private void Grow()
