@@ -13,6 +13,7 @@ public class PerkButton : MonoBehaviour
     private bool m_bIsActivated = false;
     private bool m_bChildPathChosen = false;
     private bool m_bIsCursorOver = false;
+    private bool m_bBranchFilled = false;
 
     private string m_strPerkName;
 
@@ -71,16 +72,20 @@ public class PerkButton : MonoBehaviour
             Shrink();
         }
 
-        if (m_parentPerk != null && m_bIsPurchased)
+        if (!m_bBranchFilled)
         {
-            if (m_branchImage.fillAmount < 1.0f)
+            if (m_parentPerk != null && m_bIsPurchased)
             {
-                m_branchImage.fillAmount += m_fBranchFillSpeed;
+                if (m_branchImage.fillAmount < 1.0f)
+                {
+                    m_branchImage.fillAmount += m_fBranchFillSpeed;
+                    return;
+                }
+
+                m_bBranchFilled = true;
+                ActivateChildPerk();
                 return;
             }
-            
-            ActivateChildPerk();
-            return;
         }
 
         if (m_bIsPurchased)
@@ -130,6 +135,8 @@ public class PerkButton : MonoBehaviour
         }
 
         PerkTreeManager.m_perkTreeManager.m_perkTreeDecriptionText.text = a_strPerkDescription;
+
+        //UpdateBranchSizes();
     }
 
     /// <summary>
@@ -319,9 +326,26 @@ public class PerkButton : MonoBehaviour
         }
     }
 
-    private void UpdateBranchSize()
+    private void UpdateBranchSizes()
     {
+        if (m_branchImage != null)
+        {
+            m_branchImage.fillAmount = 1.0f;
+            m_branchImage.fillOrigin = 1;
+            m_branchImage.fillAmount = 0.85f;
+        }
 
+        for (int iCount = 0; iCount < m_childPerks.Count; ++iCount)
+        {
+            Image branchImage = m_childPerks[iCount].GetComponent<PerkButton>().m_branchImage;
+
+            if (branchImage != null)
+            {
+                m_branchImage.fillAmount = 1.0f;
+                m_branchImage.fillOrigin = 0;
+                m_branchImage.fillAmount = 0.85f;
+            }
+        }
     }
 
     private void Grow()
