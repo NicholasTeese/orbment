@@ -326,28 +326,6 @@ public class PerkButton : MonoBehaviour
         }
     }
 
-    private void UpdateBranchSizes()
-    {
-        if (m_branchImage != null)
-        {
-            m_branchImage.fillAmount = 1.0f;
-            m_branchImage.fillOrigin = 1;
-            m_branchImage.fillAmount = 0.85f;
-        }
-
-        for (int iCount = 0; iCount < m_childPerks.Count; ++iCount)
-        {
-            Image branchImage = m_childPerks[iCount].GetComponent<PerkButton>().m_branchImage;
-
-            if (branchImage != null)
-            {
-                m_branchImage.fillAmount = 1.0f;
-                m_branchImage.fillOrigin = 0;
-                m_branchImage.fillAmount = 0.85f;
-            }
-        }
-    }
-
     private void Grow()
     {
         if (m_perkIconButton.transform.localScale.x < 1.5f)
