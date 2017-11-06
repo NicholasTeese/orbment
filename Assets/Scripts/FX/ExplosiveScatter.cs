@@ -33,6 +33,7 @@ public class ExplosiveScatter : MonoBehaviour
         m_rb = this.GetComponent<Rigidbody>();
         if (m_script != null && m_rb != null && m_explsionPosition != null)
         {
+            transform.rotation = Random.rotation;
             m_rb.AddExplosionForce(m_explosiveForce, m_explsionPosition.position, m_explosiveRadius, m_explosiveUpMod);
             Physics.IgnoreCollision(GetComponent<Collider>(), Player.m_player.GetComponent<Collider>(), true);
             StartCoroutine(FadeDelay());
