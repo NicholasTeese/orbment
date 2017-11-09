@@ -10,6 +10,7 @@ public class BreakOnImpactWith : MonoBehaviour
     public string m_tag;
     public GameObject m_faceModel;
     public GameObject m_chunkModel;
+    public GameObject m_boulders;
 
     [HideInInspector]
     public Vector3 m_entranceVector;
@@ -59,7 +60,8 @@ public class BreakOnImpactWith : MonoBehaviour
             if (playerScript != null && playerScript.m_dashing)
             {
                 m_entranceVector = playerScript.m_dashDirection;
-                wallHealth -= 100;                
+                wallHealth -= 100;
+                m_boulders.SetActive(false);
             }
         }
     }
