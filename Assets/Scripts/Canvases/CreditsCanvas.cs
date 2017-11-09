@@ -46,9 +46,10 @@ public class CreditsCanvas : MonoBehaviour
             }
         }
 
-        if (m_bPageOneShown && Input.anyKeyDown)
+        if (m_bShowPageOne && Input.anyKeyDown)
         {
             m_bShowPageOne = false;
+            m_bPageOneShown = true;
         }
 
         if (!m_bShowPageOne && m_bPageOneShown)
@@ -75,16 +76,17 @@ public class CreditsCanvas : MonoBehaviour
             }
         }
 
-        if (m_bPageTwoShown && Input.anyKeyDown)
+        if (m_bShowPageTwo && Input.anyKeyDown)
         {
             m_bShowPageTwo = false;
+            m_bPageTwoShown = true;
         }
 
         if (!m_bShowPageTwo && m_bPageTwoShown)
         {
             if (FadeOut(m_fadeImage, m_fFadeSpeed))
             {
-                 // Load main menu.
+                LevelManager.m_levelManager.LoadNextLevelAsyncOperation.allowSceneActivation = true;
             }
         }
     }
