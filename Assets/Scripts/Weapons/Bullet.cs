@@ -168,46 +168,20 @@ public class Bullet : MonoBehaviour
             //do base damage
             if (m_target != null)// || m_target.name != m_id)
             {
-                if (a_collision.collider.CompareTag("Player"))
+                if (Player.m_player.m_dashing && m_target.CompareTag("Player"))
                 {
-                    if (Player.m_player.m_dashing && m_target.CompareTag("Player"))
-                    {
-                        // take no damage
-                    }
-                    else
-                    {
-                        if (Player.m_player.IceShield == true)
-                        {
-                            float adjustedDamage = m_damage * 0.25f;
-                            m_target.m_beenCrit = m_isCrit;
-                            m_target.m_currHealth -= (int)adjustedDamage;
-                            m_target.m_recentDamageTaken = (int)adjustedDamage;
-
-                            ExplosionManager.m_explosionManager.RequestExplosion(transform.position, -m_direction, Explosion.ExplosionType.BulletImpact, 0.0f);
-                            ExplosionManager.m_explosionManager.RequestExplosion(transform.position, -m_direction, Explosion.ExplosionType.SmallBlood, 0.0f);
-                        }
-                        else if (Player.m_player.IceArmor == true)
-                        {
-                            float adjustedDamage = m_damage * 0.5f;
-                            m_target.m_beenCrit = m_isCrit;
-                            m_target.m_currHealth -= (int)adjustedDamage;
-                            m_target.m_recentDamageTaken = (int)adjustedDamage;
-
-                            ExplosionManager.m_explosionManager.RequestExplosion(transform.position, -m_direction, Explosion.ExplosionType.BulletImpact, 0.0f);
-                            ExplosionManager.m_explosionManager.RequestExplosion(transform.position, -m_direction, Explosion.ExplosionType.SmallBlood, 0.0f);
-                        }
-                        else
-                        {
-                            m_target.m_beenCrit = m_isCrit;
-                            m_target.m_currHealth -= m_damage;
-                            m_target.m_recentDamageTaken = m_damage;
-
-                            ExplosionManager.m_explosionManager.RequestExplosion(transform.position, -m_direction, Explosion.ExplosionType.BulletImpact, 0.0f);
-                            ExplosionManager.m_explosionManager.RequestExplosion(transform.position, -m_direction, Explosion.ExplosionType.SmallBlood, 0.0f);
-                            //Debug.Log(Vector3.Distance(m_v3PreviousExplosionPos, transform.position));
-                            m_v3PreviousExplosionPos = transform.position;
-                        }
-                    }
+                    // take no damage
+                }
+                else
+                {
+                    m_target.m_beenCrit = m_isCrit;
+                    m_target.m_currHealth -= m_damage;
+                    m_target.m_recentDamageTaken = m_damage;
+                    
+                    ExplosionManager.m_explosionManager.RequestExplosion(transform.position, -m_direction, Explosion.ExplosionType.BulletImpact, 0.0f);
+                    ExplosionManager.m_explosionManager.RequestExplosion(transform.position, -m_direction, Explosion.ExplosionType.SmallBlood, 0.0f);
+                    //Debug.Log(Vector3.Distance(m_v3PreviousExplosionPos, transform.position));
+                    m_v3PreviousExplosionPos = transform.position;
                 }
             }
             Disable();
