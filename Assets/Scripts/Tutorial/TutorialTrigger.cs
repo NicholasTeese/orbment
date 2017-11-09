@@ -7,7 +7,7 @@ public class TutorialTrigger : MonoBehaviour
     private float m_fPopSpeed = 800.0f;
     private float m_fPopDiatanceBuffer = 2.0f;
     private float m_fPoppedInHeight = 200.0f;
-    private float m_fPoppedOutHeight = -100.0f;
+    private float m_fPoppedOutHeight = -150.0f;
 
     private bool m_bPopIn = false;
 
@@ -27,12 +27,18 @@ public class TutorialTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        m_bPopIn = true;
+        if (other.CompareTag("Player"))
+        {
+            m_bPopIn = true;
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        m_bPopIn = false;
+        if (other.CompareTag("Player"))
+        {
+            m_bPopIn = false;
+        }
     }
 
     private void PopIn()
