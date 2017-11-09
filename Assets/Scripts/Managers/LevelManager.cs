@@ -217,6 +217,8 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
+
+#if UNITY_EDITOR
         // Debug shortcut for Level pass
         if (Input.GetKeyDown(KeyCode.P))
         {
@@ -231,6 +233,7 @@ public class LevelManager : MonoBehaviour
                 DestroyAllDontDestroyOnLoad();
             }
         }
+#endif
 
         if (m_bSceneLoadComplete)
         {
