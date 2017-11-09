@@ -22,8 +22,10 @@ public class ExpManager : MonoBehaviour
     public int m_playerLevel = 1;
     public float m_percentageAddedXPPerLvl = 0.25f;
 
-    public Texture2D m_experienceBarFull;
-    public Texture2D m_experienceBarEmpty;
+    public List<GameObject> m_levelUpParticles = new List<GameObject>();
+
+    //public Texture2D m_experienceBarFull;
+    //public Texture2D m_experienceBarEmpty;
 
     public static ExpManager m_experiencePointsManager;
 
@@ -137,6 +139,12 @@ public class ExpManager : MonoBehaviour
 
     void LevelUp()
     {
+        for (int iCount = 0; iCount < m_levelUpParticles.Count; ++iCount)
+        {
+            m_levelUpParticles[iCount].SetActive(false);
+            m_levelUpParticles[iCount].SetActive(true);
+        }
+
         m_playerExperience = m_playerExperience - m_playerMaxXP;
         m_playerMaxXP += m_percentageAddedXPPerLvl*m_playerMaxXP;
         m_playerLevel++;
