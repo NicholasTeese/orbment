@@ -252,6 +252,12 @@ public class MeleeEnemy : Enemy
                     break;
                 }
         }
+
+        //Debug.Log(m_foir.m_target);
+        //Debug.DrawRay(transform.position, m_foir.direction * m_foir.m_sightRadius);
+        //Debug.Log(Vector3.Distance(transform.position, m_v3ChargeTarget));
+        //Debug.Log("Orc = " + transform.position);
+        //Debug.Log("Player = " + m_v3ChargeTarget);
     }
 
     void FixedUpdate()

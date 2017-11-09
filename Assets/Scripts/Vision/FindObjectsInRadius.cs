@@ -13,11 +13,11 @@ public class FindObjectsInRadius : MonoBehaviour
 
     public bool inRange = false;
     public bool inSight = false;
-    private Vector3 direction;
-    private Vector3 forwardPoint;
-    private Vector3 leftPoint;
-    private Vector3 rightPoint;
-    private Collider[] insideSphere;
+    public Vector3 direction;
+    //private Vector3 forwardPoint;
+    //private Vector3 leftPoint;
+    //private Vector3 rightPoint;
+    //private Collider[] insideSphere;
 
     public bool m_manualSetTarget;
     [HideInInspector]
@@ -45,36 +45,26 @@ public class FindObjectsInRadius : MonoBehaviour
         //}
 
         //foreach (Collider col in insideSphere)
-        {
+        //{
             //if (col.CompareTag(m_targetTag))
-            {
+            //{
                 //direction = col.transform.position - this.transform.position;
-                direction = Player.m_player.transform.position - this.transform.position;
-                direction.y = 0;
-                direction.Normalize();
+        direction = Player.m_player.transform.position - this.transform.position;
+        direction.y = 0;
+        direction.Normalize();
 
-                float angle = Vector3.Angle(this.transform.forward, direction);
-                if (angle < m_sightAngle)
+        float angle = Vector3.Angle(this.transform.forward, direction);
+        if (angle < m_sightAngle)
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(this.transform.position, direction * m_sightRadius, out hit))
+            {
+                Debug.Log(hit.collider.name);
+
+                if (hit.collider.CompareTag(m_targetTag))
                 {
-                    RaycastHit hit;
-                    if (Physics.Raycast(this.transform.position, direction * m_sightRadius, out hit))
-                    {
-                        if (hit.collider.CompareTag(m_targetTag))
-                        {
-                            inSight = true;
-                            m_target = hit.collider.transform;
-                        }
-                        else
-                        {
-                            inSight = false;
-                            m_target = null;
-                        }
-                    }
-                    else
-                    {
-                        inSight = false;
-                        m_target = null;
-                    }
+                    inSight = true;
+                    m_target = hit.collider.transform;
                 }
                 else
                 {
@@ -82,7 +72,19 @@ public class FindObjectsInRadius : MonoBehaviour
                     m_target = null;
                 }
             }
+            else
+            {
+                inSight = false;
+                m_target = null;
+            }
         }
+        else
+        {
+            inSight = false;
+            m_target = null;
+        }
+            //}
+        //}
         
         if(m_target != null)
         {
