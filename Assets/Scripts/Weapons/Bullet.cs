@@ -168,7 +168,7 @@ public class Bullet : MonoBehaviour
             //do base damage
             if (m_target != null)// || m_target.name != m_id)
             {
-                if (!a_collision.collider.CompareTag("Player"))
+                if (a_collision.collider.CompareTag("Player"))
                 {
                     if (Player.m_player.m_dashing && m_target.CompareTag("Player"))
                     {
