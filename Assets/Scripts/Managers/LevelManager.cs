@@ -6,10 +6,12 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
     // Scene names.
+    public const string m_strSplashScreenName = "Splash_Screen";
     public const string m_strMainMenuSceneName = "Main_Menu";
     public const string m_strTutorialSceneName = "Tutorial";
     public const string m_strLevelOneSceneName = "Level_1";
     public const string m_strLevelTwoSceneName = "Level_2";
+    public const string m_strCreditsSceneName = "Credits";
 
     private bool m_bSceneLoadComplete = false;
 
@@ -79,11 +81,21 @@ public class LevelManager : MonoBehaviour
         //!? Is required to stop black screen bug when loaded between scenes.
         if (SceneManager.GetActiveScene().name != m_strMainMenuSceneName)
         {
-            PerkTreeCamera.m_perkTreeCamera.gameObject.SetActive(false);
-            IsoCam.m_playerCamera.gameObject.SetActive(false);
-        }
+            if (PerkTreeCamera.m_perkTreeCamera != null)
+            {
+                PerkTreeCamera.m_perkTreeCamera.gameObject.SetActive(false);
+            }
 
-        SerializationManager.m_serializationManager.Load();
+            if (IsoCam.m_playerCamera != null)
+            {
+                IsoCam.m_playerCamera.gameObject.SetActive(false);
+            }
+        }
+        
+        if (SerializationManager.m_serializationManager != null)
+        {
+            SerializationManager.m_serializationManager.Load();
+        }
 
         switch (a_scene.name)
         {
@@ -184,6 +196,12 @@ public class LevelManager : MonoBehaviour
 
                     // Initialise pooling.
                     EnemyLootManager.m_enemyLootManager.DisableOrbs();
+                    break;
+                }
+
+            case m_strCreditsSceneName:
+                {
+
                     break;
                 }
 
@@ -299,6 +317,12 @@ public class LevelManager : MonoBehaviour
     {
         switch (SceneManager.GetActiveScene().name)
         {
+            case m_strSplashScreenName:
+                {
+                    m_loadNextLevelAsyncOperation = SceneManager.LoadSceneAsync(m_strMainMenuSceneName);
+                    break;
+                }
+
             case m_strMainMenuSceneName:
                 {
                     m_loadNextLevelAsyncOperation = SceneManager.LoadSceneAsync(m_strTutorialSceneName);
@@ -318,6 +342,12 @@ public class LevelManager : MonoBehaviour
                 }
 
             case m_strLevelTwoSceneName:
+                {
+                    m_loadNextLevelAsyncOperation = SceneManager.LoadSceneAsync(m_strCreditsSceneName);
+                    break;
+                }
+
+            case m_strCreditsSceneName:
                 {
                     m_loadNextLevelAsyncOperation = SceneManager.LoadSceneAsync(m_strMainMenuSceneName);
                     break;
