@@ -159,6 +159,8 @@ public class Player : Entity
             m_animatior.speed = 1.3f;
 		}
 
+#if UNITY_EDITOR
+
         // Debug shortcut for Heal
         if (Input.GetKey(KeyCode.H) && Input.GetKey(KeyCode.KeypadPlus))
         {
@@ -169,6 +171,7 @@ public class Player : Entity
         {
             m_orbsCollected = 20;
         }
+#endif
 
 
             PlayerHUDManager.m_playerHUDManager.HealthBar.GetComponent<Image>().fillAmount = m_currHealth / m_maxHealth;

@@ -59,7 +59,7 @@ public class BreakOnImpactWith : MonoBehaviour
             if (playerScript != null && playerScript.m_dashing)
             {
                 m_entranceVector = playerScript.m_dashDirection;
-                wallHealth -= 55;
+                wallHealth -= 100;                
             }
         }
     }

@@ -55,11 +55,13 @@ public class Gremlin : Enemy
 
     private new void Update()
     {
+#if UNITY_EDITOR
         // Debug shortcut for insta-kill
         if (Input.GetKey(KeyCode.E) && Input.GetKey(KeyCode.Equals) && Input.GetKey(KeyCode.Alpha0))
         {
             this.m_currHealth = 0;
         }
+#endif
 
         if (m_currHealth <= 0)
         {
