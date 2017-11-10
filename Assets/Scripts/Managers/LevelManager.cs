@@ -90,6 +90,12 @@ public class LevelManager : MonoBehaviour
             {
                 IsoCam.m_playerCamera.gameObject.SetActive(false);
             }
+
+            if (Player.m_player != null)
+            {
+                Player.m_player.m_currHealth = Player.m_player.m_maxHealth;
+                Player.m_player.ManaPool.m_currentMana = Player.m_player.ManaPool.m_maxMana;
+            }
         }
         
         if (SerializationManager.m_serializationManager != null)

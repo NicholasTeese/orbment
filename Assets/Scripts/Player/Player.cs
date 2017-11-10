@@ -113,6 +113,8 @@ public class Player : Entity
     public bool IceShield { get { return m_bIceShield; } set { m_bIceShield = value; } }
     public bool IceArmor { get { return m_bIceArmor; } set { m_bIceArmor = value; } }
 
+    public Mana ManaPool { get { return m_manaPool; } }
+
     void Awake()
     {
         if (m_player == null)
@@ -125,6 +127,8 @@ public class Player : Entity
         }
 
         m_animatior = transform.Find("Vince_Model_Beta").GetComponent<Animator>();
+
+        m_manaPool = GetComponent<Mana>();
     }
 
     new void Start()
@@ -133,7 +137,6 @@ public class Player : Entity
         PoolSpentOrbs();
 
         m_charCont = this.GetComponent<CharacterController>();
-        m_manaPool = this.GetComponent<Mana>();
         m_camera = GameObject.FindObjectOfType<IsoCam>();
 
 
