@@ -50,8 +50,9 @@ public class ExpManager : MonoBehaviour
         {
             // Initialise perk.
             PerkTreeManager.m_perkTreeManager.m_selectedPerkTree.SetActive(true);
+            PerkTreeManager.m_perkTreeManager.IncrementAvailiablePerks();
             PerkTreeManager.m_perkTreeManager.m_selectedPerkButton.PurchasePerk();
-            //PerkTreeManager.m_perkTreeManager.m_selectedPerkTree.SetActive(false);
+            LevelUp(false);
         }
 
         PerkTreeManager.m_perkTreeManager.gameObject.SetActive(false);
@@ -137,12 +138,15 @@ public class ExpManager : MonoBehaviour
 #endif
     }
 
-    void LevelUp()
+    void LevelUp(bool a_bPlayParticles = true)
     {
-        for (int iCount = 0; iCount < m_levelUpParticles.Count; ++iCount)
+        if (a_bPlayParticles)
         {
-            m_levelUpParticles[iCount].SetActive(false);
-            m_levelUpParticles[iCount].SetActive(true);
+            for (int iCount = 0; iCount < m_levelUpParticles.Count; ++iCount)
+            {
+                m_levelUpParticles[iCount].SetActive(false);
+                m_levelUpParticles[iCount].SetActive(true);
+            }
         }
 
         m_playerExperience = m_playerExperience - m_playerMaxXP;

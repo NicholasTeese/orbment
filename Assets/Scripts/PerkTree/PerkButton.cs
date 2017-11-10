@@ -156,7 +156,13 @@ public class PerkButton : MonoBehaviour
         // If there are no available perks, exit the function.
         if (PerkTreeManager.m_perkTreeManager.AvailiablePerks == 0)
         {
-            //Debug.Log("No available perks to spend.");
+            Debug.Log("No available perks to spend.");
+            return;
+        }
+
+        if (m_bIsPurchased)
+        {
+            Debug.Log("Perk already purchased.");
             return;
         }
 
@@ -195,7 +201,7 @@ public class PerkButton : MonoBehaviour
         // Set the perk to be purchased.
         m_bIsPurchased = true;
         // Decrement the amount of available perks.
-        if (PerkTreeManager.m_perkTreeManager.AvailiablePerks != 0)
+        //if (PerkTreeManager.m_perkTreeManager.AvailiablePerks != 0)
         {
             PerkTreeManager.m_perkTreeManager.DecrementAvailiablePerks();
         }
