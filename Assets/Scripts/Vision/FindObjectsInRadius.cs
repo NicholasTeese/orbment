@@ -59,7 +59,7 @@ public class FindObjectsInRadius : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(this.transform.position, direction * m_sightRadius, out hit))
             {
-                Debug.Log(hit.collider.name);
+                //Debug.Log(hit.collider.name);
 
                 if (hit.collider.CompareTag(m_targetTag))
                 {

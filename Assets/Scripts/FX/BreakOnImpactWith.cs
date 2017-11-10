@@ -65,4 +65,20 @@ public class BreakOnImpactWith : MonoBehaviour
             }
         }
     }
+
+    void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag(m_tag) && !m_isBroken)
+        {
+            ///if player
+            Player playerScript = other.GetComponent<Player>();
+
+            if (playerScript != null && playerScript.m_dashing)
+            {
+                m_entranceVector = playerScript.m_dashDirection;
+                wallHealth -= 100;
+                m_boulders.SetActive(false);
+            }
+        }
+    }
 }

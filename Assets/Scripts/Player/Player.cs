@@ -240,8 +240,11 @@ public class Player : Entity
             m_currRegenRate = 0.0f;
         }
 
+        //Debug.Log("Movement: " + m_movement);
+        //Debug.Log("Velocity: " + m_charCont.velocity);
+
         //dash
-        if ((Input.GetKeyDown(KeyCode.Space) || InputManager.LeftTriggerDown()) && m_manaPool.m_currentMana >= m_dashManaCost && m_movement != Vector3.zero)
+        if ((Input.GetKeyDown(KeyCode.Space) || InputManager.LeftTriggerDown()) && m_manaPool.m_currentMana >= m_dashManaCost && m_charCont.velocity != Vector3.zero)
         {
             if (m_dashTrail != null)
             {
@@ -249,6 +252,7 @@ public class Player : Entity
                 m_dashTrail.enabled = true;
             }
             m_dashDirection = m_movement.normalized;
+            Debug.Log("Direction: " + m_dashDirection);
             m_manaPool.m_currentMana -= m_dashManaCost;
             m_dashing = true;
         }

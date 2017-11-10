@@ -38,7 +38,7 @@ public class BreakableWall : MonoBehaviour
 
     private int RandomBoulder()
     {
-        int a_value = Random.Range(0, 10);
+        int a_value = Random.Range(0, m_BoulderList.Count);
 
         if (m_BoulderList[a_value] == null || !m_BoulderList[a_value].activeInHierarchy)
         {
