@@ -96,6 +96,8 @@ public class GameManager : MonoBehaviour
                         TutorialCanvas.m_tutorialCanvas.gameObject.SetActive(false);
                     }
 
+                    OrbCountDisplay.m_orbCountDisplay.gameObject.SetActive(false);
+
                     SerializationManager.m_serializationManager.Load();
                     m_bGameIsPaused = true;
                     Time.timeScale = 0.0f;

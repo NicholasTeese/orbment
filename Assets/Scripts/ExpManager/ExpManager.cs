@@ -161,6 +161,7 @@ public class ExpManager : MonoBehaviour
         PerkTreeCamera.m_perkTreeCamera.gameObject.SetActive(true);
         PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(false);
         IsoCam.m_playerCamera.gameObject.SetActive(false);
+        OrbCountDisplay.m_orbCountDisplay.gameObject.SetActive(false);
         m_bPerkTreeOpen = true;
         Time.timeScale = 0;
         Cursor.visible = true;
@@ -172,6 +173,7 @@ public class ExpManager : MonoBehaviour
         PerkTreeCamera.m_perkTreeCamera.gameObject.SetActive(false);
         PlayerHUDManager.m_playerHUDManager.gameObject.SetActive(true);
         IsoCam.m_playerCamera.gameObject.SetActive(true);
+        OrbCountDisplay.m_orbCountDisplay.gameObject.SetActive(true);
         m_bPerkTreeOpen = false;
         Time.timeScale = 1;
         Cursor.visible = false;

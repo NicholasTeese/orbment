@@ -50,6 +50,7 @@ public class PauseMenuButton : BaseButton
                     PauseMenuManager.m_pauseMenuManager.m_optionsPanel.SetActive(false);
                     PauseMenuManager.m_pauseMenuManager.m_quitToMainMenuPanel.SetActive(false);
                     PauseMenuManager.m_pauseMenuManager.m_quitToDesktopPanel.SetActive(false);
+                    OrbCountDisplay.m_orbCountDisplay.gameObject.SetActive(true);
                     PauseMenuManager.m_pauseMenuManager.ResetSelectedButtonIndex();
                     GameManager.m_gameManager.Continue();
                     break;

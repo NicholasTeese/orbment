@@ -34,6 +34,7 @@ public class PauseMenuSubMenu : MonoBehaviour
             PauseMenuManager.m_pauseMenuManager.OptionsMainPanel.SetActive(true);
             PauseMenuManager.m_pauseMenuManager.OptionsAudioPanel.SetActive(false);
             PauseMenuManager.m_pauseMenuManager.OptionsGeneralPanel.SetActive(false);
+            OrbCountDisplay.m_orbCountDisplay.gameObject.SetActive(true);
             GameManager.m_gameManager.Continue();
         }
     }
@@ -50,6 +51,7 @@ public class PauseMenuSubMenu : MonoBehaviour
             PauseMenuManager.m_pauseMenuManager.m_optionsPanel.SetActive(false);
             PauseMenuManager.m_pauseMenuManager.m_quitToMainMenuPanel.SetActive(false);
             PauseMenuManager.m_pauseMenuManager.m_quitToDesktopPanel.SetActive(false);
+            OrbCountDisplay.m_orbCountDisplay.gameObject.SetActive(true);
             PauseMenuManager.m_pauseMenuManager.ResetSelectedButtonIndex();
             GameManager.m_gameManager.Continue();
             return;
