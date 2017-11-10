@@ -89,6 +89,7 @@ public class StatusEffectManager : MonoBehaviour
         {
             effect.transform.position = obj.position;
             effect.transform.SetParent(obj);
+            effect.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
             effect.SetActive(true);
         }
     }

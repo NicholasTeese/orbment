@@ -163,6 +163,11 @@ public class Entity : MonoBehaviour
             this.gameObject.SetActive(false);
         }
 
+        if (m_setOnFire)
+        {
+            Debug.Log("Set on fire.");
+        }
+
         ///STATUS EFFECTS
         //if set on fire and previously not on fire. to avoid effect stacking
         if (m_setOnFire && !m_onFire)
@@ -170,14 +175,14 @@ public class Entity : MonoBehaviour
             m_statusEffectManager.RequestEffect(this.transform, StatusEffect.Status.OnFire);
             m_setOnFire = false;
             
-            if (!gameObject.CompareTag("Player") && Player.m_player.BurningSpeedBoost)
-            {
-                if (Player.m_player.AdditionalBurningSpeedBoost)
-                {
-                    ++Player.m_player.EnemiesOnFire;
-                }
-                ++Player.m_player.EnemiesOnFire;
-            }
+            //if (!gameObject.CompareTag("Player") && Player.m_player.BurningSpeedBoost)
+            //{
+            //    if (Player.m_player.AdditionalBurningSpeedBoost)
+            //    {
+            //        ++Player.m_player.EnemiesOnFire;
+            //    }
+            //    ++Player.m_player.EnemiesOnFire;
+            //}
         }
 
         if (!m_ringOfFireActive && HealthBelowPercentCheck(25) && m_hasRingOfFire)

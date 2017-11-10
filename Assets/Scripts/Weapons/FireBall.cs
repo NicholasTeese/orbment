@@ -34,7 +34,7 @@ public class FireBall : Bullet
         {
             ExplosionManager.m_explosionManager.RequestExplosion(this.transform.position, -m_direction, Explosion.ExplosionType.BulletImpact, 0.0f);
 
-            m_target = collision.collider.GetComponent<Entity>();
+            m_target = collision.gameObject.GetComponent<Entity>();
             //do base damage
             if (m_target != null)
             {
@@ -43,33 +43,21 @@ public class FireBall : Bullet
                 m_target.m_recentDamageTaken = m_damage;
 
                 ExplosionManager.m_explosionManager.RequestExplosion(this.transform.position, -m_direction, Explosion.ExplosionType.SmallBlood, 0.0f);
+
+                if (!m_hasStunPerk && Player.m_player != null && Player.m_player.m_perks.Contains(PerkID.StunChance))
+                {
+                    //do once
+                    m_hasStunPerk = true;
+                }
+
+                m_target.m_setOnFire = true;
+
+                Player.m_player.m_currSpeedMult += 1;
             }
             Disable();
         }
 
-        //set on fire
-        if (m_target != null)
-        {
-            if(!m_hasStunPerk && Player.m_player != null && Player.m_player.m_perks.Contains(PerkID.StunChance))
-            {
-                //do once
-                m_hasStunPerk = true;
-            }
-
-            //stun
-            if (m_hasStunPerk && Random.Range(0.0f, 100.0f) <= m_stunChance)
-            {
-                m_target.m_causeStun = true;
-            }
-
-            m_target.m_setOnFire = true;
-
-            Player.m_player.m_currSpeedMult += 1;
-        }
-
-
         //if AOE toggled on 
-
         if(!m_hasSplashDamagePerk && Player.m_player != null && Player.m_player.m_perks.Contains(PerkID.SplashDamage))
         {
             //do once
