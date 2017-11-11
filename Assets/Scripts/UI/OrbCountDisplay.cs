@@ -33,7 +33,7 @@ public class OrbCountDisplay : MonoBehaviour
 
     void Update()
     {
-        if (GateList[m_iIndex].m_isOpen)
+        if (GateList[m_iIndex].m_bUnlocked)
         {
               if (m_iIndex != GateList.Count - 1)
               {
