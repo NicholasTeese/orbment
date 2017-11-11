@@ -30,6 +30,7 @@ public class PerkTreeConfirmationButton : BaseButton
                     AudioManager.m_audioManager.PlayOneShotPerkApplied();
                     PerkTreeManager.m_perkTreeManager.m_selectedPerkButton.PurchasePerk();
                     PerkTreeConfirmationManager.m_perkTreeConfirmationManager.gameObject.SetActive(false);
+                    PerkTreeManager.m_perkTreeManager.m_perkTreeDecriptionText.gameObject.SetActive(true);
                     break;
                 }
 
@@ -37,6 +38,7 @@ public class PerkTreeConfirmationButton : BaseButton
                 {
                     AudioManager.m_audioManager.PlayOneShotMenuClick();
                     PerkTreeConfirmationManager.m_perkTreeConfirmationManager.gameObject.SetActive(false);
+                    PerkTreeManager.m_perkTreeManager.m_perkTreeDecriptionText.gameObject.SetActive(true);
                     break;
                 }
 

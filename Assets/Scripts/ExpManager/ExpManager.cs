@@ -13,8 +13,8 @@ public class ExpManager : MonoBehaviour
 
     private GameObject m_upgradeAvailableText;
     private GameObject m_upgradeUnavailableText;
-	private GameObject Xpfiller;
-	private GameObject XPSlider;
+    private GameObject Xpfiller;
+    private GameObject XPSlider;
 
     public int m_expBarWidth = 500;
     public float m_playerExperience = 0.0f;
@@ -67,13 +67,13 @@ public class ExpManager : MonoBehaviour
 
     void Update()
     {
-		XPSlider.GetComponent<Slider> ().maxValue = m_playerMaxXP;
-		Xpfiller.GetComponent<Slider> ().value = m_playerExperience;
-		Xpfiller.GetComponent<Slider> ().maxValue = m_playerMaxXP;
-		if (XPSlider.GetComponent<Slider> ().value < m_playerExperience)
+        XPSlider.GetComponent<Slider>().maxValue = m_playerMaxXP;
+        Xpfiller.GetComponent<Slider>().value = m_playerExperience;
+        Xpfiller.GetComponent<Slider>().maxValue = m_playerMaxXP;
+        if (XPSlider.GetComponent<Slider>().value < m_playerExperience)
         {
-			XPSlider.GetComponent<Slider> ().value += 5.0f * Time.deltaTime;
-		}
+            XPSlider.GetComponent<Slider>().value += 5.0f * Time.deltaTime;
+        }
         if (m_playerExperience < XPSlider.GetComponent<Slider>().value)
         {
             XPSlider.GetComponent<Slider>().value = m_playerExperience;
@@ -111,7 +111,7 @@ public class ExpManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Tab) || InputManager.BackButton())
         {
-            if(!GameManager.m_gameManager.GameIsPaused)
+            if (!GameManager.m_gameManager.GameIsPaused)
             {
                 if (!m_bPerkTreeOpen)
                 {
@@ -120,11 +120,11 @@ public class ExpManager : MonoBehaviour
                 else if (m_bPerkTreeOpen)
                 {
                     DisablePerkTree();
-                }    
+                }
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.Escape) && m_bPerkTreeOpen)
+        if (Input.GetKeyDown(KeyCode.Escape) && m_bPerkTreeOpen)
         {
             DisablePerkTree();
         }
@@ -144,16 +144,16 @@ public class ExpManager : MonoBehaviour
         {
             for (int iCount = 0; iCount < m_levelUpParticles.Count; ++iCount)
             {
-                m_levelUpParticles[iCount].SetActive(false);
                 m_levelUpParticles[iCount].SetActive(true);
+                StartCoroutine(TurnOffParticles());
             }
         }
 
         m_playerExperience = m_playerExperience - m_playerMaxXP;
-        m_playerMaxXP += m_percentageAddedXPPerLvl*m_playerMaxXP;
+        m_playerMaxXP += m_percentageAddedXPPerLvl * m_playerMaxXP;
         m_playerLevel++;
         PerkTreeManager.m_perkTreeManager.IncrementAvailiablePerks();
-	}
+    }
 
     private void EnablePerkTree()
     {
@@ -167,7 +167,7 @@ public class ExpManager : MonoBehaviour
         Cursor.visible = true;
     }
 
-    private void DisablePerkTree()
+    public void DisablePerkTree()
     {
         PerkTreeManager.m_perkTreeManager.gameObject.SetActive(false);
         PerkTreeCamera.m_perkTreeCamera.gameObject.SetActive(false);
@@ -177,5 +177,14 @@ public class ExpManager : MonoBehaviour
         m_bPerkTreeOpen = false;
         Time.timeScale = 1;
         Cursor.visible = false;
+    }
+
+    private IEnumerator TurnOffParticles()
+    {
+        yield return new WaitForSeconds(0.5f);
+        for (int iCount = 0; iCount < m_levelUpParticles.Count; ++iCount)
+        {
+            m_levelUpParticles[iCount].SetActive(false);
+        }
     }
 }

@@ -17,6 +17,8 @@ public class PerkTreeManager : MonoBehaviour
 
     private Image m_backgroundImage = null;
 
+    public GameObject m_perkAvailableParticle;
+
     [Header("Perk Tree Button Max & Min Indexes")]
     public int m_iMinimumIndex;
     public int m_iMaximumIndex;
@@ -169,10 +171,20 @@ public class PerkTreeManager : MonoBehaviour
     public void IncrementAvailiablePerks()
     {
         ++m_uiAvailiablePerks;
+
+        m_perkTreeDecriptionText.transform.Find("Perk_Points_Remaining_Text").GetComponent<Text>().text = "Points Remaining: " + m_uiAvailiablePerks;
+        m_perkAvailableParticle.SetActive(true);
     }
 
     public void DecrementAvailiablePerks()
     {
         --m_uiAvailiablePerks;
+
+        m_perkTreeDecriptionText.transform.Find("Perk_Points_Remaining_Text").GetComponent<Text>().text = "Points Remaining: " + m_uiAvailiablePerks;
+
+        if (m_uiAvailiablePerks == 0)
+        {
+            m_perkAvailableParticle.SetActive(false);
+        }
     }
 }

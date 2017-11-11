@@ -19,6 +19,11 @@ public class PerkTreeBackButton : MonoBehaviour
 
     public void OnCursorEnter()
     {
+        if (PerkTreeManager.m_perkTreeManager.m_selectedPerkButton.m_perkUpgradeConfirmation.activeSelf)
+        {
+            return;
+        }
+
         m_bIsHightlighted = true;
     }
 
@@ -29,11 +34,18 @@ public class PerkTreeBackButton : MonoBehaviour
 
     public void OnClick()
     {
-        AudioManager.m_audioManager.PlayOneShotMenuClick();
-        PerkTreeManager.m_perkTreeManager.gameObject.SetActive(false);
-        PerkTreeCamera.m_perkTreeCamera.gameObject.SetActive(false);
-        IsoCam.m_playerCamera.gameObject.SetActive(true);
-        Time.timeScale = 1.0f;
+        if (PerkTreeManager.m_perkTreeManager.m_selectedPerkButton.m_perkUpgradeConfirmation.activeSelf)
+        {
+            return;
+        }
+
+        ExpManager.m_experiencePointsManager.DisablePerkTree();
+
+        //AudioManager.m_audioManager.PlayOneShotMenuClick();
+        //PerkTreeManager.m_perkTreeManager.gameObject.SetActive(false);
+        //PerkTreeCamera.m_perkTreeCamera.gameObject.SetActive(false);
+        //IsoCam.m_playerCamera.gameObject.SetActive(true);
+        //Time.timeScale = 1.0f;
         //m_perkTreePanel.SetActive(false);
         //
         //foreach (GameObject perkTreeIcon in m_perkTreeIcons)

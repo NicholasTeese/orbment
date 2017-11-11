@@ -18,7 +18,7 @@ public class AudioManager : MonoBehaviour
     private AudioClip[] m_enemyDeathClips;
 
     [Header("Audio Clips")]
-    public AudioClip m_daytimeMusic;
+    public AudioClip m_inGameMusic;
     public AudioClip m_mainMenuMusic;
     public AudioClip m_menuClick;
     public AudioClip m_perkApplied;
@@ -129,9 +129,9 @@ public class AudioManager : MonoBehaviour
 
             case LevelManager.m_strTutorialSceneName:
                 {
-                    if (m_musicAudioSource.clip != m_daytimeMusic)
+                    if (m_musicAudioSource.clip != m_inGameMusic)
                     {
-                        m_musicAudioSource.clip = m_daytimeMusic;
+                        m_musicAudioSource.clip = m_inGameMusic;
                         m_musicAudioSource.Play();
                     }
                     break;
@@ -139,9 +139,9 @@ public class AudioManager : MonoBehaviour
 
             case LevelManager.m_strLevelOneSceneName:
                 {
-                    if (m_musicAudioSource.clip != m_daytimeMusic)
+                    if (m_musicAudioSource.clip != m_inGameMusic)
                     {
-                        m_musicAudioSource.clip = m_daytimeMusic;
+                        m_musicAudioSource.clip = m_inGameMusic;
                         m_musicAudioSource.Play();
                     }
                     break;
@@ -149,9 +149,9 @@ public class AudioManager : MonoBehaviour
 
             case LevelManager.m_strLevelTwoSceneName:
                 {
-                    if (m_musicAudioSource.clip != m_daytimeMusic)
+                    if (m_musicAudioSource.clip != m_inGameMusic)
                     {
-                        m_musicAudioSource.clip = m_daytimeMusic;
+                        m_musicAudioSource.clip = m_inGameMusic;
                         m_musicAudioSource.Play();
                     }
                     break;

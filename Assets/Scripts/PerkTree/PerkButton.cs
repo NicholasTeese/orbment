@@ -153,6 +153,11 @@ public class PerkButton : MonoBehaviour
     /// <param name="a_strPerk"></param>
     public void OnClick()
     {
+        if (m_perkUpgradeConfirmation.activeSelf)
+        {
+            return;
+        }
+
         // If there are no available perks, exit the function.
         if (PerkTreeManager.m_perkTreeManager.AvailiablePerks == 0)
         {
@@ -182,6 +187,7 @@ public class PerkButton : MonoBehaviour
 
         // Purchase this perk.
         AudioManager.m_audioManager.PlayOneShotPerkSelected();
+        PerkTreeManager.m_perkTreeManager.m_perkTreeDecriptionText.gameObject.SetActive(false);
         m_perkUpgradeConfirmation.SetActive(true);
     }
 
