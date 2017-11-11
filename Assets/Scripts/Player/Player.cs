@@ -87,8 +87,10 @@ public class Player : Entity
     //!? End of unorganised variables.
 
     private int m_iAdditionalBurnDPS = 0;
+    private int m_iChanceToSetEnemiesOnFire = 0;
     private int m_iEnemiesOnFire = 0;
 
+    private bool m_bCanSetEnemiesOnFire = false;
     private bool m_bBurningSpeedBoost = false;
     private bool m_bAdditionalBurningSpeedBoost = false;
     private bool m_bFreezeUnlocked = false;
@@ -103,9 +105,11 @@ public class Player : Entity
     public static Player m_player;
 
     // Variable getters and setters.
-    public int EnemiesOnFire { get { return m_iEnemiesOnFire; } set { m_iEnemiesOnFire = value; } }
+    public int ChanceToSetEnemiesOnFire { get { return m_iChanceToSetEnemiesOnFire; } set { m_iChanceToSetEnemiesOnFire = value; } }
+    public int EnemiesOnFire { get { return m_iEnemiesOnFire; } set { m_iEnemiesOnFire = value;  m_iEnemiesOnFire = Mathf.Clamp(m_iEnemiesOnFire, 0, 50); } }
     public int AdditionalBurnDPS { get { return m_iAdditionalBurnDPS; } set { m_iAdditionalBurnDPS = value; } }
 
+    public bool CanSetEnemiesOnFire { get { return m_bCanSetEnemiesOnFire; } set { m_bCanSetEnemiesOnFire = value; } }
     public bool IceSplatterUnlocked { get { return m_bIceSplatterUnlocked; } set { m_bIceSplatterUnlocked = value; } }
     public bool AdditionalBurningSpeedBoost { get { return m_bAdditionalBurningSpeedBoost; } set { m_bAdditionalBurningSpeedBoost = value; } }
     public bool BurningSpeedBoost { get { return m_bBurningSpeedBoost; } set { m_bBurningSpeedBoost = value; } }
@@ -255,7 +259,6 @@ public class Player : Entity
                 m_dashTrail.enabled = true;
             }
             m_dashDirection = m_movement.normalized;
-            Debug.Log("Direction: " + m_dashDirection);
             m_manaPool.m_currentMana -= m_dashManaCost;
             m_dashing = true;
         }

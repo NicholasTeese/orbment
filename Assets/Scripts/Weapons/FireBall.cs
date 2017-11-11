@@ -50,9 +50,14 @@ public class FireBall : Bullet
                     m_hasStunPerk = true;
                 }
 
-                m_target.m_setOnFire = true;
 
-                Player.m_player.m_currSpeedMult += 1;
+                if (Player.m_player.CanSetEnemiesOnFire)
+                {
+                    if (Random.Range(0, 100) > Player.m_player.ChanceToSetEnemiesOnFire)
+                    {
+                        m_target.m_setOnFire = true;
+                    }
+                }
             }
             Disable();
         }

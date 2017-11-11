@@ -50,7 +50,7 @@ public class ExpManager : MonoBehaviour
         {
             // Initialise perk.
             PerkTreeManager.m_perkTreeManager.m_selectedPerkTree.SetActive(true);
-            PerkTreeManager.m_perkTreeManager.IncrementAvailiablePerks();
+            //PerkTreeManager.m_perkTreeManager.IncrementAvailiablePerks();
             PerkTreeManager.m_perkTreeManager.m_selectedPerkButton.PurchasePerk();
             LevelUp(false);
         }

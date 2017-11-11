@@ -179,18 +179,18 @@ public class BaseEnemy : MonoBehaviour
         // Check fire.
         if (m_bBurn && m_bIsBuring)
         {
-            StatusEffectManager.m_statusEffectManager.RequestEffect(transform, StatusEffect.Status.OnFire);
+            //StatusEffectManager.m_statusEffectManager.RequestEffect(transform, StatusEffect.Status.OnFire);
             m_bBurn = false;
 
-            if (Player.m_player.BurningSpeedBoost)
-            {
-                if (Player.m_player.AdditionalBurningSpeedBoost)
-                {
-                    ++Player.m_player.EnemiesOnFire;
-                }
-
-                ++Player.m_player.EnemiesOnFire;
-            }
+            //if (Player.m_player.BurningSpeedBoost)
+            //{
+            //    if (Player.m_player.AdditionalBurningSpeedBoost)
+            //    {
+            //        ++Player.m_player.EnemiesOnFire;
+            //    }
+            //
+            //    ++Player.m_player.EnemiesOnFire;
+            //}
         }
 
         // Check slow.

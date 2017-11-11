@@ -226,10 +226,13 @@ public class PerkButton : MonoBehaviour
                     break;
                 }
 
-            // Increase player movement speed by 50% (2A).
+            //x Increase player movement speed by 50% (2A).
+            // Fire bullets have a chance 15% chance to set enemies on fire (2A).
             case "FirePerk_2A":
                 {
-                    Player.m_player.m_currSpeed += (Player.m_player.m_currSpeed * 0.5f);
+                    //Player.m_player.m_currSpeed += (Player.m_player.m_currSpeed * 0.5f);
+                    Player.m_player.CanSetEnemiesOnFire = true;
+                    Player.m_player.ChanceToSetEnemiesOnFire = 15;
                     break;
                 }
 
@@ -271,10 +274,12 @@ public class PerkButton : MonoBehaviour
                     break;
                 }
 
-            // Increase player speed boost based on how many enemies are burning (4A).
+            //x Increase player speed boost based on how many enemies are burning (4A).
+            // Fire bullets have a 25% chance of setting enemies on fire.
             case "FirePerk_4A":
                 {
-                    Player.m_player.AdditionalBurningSpeedBoost = true;
+                    //x Player.m_player.AdditionalBurningSpeedBoost = true;
+                    Player.m_player.ChanceToSetEnemiesOnFire = 25;
                     break;
                 }
 

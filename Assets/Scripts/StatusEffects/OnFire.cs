@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -48,11 +48,11 @@ public class OnFire : StatusEffect
         {
             if (m_entity != null && Player.m_player.BurningSpeedBoost)
             {
-                if (Player.m_player.AdditionalBurningSpeedBoost)
+                if (Player.m_player.BurningSpeedBoost)
                 {
                     --Player.m_player.EnemiesOnFire;
                 }
-                --Player.m_player.EnemiesOnFire;
+                //x --Player.m_player.EnemiesOnFire;
                 m_entity.m_onFire = false;
             }
 
