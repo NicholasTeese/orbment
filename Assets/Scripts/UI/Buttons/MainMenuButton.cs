@@ -26,10 +26,13 @@ public class MainMenuButton : BaseButton
         {
             case "MainPanelPlay":
                 {
+                    MainMenuManager.m_mainMenuManager.ActivePanelButtons = MainMenuManager.m_mainMenuManager.PlayPanelButtons;
+                    MainMenuManager.m_mainMenuManager.SelectedButton.IsMousedOver = false;
+                    MainMenuManager.m_mainMenuManager.SelectedButton = MainMenuManager.m_mainMenuManager.ActivePanelButtons[0];
+                    MainMenuManager.m_mainMenuManager.SelectedButton.IsMousedOver = true;
                     MainMenuManager.m_mainMenuManager.m_mainPanel.SetActive(false);
-                    MainMenuManager.m_mainMenuManager.m_backgroundImage.SetActive(false);
-                    MainMenuManager.m_mainMenuManager.FadeIn = false;
-                    AudioManager.m_audioManager.FadeIn = false;
+                    MainMenuManager.m_mainMenuManager.PlayPanel.SetActive(true);
+                    MainMenuManager.m_mainMenuManager.ResetSelectedButtonIndex();
                     break;
                 }
 
@@ -53,6 +56,40 @@ public class MainMenuButton : BaseButton
                     MainMenuManager.m_mainMenuManager.SelectedButton.IsMousedOver = true;
                     MainMenuManager.m_mainMenuManager.m_mainPanel.SetActive(false);
                     MainMenuManager.m_mainMenuManager.m_quitToDesktopPanel.SetActive(true);
+                    MainMenuManager.m_mainMenuManager.ResetSelectedButtonIndex();
+                    break;
+                }
+
+            case "PlayPanelYes":
+                {
+                    MainMenuManager.m_mainMenuManager.m_mainPanel.SetActive(false);
+                    MainMenuManager.m_mainMenuManager.m_backgroundImage.SetActive(false);
+                    MainMenuManager.m_mainMenuManager.PlayPanel.SetActive(false);
+                    MainMenuManager.m_mainMenuManager.PlayTutorial = true;
+                    MainMenuManager.m_mainMenuManager.FadeIn = false;
+                    AudioManager.m_audioManager.FadeIn = false;
+                    break;
+                }
+
+            case "PlayPanelNo":
+                {
+                    MainMenuManager.m_mainMenuManager.m_mainPanel.SetActive(false);
+                    MainMenuManager.m_mainMenuManager.m_backgroundImage.SetActive(false);
+                    MainMenuManager.m_mainMenuManager.PlayPanel.SetActive(false);
+                    MainMenuManager.m_mainMenuManager.PlayTutorial = false;
+                    MainMenuManager.m_mainMenuManager.FadeIn = false;
+                    AudioManager.m_audioManager.FadeIn = false;
+                    break;
+                }
+
+            case "PlayPanelBack":
+                {
+                    MainMenuManager.m_mainMenuManager.ActivePanelButtons = MainMenuManager.m_mainMenuManager.MainPanelButtons;
+                    MainMenuManager.m_mainMenuManager.SelectedButton.IsMousedOver = false;
+                    MainMenuManager.m_mainMenuManager.SelectedButton = MainMenuManager.m_mainMenuManager.ActivePanelButtons[0];
+                    MainMenuManager.m_mainMenuManager.SelectedButton.IsMousedOver = true;
+                    MainMenuManager.m_mainMenuManager.m_mainPanel.SetActive(true);
+                    MainMenuManager.m_mainMenuManager.PlayPanel.SetActive(false);
                     MainMenuManager.m_mainMenuManager.ResetSelectedButtonIndex();
                     break;
                 }

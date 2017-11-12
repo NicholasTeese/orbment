@@ -189,12 +189,12 @@ public class GameManager : MonoBehaviour
 
     public void LoadTutorial()
     {
-        SceneManager.LoadScene(LevelManager.m_strLevelOneSceneName);
+        SceneManager.LoadScene(LevelManager.m_strTutorialSceneName);
     }
 
     public void LoadLevelOne()
     {
-        SceneManager.LoadScene(LevelManager.m_strLevelTwoSceneName);
+        SceneManager.LoadScene(LevelManager.m_strLevelOneSceneName);
     }
 
     public void QuitToDesktop()

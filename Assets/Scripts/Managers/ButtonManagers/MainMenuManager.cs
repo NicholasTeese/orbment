@@ -15,7 +15,9 @@ public class MainMenuManager : MonoBehaviour
     private bool m_bFadeInComplete = false;
     private bool m_bFadeOutComplete = false;
     private bool m_bInputRecieved = false;
+    private bool m_bPlayTutorial = true;
 
+    private GameObject m_playPanel;
     private GameObject m_optionsMainPanel;
     private GameObject m_optionsAudioPanel;
     private GameObject m_optionsGeneralPanel;
@@ -30,6 +32,7 @@ public class MainMenuManager : MonoBehaviour
     public BaseButton SelectedButton { get { return m_selectedButton; } set { m_selectedButton = value; } }
 
     private List<BaseButton> m_lMainPanelButtons = new List<BaseButton>();
+    private List<BaseButton> m_lPlayPanelButtons = new List<BaseButton>();
     private List<BaseButton> m_lOptionsPanelButtons = new List<BaseButton>();
     private List<BaseButton> m_lOptionsMainPanelButtons = new List<BaseButton>();
     private List<BaseButton> m_lOptionsAudioPanelButtons = new List<BaseButton>();
@@ -41,7 +44,9 @@ public class MainMenuManager : MonoBehaviour
     public int LastSelectedButtonIndex { get { return m_iLastSelectedButtonIndex; } set { m_iLastSelectedButtonIndex = value; } }
 
     public bool FadeIn { get { return m_bFadeIn; } set { m_bFadeIn = value; } }
+    public bool PlayTutorial { get { return m_bPlayTutorial; } set { m_bPlayTutorial = value; } }
 
+    public GameObject PlayPanel { get { return m_playPanel; } }
     public GameObject OptionsMainPanel { get { return m_optionsMainPanel; } }
     public GameObject OptionsAudioPanel { get { return m_optionsAudioPanel; } }
     public GameObject OptionsGeneralPanel { get { return m_optionsGeneralPanel; } }
@@ -50,6 +55,7 @@ public class MainMenuManager : MonoBehaviour
 
     // Main panel buttons.
     public List<BaseButton> MainPanelButtons { get { return m_lMainPanelButtons; } }
+    public List<BaseButton> PlayPanelButtons { get { return m_lPlayPanelButtons; } }
     // Options panel buttons.
     public List<BaseButton> OptionsMainPanelButtons { get { return m_lOptionsMainPanelButtons; } }
     public List<BaseButton> OptionsAudioPanelButtons { get { return m_lOptionsAudioPanelButtons; } }
@@ -85,6 +91,7 @@ public class MainMenuManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+        m_playPanel = transform.Find("Play_Panel").gameObject;
         m_optionsMainPanel = m_optionsPanel.transform.Find("Main_Options_Panel").gameObject;
         m_optionsAudioPanel = m_optionsPanel.transform.Find("Audio_Options_Panel").gameObject;
         m_optionsGeneralPanel = m_optionsPanel.transform.Find("General_Options_Panel").gameObject;
@@ -123,7 +130,14 @@ public class MainMenuManager : MonoBehaviour
             if (ImageFadeOut(m_fadeImage, m_fFadeSpeed))
             {
                 m_bFadeOutComplete = true;
-                LevelManager.m_levelManager.LoadNextLevelAsyncOperation.allowSceneActivation = true;
+                if (m_bPlayTutorial)
+                {
+                    LevelManager.m_levelManager.LoadNextLevelAsyncOperation.allowSceneActivation = true;
+                }
+                else
+                {
+                    GameManager.m_gameManager.LoadLevelOne();
+                }
             }
         }
 
@@ -173,6 +187,17 @@ public class MainMenuManager : MonoBehaviour
             if (button.CompareTag("Button"))
             {
                 m_lMainPanelButtons.Add(button.GetComponent<BaseButton>());
+                button.GetComponent<BaseButton>().ParentListIndex = iParentListIndex;
+                ++iParentListIndex;
+            }
+        }
+        iParentListIndex = 0;
+
+        foreach (Transform button in m_playPanel.transform)
+        {
+            if (button.CompareTag("Button"))
+            {
+                m_lPlayPanelButtons.Add(button.GetComponent<BaseButton>());
                 button.GetComponent<BaseButton>().ParentListIndex = iParentListIndex;
                 ++iParentListIndex;
             }

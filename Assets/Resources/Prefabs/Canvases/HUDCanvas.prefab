@@ -337,6 +337,7 @@ GameObject:
   - component: {fileID: 224026634902075724}
   - component: {fileID: 222110042391903454}
   - component: {fileID: 114954069082310044}
+  - component: {fileID: 114414455295399026}
   m_Layer: 5
   m_Name: Health_Bar_Full
   m_TagString: Untagged
@@ -1422,6 +1423,7 @@ GameObject:
   - component: {fileID: 224251206023106470}
   - component: {fileID: 222446697242419664}
   - component: {fileID: 114228496473757552}
+  - component: {fileID: 114787039411670210}
   m_Layer: 5
   m_Name: Mana_Bar_Full
   m_TagString: Untagged
@@ -2851,6 +2853,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114414455295399026
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1255136229604188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b531b51b2cfee644a2b8bed91da8611, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_image: {fileID: 114954069082310044}
 --- !u!114 &114416378442747842
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3548,6 +3562,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114787039411670210
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1987351686415426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b531b51b2cfee644a2b8bed91da8611, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_image: {fileID: 114228496473757552}
 --- !u!114 &114791826941091596
 MonoBehaviour:
   m_ObjectHideFlags: 1
