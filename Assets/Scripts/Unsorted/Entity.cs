@@ -168,11 +168,11 @@ public class Entity : MonoBehaviour
         if (m_setOnFire && !m_onFire)
         {
             m_setOnFire = false;
-            
+
+            m_statusEffectManager.RequestEffect(this.transform, StatusEffect.Status.OnFire);
+
             if (!gameObject.CompareTag("Player") && Player.m_player.BurningSpeedBoost)
             {
-                m_statusEffectManager.RequestEffect(this.transform, StatusEffect.Status.OnFire);
-
                 if (Player.m_player.BurningSpeedBoost)
                 {
                     ++Player.m_player.EnemiesOnFire;

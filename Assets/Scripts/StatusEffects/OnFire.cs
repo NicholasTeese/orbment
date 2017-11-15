@@ -53,8 +53,9 @@ public class OnFire : StatusEffect
                     --Player.m_player.EnemiesOnFire;
                 }
                 //x --Player.m_player.EnemiesOnFire;
-                m_entity.m_onFire = false;
             }
+
+            m_entity.m_onFire = false;
 
             ReturnToSender();
 
