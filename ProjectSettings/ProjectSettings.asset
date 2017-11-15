@@ -380,9 +380,6 @@ PlayerSettings:
   switchUdpSendBufferSize: 9
   switchUdpReceiveBufferSize: 42
   switchSocketBufferEfficiency: 4
-  switchSocketInitializeEnabled: 1
-  switchNetworkInterfaceManagerInitializeEnabled: 1
-  switchPlayerConnectionEnabled: 1
   ps4NPAgeRating: 12
   ps4NPTitleSecret: 
   ps4NPTrophyPackPath: 
@@ -602,9 +599,9 @@ PlayerSettings:
     UNet: 1
   facebookSdkVersion: 7.9.1
   apiCompatibilityLevel: 2
-  cloudProjectId: 15cb30ae-beb0-4a3e-9b5a-0fd16453b600
-  projectName: IsoShooterPrototype
-  organizationId: vincentchin
+  cloudProjectId: 575133b0-6c19-4af9-bfad-0073104f913b
+  projectName: Orbment
+  organizationId: strongishllama
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
