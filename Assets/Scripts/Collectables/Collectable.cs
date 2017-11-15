@@ -93,6 +93,7 @@ public class Collectable : MonoBehaviour
                     {
                         if(Player.m_player)
                         {
+                            //Debug.Log(collision.collider);
                             Player.m_player.m_orbsCollected++;
                             Player.m_player.OrbPickedUp();
 
@@ -150,7 +151,7 @@ public class Collectable : MonoBehaviour
         if (other.tag == "OrbBoundary")
         {
             m_rigidBody.velocity = -m_rigidBody.velocity;
-            Debug.Log("Exit Bounds");
+            //Debug.Log("Exit Bounds");
         }
     }
 }
