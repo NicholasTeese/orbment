@@ -42,18 +42,6 @@ public class FindObjectsInRadius : MonoBehaviour
     //maybe turn this into a call so it's not run every frame?
     private void FixedUpdate()
     {
-        //insideSphere = Physics.OverlapSphere(this.transform.position, m_sightRadius);
-
-        //if (m_targetTag == "")
-        //{
-        //    return;
-        //}
-
-        //foreach (Collider col in insideSphere)
-        //{
-            //if (col.CompareTag(m_targetTag))
-            //{
-                //direction = col.transform.position - this.transform.position;
         direction = Player.m_player.transform.position - this.transform.position;
         direction.y = 0;
         direction.Normalize();
@@ -89,8 +77,6 @@ public class FindObjectsInRadius : MonoBehaviour
             inSight = false;
             m_target = null;
         }
-            //}
-        //}
         
         if(m_target != null)
         {
