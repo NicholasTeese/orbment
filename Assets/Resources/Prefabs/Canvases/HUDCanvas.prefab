@@ -458,7 +458,6 @@ GameObject:
   - component: {fileID: 4441610074415582}
   - component: {fileID: 198712956692719552}
   - component: {fileID: 199076909429631232}
-  - component: {fileID: 114710517980452522}
   m_Layer: 15
   m_Name: Burst (1)
   m_TagString: Untagged
@@ -478,7 +477,6 @@ GameObject:
   - component: {fileID: 199117475613585330}
   - component: {fileID: 82814243868584494}
   - component: {fileID: 222966024467121848}
-  - component: {fileID: 114318975696067818}
   m_Layer: 15
   m_Name: Glow
   m_TagString: Untagged
@@ -2701,17 +2699,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_image: {fileID: 0}
---- !u!114 &114318975696067818
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1402859394267116}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114332561962909412
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3447,17 +3434,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114710517980452522
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1387144367545578}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114710925500238372
 MonoBehaviour:
   m_ObjectHideFlags: 1
