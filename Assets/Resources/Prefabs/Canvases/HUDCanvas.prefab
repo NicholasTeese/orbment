@@ -603,7 +603,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1510077424108878
 GameObject:
   m_ObjectHideFlags: 1
@@ -10444,8 +10444,8 @@ ParticleSystem:
   m_GameObject: {fileID: 1488048291081990}
   serializedVersion: 5
   lengthInSec: 0.4
-  simulationSpeed: 1.3
-  looping: 0
+  simulationSpeed: 1
+  looping: 1
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -10495,7 +10495,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 1103629428
+  randomSeed: 816777653
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -10560,8 +10560,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 1, g: 0.6897566, b: 0.022058845, a: 0.043137256}
-      maxColor: {r: 0.91480726, g: 1, b: 0.38235295, a: 0.043137256}
+      minColor: {r: 0, g: 0, b: 0, a: 0.043137256}
+      maxColor: {r: 0.61764705, g: 0.022707596, b: 0.6012351, a: 0.043137256}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -10623,7 +10623,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 15
+      scalar: 13.85
       minScalar: 3
       maxCurve:
         serializedVersion: 2
@@ -10843,7 +10843,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 1000
+    maxNumParticles: 984
     size3D: 0
     rotation3D: 0
     gravityModifier:
