@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 199216607388820566}
   - component: {fileID: 135459598214178500}
   - component: {fileID: 114121991679070210}
+  - component: {fileID: 114311751317379020}
   m_Layer: 2
   m_Name: Ring of Fire
   m_TagString: RingOfFire
@@ -65,14 +66,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1950582000861544}
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -12.686999, y: 0.26871675, z: 29.742289}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4339700871424902}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!108 &108593434791007404
 Light:
   m_ObjectHideFlags: 1
@@ -105,6 +106,20 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
+  m_FalloffTable:
+    m_Table[0]: 0
+    m_Table[1]: 0
+    m_Table[2]: 0
+    m_Table[3]: 0
+    m_Table[4]: 0
+    m_Table[5]: 0
+    m_Table[6]: 0
+    m_Table[7]: 0
+    m_Table[8]: 0
+    m_Table[9]: 0
+    m_Table[10]: 0
+    m_Table[11]: 0
+    m_Table[12]: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
@@ -115,12 +130,27 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1950582000861544}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9eff6e3a912210a428129f764384d02b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_type: 5
+  m_manager: {fileID: 0}
+  m_tickInterval: 0.5
+  m_healthPercentThreshold: 25
+--- !u!114 &114311751317379020
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1950582000861544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eff6e3a912210a428129f764384d02b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_type: 0
   m_manager: {fileID: 0}
   m_tickInterval: 0.5
   m_healthPercentThreshold: 25
@@ -134,7 +164,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 10
+  m_Radius: 7
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &198332901323206602
 ParticleSystem:
@@ -195,7 +225,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 527533457
+  randomSeed: 745651721
   InitialModule:
     serializedVersion: 3
     enabled: 1

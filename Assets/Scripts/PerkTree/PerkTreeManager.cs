@@ -178,8 +178,10 @@ public class PerkTreeManager : MonoBehaviour
 
     public void DecrementAvailiablePerks()
     {
-        --m_uiAvailiablePerks;
-
+        if (m_uiAvailiablePerks != 0)
+        {
+            --m_uiAvailiablePerks;
+        }
         m_perkTreeDecriptionText.transform.Find("Perk_Points_Remaining_Text").GetComponent<Text>().text = "Points Remaining: " + m_uiAvailiablePerks;
 
         if (m_uiAvailiablePerks == 0)

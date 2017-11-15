@@ -49,10 +49,9 @@ public class ExpManager : MonoBehaviour
             SceneManager.GetActiveScene().name == LevelManager.m_strLevelTwoSceneName)
         {
             // Initialise perk.
-            PerkTreeManager.m_perkTreeManager.m_selectedPerkTree.SetActive(true);
-            //PerkTreeManager.m_perkTreeManager.IncrementAvailiablePerks();
-            PerkTreeManager.m_perkTreeManager.m_selectedPerkButton.PurchasePerk();
             LevelUp(false);
+            PerkTreeManager.m_perkTreeManager.m_selectedPerkTree.SetActive(true);
+            PerkTreeManager.m_perkTreeManager.m_selectedPerkButton.PurchasePerk();
         }
 
         PerkTreeManager.m_perkTreeManager.gameObject.SetActive(false);
