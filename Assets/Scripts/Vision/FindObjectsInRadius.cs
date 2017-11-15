@@ -23,8 +23,16 @@ public class FindObjectsInRadius : MonoBehaviour
     [HideInInspector]
     public Transform m_target;
 
+    string m_sLayer;
+    int m_iLayer;
+
     private void Awake()
     {
+        m_sLayer = LayerMask.LayerToName(10);
+        m_iLayer = LayerMask.GetMask("Player");
+
+        Debug.Log("GetName = " + m_sLayer);
+        Debug.Log("GetLayer = " + m_iLayer);
 
     }
     // Use this for initialization
@@ -57,9 +65,17 @@ public class FindObjectsInRadius : MonoBehaviour
         if (angle < m_sightAngle)
         {
             RaycastHit hit;
-            if (Physics.Raycast(this.transform.position, direction * m_sightRadius, out hit))
+            // Player Layer mask = 1024
+            // wall layer mask = 0 "default"
+            
+            int layerMask = LayerMask.GetMask("Default", "Player");
+
+            //if (Physics.Raycast(this.transform.position, direction * m_sightRadius, out hit, 20.0f, 1024))
+//            if (Physics.Raycast(this.transform.position, direction * m_sightRadius, out hit))
+            if (Physics.Raycast(this.transform.position, direction * m_sightRadius, out hit, 20.0f, layerMask, QueryTriggerInteraction.Collide))
             {
-                //Debug.Log(hit.collider.name);
+                Debug.Log(this.transform.position.ToString());
+                Debug.Log(hit.collider.name);
 
                 if (hit.collider.CompareTag(m_targetTag))
                 {

@@ -39,6 +39,8 @@ public class BreakOnImpactWith : MonoBehaviour
             m_chunkModel.SetActive(true);
             
             m_isBroken = true;
+            Destroy(gameObject, 2.6f);
+
         }
         //else
         //{

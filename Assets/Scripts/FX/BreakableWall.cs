@@ -27,12 +27,11 @@ public class BreakableWall : MonoBehaviour
             a_CurrentBoulder = RandomBoulder();
             m_BoulderList[a_CurrentBoulder].SetActive(false);
         }
-        if (a_other.gameObject.tag == "Bullet")
+        if (m_breakableWallHolder.WallHealth <= 0)
         {
-            if (m_breakableWallHolder.WallHealth <= 0)
-            {
-                Boulders.SetActive(false);
-            }
+            Boulders.SetActive(false);
+            Destroy(transform.parent.gameObject, 2.6f);
+
         }
     }
 

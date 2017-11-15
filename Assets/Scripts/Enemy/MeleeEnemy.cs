@@ -27,6 +27,9 @@ public class MeleeEnemy : Enemy
     private NavMeshAgent m_navMeshAgent;
 
     private FindObjectsInRadius m_foir;
+    //public Transform m_eTarget;
+
+    int playerlayer = 0;
 
     private Renderer m_OrcRenderer;
 
@@ -43,6 +46,8 @@ public class MeleeEnemy : Enemy
         m_IdleColour   = m_OrcRenderer.material.color;
         m_navMeshAgent.destination = GetWanderPosition(transform.position);
         m_navMeshAgent.speed = m_fMoveSpeed;
+        //playerlayer = LayerMask.GetMask("Player");
+        //Debug.Log(playerlayer);
     }
 
     new private void Start()
@@ -76,6 +81,7 @@ public class MeleeEnemy : Enemy
         }
 
         base.Update();
+        //TargetCheck();
 
         Vector3 V_targetOffset = new Vector3(Player.m_player.transform.position.x, transform.position.y, Player.m_player.transform.position.z);
 
@@ -320,4 +326,15 @@ public class MeleeEnemy : Enemy
         }
             return false;
     }
+
+    //private bool TargetCheck()
+    //{
+    //    if(m_foir.m_target == m_eTarget)
+    //    {
+    //        Debug.Log("Foir Player");
+    //        return true;
+    //    }
+    //    Debug.Log("Foir !Player");
+    //        return false;
+    //}
 }
