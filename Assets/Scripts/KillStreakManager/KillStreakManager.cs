@@ -49,7 +49,7 @@ public class KillStreakManager : MonoBehaviour
         m_currentKillStreakImage = PlayerHUDManager.m_playerHUDManager.m_currentKillStreakImage;
 
         m_v3CurrentKillStreakImageOriginalPosition = IsoCam.m_playerCamera.m_uiCamera.WorldToScreenPoint(m_currentKillStreakImage.transform.position) +
-                                                     new Vector3(-m_currentKillStreakImage.rectTransform.rect.width, -m_currentKillStreakImage.rectTransform.rect.height, 0.0f);
+                                                     new Vector3(-m_currentKillStreakImage.rectTransform.rect.width * 2, -m_currentKillStreakImage.rectTransform.rect.height * 2, 0.0f);
     }
 
     private void Update()
@@ -116,6 +116,11 @@ public class KillStreakManager : MonoBehaviour
                 {
                     m_currentKillStreakImage.gameObject.SetActive(true);
                     m_currentKillStreakImage.sprite = m_killStreakSprite[5];
+                    
+                    if (Player.m_player.GodModeAvailable)
+                    {
+                        
+                    }
                     break;
                 }
         }
@@ -142,7 +147,7 @@ public class KillStreakManager : MonoBehaviour
 
             if (m_killStreak >= 10)
             {
-
+                StartCoroutine(ActivateGodMode());
             }
         }
     }
@@ -171,5 +176,13 @@ public class KillStreakManager : MonoBehaviour
     public Vector3 NewStreakShakePosition(Vector3 a_v3CurrentImagePosition, float a_fMaxScreenShakeAmount)
     {
         return new Vector3((a_v3CurrentImagePosition.x + Random.Range(0.0f, a_fMaxScreenShakeAmount)), (a_v3CurrentImagePosition.y + Random.Range(0.0f, a_fMaxScreenShakeAmount)), 0.0f);
+        //return new Vector3(Screen.width - (m_currentKillStreakImage.GetComponent<RectTransform>().rect.width * 2) + Random.Range(0.0f, a_fMaxScreenShakeAmount), Screen.height - (m_currentKillStreakImage.GetComponent<RectTransform>().rect.height + Random.Range(0.0f, a_fMaxScreenShakeAmount) * 2), 0.0f);
+    }
+
+    private IEnumerator ActivateGodMode()
+    {
+        Player.m_player.GodModeEnabled = true;
+        yield return new WaitForSeconds(5.0f);
+        Player.m_player.GodModeEnabled = false;
     }
 }

@@ -97,6 +97,8 @@ public class Player : Entity
     private bool m_bIceSplatterUnlocked = false;
     private bool m_bIceShield = false;
     private bool m_bIceArmor = false;
+    private bool m_bGodModeAvailable = false;
+    private bool m_bGodModeEnabled = false;
 
     private Animator m_animatior;
 
@@ -116,6 +118,8 @@ public class Player : Entity
     public bool FreezeUnlocked { get { return m_bFreezeUnlocked; } set { m_bFreezeUnlocked = value; } }
     public bool IceShield { get { return m_bIceShield; } set { m_bIceShield = value; } }
     public bool IceArmor { get { return m_bIceArmor; } set { m_bIceArmor = value; } }
+    public bool GodModeAvailable { get { return m_bGodModeAvailable; } set { m_bGodModeAvailable = value; } }
+    public bool GodModeEnabled { get { return m_bGodModeEnabled; } set { m_bGodModeEnabled = value; } }
 
     public Mana ManaPool { get { return m_manaPool; } }
 

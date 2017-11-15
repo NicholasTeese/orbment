@@ -172,6 +172,10 @@ public class Bullet : MonoBehaviour
                 {
                     // take no damage
                 }
+                else if (Player.m_player.GodModeEnabled)
+                {
+
+                }
                 else
                 {
                     m_target.m_beenCrit = m_isCrit;

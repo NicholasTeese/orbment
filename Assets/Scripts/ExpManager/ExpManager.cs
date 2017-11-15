@@ -180,7 +180,7 @@ public class ExpManager : MonoBehaviour
 
     private IEnumerator TurnOffParticles()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.0f);
         for (int iCount = 0; iCount < m_levelUpParticles.Count; ++iCount)
         {
             m_levelUpParticles[iCount].SetActive(false);
