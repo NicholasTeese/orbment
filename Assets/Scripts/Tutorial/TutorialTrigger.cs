@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class TutorialTrigger : MonoBehaviour
 {
-    private float m_fPopSpeed = 800.0f;
+    private float m_fPopSpeed = 200.0f;
     private float m_fPoppedInHeight = 200.0f;
     private float m_fPoppedOutHeight = -150.0f;
-    private float m_fMessageBuffer = 20.0f;
+    private float m_fMessageBuffer = 400.0f;
 
     private bool m_bPopIn = false;
 
@@ -24,8 +24,6 @@ public class TutorialTrigger : MonoBehaviour
 
     private void Awake()
     {
-        m_v3StartPosition = transform.position;
-
         if (m_MessageHolder != null)
         {
             m_messageBorder = m_MessageHolder.transform.Find("Border").GetComponent<RectTransform>();
@@ -36,6 +34,7 @@ public class TutorialTrigger : MonoBehaviour
             m_canvasRectTransform = m_tutorialCanvas.GetComponent<RectTransform>();
         }
 
+        m_v3StartPosition = m_MessageHolder.transform.localPosition;
         m_v3EndPosition = new Vector3(m_canvasRectTransform.rect.xMin + m_messageBorder.rect.width + m_fMessageBuffer, m_canvasRectTransform.rect.yMin + m_messageBorder.rect.height + m_fMessageBuffer, 0.0f);
     }
 	
@@ -54,11 +53,17 @@ public class TutorialTrigger : MonoBehaviour
 
 		if (m_bPopIn)
         {
-            PopIn();
+            if (m_MessageHolder.transform.localPosition.y < m_v3EndPosition.y)
+            {
+                m_MessageHolder.transform.localPosition += new Vector3(0.0f, 5.0f, 0.0f) * m_fPopSpeed * Time.deltaTime;
+            }
         }
         else
         {
-            PopOut();
+            if (m_MessageHolder.transform.localPosition.y > m_v3StartPosition.y)
+            {
+                m_MessageHolder.transform.localPosition -= new Vector3(0.0f, 5.0f, 0.0f) * m_fPopSpeed * Time.deltaTime;
+            }
         }
 	}
 
@@ -83,26 +88,6 @@ public class TutorialTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             m_bPopIn = false;
-        }
-    }
-
-    private void PopIn()
-    {
-        if (m_MessageHolder.transform.position.y < m_fPoppedInHeight)
-        {
-            m_MessageHolder.transform.position = new Vector3(m_MessageHolder.transform.position.x,
-                                                             m_MessageHolder.transform.position.y + m_fPopSpeed * Time.deltaTime,
-                                                             m_MessageHolder.transform.position.z);
-        }
-    }
-
-    private void PopOut()
-    {
-        if (m_MessageHolder.transform.position.y > m_fPoppedOutHeight)
-        {
-            m_MessageHolder.transform.position = new Vector3(m_MessageHolder.transform.position.x,
-                                                             m_MessageHolder.transform.position.y - m_fPopSpeed * Time.deltaTime,
-                                                             m_MessageHolder.transform.position.z);
         }
     }
 }

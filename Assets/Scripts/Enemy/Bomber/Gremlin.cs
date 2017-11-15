@@ -177,7 +177,6 @@ public class Gremlin : Enemy
 
             case Behaviour.DEAD:
                 {
-
                     break;
                 }
 
