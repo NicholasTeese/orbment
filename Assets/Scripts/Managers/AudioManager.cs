@@ -54,6 +54,7 @@ public class AudioManager : MonoBehaviour
     public float MenuVolume { get { return m_fMusicVolume; } set { m_fMenuVolume = value; } }
 
     public bool FadeIn { get { return m_bFadeIn; } set { m_bFadeIn = value; } }
+    public bool FadeComplete { get { return m_bFadeComplete; } set { m_bFadeComplete = value; } }
 
     public AudioClip[] EnemyDeathClips { get { return m_enemyDeathClips; } }
 
@@ -148,6 +149,16 @@ public class AudioManager : MonoBehaviour
                 }
 
             case LevelManager.m_strLevelTwoSceneName:
+                {
+                    if (m_musicAudioSource.clip != m_inGameMusic)
+                    {
+                        m_musicAudioSource.clip = m_inGameMusic;
+                        m_musicAudioSource.Play();
+                    }
+                    break;
+                }
+
+            case LevelManager.m_strCreditsSceneName:
                 {
                     if (m_musicAudioSource.clip != m_inGameMusic)
                     {

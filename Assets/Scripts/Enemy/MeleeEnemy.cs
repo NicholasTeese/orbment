@@ -39,7 +39,7 @@ public class MeleeEnemy : Enemy
         m_foir = this.GetComponent<FindObjectsInRadius>();
         m_navMeshAgent = GetComponent<NavMeshAgent>();
         m_OrcRenderer  = transform.Find("Melee_Mesh_Low").GetComponent<Renderer>();
-        m_ChargeColour = new Color(0.588f, 0.049f, 0.049f, 1.0f);
+        m_ChargeColour = new Color(0.0f, 0.0f, 1.0f, 1.0f);
         m_IdleColour   = m_OrcRenderer.material.color;
         m_navMeshAgent.destination = GetWanderPosition(transform.position);
         m_navMeshAgent.speed = m_fMoveSpeed;

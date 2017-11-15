@@ -135,6 +135,8 @@ public class GameManager : MonoBehaviour
             InGameCanvas.m_inGameCanvas.FadeOutSpeed = m_fDeathFadeOutSpeed;
             InGameCanvas.m_inGameCanvas.FadeIn = false;
             InGameCanvas.m_inGameCanvas.FadeOutComplete = false;
+            AudioManager.m_audioManager.FadeIn = false;
+            AudioManager.m_audioManager.FadeComplete = false;
             m_bDeathFadeOutStarted = true;
         }
 

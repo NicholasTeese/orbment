@@ -207,7 +207,10 @@ public class LevelManager : MonoBehaviour
 
             case m_strCreditsSceneName:
                 {
+                    m_strCurrentSceneName = m_strCreditsSceneName;
 
+                    AudioManager.m_audioManager.FadeIn = false;
+                    AudioManager.m_audioManager.FadeComplete = false;
                     break;
                 }
 
@@ -286,7 +289,7 @@ public class LevelManager : MonoBehaviour
             Destroy(GameManager.m_gameManager.gameObject);
         }
 
-        if (AudioManager.m_audioManager != null)
+        if (AudioManager.m_audioManager != null && LevelManager.m_levelManager.m_strCurrentSceneName != LevelManager.m_strLevelTwoSceneName)
         {
             Destroy(AudioManager.m_audioManager.gameObject);
         }

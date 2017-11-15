@@ -26,16 +26,15 @@ public class OrbCountDisplay : MonoBehaviour
 
     void Start()
     {
-        //Player.m_Player = GameObject.FindObjectOfType<Player>();
         m_iIndex = 0;
         m_textDisplay = GetComponent<Text>();
     }
 
     void Update()
     {
-        if (GateList[m_iIndex].m_bUnlocked)
+        if (GateList[m_iIndex].m_bUnlocked && m_iIndex != GateList.Count - 1)
         {
-              if (m_iIndex != GateList.Count - 1)
+              if (m_iIndex < GateList.Count - 1)
               {
                 m_iIndex++;
               }

@@ -86,6 +86,7 @@ public class CreditsCanvas : MonoBehaviour
         {
             if (FadeOut(m_fadeImage, m_fFadeSpeed))
             {
+                LevelManager.m_levelManager.DestroyAllDontDestroyOnLoad();
                 LevelManager.m_levelManager.LoadNextLevelAsyncOperation.allowSceneActivation = true;
             }
         }
