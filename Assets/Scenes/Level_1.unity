@@ -2135,6 +2135,11 @@ Prefab:
       propertyPath: m_boulders
       value: 
       objectReference: {fileID: 615629056}
+    - target: {fileID: 65710579880689260, guid: d3b7472badde1764484d119cbc04bae3,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d3b7472badde1764484d119cbc04bae3, type: 2}
   m_IsPrefabParent: 0
@@ -2650,6 +2655,11 @@ Prefab:
       propertyPath: m_boulders
       value: 
       objectReference: {fileID: 1478650598}
+    - target: {fileID: 65710579880689260, guid: d3b7472badde1764484d119cbc04bae3,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d3b7472badde1764484d119cbc04bae3, type: 2}
   m_IsPrefabParent: 0
@@ -14918,6 +14928,11 @@ Prefab:
       propertyPath: m_boulders
       value: 
       objectReference: {fileID: 1370887229}
+    - target: {fileID: 65710579880689260, guid: d3b7472badde1764484d119cbc04bae3,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d3b7472badde1764484d119cbc04bae3, type: 2}
   m_IsPrefabParent: 0
@@ -20832,6 +20847,11 @@ Prefab:
       propertyPath: m_boulders
       value: 
       objectReference: {fileID: 1295450850}
+    - target: {fileID: 65710579880689260, guid: d3b7472badde1764484d119cbc04bae3,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d3b7472badde1764484d119cbc04bae3, type: 2}
   m_IsPrefabParent: 0
@@ -26347,6 +26367,11 @@ Prefab:
       propertyPath: m_boulders
       value: 
       objectReference: {fileID: 1771209287}
+    - target: {fileID: 65710579880689260, guid: d3b7472badde1764484d119cbc04bae3,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d3b7472badde1764484d119cbc04bae3, type: 2}
   m_IsPrefabParent: 0
@@ -37602,6 +37627,11 @@ Prefab:
       propertyPath: m_boulders
       value: 
       objectReference: {fileID: 1355822938}
+    - target: {fileID: 65710579880689260, guid: d3b7472badde1764484d119cbc04bae3,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d3b7472badde1764484d119cbc04bae3, type: 2}
   m_IsPrefabParent: 0
