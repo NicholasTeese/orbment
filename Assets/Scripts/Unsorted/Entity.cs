@@ -166,7 +166,7 @@ public class Entity : MonoBehaviour
         {
             m_setOnFire = false;
 
-            m_statusEffectManager.RequestEffect(this.transform, StatusEffect.Status.OnFire);
+            StatusEffectManager.m_statusEffectManager.RequestEffect(this.transform, StatusEffect.Status.OnFire);
 
             if (!gameObject.CompareTag("Player") && Player.m_player.BurningSpeedBoost)
             {
@@ -180,7 +180,7 @@ public class Entity : MonoBehaviour
 
         if (!m_ringOfFireActive && HealthBelowPercentCheck(25) && m_hasRingOfFire)
         {
-            m_statusEffectManager.RequestEffect(this.transform, StatusEffect.Status.FireRing);
+            StatusEffectManager.m_statusEffectManager.RequestEffect(this.transform, StatusEffect.Status.FireRing);
         }
 
         m_oldHealth = m_currHealth;
