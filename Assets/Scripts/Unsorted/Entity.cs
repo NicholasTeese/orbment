@@ -158,6 +158,10 @@ public class Entity : MonoBehaviour
         if (m_currHealth <= 0)
         {
             m_bIsAlive = false;
+            if (Player.m_player.BurningSpeedBoost)
+            {
+                --Player.m_player.EnemiesOnFire;
+            }
             m_explosionManager.RequestExplosion(this.transform.position, this.transform.forward, Explosion.ExplosionType.BigBlood, 0.0f);
             m_explosionManager.RequestExplosion(this.transform.position, this.transform.forward, Explosion.ExplosionType.Gibs, 0.0f);
             this.gameObject.SetActive(false);

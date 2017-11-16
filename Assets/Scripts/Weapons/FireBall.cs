@@ -53,9 +53,13 @@ public class FireBall : Bullet
 
                 if (Player.m_player.CanSetEnemiesOnFire)
                 {
-                    if (Random.Range(0, 100) > Player.m_player.ChanceToSetEnemiesOnFire)
+                    int iRoll = Random.Range(0, 100);
+                    Debug.Log(iRoll);
+
+                    if (iRoll < Player.m_player.ChanceToSetEnemiesOnFire)
                     {
                         m_target.m_setOnFire = true;
+                        Debug.Log(m_target.m_setOnFire);
                     }
                 }
             }
