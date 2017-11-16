@@ -69,6 +69,7 @@ public class Gremlin : Enemy
             if (m_killStreakManager != null)
             {
                 m_killStreakManager.AddKill();
+                AudioManager.m_audioManager.PlayOneShotEnemyDeath();
             }
         }
 
