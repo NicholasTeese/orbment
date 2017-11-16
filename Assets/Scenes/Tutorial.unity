@@ -20375,11 +20375,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1717491772}
     m_Modifications:
-    - target: {fileID: 114359912566957444, guid: 7071f2acf78a2004cb5e671e906ac67c,
-        type: 2}
-      propertyPath: m_enemySections.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4310704953981256, guid: 7071f2acf78a2004cb5e671e906ac67c, type: 2}
       propertyPath: m_LocalPosition.x
       value: -0.0346
