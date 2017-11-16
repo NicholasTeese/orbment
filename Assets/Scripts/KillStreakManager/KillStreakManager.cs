@@ -48,8 +48,8 @@ public class KillStreakManager : MonoBehaviour
     {
         m_currentKillStreakImage = PlayerHUDManager.m_playerHUDManager.m_currentKillStreakImage;
 
-        m_v3CurrentKillStreakImageOriginalPosition = IsoCam.m_playerCamera.m_uiCamera.WorldToScreenPoint(m_currentKillStreakImage.transform.position) +
-                                                     new Vector3(-m_currentKillStreakImage.rectTransform.rect.width * 2, -m_currentKillStreakImage.rectTransform.rect.height * 2, 0.0f);
+        m_v3CurrentKillStreakImageOriginalPosition = m_currentKillStreakImage.GetComponent<RectTransform>().localPosition;//IsoCam.m_playerCamera.m_uiCamera.WorldToScreenPoint(m_currentKillStreakImage.transform.position) +
+                                                     //new Vector3(-m_currentKillStreakImage.rectTransform.rect.width * 2, -m_currentKillStreakImage.rectTransform.rect.height * 2, 0.0f);
     }
 
     private void Update()
