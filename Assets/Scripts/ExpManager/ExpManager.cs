@@ -16,6 +16,8 @@ public class ExpManager : MonoBehaviour
     private GameObject Xpfiller;
     private GameObject XPSlider;
 
+    public GameObject m_LevelUpEffect;
+
     public int m_expBarWidth = 500;
     public float m_playerExperience = 0.0f;
     public float m_playerMaxXP = 50.0f;
@@ -62,6 +64,7 @@ public class ExpManager : MonoBehaviour
         m_upgradeUnavailableText = GameObject.FindGameObjectWithTag("UpgradeUnavailableText");
         Xpfiller = PlayerHUDManager.m_playerHUDManager.transform.Find("ExperienceBar").Find("ExperienceFiller").gameObject;
         XPSlider = PlayerHUDManager.m_playerHUDManager.transform.Find("ExperienceBar").Find("ExperienceSlider").gameObject;
+        m_LevelUpEffect.SetActive(false);
     }
 
     void Update()
@@ -140,6 +143,7 @@ public class ExpManager : MonoBehaviour
     void LevelUp(bool a_bPlayParticles = true)
     {
         AudioManager.m_audioManager.PlayOneShotLevelUp();
+        StartCoroutine(LevelUpBurst());
         if (a_bPlayParticles)
         {
             for (int iCount = 0; iCount < m_levelUpParticles.Count; ++iCount)
@@ -186,5 +190,12 @@ public class ExpManager : MonoBehaviour
         {
             m_levelUpParticles[iCount].SetActive(false);
         }
+    }
+
+    private IEnumerator LevelUpBurst()
+    {
+        m_LevelUpEffect.SetActive(true);
+        yield return new WaitForSeconds(1.0f);
+        m_LevelUpEffect.SetActive(false);
     }
 }
