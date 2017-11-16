@@ -82,7 +82,7 @@ public class Bomb : MonoBehaviour
 
             GameObject explosion = Instantiate(Resources.Load("Prefabs/Explosions/FireExplosion") as GameObject);
             explosion.transform.position = transform.position + new Vector3(0.0f, 0.5f, 0.0f);
-            explosion.transform.SetParent(BombManager.m_bombManager.transform);
+            //explosion.transform.SetParent(BombManager.m_bombManager.transform);
             gameObject.SetActive(false);
 
             if (Vector3.Distance(transform.position, Player.m_player.transform.position) <= 3.0f && !Player.m_player.m_dashing)
