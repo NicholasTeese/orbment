@@ -5,6 +5,7 @@ using UnityEngine;
 public class OrbGate : MonoBehaviour
 {
     public GameObject m_portal;
+    public GameObject m_portalBlocker;
 
     public GUIStyle m_textStyle;
     public GameObject m_visualLock;
@@ -89,6 +90,11 @@ public class OrbGate : MonoBehaviour
             if (m_visualLock != null)
             {
                 m_visualLock.SetActive(false);
+            }
+
+            if (m_portalBlocker != null)
+            {
+                m_portalBlocker.SetActive(false);
             }
 
             if (m_portal != null)
