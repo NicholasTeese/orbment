@@ -23,25 +23,28 @@ public class DebugLevelSwitcher : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F1))
+        if (m_bCheatsEnabled)
         {
-            SceneManager.LoadScene(LevelManager.m_strMainMenuSceneName);
-        }
-        else if (Input.GetKeyDown(KeyCode.F2))
-        {
-            SceneManager.LoadScene(LevelManager.m_strTutorialSceneName);
-        }
-        else if (Input.GetKeyDown(KeyCode.F3))
-        {
-            SceneManager.LoadScene(LevelManager.m_strLevelOneSceneName);
-        }
-        else if (Input.GetKeyDown(KeyCode.F4))
-        {
-            SceneManager.LoadScene(LevelManager.m_strLevelTwoSceneName);
-        }
-        else if (Input.GetKeyDown(KeyCode.F5))
-        {
+            if (Input.GetKeyDown(KeyCode.F1))
+            {
+                SceneManager.LoadScene(LevelManager.m_strMainMenuSceneName);
+            }
+            else if (Input.GetKeyDown(KeyCode.F2))
+            {
+                SceneManager.LoadScene(LevelManager.m_strTutorialSceneName);
+            }
+            else if (Input.GetKeyDown(KeyCode.F3))
+            {
+                SceneManager.LoadScene(LevelManager.m_strLevelOneSceneName);
+            }
+            else if (Input.GetKeyDown(KeyCode.F4))
+            {
+                SceneManager.LoadScene(LevelManager.m_strLevelTwoSceneName);
+            }
+            else if (Input.GetKeyDown(KeyCode.F5))
+            {
 
+            }
         }
     }
 }

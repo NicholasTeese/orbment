@@ -234,6 +234,8 @@ public class Player : Entity
                         }
                     }
                     m_manaPool.m_currentMana -= m_shootManaCost;
+                    Debug.Log("Current Mana: " + m_manaPool.m_currentMana);
+                    Debug.Log("Shoot cost: " + m_shootManaCost);
                 }
             }
             m_playerFireTimer += Time.deltaTime;
@@ -244,7 +246,7 @@ public class Player : Entity
         }
 
         //regen mana when mouse up
-        if ((!Input.GetMouseButton(0) || m_manaPool.m_currentMana <= m_shootManaCost) && Time.timeScale != 0.0f)
+        if ((!Input.GetMouseButton(0) && !InputManager.RightTriggerHold() || m_manaPool.m_currentMana <= m_shootManaCost) && Time.timeScale != 0.0f)
         {
             RegenMana();
         }
