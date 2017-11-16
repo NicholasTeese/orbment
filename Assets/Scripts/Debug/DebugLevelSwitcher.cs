@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class DebugLevelSwitcher : MonoBehaviour
 {
-    public static bool m_bCheatsEnabled = true;
+    public static bool m_bCheatsEnabled = false;
 
     public static DebugLevelSwitcher m_debugLevelSwitcher = null;
 

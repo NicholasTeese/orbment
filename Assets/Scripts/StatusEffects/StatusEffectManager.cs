@@ -98,10 +98,16 @@ public class StatusEffectManager : MonoBehaviour
     {
         for (int i = 0; i < a_list.Count; ++i)
         {
-            if (!a_list[i].m_object.activeInHierarchy)
+            if (a_list[i].m_object == null)
             {
-                return a_list[i].m_object;
-
+                a_list.RemoveAt(i);
+            }
+            else if (!a_list[i].m_object.activeInHierarchy)
+            {
+                //if
+                {
+                    return a_list[i].m_object;
+                }
             }
         }
 
