@@ -74,6 +74,7 @@ public class Gremlin : Enemy
                 m_killStreakManager.AddKill();
                 AudioManager.m_audioManager.PlayOneShotEnemyDeath();
             }
+            Death();
         }
 
         if (!CalculateFrustrum(IsoCam.m_playerCamera.FrustrumPlanes, m_collider))

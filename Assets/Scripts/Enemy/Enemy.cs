@@ -34,7 +34,6 @@ public class Enemy : Entity
 
     new void Update()
     {
-//#if UNITY_EDITOR
         if (DebugLevelSwitcher.m_bCheatsEnabled)
         {
             // Debug shortcut for instakill
@@ -43,7 +42,6 @@ public class Enemy : Entity
                 this.m_currHealth = 0;
             }
         }
-//#endif
 
         if (m_currHealth <= 0)
         {
@@ -54,6 +52,7 @@ public class Enemy : Entity
             {
                 m_killStreakManager.AddKill();
             }
+            Death();
         }
 
         if (!CalculateFrustrum(IsoCam.m_playerCamera.FrustrumPlanes, m_collider))

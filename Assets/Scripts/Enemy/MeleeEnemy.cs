@@ -59,18 +59,13 @@ public class MeleeEnemy : Enemy
     {
 
 //#if UNITY_EDITOR
-if (DebugLevelSwitcher.m_bCheatsEnabled)
+        if (DebugLevelSwitcher.m_bCheatsEnabled)
         {
            // Debug shortcut for instakill
            if (Input.GetKey(KeyCode.E) && Input.GetKey(KeyCode.Equals) && Input.GetKey(KeyCode.Alpha0))
            {
                this.m_currHealth = 0;
            }
-        }
-
-        if (!CalculateFrustrum(IsoCam.m_playerCamera.FrustrumPlanes, m_collider))
-        {
-            return;
         }
 
         if (m_currHealth <= 0)
@@ -80,6 +75,12 @@ if (DebugLevelSwitcher.m_bCheatsEnabled)
             {
                 m_killStreakManager.AddKill();
             }
+            Death();
+        }
+
+        if (!CalculateFrustrum(IsoCam.m_playerCamera.FrustrumPlanes, m_collider))
+        {
+            return;
         }
 
         base.Update();

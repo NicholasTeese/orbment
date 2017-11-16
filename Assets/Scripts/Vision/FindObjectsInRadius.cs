@@ -42,6 +42,11 @@ public class FindObjectsInRadius : MonoBehaviour
     //maybe turn this into a call so it's not run every frame?
     private void FixedUpdate()
     {
+        if (Player.m_player == null)
+        {
+            return;
+        }
+
         direction = Player.m_player.transform.position - this.transform.position;
         direction.y = 0;
         direction.Normalize();
