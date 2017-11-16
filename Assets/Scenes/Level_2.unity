@@ -15194,6 +15194,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bafa07d99340bf344954e239ca710541, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &614375415 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1094836615329662, guid: bafa07d99340bf344954e239ca710541,
+    type: 2}
+  m_PrefabInternal: {fileID: 614375414}
 --- !u!1 &615839189
 GameObject:
   m_ObjectHideFlags: 0
@@ -48526,6 +48531,11 @@ Prefab:
       propertyPath: m_levelUpParticles.Array.data[2]
       value: 
       objectReference: {fileID: 1386079548}
+    - target: {fileID: 114382680884065128, guid: bf06446aec502fb4584dfd1747c91bef,
+        type: 2}
+      propertyPath: m_LevelUpEffect
+      value: 
+      objectReference: {fileID: 614375415}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bf06446aec502fb4584dfd1747c91bef, type: 2}
   m_IsPrefabParent: 0

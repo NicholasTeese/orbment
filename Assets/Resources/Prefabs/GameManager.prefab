@@ -557,6 +557,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddefac981bb842d408e72ab4c6b38751, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LevelUpEffect: {fileID: 0}
   m_expBarWidth: 685
   m_playerExperience: 0
   m_playerMaxXP: 100

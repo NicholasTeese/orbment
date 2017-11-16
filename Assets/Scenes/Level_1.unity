@@ -1858,6 +1858,11 @@ Transform:
   m_Father: {fileID: 1732644405}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &135459594 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1094836615329662, guid: bafa07d99340bf344954e239ca710541,
+    type: 2}
+  m_PrefabInternal: {fileID: 1055697492}
 --- !u!1001 &136454104
 Prefab:
   m_ObjectHideFlags: 0
@@ -39256,6 +39261,11 @@ Prefab:
       propertyPath: m_levelUpParticles.Array.data[2]
       value: 
       objectReference: {fileID: 114731073}
+    - target: {fileID: 114382680884065128, guid: bf06446aec502fb4584dfd1747c91bef,
+        type: 2}
+      propertyPath: m_LevelUpEffect
+      value: 
+      objectReference: {fileID: 135459594}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bf06446aec502fb4584dfd1747c91bef, type: 2}
   m_IsPrefabParent: 0

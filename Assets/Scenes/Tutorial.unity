@@ -2915,6 +2915,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7731e5c41d9216a4d9a4537b0abfd061, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &180015670 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1094836615329662, guid: bafa07d99340bf344954e239ca710541,
+    type: 2}
+  m_PrefabInternal: {fileID: 1718589208}
 --- !u!4 &182288061 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4261986540723924, guid: 7731e5c41d9216a4d9a4537b0abfd061,
@@ -15435,6 +15440,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 114382680884065128, guid: bf06446aec502fb4584dfd1747c91bef,
+        type: 2}
+      propertyPath: m_LevelUpEffect
+      value: 
+      objectReference: {fileID: 180015670}
     - target: {fileID: 114382680884065128, guid: bf06446aec502fb4584dfd1747c91bef,
         type: 2}
       propertyPath: m_levelUpParticles.Array.data[0]
