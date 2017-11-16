@@ -131,13 +131,16 @@ public class ExpManager : MonoBehaviour
             DisablePerkTree();
         }
 
-#if UNITY_EDITOR
-        // Debug shortcut for Level up
-        if (Input.GetKey(KeyCode.L) && Input.GetKey(KeyCode.KeypadPlus))
+//#if UNITY_EDITOR
+        if (DebugLevelSwitcher.m_bCheatsEnabled)
         {
-            m_playerExperience += 700;
+            // Debug shortcut for Level up
+            if (Input.GetKey(KeyCode.L) && Input.GetKey(KeyCode.KeypadPlus))
+            {
+                m_playerExperience += 700;
+            }
         }
-#endif
+//#endif
     }
 
     void LevelUp(bool a_bPlayParticles = true, bool a_bPlaySounds = true)

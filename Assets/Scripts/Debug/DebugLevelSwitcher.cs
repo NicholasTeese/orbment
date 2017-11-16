@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class DebugLevelSwitcher : MonoBehaviour
 {
+    public static bool m_bCheatsEnabled = true;
+
     public static DebugLevelSwitcher m_debugLevelSwitcher = null;
 
     private void Awake()
