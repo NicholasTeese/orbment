@@ -207,7 +207,7 @@ public class Entity : MonoBehaviour
         }
         m_explosionManager.RequestExplosion(this.transform.position, this.transform.forward, Explosion.ExplosionType.BigBlood, 0.0f);
         m_explosionManager.RequestExplosion(this.transform.position, this.transform.forward, Explosion.ExplosionType.Gibs, 0.0f);
-        //this.gameObject.SetActive(false);
-        Destroy(gameObject);
+        this.gameObject.SetActive(false);
+        //Destroy(gameObject);
     }
 }
