@@ -232,6 +232,7 @@ public class Player : Entity
                         }
                     }
                     m_manaPool.m_currentMana -= m_shootManaCost;
+                    Debug.Log(m_manaPool.m_currentMana);
                 }
             }
             m_playerFireTimer += Time.deltaTime;
