@@ -79,7 +79,7 @@ public class OrbGate : MonoBehaviour
         if (m_iNumberOfOrbsToUnlock <= 0)
         {
             m_bUnlocked = true;
-
+            //AudioManager.m_audioManager.PlayOneShotGateOpen();
             if (m_DoorLeftAnimator != null)
             {
                 m_DoorLeftAnimator.SetTrigger("Open");

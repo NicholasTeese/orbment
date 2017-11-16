@@ -139,6 +139,7 @@ public class ExpManager : MonoBehaviour
 
     void LevelUp(bool a_bPlayParticles = true)
     {
+        AudioManager.m_audioManager.PlayOneShotLevelUp();
         if (a_bPlayParticles)
         {
             for (int iCount = 0; iCount < m_levelUpParticles.Count; ++iCount)

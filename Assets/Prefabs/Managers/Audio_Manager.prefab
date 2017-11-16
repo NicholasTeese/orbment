@@ -1157,6 +1157,8 @@ MonoBehaviour:
   m_perkApplied: {fileID: 8300000, guid: b22f2abaa272d7342b210080dc498c8e, type: 3}
   m_perkUnavailable: {fileID: 8300000, guid: 132695613e5c9d54681444e2af53a343, type: 3}
   m_perkSelected: {fileID: 8300000, guid: 5425704cd26139449a9c4454fb130eb2, type: 3}
+  m_LevelUp: {fileID: 8300000, guid: a9cc7ad828d958942b1596717e9bd950, type: 3}
+  m_GateOpen: {fileID: 8300000, guid: e5fd5a24f19ea174abdca82b180ca3af, type: 3}
   m_playerNormalBullets:
   - {fileID: 8300000, guid: 74970d06e193dd644ae51e38127a308e, type: 3}
   - {fileID: 8300000, guid: b7f28a52f9e6a0644b73cf6c7e3fb239, type: 3}

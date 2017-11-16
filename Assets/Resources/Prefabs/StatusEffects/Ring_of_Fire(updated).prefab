@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4899532594748432}
   - component: {fileID: 198538112445053490}
   - component: {fileID: 199853798124726036}
+  - component: {fileID: 114048076618868184}
   m_Layer: 0
   m_Name: Ring_of_Fire(updated)
   m_TagString: Untagged
@@ -86,8 +87,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1882035729207964}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 3.3, z: 0.2}
-  m_LocalScale: {x: 0.153701, y: 0.15370114, z: -0.00049157493}
+  m_LocalPosition: {x: 0.5, y: 0.56, z: 0.96}
+  m_LocalScale: {x: 0.0628973, y: 0.062897354, z: -0.00020116157}
   m_Children: []
   m_Father: {fileID: 4810070300363562}
   m_RootOrder: 0
@@ -99,8 +100,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1670327984852858}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4478777, y: 0.44787785, z: 0.44787785}
+  m_LocalPosition: {x: -0, y: -0.35, z: 0}
+  m_LocalScale: {x: 0.21112086, y: 0.21112086, z: 0.21112086}
   m_Children: []
   m_Father: {fileID: 4810070300363562}
   m_RootOrder: 1
@@ -112,8 +113,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1828860520179776}
   m_LocalRotation: {x: 0.00000021073427, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2988766, y: 0.29887635, z: 0.29887635}
+  m_LocalPosition: {x: -0.042345, y: -1.14, z: -0.86}
+  m_LocalScale: {x: 0.12949045, y: 0.12949035, z: 0.12949035}
   m_Children:
   - {fileID: 4334680531082120}
   - {fileID: 4379082814497614}
@@ -127,13 +128,28 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1519490139317268}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -3.39, y: 1.17, z: -34.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4810070300363562}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114048076618868184
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1519490139317268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eff6e3a912210a428129f764384d02b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_type: 5
+  m_manager: {fileID: 0}
+  m_tickInterval: 0.5
+  m_healthPercentThreshold: 25
 --- !u!198 &198538112445053490
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -193,7 +209,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -2121304540
+  randomSeed: -845641902
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -637,7 +653,7 @@ ParticleSystem:
     serializedVersion: 5
     enabled: 1
     type: 4
-    angle: 25
+    angle: 90
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
@@ -3455,14 +3471,14 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 211952924
+  randomSeed: -675327127
   InitialModule:
     serializedVersion: 3
     enabled: 1
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3
+      scalar: 2
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -3544,8 +3560,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 0.9254902, g: 0.9254902, b: 0.9254902, a: 1}
-      maxColor: {r: 1, g: 0.8980392, b: 0.8, a: 1}
+      minColor: {r: 0.7941176, g: 0.70109475, b: 0.1810121, a: 1}
+      maxColor: {r: 0.8455882, g: 0.155439, b: 0.31250748, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 0.40392157, g: 0.06666667, b: 0.44313726, a: 1}
@@ -3898,7 +3914,7 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 5
     enabled: 1
-    type: 8
+    type: 4
     angle: 50
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
@@ -6717,14 +6733,14 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 2059651364
+  randomSeed: 1213179336
   InitialModule:
     serializedVersion: 3
     enabled: 1
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3
+      scalar: 2
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -6806,8 +6822,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 0.9254902, g: 0.9254902, b: 0.9254902, a: 1}
-      maxColor: {r: 1, g: 0.8980392, b: 0.8, a: 1}
+      minColor: {r: 1, g: 0.90101427, b: 0.102941155, a: 1}
+      maxColor: {r: 0.9632353, g: 0.19831318, b: 0.19831318, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 0.40392157, g: 0.06666667, b: 0.44313726, a: 1}
@@ -6869,7 +6885,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.05
+      scalar: 2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -7277,7 +7293,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 6
+      scalar: 20
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -7611,7 +7627,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   ColorModule:
-    enabled: 1
+    enabled: 0
     gradient:
       serializedVersion: 2
       minMaxState: 1
@@ -9979,14 +9995,14 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -323791724
+  randomSeed: 595805634
   InitialModule:
     serializedVersion: 3
     enabled: 1
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 3
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -13218,7 +13234,7 @@ ParticleSystemRenderer:
   m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0
-  m_MinParticleSize: 0.068
+  m_MinParticleSize: 0.2
   m_MaxParticleSize: 1
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
@@ -13270,7 +13286,7 @@ ParticleSystemRenderer:
   m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0
-  m_MinParticleSize: 0.05
+  m_MinParticleSize: 0.1
   m_MaxParticleSize: 2
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
@@ -13322,7 +13338,7 @@ ParticleSystemRenderer:
   m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0
-  m_MinParticleSize: 0.068
+  m_MinParticleSize: 0.15
   m_MaxParticleSize: 1
   m_CameraVelocityScale: 0
   m_VelocityScale: 0

@@ -42,7 +42,6 @@ public class RingOfFire : StatusEffect
     // Update is called once per frame
     protected override void Update()
     {
-
         base.Update();
 
         if (m_entity != null)
@@ -59,7 +58,6 @@ public class RingOfFire : StatusEffect
     {
         if(col.CompareTag("Enemy"))
         {
-
             Entity entity = col.GetComponent<Entity>();
 
             if (entity != null)

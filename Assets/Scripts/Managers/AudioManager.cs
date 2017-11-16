@@ -24,6 +24,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip m_perkApplied;
     public AudioClip m_perkUnavailable;
     public AudioClip m_perkSelected;
+    public AudioClip m_LevelUp;
+    public AudioClip m_GateOpen;
 
     public AudioClip[] m_playerNormalBullets;
     public AudioClip[] m_playerFireBullets;
@@ -44,7 +46,7 @@ public class AudioManager : MonoBehaviour
     public AudioSource m_enemyDeathAudioSource;
     public AudioSource m_perkTreeAudioSource;
     public AudioSource m_menuAudioSource;
-
+  
     public static AudioManager m_audioManager;
 
     public float MasterVolume { get { return m_fMasterVolume; } set { m_fMasterVolume = value; } }
@@ -310,5 +312,15 @@ public class AudioManager : MonoBehaviour
     public void PlayOneShotEnemyDeath()
     {
         m_enemyDeathAudioSource.PlayOneShot(m_enemyDeath[Random.Range(0, m_enemyDeath.Length)]);
+    }
+
+    public void PlayOneShotLevelUp()
+    {
+        m_menuAudioSource.PlayOneShot(m_LevelUp);
+    }
+
+    public void PlayOneShotGateOpen()
+    {
+        m_menuAudioSource.PlayOneShot(m_GateOpen);
     }
 }
