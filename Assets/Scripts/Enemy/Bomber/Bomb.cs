@@ -77,12 +77,12 @@ public class Bomb : MonoBehaviour
         }
         else if (m_fFuseTimer <= 0.0f && !m_bHasExploded)
         {
+            m_bHasExploded = true;
             AudioManager.m_audioManager.PlayOneShotFireExplosion();
 
             GameObject explosion = Instantiate(Resources.Load("Prefabs/Explosions/FireExplosion") as GameObject);
             explosion.transform.position = transform.position + new Vector3(0.0f, 0.5f, 0.0f);
             explosion.transform.SetParent(BombManager.m_bombManager.transform);
-            m_bHasExploded = true;
             gameObject.SetActive(false);
 
             if (Vector3.Distance(transform.position, Player.m_player.transform.position) <= 3.0f && !Player.m_player.m_dashing)
