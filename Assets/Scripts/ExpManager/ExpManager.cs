@@ -51,7 +51,7 @@ public class ExpManager : MonoBehaviour
             SceneManager.GetActiveScene().name == LevelManager.m_strLevelTwoSceneName)
         {
             // Initialise perk.
-            LevelUp(false);
+            LevelUp(false, false);
             PerkTreeManager.m_perkTreeManager.m_selectedPerkTree.SetActive(true);
             PerkTreeManager.m_perkTreeManager.m_selectedPerkButton.PurchasePerk();
         }
@@ -131,18 +131,24 @@ public class ExpManager : MonoBehaviour
             DisablePerkTree();
         }
 
-#if UNITY_EDITOR
-        // Debug shortcut for Level up
-        if (Input.GetKey(KeyCode.L) && Input.GetKey(KeyCode.KeypadPlus))
+//#if UNITY_EDITOR
+        if (DebugLevelSwitcher.m_bCheatsEnabled)
         {
-            m_playerExperience += 700;
+            // Debug shortcut for Level up
+            if (Input.GetKey(KeyCode.L) && Input.GetKey(KeyCode.KeypadPlus))
+            {
+                m_playerExperience += 700;
+            }
         }
-#endif
+//#endif
     }
 
-    void LevelUp(bool a_bPlayParticles = true)
+    void LevelUp(bool a_bPlayParticles = true, bool a_bPlaySounds = true)
     {
-        AudioManager.m_audioManager.PlayOneShotLevelUp();
+        if (a_bPlaySounds)
+        {
+            AudioManager.m_audioManager.PlayOneShotLevelUp();
+        }
         StartCoroutine(LevelUpBurst());
         if (a_bPlayParticles)
         {

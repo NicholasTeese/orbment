@@ -227,22 +227,25 @@ public class LevelManager : MonoBehaviour
     private void Update()
     {
 
-#if UNITY_EDITOR
-        // Debug shortcut for Level pass
-        if (Input.GetKeyDown(KeyCode.P))
+//#if UNITY_EDITOR
+        if (DebugLevelSwitcher.m_bCheatsEnabled)
         {
-            m_loadNextLevelAsyncOperation.allowSceneActivation = true;
-            
-            if (SceneManager.GetActiveScene().name != m_strLevelTwoSceneName || SceneManager.GetActiveScene().name != m_strMainMenuSceneName)
+            // Debug shortcut for Level pass
+            if (Input.GetKeyDown(KeyCode.P))
             {
-                InitialiseDontDestroyOnLoad();
-            }
-            else if (SceneManager.GetActiveScene().name == m_strLevelTwoSceneName)
-            {
-                DestroyAllDontDestroyOnLoad();
+                m_loadNextLevelAsyncOperation.allowSceneActivation = true;
+
+                if (SceneManager.GetActiveScene().name != m_strLevelTwoSceneName || SceneManager.GetActiveScene().name != m_strMainMenuSceneName)
+                {
+                    InitialiseDontDestroyOnLoad();
+                }
+                else if (SceneManager.GetActiveScene().name == m_strLevelTwoSceneName)
+                {
+                    DestroyAllDontDestroyOnLoad();
+                }
             }
         }
-#endif
+//#endif
 
         if (m_bSceneLoadComplete)
         {

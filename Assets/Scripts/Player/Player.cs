@@ -170,19 +170,21 @@ public class Player : Entity
             m_animatior.speed = 1.3f;
 		}
 
-#if UNITY_EDITOR
-
-        // Debug shortcut for Heal
-        if (Input.GetKey(KeyCode.H) && Input.GetKey(KeyCode.KeypadPlus))
+        //#if UNITY_EDITOR
+        if (DebugLevelSwitcher.m_bCheatsEnabled)
         {
-            m_currHealth = m_maxHealth;
+            // Debug shortcut for Heal
+            if (Input.GetKey(KeyCode.H) && Input.GetKey(KeyCode.KeypadPlus))
+            {
+                m_currHealth = m_maxHealth;
+            }
+            // Debug shortcut for Keys
+            if (Input.GetKey(KeyCode.K) && Input.GetKey(KeyCode.KeypadPlus))
+            {
+                m_orbsCollected = 20;
+            }
         }
-        // Debug shortcut for Keys
-        if (Input.GetKey(KeyCode.K) && Input.GetKey(KeyCode.KeypadPlus))
-        {
-            m_orbsCollected = 20;
-        }
-#endif
+//#endif
 
 
             PlayerHUDManager.m_playerHUDManager.HealthBar.GetComponent<Image>().fillAmount = m_currHealth / m_maxHealth;
